@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Agent 架构模式深度剖析</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="Agent 架构模式深度剖析"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Agent 架构模式深度剖析"/><meta name="twitter:description" content="Agent 架构模式深度剖析 出处：www.runoob.com/ai-agent/agent-architecture.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 Agent 架构 Agent（智能体）是指能够自主感知环境、推理并采取行动以完成目标的 AI 系统。 本文从最简单的循环到多 Agent 协作，一文读懂六种主流架构的原理、图解与适用场景，帮助你在实际项目中做出合适的技术选型。 什么是 Agent 架构 在 AI 应用开发中，Agent（智能体）是指能够感知环境、自主做出决策、并采取行动的 AI 系统。 与传统的”问一答一”式大模型调用不同，..."/><meta property="og:description" content="Agent 架构模式深度剖析 出处：www.runoob.com/ai-agent/agent-architecture.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 Agent 架构 Agent（智能体）是指能够自主感知环境、推理并采取行动以完成目标的 AI 系统。 本文从最简单的循环到多 Agent 协作，一文读懂六种主流架构的原理、图解与适用场景，帮助你在实际项目中做出合适的技术选型。 什么是 Agent 架构 在 AI 应用开发中，Agent（智能体）是指能够感知环境、自主做出决策、并采取行动的 AI 系统。 与传统的”问一答一”式大模型调用不同，..."/><meta property="og:image:alt" content="Agent 架构模式深度剖析 出处：www.runoob.com/ai-agent/agent-architecture.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 Agent 架构 Agent（智能体）是指能够自主感知环境、推理并采取行动以完成目标的 AI 系统。 本文从最简单的循环到多 Agent 协作，一文读懂六种主流架构的原理、图解与适用场景，帮助你在实际项目中做出合适的技术选型。 什么是 Agent 架构 在 AI 应用开发中，Agent（智能体）是指能够感知环境、自主做出决策、并采取行动的 AI 系统。 与传统的”问一答一”式大模型调用不同，..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/agent-架构模式深度剖析"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/agent-架构模式深度剖析"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="Agent 架构模式深度剖析 出处：www.runoob.com/ai-agent/agent-architecture.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 Agent 架构 Agent（智能体）是指能够自主感知环境、推理并采取行动以完成目标的 AI 系统。 本文从最简单的循环到多 Agent 协作，一文读懂六种主流架构的原理、图解与适用场景，帮助你在实际项目中做出合适的技术选型。 什么是 Agent 架构 在 AI 应用开发中，Agent（智能体）是指能够感知环境、自主做出决策、并采取行动的 AI 系统。 与传统的”问一答一”式大模型调用不同，..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/agent-架构模式深度剖析-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/agent-架构模式深度剖析-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/agent-架构模式深度剖析-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/03-核心机制与记忆/agent-架构模式深度剖析" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-17" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-17" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/03-核心机制与记忆/">03-核心机制与记忆</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Agent 架构模式深度剖析</a></div></nav><h1 class="article-title">Agent 架构模式深度剖析</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/核心机制与记忆" class="internal internal-link tag-link">核心机制与记忆</a><span class="note-properties-separator">, </span><a href="../../../tags/agent-架构模式" class="internal internal-link tag-link">agent-架构模式</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>30分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="agent-架构模式深度剖析">Agent 架构模式深度剖析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-架构模式深度剖析" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/agent-architecture.html" class="external external-link">https://www.runoob.com/ai-agent/agent-architecture.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>03-核心机制与记忆</code></p>
+</blockquote>
+<hr/>
+<h1 id="agent-架构">Agent 架构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-架构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Agent（智能体）是指能够自主感知环境、推理并采取行动以完成目标的 AI 系统。</p>
+<p>本文从最简单的循环到多 Agent 协作，一文读懂六种主流架构的原理、图解与适用场景，帮助你在实际项目中做出合适的技术选型。</p>
+<h2 id="什么是-agent-架构">什么是 Agent 架构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么是-agent-架构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>在 AI 应用开发中，Agent（智能体）是指能够感知环境、自主做出决策、并采取行动的 AI 系统。</p>
+<p>与传统的”问一答一”式大模型调用不同，Agent 可以连续地执行多步操作，调用工具，甚至协调其他 Agent，来完成复杂任务。</p>
+<p>Agent 架构是指 Agent 系统中各个组件的组织方式，决定了 Agent 的能力边界、可靠性、灵活性和适用场景。</p>
+<p>Agent 的本质：感知 → 推理 → 行动</p>
+<p>Agent 的工作方式本质上是一个循环（Loop）——感知当前状态，推理下一步，执行行动，再次感知……直到任务完成。</p>
+<p>不同架构的差异，就在于如何组织和扩展这个基本循环。</p>
+<blockquote>
+<p>本文假设你已了解大语言模型（LLM）的基本概念，以及”工具调用”（Function Calling）的基本思路。如果还不熟悉，可以先了解这两个基础知识。</p>
+</blockquote>
+<h2 id="架构一单-agent-循环single-agent-loop">架构一：单 Agent 循环（Single Agent Loop）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构一单-agent-循环single-agent-loop" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>入门首选
+实现简单</p>
+<p>最基础也最直观的架构，一个 Agent 从头到尾独立完成所有任务。</p>
+<p>单 Agent 循环直接体现了 ReAct 模式（Reasoning + Acting）：每一步都是”先想再做”。LLM 充当大脑，工具调用是它的双手。</p>
+<p>图 1 — 单 Agent 循环流程</p>
+<h3 id="工作原理">工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>感知：读取当前状态——文件内容、环境变量、之前步骤的输出结果，整合成当前上下文。</p>
+<p>推理：LLM 根据上下文决定下一步动作——调用哪个工具、传入什么参数，或者判断任务是否已完成。</p>
+<p>行动：执行工具调用，例如读写文件、搜索网络。工具的执行结果会被追加到上下文中，进入下一轮循环。</p>
+<blockquote>
+<p>每次工具调用的结果都会回写到上下文（Context Window）。因此随着任务推进，上下文会不断增长，直到触达 LLM 的上下文窗口限制——这是单 Agent 循环最主要的瓶颈。</p>
+</blockquote>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="单-agent-循环的简化实现--展示-react-模式的核心逻辑">单 Agent 循环的简化实现 —— 展示 ReAct 模式的核心逻辑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#单-agent-循环的简化实现--展示-react-模式的核心逻辑" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class SimpleAgent:
+    &quot;&quot;&quot;单 Agent 循环的基本结构&quot;&quot;&quot;</p>
+<p>    def <strong>init</strong>(self, model, tools, max_turns=10):
+        self.model = model          # 大语言模型
+        self.tools = tools          # 可用工具列表
+        self.max_turns = max_turns  # 最大循环轮次，防止无限循环</p>
+<p>    def run(self, task: str) -> str:
+        &quot;&quot;&quot;执行任务的主循环&quot;&quot;&quot;
+        context = f”用户任务：{task}”</p>
+<p>        for turn in range(self.max_turns):
+            # 第一步：思考 —— 让模型决定下一步
+            response = self.model.think(context)</p>
+<p>            # 如果模型认为任务完成，返回最终答案
+            if response.is_final():
+                return response.content</p>
+<p>            # 第二步：行动 —— 调用模型选择的工具
+            tool_name = response.tool_name
+            tool_args = response.tool_args
+            tool_result = self.tools<a href="../../../tool_args" class="internal internal-link alias" data-slug="tool_args">tool_name</a></p>
+<p>            # 第三步：将工具结果反馈给模型，进入下一轮
+            context += f”\n工具 {tool_name} 返回：{tool_result}”</p>
+<p>        return “达到最大轮次，任务未完成”</p>
+<h1 id="使用示例">使用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>agent = SimpleAgent(model=llm, tools={
+    “read_file”: read_file,
+    “search_code”: search_code,
+    “run_test”: run_test
+})
+result = agent.run(“修复 runoob 项目中 user.py 的类型错误”)</p>
+<h4 id="优点">优点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#优点" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>实现最简单，易于调试</li>
+<li>适合任务边界清晰的场景</li>
+<li>几乎所有 Agent 框架都支持</li>
+</ul>
+<h4 id="缺点">缺点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#缺点" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>上下文窗口容易撑满</li>
+<li>复杂任务中容易”偏航”</li>
+<li>无法并行处理多个子任务</li>
+</ul>
+<p>最佳适用场景：修复一个 bug、编写一个函数、回答一个具体问题。任务明确，复杂度适中，不需要并行或多角色协作。</p>
+<blockquote>
+<p>如果你的任务预计需要超过 15 轮工具调用，单 Agent 循环可能不是最佳选择。考虑使用多 Agent 协作或规划执行架构来分解复杂度。</p>
+</blockquote>
+<h2 id="架构二规划--执行plan--execute">架构二：规划 + 执行（Plan &amp; Execute）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构二规划--执行plan--execute" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>直觉友好
+可审查</p>
+<p>将”想清楚要做什么”和”实际去做”分离为两个独立阶段，提升任务的可预测性和可审计性。</p>
+<p>规划 + 执行架构将 Agent 的工作拆分为两个明确阶段：先规划（Plan），再执行（Execute）。</p>
+<p>在规划阶段，模型不执行任何操作，只生成一份详细的执行步骤列表。在执行阶段，系统依次完成每个步骤。这种分离让用户可以在执行前审查计划，就像 Claude Code 的 Plan Mode 一样。</p>
+<p>图 2 — 规划 + 执行架构（含动态重规划）</p>
+<h3 id="两种变体">两种变体<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#两种变体" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>变体</th><th>行为</th><th>典型场景</th></tr></thead><tbody><tr><td>静态规划</td><td>计划一次性生成，按顺序线性执行，不中途调整</td><td>流程固定、步骤明确的任务，如数据迁移脚本</td></tr><tr><td>动态规划</td><td>每执行一步后重新评估，根据结果调整后续计划</td><td>结果不确定的任务，如调试、探索性数据分析</td></tr></tbody></table></div>
+<p>动态规划更健壮，但实现复杂度更高，且每步重新规划会消耗额外的 token。</p>
+<blockquote>
+<p>Claude Code 的 Plan Mode 就是这个架构的体现——点击”计划”后，AI 先输出一份详细计划供你审查，确认后才开始执行。这大幅提升了用户的掌控感。</p>
+</blockquote>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="plan--execute-架构的简化实现">Plan &amp; Execute 架构的简化实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan--execute-架构的简化实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class PlanExecuteAgent:
+    &quot;&quot;&quot;先规划、后执行的 Agent&quot;&quot;&quot;</p>
+<p>    def plan(self, task: str) -> list:
+        &quot;&quot;&quot;阶段一：生成执行计划&quot;&quot;&quot;
+        plan = self.model.generate(f&quot;&quot;&quot;
+        请将以下任务拆解为可执行的步骤列表：
+        任务：{task}
+        返回 JSON 格式的步骤列表，每步包含：
+        - step_id: 步骤编号
+        - description: 步骤描述
+        - tool: 需要调用的工具名
+        &quot;&quot;&quot;)
+        return plan</p>
+<p>    def execute(self, plan: list, dynamic: bool = False) -> str:
+        &quot;&quot;&quot;阶段二：逐步执行计划&quot;&quot;&quot;
+        results = []
+        remaining_plan = plan.copy()</p>
+<p>        while remaining_plan:
+            step = remaining_plan.pop(0)
+            output = self.tools<a href="../../../step[description]" class="internal internal-link alias" data-slug="step[description]">step[“tool”]</a>
+            results.append({“step”: step[“step_id”], “output”: output})</p>
+<p>            if dynamic and remaining_plan:
+                # 动态规划：根据当前结果重新评估后续计划
+                remaining_plan = self.replan(remaining_plan, results)</p>
+<p>        return self.summarize(results)</p>
+<h1 id="使用示例-1">使用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用示例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>agent = PlanExecuteAgent()
+plan = agent.plan(“为 runoob 项目添加用户认证功能”)</p>
+<h1 id="人类可以先审查-plan确认合理后再执行">人类可以先审查 plan，确认合理后再执行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#人类可以先审查-plan确认合理后再执行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>result = agent.execute(plan, dynamic=True)</p>
+<h4 id="优点-1">优点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#优点-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>执行前可人工审查计划</li>
+<li>推理和执行职责分离，清晰</li>
+<li>对长任务友好</li>
+</ul>
+<h4 id="缺点-1">缺点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#缺点-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>初始计划可能不够准确</li>
+<li>两阶段增加了延迟</li>
+<li>静态版本难以应对意外情况</li>
+</ul>
+<blockquote>
+<p>Plan &amp; Execute 的代价是增加了推理轮次，对于简单任务反而是一种浪费。如果一个任务可以在 3 步内完成，直接用单 Agent 循环更高效。</p>
+</blockquote>
+<h2 id="架构三多-agent-协作multi-agent">架构三：多 Agent 协作（Multi-Agent）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构三多-agent-协作multi-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>生产推荐
+复杂任务</p>
+<p>一个 Orchestrator（协调者）负责任务拆解和调度，多个 Subagent 各司其职，并行或串行地完成子任务，结果汇聚回 Orchestrator 做综合。</p>
+<p>当单个 Agent 面临上下文窗口不足或任务过于复杂时，多 Agent 架构提供了一个优雅的解决方案：让多个专门化的子 Agent 并行工作，由一个 Orchestrator（协调者）统筹全局。</p>
+<p>图 3 — 多 Agent 协作架构（Orchestrator + Subagents）</p>
+<h3 id="独立上下文是核心优势">独立上下文是核心优势<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#独立上下文是核心优势" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>每个子 Agent 拥有独立的上下文窗口。代码审查 Agent 深度阅读 auth.py 不会影响性能分析 Agent 的判断；安全检测 Agent 产生的大量中间输出不会挤占其他 Agent 的空间。</p>
+<blockquote>
+<p>子 Agent（Subagent）是短暂的、隔离的——完成一个任务后即销毁。Agent 团队（Agent Teams）则是多个独立 Agent 实例长时间协作、互相发消息，更像一个真实的团队。</p>
+</blockquote>
+<h2 id="实例-2">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="多-agent-协作的简化实现">多 Agent 协作的简化实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#多-agent-协作的简化实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class Orchestrator:
+    &quot;&quot;&quot;编排器：负责任务拆解、分发和结果汇总&quot;&quot;&quot;</p>
+<p>    def <strong>init</strong>(self):
+        self.subagents = {
+            “code_review”: Subagent(
+                name=“代码审查”,
+                tools=[“read_file”, “static_analysis”],
+                system_prompt=“你是代码审查专家…”
+            ),
+            “security”: Subagent(
+                name=“安全检测”,
+                tools=[“scan_vulnerability”, “check_deps”],
+                system_prompt=“你是安全检测专家…”
+            ),
+            “performance”: Subagent(
+                name=“性能分析”,
+                tools=[“profile_code”, “analyze_complexity”],
+                system_prompt=“你是性能分析专家…”
+            )
+        }</p>
+<p>    def handle_task(self, task: str) -> dict:
+        # 第一步：分析任务，决定需要哪些 Subagent
+        needed = self.plan(task)</p>
+<p>        # 第二步：并行分发（各 Subagent 同时工作，独立上下文）
+        results = {}
+        for agent_name in needed:
+            sub_task = self.decompose(task, agent_name)
+            results[agent_name] = self.subagents[agent_name].run(sub_task)</p>
+<p>        # 第三步：汇总各 Subagent 的结果，综合输出
+        return self.synthesize(task, results)</p>
+<h1 id="使用示例一次运行三个维度并行分析">使用示例：一次运行，三个维度并行分析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用示例一次运行三个维度并行分析" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>orch = Orchestrator()
+report = orch.handle_task(“审查 runoob 项目 PR #42”)</p>
+<h4 id="优点-2">优点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#优点-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>天然支持并行，速度快</li>
+<li>子 Agent 各自独立，上下文互不干扰</li>
+<li>可以专门化每个子 Agent 的角色</li>
+</ul>
+<h4 id="缺点-2">缺点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#缺点-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>协调逻辑复杂，调试困难</li>
+<li>多个 Agent 并行的 Token 成本更高</li>
+<li>Orchestrator 本身可能成为瓶颈</li>
+</ul>
+<blockquote>
+<p>多 Agent 协作的主要成本是编排开销。如果子任务非常简单（每个只需 1-2 步），编排开销可能超过实际工作的开销，此时单 Agent 更合适。</p>
+</blockquote>
+<h2 id="架构四反思与自我修正reflection">架构四：反思与自我修正（Reflection）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构四反思与自我修正reflection" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>高质量输出
+易于集成</p>
+<p>在 Agent 的输出环节加入质量评估，不满意则重新生成或修正，形成内部迭代循环。</p>
+<p>反思架构为 Agent 增加了一个”质检环节”：每次生成输出后，都由一个评判者（Critic）来评估质量，如果不达标则要求修正，直到输出满足标准。</p>
+<p>这就像开发者写完代码后自己跑一遍测试——在交付之前先自查一遍。</p>
+<p>图 4 — 反思与自我修正架构</p>
+<h3 id="两种实现方式">两种实现方式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#两种实现方式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>方式</th><th>机制</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>自我反思</td><td>同一个模型先执行再评估自己的输出</td><td>实现简单，无额外模型成本</td><td>模型可能对自己的错误”视而不见”</td></tr><tr><td>Critic 模型</td><td>用独立的评判模型评估执行模型的输出</td><td>更客观，能发现执行模型盲区</td><td>增加模型调用成本和延迟</td></tr></tbody></table></div>
+<blockquote>
+<p>“写单元测试 → 运行测试 → 观察失败 → 修复代码 → 再次运行”——这就是反思架构的经典应用。测试结果本身就是 Critic 的反馈信号。</p>
+</blockquote>
+<h2 id="实例-3">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="反思架构的简化实现">反思架构的简化实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#反思架构的简化实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class ReflectiveAgent:
+    &quot;&quot;&quot;带有自我反思能力的 Agent&quot;&quot;&quot;</p>
+<p>    def <strong>init</strong>(self, model, tools, max_reflections=3):
+        self.model = model
+        self.tools = tools
+        self.max_reflections = max_reflections  # 最多修正次数，防止死循环</p>
+<p>    def run(self, task: str) -> str:
+        # 第一步：正常执行，产生初始输出
+        output = self.model.generate(task)</p>
+<p>        for i in range(self.max_reflections):
+            # 第二步：反思 —— 评估输出质量
+            critique = self.model.generate(f&quot;&quot;&quot;
+            请严格评估以下输出：
+            原始任务：{task}
+            当前输出：{output}
+            检查：事实错误？逻辑漏洞？遗漏信息？格式问题？
+            如果输出完美无缺，请回复 “PASS”。
+            &quot;&quot;&quot;)</p>
+<p>            if “PASS” in critique:
+                break  # 输出通过审查</p>
+<p>            # 第三步：修正 —— 根据批评意见改进
+            output = self.model.generate(f&quot;&quot;&quot;
+            原始任务：{task}
+            上次输出：{output}
+            问题反馈：{critique}
+            请根据反馈修正输出。
+            &quot;&quot;&quot;)</p>
+<p>        return output</p>
+<h1 id="使用示例-2">使用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用示例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>agent = ReflectiveAgent(model=llm, tools={})
+code = agent.run(“编写一个 Python 函数，实现 RUNOOB 字符串的 AES 加密”)</p>
+<h1 id="agent-生成代码后自我检查加密实现密钥处理">Agent 生成代码后自我检查加密实现、密钥处理，<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-生成代码后自我检查加密实现密钥处理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="发现漏洞后自动修正确保输出安全可靠">发现漏洞后自动修正，确保输出安全可靠<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#发现漏洞后自动修正确保输出安全可靠" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h4 id="优点-3">优点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#优点-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>显著提升输出质量</li>
+<li>可以设置明确的质量标准</li>
+<li>适合有客观评判标准的任务</li>
+</ul>
+<h4 id="缺点-3">缺点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#缺点-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>多次迭代增加延迟和成本</li>
+<li>需要设置最大迭代次数防止死循环</li>
+<li>评判标准难以形式化时效果有限</li>
+</ul>
+<blockquote>
+<p>反思循环每次迭代都是一次额外的 LLM 调用，会明显增加延迟。此外需要设置反思次数上限，否则模型可能陷入”永远不满意”的死循环。</p>
+</blockquote>
+<h2 id="架构五rag--agent检索增强型智能体">架构五：RAG + Agent（检索增强型智能体）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构五rag--agent检索增强型智能体" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>知识密集任务
+大型知识库</p>
+<p>在 Agent 的工具集里加入向量检索能力，让 Agent 在推理过程中动态查询外部知识库，克服上下文窗口的限制。</p>
+<p>RAG（Retrieval-Augmented Generation，检索增强生成）本是一种让 LLM 查询外部知识库的技术。当它与 Agent 结合时，变得更加强大：Agent 可以主动决定何时检索、检索什么，而不是每次都被动地检索一次。</p>
+<p>图 5 — RAG + Agent 检索增强架构</p>
+<h3 id="与普通-rag-的关键区别">与普通 RAG 的关键区别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#与普通-rag-的关键区别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>普通 RAG 是”被动、一次性”的：用户提问时固定检索一次，将结果塞入 Prompt。</p>
+<p>RAG + Agent 则不同：Agent 自主判断在推理的哪个环节需要补充知识、需要检索什么，并可以多次查询知识库，直到获得足够的信息来完成任务。</p>
+<blockquote>
+<p>代码库问答 Agent 被问到”为什么这里用单例模式？“时，它会主动检索项目文档、设计决策记录、相关代码文件，而不是只凭 LLM 的训练记忆来猜测。</p>
+</blockquote>
+<h2 id="实例-4">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="rag--agent-的简化实现">RAG + Agent 的简化实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#rag--agent-的简化实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class RAGAgent:
+    &quot;&quot;&quot;带有动态检索能力的 Agent&quot;&quot;&quot;</p>
+<p>    def <strong>init</strong>(self, model, vector_db, max_retrievals=5):
+        self.model = model
+        self.vector_db = vector_db  # 向量数据库
+        self.max_retrievals = max_retrievals</p>
+<p>    def should_retrieve(self, context: str, question: str) -> bool:
+        &quot;&quot;&quot;Agent 自己判断是否需要检索更多信息&quot;&quot;&quot;
+        decision = self.model.generate(f&quot;&quot;&quot;
+        当前已知信息：{context}
+        当前问题：{question}
+        现有信息是否足以回答问题？回答 YES 或 NO。
+        &quot;&quot;&quot;)
+        return “NO” in decision</p>
+<p>    def run(self, task: str) -> str:
+        context = &quot;&quot;
+        retrieval_count = 0</p>
+<p>        while retrieval_count &lt; self.max_retrievals:
+            # Agent 自主判断是否需要检索
+            if not self.should_retrieve(context, task):
+                break</p>
+<p>            # Agent 自主决定检索什么
+            search_query = self.model.generate(f&quot;&quot;&quot;
+            任务：{task}
+            已有信息：{context}
+            为了完成任务，下一步应该检索什么信息？
+            &quot;&quot;&quot;)</p>
+<p>            # 执行检索，结果追加到上下文
+            docs = self.vector_db.search(search_query)
+            context += “\n”.join(docs)
+            retrieval_count += 1</p>
+<p>        # 综合所有信息生成最终答案
+        return self.model.generate(f”任务：{task}\n参考资料：{context}“)</p>
+<h1 id="使用示例-3">使用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用示例-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>agent = RAGAgent(model=llm, vector_db=runoob_docs_db)
+answer = agent.run(“RUNOOB 框架中如何配置数据库连接池？“)</p>
+<h1 id="agent-先检索连接池配置发现提到最大连接数">Agent 先检索”连接池配置”，发现提到”最大连接数”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-先检索连接池配置发现提到最大连接数" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="如果不理解会再次检索最大连接数最佳实践">如果不理解，会再次检索”最大连接数最佳实践”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#如果不理解会再次检索最大连接数最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="最终综合多轮检索结果给出完整回答">最终综合多轮检索结果给出完整回答<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#最终综合多轮检索结果给出完整回答" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h4 id="优点-4">优点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#优点-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>突破上下文窗口限制</li>
+<li>输出有据可查，减少幻觉</li>
+<li>知识库可独立更新</li>
+</ul>
+<h4 id="缺点-4">缺点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#缺点-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>检索质量影响整体效果</li>
+<li>向量数据库的维护成本</li>
+<li>检索延迟增加响应时间</li>
+</ul>
+<h2 id="架构六工作流编排workflow--dag">架构六：工作流编排（Workflow / DAG）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构六工作流编排workflow--dag" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>生产首选
+高可靠性</p>
+<p>把 Agent 行为固化为一张有向无环图（DAG），每个节点是一个 LLM 调用或工具调用，边表示数据依赖关系，由框架驱动执行。</p>
+<p>这是最接近传统软件工程的一种 Agent 架构。与前面几种架构的最大区别在于：Agent 的自主决策空间被限制在单个节点内部，节点之间的流转是预先定义好的，不可更改。</p>
+<p>图 6 — 工作流 DAG 架构（有向无环图）</p>
+<h3 id="纯-agent-vs-dag-工作流">纯 Agent vs DAG 工作流<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#纯-agent-vs-dag-工作流" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>特性</th><th>纯 Agent</th><th>DAG 工作流</th></tr></thead><tbody><tr><td>流程控制</td><td>模型自主决定下一步</td><td>预定义的 DAG 图决定</td></tr><tr><td>可预测性</td><td>低，每次运行路径可能不同</td><td>高，运行路径确定</td></tr><tr><td>可调试性</td><td>难，依赖日志追踪</td><td>易，每个节点输入输出明确</td></tr><tr><td>容错性</td><td>依赖模型自行恢复</td><td>框架提供重试、断点续跑</td></tr><tr><td>灵活性</td><td>高，可应对意外情况</td><td>低，只能走预定义路径</td></tr></tbody></table></div>
+<p>DAG 的 “无环”（Acyclic）特性意味着工作流是确定性的——没有无限循环，执行路径可以完全预测，失败的节点可以单独重试。</p>
+<blockquote>
+<p>DAG 是”低自主性、高可预测性”的极端。你需要预先设计好整个流程。这不是缺点，而是刻意的设计取舍——生产环境中有时候确定性比灵活性更重要。</p>
+</blockquote>
+<h2 id="实例-5">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="dag-工作流的简化定义类似-langgraph-风格">DAG 工作流的简化定义（类似 LangGraph 风格）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dag-工作流的简化定义类似-langgraph-风格" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>from langgraph import StateGraph</p>
+<h1 id="定义工作流状态--节点间传递的数据对象">定义工作流状态 —— 节点间传递的数据对象<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#定义工作流状态--节点间传递的数据对象" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class PipelineState:
+    raw_data: str = &quot;&quot;         # 原始输入数据
+    cleaned_data: str = &quot;&quot;     # 清洗后的数据
+    analysis_result: dict = {} # 分析结果
+    final_report: str = &quot;&quot;     # 最终报告</p>
+<h1 id="定义-dag-节点--每个节点是独立的处理单元">定义 DAG 节点 —— 每个节点是独立的处理单元<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#定义-dag-节点--每个节点是独立的处理单元" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def extract_data(state: PipelineState) -> PipelineState:
+    &quot;&quot;&quot;节点1：从 runoob 数据库中提取原始数据&quot;&quot;&quot;
+    state.raw_data = query_database(“SELECT * FROM logs”)
+    return state</p>
+<p>def clean_data(state: PipelineState) -> PipelineState:
+    &quot;&quot;&quot;节点2：清洗数据（去重、标准化格式）&quot;&quot;&quot;
+    state.cleaned_data = preprocess(state.raw_data)
+    return state</p>
+<p>def analyze_data(state: PipelineState) -> PipelineState:
+    &quot;&quot;&quot;节点3：统计分析&quot;&quot;&quot;
+    state.analysis_result = statistical_analysis(state.cleaned_data)
+    return state</p>
+<p>def generate_report(state: PipelineState) -> PipelineState:
+    &quot;&quot;&quot;节点4：使用 LLM 生成报告&quot;&quot;&quot;
+    state.final_report = llm.generate(
+        f”基于以下分析结果生成报告：{state.analysis_result}”
+    )
+    return state</p>
+<h1 id="构建-dag定义节点和边数据流向">构建 DAG：定义节点和边（数据流向）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#构建-dag定义节点和边数据流向" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>workflow = StateGraph(PipelineState)
+workflow.add_node(“extract”, extract_data)
+workflow.add_node(“clean”, clean_data)
+workflow.add_node(“analyze”, analyze_data)
+workflow.add_node(“report”, generate_report)</p>
+<h1 id="定义边extract--clean--analyze--report">定义边：extract → clean → analyze → report<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#定义边extract--clean--analyze--report" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>workflow.add_edge(“extract”, “clean”)
+workflow.add_edge(“clean”, “analyze”)
+workflow.add_edge(“analyze”, “report”)
+workflow.set_entry_point(“extract”)
+workflow.set_finish_point(“report”)</p>
+<h1 id="编译并运行">编译并运行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#编译并运行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>app = workflow.compile()
+result = app.invoke(PipelineState())
+print(result.final_report)</p>
+<h4 id="优点-5">优点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#优点-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>可预测、可审计、可重试</li>
+<li>支持并行加速</li>
+<li>工程化程度高，运维友好</li>
+</ul>
+<h4 id="缺点-5">缺点<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#缺点-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>流程需要预先设计，灵活性低</li>
+<li>难以应对未预期的情况</li>
+<li>需要学习编排框架</li>
+</ul>
+<h2 id="横向对比与如何选择">横向对比与如何选择<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#横向对比与如何选择" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>从多个维度对比六种架构，帮助你快速定位适合的选项。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>架构</th><th>自主性</th><th>可预测性</th><th>并行能力</th><th>适合任务复杂度</th><th>典型实现</th></tr></thead><tbody><tr><td>单 Agent 循环</td><td>高</td><td>低</td><td>无</td><td>中低</td><td>Claude Code 默认模式</td></tr><tr><td>规划 + 执行</td><td>中</td><td>中</td><td>部分</td><td>中高</td><td>Claude Code Plan Mode</td></tr><tr><td>多 Agent 协作</td><td>高</td><td>低</td><td>强</td><td>高</td><td>AutoGen, CrewAI</td></tr><tr><td>反思 / 自我修正</td><td>中</td><td>中</td><td>无</td><td>中</td><td>Reflexion, Self-Refine</td></tr><tr><td>RAG + Agent</td><td>高</td><td>中</td><td>无</td><td>中高</td><td>LangChain RAG Agent</td></tr><tr><td>工作流编排</td><td>低</td><td>高</td><td>强</td><td>高（固定流程）</td><td>LangGraph, Prefect</td></tr></tbody></table></div>
+<h3 id="常见组合模式">常见组合模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见组合模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>实际生产系统通常会组合使用多种架构，以下是几种成熟的组合模式：</p>
+<p>工作流编排 + 多 Agent：用 DAG 定义主流程，每个节点内部是一个独立的 Agent。例如 CI/CD 流水线中，代码检查节点是 Code Review Agent，安全扫描节点是 Security Agent。</p>
+<p>多 Agent + RAG：多个 Subagent 共享同一个向量知识库，各自根据子任务按需检索。例如客服系统中，订单查询 Agent 和退款处理 Agent 都查询同一个知识库但检索不同的内容。</p>
+<p>规划执行 + 反思：先规划再执行，但每个步骤执行后加入反思环节确保质量。适合对质量要求极高的任务。</p>
+<blockquote>
+<p>如果你不确定从哪里开始，从单 Agent 循环开始。它最容易实现和调试。当你发现上下文窗口不够用时，考虑多 Agent；当你需要质量保证时，加入反思层；当流程趋于稳定时，重构为 DAG 以提升可靠性。</p>
+</blockquote>
+<h3 id="常见误区">常见误区<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见误区" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>误区一：架构越复杂越好</p>
+<p>多 Agent 协作看起来很强大，但如果你的任务用单 Agent 循环在 5 步内就能完成，引入编排开销反而降低效率。原则：用能满足需求的最简架构。</p>
+<p>误区二：反思一定能提升质量</p>
+<p>自我反思的有效性取决于模型的自我评估能力。如果质量要求极其严格，考虑使用 Critic 模型或引入外部验证（如代码自动测试）。</p>
+<p>误区三：DAG 工作流不需要 Agent</p>
+<p>DAG 定义了流程骨架，但每个节点内部仍然可以是 Agent 调用。工作流编排和 Agent 能力不是互斥的，而是互补的——DAG 提供可靠性，Agent 提供灵活性。</p>
+<p>误区四：上下文窗口大了就不需要 RAG</p>
+<p>即使模型支持 1M token 的上下文窗口，把所有文档塞进去仍然不是最优方案。RAG 的价值不仅在于”装得下”，更在于精准检索——减少噪音、降低推理成本、提高答案准确性。</p>
+<h2 id="总结">总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#总结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>六种 Agent 架构覆盖了从高度自主到高度可控的完整光谱。</p>
+<p>选择架构时，核心考量只有两个：你需要多大的灵活性来应对意外情况，以及你需要多大的确定性来保证结果可靠。</p>
+<p>从简单开始，在确实需要时才增加复杂度，这是 Agent 架构选型的第一原则。</p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-17" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#agent-架构模式深度剖析" data-for="agent-架构模式深度剖析">Agent 架构模式深度剖析</a></li><li class="depth-0"><a href="#agent-架构" data-for="agent-架构">Agent 架构</a></li><li class="depth-1"><a href="#什么是-agent-架构" data-for="什么是-agent-架构">什么是 Agent 架构</a></li><li class="depth-1"><a href="#架构一单-agent-循环single-agent-loop" data-for="架构一单-agent-循环single-agent-loop">架构一：单 Agent 循环（Single Agent Loop）</a></li><li class="depth-2"><a href="#工作原理" data-for="工作原理">工作原理</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#单-agent-循环的简化实现--展示-react-模式的核心逻辑" data-for="单-agent-循环的简化实现--展示-react-模式的核心逻辑">单 Agent 循环的简化实现 —— 展示 ReAct 模式的核心逻辑</a></li><li class="depth-0"><a href="#使用示例" data-for="使用示例">使用示例</a></li><li class="depth-1"><a href="#架构二规划--执行plan--execute" data-for="架构二规划--执行plan--execute">架构二：规划 + 执行（Plan &amp; Execute）</a></li><li class="depth-2"><a href="#两种变体" data-for="两种变体">两种变体</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-0"><a href="#plan--execute-架构的简化实现" data-for="plan--execute-架构的简化实现">Plan &amp; Execute 架构的简化实现</a></li><li class="depth-0"><a href="#使用示例-1" data-for="使用示例-1">使用示例</a></li><li class="depth-0"><a href="#人类可以先审查-plan确认合理后再执行" data-for="人类可以先审查-plan确认合理后再执行">人类可以先审查 plan，确认合理后再执行</a></li><li class="depth-1"><a href="#架构三多-agent-协作multi-agent" data-for="架构三多-agent-协作multi-agent">架构三：多 Agent 协作（Multi-Agent）</a></li><li class="depth-2"><a href="#独立上下文是核心优势" data-for="独立上下文是核心优势">独立上下文是核心优势</a></li><li class="depth-1"><a href="#实例-2" data-for="实例-2">实例</a></li><li class="depth-0"><a href="#多-agent-协作的简化实现" data-for="多-agent-协作的简化实现">多 Agent 协作的简化实现</a></li><li class="depth-0"><a href="#使用示例一次运行三个维度并行分析" data-for="使用示例一次运行三个维度并行分析">使用示例：一次运行，三个维度并行分析</a></li><li class="depth-1"><a href="#架构四反思与自我修正reflection" data-for="架构四反思与自我修正reflection">架构四：反思与自我修正（Reflection）</a></li><li class="depth-2"><a href="#两种实现方式" data-for="两种实现方式">两种实现方式</a></li><li class="depth-1"><a href="#实例-3" data-for="实例-3">实例</a></li><li class="depth-0"><a href="#反思架构的简化实现" data-for="反思架构的简化实现">反思架构的简化实现</a></li><li class="depth-0"><a href="#使用示例-2" data-for="使用示例-2">使用示例</a></li><li class="depth-0"><a href="#agent-生成代码后自我检查加密实现密钥处理" data-for="agent-生成代码后自我检查加密实现密钥处理">Agent 生成代码后自我检查加密实现、密钥处理，</a></li><li class="depth-0"><a href="#发现漏洞后自动修正确保输出安全可靠" data-for="发现漏洞后自动修正确保输出安全可靠">发现漏洞后自动修正，确保输出安全可靠</a></li><li class="depth-1"><a href="#架构五rag--agent检索增强型智能体" data-for="架构五rag--agent检索增强型智能体">架构五：RAG + Agent（检索增强型智能体）</a></li><li class="depth-2"><a href="#与普通-rag-的关键区别" data-for="与普通-rag-的关键区别">与普通 RAG 的关键区别</a></li><li class="depth-1"><a href="#实例-4" data-for="实例-4">实例</a></li><li class="depth-0"><a href="#rag--agent-的简化实现" data-for="rag--agent-的简化实现">RAG + Agent 的简化实现</a></li><li class="depth-0"><a href="#使用示例-3" data-for="使用示例-3">使用示例</a></li><li class="depth-0"><a href="#agent-先检索连接池配置发现提到最大连接数" data-for="agent-先检索连接池配置发现提到最大连接数">Agent 先检索”连接池配置”，发现提到”最大连接数”</a></li><li class="depth-0"><a href="#如果不理解会再次检索最大连接数最佳实践" data-for="如果不理解会再次检索最大连接数最佳实践">如果不理解，会再次检索”最大连接数最佳实践”</a></li><li class="depth-0"><a href="#最终综合多轮检索结果给出完整回答" data-for="最终综合多轮检索结果给出完整回答">最终综合多轮检索结果给出完整回答</a></li><li class="depth-1"><a href="#架构六工作流编排workflow--dag" data-for="架构六工作流编排workflow--dag">架构六：工作流编排（Workflow / DAG）</a></li><li class="depth-2"><a href="#纯-agent-vs-dag-工作流" data-for="纯-agent-vs-dag-工作流">纯 Agent vs DAG 工作流</a></li><li class="depth-1"><a href="#实例-5" data-for="实例-5">实例</a></li><li class="depth-0"><a href="#dag-工作流的简化定义类似-langgraph-风格" data-for="dag-工作流的简化定义类似-langgraph-风格">DAG 工作流的简化定义（类似 LangGraph 风格）</a></li><li class="depth-0"><a href="#定义工作流状态--节点间传递的数据对象" data-for="定义工作流状态--节点间传递的数据对象">定义工作流状态 —— 节点间传递的数据对象</a></li><li class="depth-0"><a href="#定义-dag-节点--每个节点是独立的处理单元" data-for="定义-dag-节点--每个节点是独立的处理单元">定义 DAG 节点 —— 每个节点是独立的处理单元</a></li><li class="depth-0"><a href="#构建-dag定义节点和边数据流向" data-for="构建-dag定义节点和边数据流向">构建 DAG：定义节点和边（数据流向）</a></li><li class="depth-0"><a href="#定义边extract--clean--analyze--report" data-for="定义边extract--clean--analyze--report">定义边：extract → clean → analyze → report</a></li><li class="depth-0"><a href="#编译并运行" data-for="编译并运行">编译并运行</a></li><li class="depth-1"><a href="#横向对比与如何选择" data-for="横向对比与如何选择">横向对比与如何选择</a></li><li class="depth-2"><a href="#常见组合模式" data-for="常见组合模式">常见组合模式</a></li><li class="depth-2"><a href="#常见误区" data-for="常见误区">常见误区</a></li><li class="depth-1"><a href="#总结" data-for="总结">总结</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

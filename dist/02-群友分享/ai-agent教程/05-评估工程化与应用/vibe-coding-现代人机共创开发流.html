@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Vibe Coding 现代人机共创开发流</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="Vibe Coding 现代人机共创开发流"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Vibe Coding 现代人机共创开发流"/><meta name="twitter:description" content="Vibe Coding 现代人机共创开发流 出处：www.runoob.com/ai-agent/vibe-coding-start.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 Vibe Coding 入门教程 Vibe Coding（氛围编程）是一种全新的编程范式，我们不需要一行行手写代码，而是用自然语言描述你想要什么，AI 来写代码、我们负责审查和把控方向。 Vibe Coding 教程参考：www.runoob.com/vibe-coding/vibe-coding-tutorial.html 什么是 Vibe Coding Vibe Codin..."/><meta property="og:description" content="Vibe Coding 现代人机共创开发流 出处：www.runoob.com/ai-agent/vibe-coding-start.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 Vibe Coding 入门教程 Vibe Coding（氛围编程）是一种全新的编程范式，我们不需要一行行手写代码，而是用自然语言描述你想要什么，AI 来写代码、我们负责审查和把控方向。 Vibe Coding 教程参考：www.runoob.com/vibe-coding/vibe-coding-tutorial.html 什么是 Vibe Coding Vibe Codin..."/><meta property="og:image:alt" content="Vibe Coding 现代人机共创开发流 出处：www.runoob.com/ai-agent/vibe-coding-start.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 Vibe Coding 入门教程 Vibe Coding（氛围编程）是一种全新的编程范式，我们不需要一行行手写代码，而是用自然语言描述你想要什么，AI 来写代码、我们负责审查和把控方向。 Vibe Coding 教程参考：www.runoob.com/vibe-coding/vibe-coding-tutorial.html 什么是 Vibe Coding Vibe Codin..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/vibe-coding-现代人机共创开发流"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/vibe-coding-现代人机共创开发流"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="Vibe Coding 现代人机共创开发流 出处：www.runoob.com/ai-agent/vibe-coding-start.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 Vibe Coding 入门教程 Vibe Coding（氛围编程）是一种全新的编程范式，我们不需要一行行手写代码，而是用自然语言描述你想要什么，AI 来写代码、我们负责审查和把控方向。 Vibe Coding 教程参考：www.runoob.com/vibe-coding/vibe-coding-tutorial.html 什么是 Vibe Coding Vibe Codin..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/vibe-coding-现代人机共创开发流-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/vibe-coding-现代人机共创开发流-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/vibe-coding-现代人机共创开发流-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/05-评估工程化与应用/vibe-coding-现代人机共创开发流" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-47" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-47" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/05-评估工程化与应用/">05-评估工程化与应用</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Vibe Coding 现代人机共创开发流</a></div></nav><h1 class="article-title">Vibe Coding 现代人机共创开发流</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/评估工程化与应用" class="internal internal-link tag-link">评估工程化与应用</a><span class="note-properties-separator">, </span><a href="../../../tags/vibe-codin" class="internal internal-link tag-link">vibe-codin</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>22分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="vibe-coding-现代人机共创开发流">Vibe Coding 现代人机共创开发流<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vibe-coding-现代人机共创开发流" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/vibe-coding-start.html" class="external external-link">https://www.runoob.com/ai-agent/vibe-coding-start.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>05-评估工程化与应用</code></p>
+</blockquote>
+<hr/>
+<h1 id="vibe-coding-入门教程">Vibe Coding 入门教程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vibe-coding-入门教程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Vibe Coding（氛围编程）是一种全新的编程范式，我们不需要一行行手写代码，而是用自然语言描述你想要什么，AI 来写代码、我们负责审查和把控方向。</p>
+<blockquote>
+<p>Vibe Coding 教程参考：<a href="https://www.runoob.com/vibe-coding/vibe-coding-tutorial.html" class="external external-link">https://www.runoob.com/vibe-coding/vibe-coding-tutorial.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+</blockquote>
+<h2 id="什么是-vibe-coding">什么是 Vibe Coding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么是-vibe-coding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Vibe Coding 一词由前特斯拉 AI 总监、OpenAI 联合创始人 Andrej Karpathy 在 2025 年 2 月首次提出。</p>
+<p>他用一句话概括了这种全新的编程方式：</p>
+<blockquote>
+<p>「I just vibe. I don’t even touch the keyboard sometimes. I just talk to the AI, it writes the code, I review it, and we iterate.」</p>
+</blockquote>
+<p>翻译过来就是：你只管描述你的「感觉」，AI 来写代码，你审查，然后来回迭代。</p>
+<p>简单来说，Vibe Coding 就是：你用人话告诉 AI 你想要什么功能，AI 帮你把代码写出来，不需要纠结语法细节、不需要记忆 API 参数、不需要手动调试每一个错误——这些都由 AI 来处理。</p>
+<p>我们的角色从「写代码的人」转变为「描述需求的人」，或者说——从程序员变成了产品经理+架构师。</p>
+<blockquote>
+<p>Vibe Coding 不是让 AI 替代你思考，而是让 AI 处理低价值的重复劳动，让你专注于更有创造性的部分：理解问题、设计架构、验证结果。</p>
+</blockquote>
+<h2 id="vibe-coding-vs-传统编程">Vibe Coding vs 传统编程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vibe-coding-vs-传统编程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>理解 Vibe Coding 与传统的编程方式有什么不同，有助于你更好地使用它。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>传统编程</th><th>Vibe Coding</th></tr></thead><tbody><tr><td>输入方式</td><td>逐行手写代码</td><td>自然语言描述需求</td></tr><tr><td>关注点</td><td>语法、API、实现细节</td><td>需求、架构、验证</td></tr><tr><td>调试方式</td><td>手动断点/日志调试</td><td>把错误信息丢给 AI，让它修复</td></tr><tr><td>速度</td><td>取决于打字速度和熟练度</td><td>取决于需求描述的清晰程度</td></tr><tr><td>适用场景</td><td>所有编程任务</td><td>原型开发、CRUD、脚本工具、UI 页面</td></tr><tr><td>核心技能</td><td>编程语言掌握度</td><td>需求拆解 + 结果验证能力</td></tr></tbody></table></div>
+<h2 id="为什么现在可以-vibe-coding">为什么现在可以 Vibe Coding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#为什么现在可以-vibe-coding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Vibe Coding 之所以在 2025 年成为可能，是因为几个关键条件的成熟。</p>
+<h3 id="大模型编码能力的飞跃">大模型编码能力的飞跃<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#大模型编码能力的飞跃" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>GPT-5.5、Claude 5、Gemini 等模型在代码生成方面的准确率大幅提升。</p>
+<p>它们不仅能写出语法正确的代码，还能理解项目上下文、遵循最佳实践、处理边界情况。</p>
+<p>更重要的是，它们可以处理超长上下文——一次性阅读整个项目，理解你的代码库结构。</p>
+<h3 id="ai-编程工具的爆发">AI 编程工具的爆发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ai-编程工具的爆发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Cursor、Claude Code、GitHub Copilot、Windsurf 等工具将 AI 能力深度集成到了开发流程中。</p>
+<p>这些工具不仅能补全代码，还能直接修改文件、运行终端命令、搜索代码库——像一个真正的开发者一样工作。</p>
+<h3 id="agent-模式的出现">Agent 模式的出现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-模式的出现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agent 模式的工具可以自主执行多步骤任务：读取文件、编写代码、运行测试、根据测试结果修复错误。</p>
+<p>你只需要下达一个初始指令，Agent 会自己循环迭代直到任务完成。</p>
+<h2 id="主流工具介绍">主流工具介绍<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#主流工具介绍" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>以下是目前最主流的 Vibe Coding 工具，各有侧重。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>工具</th><th>类型</th><th>核心特点</th><th>适合场景</th></tr></thead><tbody><tr><td><a href="https://qoder.cn/referral?utm_source=paid&amp;utm_medium=affiliate&amp;utm_campaign=cainiaojiaocheng" class="external external-link">Qoder<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>Agent IDE</td><td>深度代码库理解、Quest 自动任务、多 Agent、Repo Wiki、CLI/IDE 双模式</td><td>中大型工程、长期项目维护</td></tr><tr><td><a href="https://www.trae.cn/sem/?utm_source=advertising&amp;utm_medium=runoob_ug_cpa&amp;utm_term=hw_trae_runoob" class="external external-link">Trae<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>AI 原生 IDE</td><td>对话驱动开发、自动生成与修改代码</td><td>Vibe Coding、新项目快速搭建</td></tr><tr><td><a href="https://cursor.com" class="external external-link">Cursor<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>AI 编辑器</td><td>项目级理解、多文件修改、Agent 模式</td><td>全栈开发、大型项目</td></tr><tr><td><a href="https://www.anthropic.com/claude-code" class="external external-link">Claude Code<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>CLI Agent</td><td>在终端中执行复杂任务、自动修改项目</td><td>后端、自动化开发</td></tr><tr><td><a href="https://github.com/features/copilot" class="external external-link">GitHub Copilot<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>AI 编程助手</td><td>智能补全、聊天、Agent</td><td>日常开发辅助</td></tr><tr><td><a href="https://windsurf.com" class="external external-link">Windsurf<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>AI 编辑器</td><td>Cascade 工作流、自动多文件修改</td><td>快速开发、小中型项目</td></tr><tr><td><a href="https://openai.com/codex/" class="external external-link">OpenAI Codex<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>AI 编程 Agent</td><td>理解任务并执行完整开发流程</td><td>自动化开发</td></tr><tr><td><a href="https://bolt.new" class="external external-link">Bolt.new<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>在线 AI 开发平台</td><td>一句话生成完整应用</td><td>MVP、原型验证</td></tr><tr><td><a href="https://v0.dev" class="external external-link">v0 by Vercel<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>UI 生成工具</td><td>自动生成 React 页面</td><td>页面设计、组件开发</td></tr><tr><td><a href="https://replit.com" class="external external-link">Replit AI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>在线 IDE</td><td>云开发 + AI 协作</td><td>教学、快速测试</td></tr><tr><td><a href="https://lovable.dev" class="external external-link">Lovable<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>AI 应用生成器</td><td>从描述直接生成 SaaS</td><td>创业、产品验证</td></tr><tr><td><a href="https://firebase.google.com/studio" class="external external-link">Firebase Studio<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>AI 应用平台</td><td>AI + 后端服务集成</td><td>App / Web 开发</td></tr></tbody></table></div>
+<blockquote>
+<p>如果你是第一次接触 Vibe Coding，可以先使用国内的 <a href="https://qoder.com/users/sign-up?referral_code=whhACoCj9WryAtAh2HAqjvE2ppbzwWtz" class="external external-link">Qoder<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 或 <a href="https://www.trae.com.cn/?utm_source=advertising&amp;utm_medium=runoob_ug_cpa&amp;utm_term=hw_trae_runoob" class="external external-link">Trae<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 开始，操作类似 VS Code，学习曲线最平缓，且不会改变你熟悉的编辑器环境。</p>
+</blockquote>
+<h2 id="快速开始">快速开始<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#快速开始" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>下面以 <a href="https://www.runoob.com/claude-code/claude-code-tutorial.html" class="external external-link">Claude Code（终端 CLI）<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 为例，展示 Vibe Coding 的典型工作流。</p>
+<p>Claude Code 完整教程参考：<a href="https://www.runoob.com/claude-code/claude-code-tutorial.html" class="external external-link">https://www.runoob.com/claude-code/claude-code-tutorial.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<h3 id="第一个项目hello-vibe-world">第一个项目：Hello, Vibe World!<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一个项目hello-vibe-world" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>**目标：**用 5 分钟，通过纯自然语言，让 Claude Code 帮你创建一个个人名片网页。</p>
+<p><strong>第一步：创建项目文件夹</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">mkdir my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">card </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">&amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> cd my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">card
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">claude</span></span></code></pre></figure>
+<p><strong>第二步：向 Claude 描述你想要的东西</strong></p>
+<p>在 Claude Code 的交互界面中，输入：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">帮我创建一个个人名片网页，要求：
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 显示我的名字（张三）和职业（前端开发者）
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 有一个简短的个人简介区域
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 列出3个技能标签（React、Python、设计）
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 设计风格：简洁现代，深色背景，有轻微的渐变效果
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 单个 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">HTML</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 文件，不需要外部依赖</span></span></code></pre></figure>
+<p><strong>第三步：观察 Claude 工作</strong></p>
+<p>你会看到 Claude Code 自动：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">分析你的需求
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">创建 index.html 文件
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">写入完整的 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">HTML</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">、</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">CSS</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 和少量 JavaScript</span></span></code></pre></figure>
+<p><strong>第四步：查看结果</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">open</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> index.html   </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># macOS
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 或
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">xdg</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">open</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> index.html   </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># Linux</span></span></code></pre></figure>
+<p><strong>第五步：迭代修改</strong></p>
+<p>如果不满意，继续对话：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">把背景色改成深蓝色渐变，字体换成更现代的 sans</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">serif，
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">技能标签加上悬停动画效果</span></span></code></pre></figure>
+<p>Claude Code 会直接修改文件，无需你碰任何代码。</p>
+<h2 id="vibe-coding-核心工作流">Vibe Coding 核心工作流<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vibe-coding-核心工作流" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Vibe Coding 的核心工作流可以概括为四个步骤：描述、审查、迭代、交付。</p>
+<h3 id="完整工作流图示">完整工作流图示<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#完整工作流图示" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">描述需求
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ↓
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 生成代码
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ↓
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你审查 Diff
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    ↓
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  ┌─ 不满意 → 描述修改意见 → </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 重新生成
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  │
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  └─ 满意 → 运行测试
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">              ↓
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            ┌─ 测试失败 → 把报错贴给 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> → 修复
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            │
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            └─ 测试通过 → 提交代码</span></span></code></pre></figure>
+<h3 id="第一步描述需求">第一步：描述需求<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步描述需求" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>用自然语言告诉 Claude Code 你想要什么。</p>
+<p>不需要写代码，不需要说技术细节，说清楚「做什么」即可。</p>
+<p>一个简单的需求描述示例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">帮我创建一个 Python Flask 项目，有一个 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">api</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">tasks 接口，
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">支持 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">GET</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 获取任务列表和 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">POST</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 创建新任务，
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">任务数据用 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">JSON</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 文件存储。</span></span></code></pre></figure>
+<p>Claude Code 收到后会自己规划文件结构、生成代码、安装依赖、运行测试。</p>
+<h3 id="第二步审查-diff">第二步：审查 Diff<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步审查-diff" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Claude Code 生成代码后，会展示所有改动（Diff）供你审查。</p>
+<p>这是 Vibe Coding 中最重要的环节——你必须看懂 AI 改了什么。</p>
+<p>审查时重点关注：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>检查项</th><th>具体看什么</th></tr></thead><tbody><tr><td>逻辑正确性</td><td>条件判断是否合理，边界情况是否处理</td></tr><tr><td>安全性</td><td>是否有 SQL 注入、XSS 等安全漏洞</td></tr><tr><td>数据流向</td><td>数据的输入、处理和输出是否符合预期</td></tr><tr><td>命名规范</td><td>变量名、函数名是否清晰易懂</td></tr><tr><td>冗余代码</td><td>是否有不必要的重复或未使用的导入</td></tr></tbody></table></div>
+<blockquote>
+<p>审查不是为了找茬，而是确保你理解每一行代码在做什么。如果你看不懂某段代码，直接问 Claude Code：「这段代码是什么意思？为什么要这样写？」</p>
+</blockquote>
+<h3 id="第三步迭代修改">第三步：迭代修改<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步迭代修改" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>审查发现问题后，用自然语言描述你想要的修改。</p>
+<p>常见的迭代指令示例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">把 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">JSON</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 文件存储改成 SQLite，用 SQLAlchemy 做 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">ORM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">。</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">给 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">POST</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 接口加个验证：title 必填，不能为空字符串。</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">报错了，看一下：
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">Traceback (most recent call last):
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  File </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;app.py&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, line </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">42</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">in</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> create_task
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    db.session.add(task)
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="property">AttributeError</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">'NoneType'</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="property"> object</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> has no attribute </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">'session'</span></span></code></pre></figure>
+<p>每次迭代后，Claude Code 会重新生成代码并展示 Diff，你再次审查，直到满意为止。</p>
+<h3 id="第四步交付">第四步：交付<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第四步交付" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当所有功能符合预期且测试通过后，提交代码。</p>
+<p>Claude Code 会帮你写好 commit message 并提交：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> git log </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">oneline
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">a1b2c3d feat: add task </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">CRUD</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> API</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> with</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> SQLite storage</span></span></code></pre></figure>
+<h2 id="实战演示用-claude-code-从零构建一个-todo-应用">实战演示：用 Claude Code 从零构建一个 Todo 应用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实战演示用-claude-code-从零构建一个-todo-应用" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>下面通过一个完整的实战案例，演示 Vibe Coding 的整个流程。</p>
+<p>我们将用 Claude Code 从零构建一个包含前端页面和后端 API 的 Todo 应用。</p>
+<h3 id="项目目标">项目目标<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#项目目标" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td>添加任务</td><td>输入任务标题，添加到列表</td></tr><tr><td>完成任务</td><td>点击勾选标记任务为已完成</td></tr><tr><td>删除任务</td><td>删除不需要的任务</td></tr><tr><td>筛选</td><td>按全部/进行中/已完成筛选</td></tr><tr><td>持久化</td><td>数据保存到 SQLite，刷新不丢失</td></tr></tbody></table></div>
+<h3 id="第一步初始化项目">第一步：初始化项目<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步初始化项目" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在终端中创建项目目录并启动 Claude Code：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> mkdir vibe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">todo </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">&amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> cd vibe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">todo
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> claude</span></span></code></pre></figure>
+<p>然后向 Claude Code 描述你的需求：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">帮我创建一个 Todo 应用，要求：
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 后端用 Python Flask </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> SQLAlchemy </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">+</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> SQLite
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 前端用纯 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">HTML</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">CSS</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">JS</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">，风格简约现代
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 支持添加、完成、删除、筛选任务
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 所有 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">API</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 返回 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">JSON</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">，前端用 fetch 调用
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 代码注释用中文</span></span></code></pre></figure>
+<h3 id="第二步claude-code-做了什么">第二步：Claude Code 做了什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步claude-code-做了什么" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Claude Code 收到需求后，自动完成了以下步骤：</p>
+<p>首先创建项目结构：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">vibe</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">todo</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">├── app.py              </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># Flask 主应用
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">├── models.py           </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 数据库模型
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">├── requirements.txt    </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 依赖清单
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── static</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">│   ├── style.css       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 样式文件
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">│   └── script.js       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 前端逻辑
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">└── templates</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    └── index.html      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 页面模板</span></span></code></pre></figure>
+<p>然后生成后端代码，以下是 app.py 的核心内容：</p>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="文件路径apppy">文件路径：app.py<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件路径apppy" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="flask-主应用定义-api-路由和页面入口">Flask 主应用，定义 API 路由和页面入口<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#flask-主应用定义-api-路由和页面入口" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>from flask import Flask, render_template, request, jsonify
+from models import db, Task</p>
+<p>app = Flask(<strong>name</strong>)</p>
+<h1 id="配置-sqlite-数据库路径">配置 SQLite 数据库路径<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置-sqlite-数据库路径" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>app.config[‘SQLALCHEMY_DATABASE_URI’] = ‘sqlite:///todo.db’
+app.config[‘SQLALCHEMY_TRACK_MODIFICATIONS’] = False</p>
+<h1 id="初始化数据库扩展">初始化数据库扩展<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#初始化数据库扩展" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>db.init_app(app)</p>
+<h1 id="应用启动时自动创建表结构">应用启动时自动创建表结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#应用启动时自动创建表结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>with app.app_context():
+    db.create_all()</p>
+<p>@app.route(’/’)
+def index():
+    &quot;&quot;&quot;返回主页面&quot;&quot;&quot;
+    return render_template(‘index.html’)</p>
+<p>@app.route(‘/api/tasks’, methods=[‘GET’])
+def get_tasks():
+    &quot;&quot;&quot;获取所有任务列表，支持按状态筛选&quot;&quot;&quot;
+    # 从查询参数获取筛选条件，默认为 ‘all’
+    status = request.args.get(‘status’, ‘all’)
+    # 根据状态筛选任务
+    if status == ‘completed’:
+        tasks = Task.query.filter_by(completed=True).all()
+    elif status == ‘active’:
+        tasks = Task.query.filter_by(completed=False).all()
+    else:
+        tasks = Task.query.all()
+    # 将任务对象转为字典列表，方便 JSON 序列化
+    return jsonify([t.to_dict() for t in tasks])</p>
+<p>@app.route(‘/api/tasks’, methods=[‘POST’])
+def create_task():
+    &quot;&quot;&quot;创建新任务&quot;&quot;&quot;
+    data = request.get_json()
+    # 校验必填字段 title
+    title = data.get(‘title’, ”).strip()
+    if not title:
+        return jsonify({‘error’: ‘任务标题不能为空’}), 400
+    # 创建任务对象并保存到数据库
+    task = Task(title=title)
+    db.session.add(task)
+    db.session.commit()
+    return jsonify(task.to_dict()), 201</p>
+<p>@app.route(‘/api/tasks/<a href="int:task_id" class="external external-link">int:task_id<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>’, methods=[‘PUT’])
+def update_task(task_id):
+    &quot;&quot;&quot;更新任务状态（完成/取消完成）&quot;&quot;&quot;
+    task = Task.query.get_or_404(task_id)
+    data = request.get_json()
+    # 如果请求中包含 completed 字段，则更新状态
+    if ‘completed’ in data:
+        task.completed = data[‘completed’]
+    db.session.commit()
+    return jsonify(task.to_dict())</p>
+<p>@app.route(‘/api/tasks/<a href="int:task_id" class="external external-link">int:task_id<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>’, methods=[‘DELETE’])
+def delete_task(task_id):
+    &quot;&quot;&quot;删除指定任务&quot;&quot;&quot;
+    task = Task.query.get_or_404(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    return jsonify({‘message’: ‘删除成功’}), 200</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>’:
+    app.run(debug=True)</p>
+<p>还有数据库模型 models.py：</p>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="文件路径modelspy">文件路径：models.py<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件路径modelspy" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="数据库模型定义使用-sqlalchemy-orm">数据库模型定义，使用 SQLAlchemy ORM<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#数据库模型定义使用-sqlalchemy-orm" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime</p>
+<h1 id="创建数据库实例后续在-apppy-中初始化">创建数据库实例，后续在 app.py 中初始化<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建数据库实例后续在-apppy-中初始化" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>db = SQLAlchemy()</p>
+<p>class Task(db.Model):
+    &quot;&quot;&quot;任务模型，对应数据库中的 tasks 表&quot;&quot;&quot;
+    <strong>tablename</strong> = ‘tasks’</p>
+<p>    # 主键，自增整数
+    id = db.Column(db.Integer, primary_key=True)
+    # 任务标题，必填，不能为空
+    title = db.Column(db.String(200), nullable=False)
+    # 完成状态，默认为 False
+    completed = db.Column(db.Boolean, default=False)
+    # 创建时间，自动记录
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)</p>
+<p>    def to_dict(self):
+        &quot;&quot;&quot;将任务对象转换为字典，方便 JSON 序列化&quot;&quot;&quot;
+        return {
+            ‘id’: self.id,
+            ‘title’: self.title,
+            ‘completed’: self.completed,
+            ‘created_at’: self.created_at.isoformat()
+        }</p>
+<h3 id="第三步审查代码">第三步：审查代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步审查代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Claude Code 展示 Diff 后，你逐行审查。</p>
+<p>你可能会发现一些问题并提出修改意见。</p>
+<p>例如，你注意到 API 路由没有统一前缀，提出修改：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">把所有 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">API</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 路由加上 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">api</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">v1 前缀，方便以后版本管理。</span></span></code></pre></figure>
+<p>Claude Code 会自动修改所有路由，你再次审查通过。</p>
+<h3 id="第四步运行测试">第四步：运行测试<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第四步运行测试" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>审查通过后，让 Claude Code 启动应用并测试：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> python app.py
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> *</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> Running on http:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">127.0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.0.1:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5000</span></span></code></pre></figure>
+<p>打开浏览器访问 <a href="http://127.0.0.1:5000%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E5%AE%8C%E6%95%B4%E7%9A%84" class="external external-link">http://127.0.0.1:5000，可以看到完整的<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> Todo 应用界面。</p>
+<p>测试添加任务功能：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> curl </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">X </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">POST</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> http:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">127.0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.0.1:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5000</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">api</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">v1</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">tasks \
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">  -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">H </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Content-Type: application/json&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> \
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">  -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">d </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">'{&quot;title&quot;: &quot;学习 Vibe Coding&quot;}'</span></span></code></pre></figure>
+<p>返回结果：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;completed&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: false,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;created_at&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;2026-06-24T10:30:00&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;id&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;title&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;学习 Vibe Coding&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<h3 id="第五步提交代码">第五步：提交代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第五步提交代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>所有功能验证通过后，提交代码：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> git add .
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> git commit </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">m </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;feat: 完成 Todo 应用基础功能&quot;</span></span></code></pre></figure>
+<blockquote>
+<p>整个实战过程，你一行代码都没有手动写。你做的事情是：描述需求、审查 Diff、描述修改、运行测试、提交代码。这就是 Vibe Coding 的核心体验。</p>
+</blockquote>
+<h2 id="写好提示词的技巧">写好提示词的技巧<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#写好提示词的技巧" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Vibe Coding 的效果很大程度上取决于你如何描述需求。</p>
+<p>好的提示词能让 AI 一次生成接近预期的代码，减少迭代次数。</p>
+<h3 id="四要素模型">四要素模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#四要素模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>一个高质量的提示词应该包含四个要素：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>要素</th><th>说明</th><th>示例</th></tr></thead><tbody><tr><td>做什么</td><td>明确描述要实现的功能</td><td>「创建一个用户注册接口」</td></tr><tr><td>用什么</td><td>指定技术栈和工具</td><td>「用 Flask + SQLAlchemy + SQLite」</td></tr><tr><td>怎么约束</td><td>给出限制条件和边界</td><td>「邮箱必填且需要格式验证」</td></tr><tr><td>期望格式</td><td>说明输出偏好</td><td>「代码注释用中文，每个函数加 docstring」</td></tr></tbody></table></div>
+<h3 id="好提示词-vs-差提示词">好提示词 vs 差提示词<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#好提示词-vs-差提示词" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>差提示词</th><th>好提示词</th></tr></thead><tbody><tr><td>帮我做个登录功能</td><td>帮我用 Flask 实现一个登录接口，接收邮箱和密码，用 bcrypt 加密密码，用 JWT 返回 token，token 有效期 24 小时。登录失败返回具体的错误信息。</td></tr><tr><td>这个按钮太丑了</td><td>把这个提交按钮改成圆角 8px、蓝色背景 <a href="../../.././../../tags/2563eb" class="tag-link internal internal-link alias" data-slug="tags/2563eb">2563eb</a>、白色文字，hover 时颜色加深 10%，加一个 0.2s 的过渡动画。</td></tr><tr><td>报错了，帮我修</td><td>运行 python app.py 时报错：AttributeError: ‘NoneType’ object has no attribute ‘session’。看起来是数据库初始化的问题，帮我排查并修复。</td></tr></tbody></table></div>
+<blockquote>
+<p>提示词的核心原则：越具体，结果越好。模糊的需求只会得到模糊的代码。</p>
+</blockquote>
+<h2 id="常见误区与注意事项">常见误区与注意事项<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见误区与注意事项" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="误区一ai-可以替代所有编程知识">误区一：AI 可以替代所有编程知识<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#误区一ai-可以替代所有编程知识" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Vibe Coding 降低了编程门槛，但没有消除门槛。</p>
+<p>我们仍然需要理解基本概念：变量、函数、API、数据库、HTTP、异步等，否则无法判断 AI 生成的代码是否正确，也无法有效地描述需求。</p>
+<h3 id="误区二一次性描述所有功能">误区二：一次性描述所有功能<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#误区二一次性描述所有功能" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不要把整个产品的 PRD 文档复制给 AI，期望它一次性生成完美代码。</p>
+<p>AI 的注意力有上限，需求越多越容易出错。</p>
+<p>更有效的方式是：核心功能 → 验证 → 添加功能 → 验证 → 继续迭代。</p>
+<h3 id="误区三不读-ai-写的代码">误区三：不读 AI 写的代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#误区三不读-ai-写的代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>有些开发者拿到 AI 生成的代码后直接合入，这是非常危险的。</p>
+<p>AI 可能会引入安全漏洞、性能问题、或者完全不合理的架构。</p>
+<p>我们至少需要快速浏览一遍关键逻辑，确保没有明显问题。</p>
+<h3 id="注意事项">注意事项<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#注意事项" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>敏感信息（API 密钥、数据库密码）不要直接写在对话里——先在代码中用环境变量占位，再手动填入</li>
+<li>每次关键修改后提交 Git，方便出问题时回滚</li>
+<li>AI 生成的代码可能不符合你团队的编码规范，需要手动调整</li>
+<li>对于需要高可靠性的代码（支付、认证、数据处理），AI 生成后务必人工审查</li>
+</ul>
+<h2 id="适合-vibe-coding-的场景">适合 Vibe Coding 的场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#适合-vibe-coding-的场景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Vibe Coding 并非万能，了解什么场景适合它能帮你更好地分配精力。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>场景</th><th>适合度</th><th>说明</th></tr></thead><tbody><tr><td>原型/MVP 开发</td><td>极高</td><td>快速验证想法，几个小时出一个可用的 demo</td></tr><tr><td>CRUD 接口</td><td>极高</td><td>重复模式明确，AI 完成度很高</td></tr><tr><td>前端页面/组件</td><td>很高</td><td>HTML/CSS/React 组件，AI 非常擅长</td></tr><tr><td>脚本/自动化工具</td><td>很高</td><td>一次性脚本、数据处理、文件操作</td></tr><tr><td>单元测试编写</td><td>很高</td><td>根据函数签名生成测试用例</td></tr><tr><td>复杂算法实现</td><td>中等</td><td>需要清晰的算法描述，且需人工验证正确性</td></tr><tr><td>底层系统优化</td><td>较低</td><td>涉及内存布局、缓存行、硬件特性，AI 容易出现细微错误</td></tr><tr><td>高安全需求代码</td><td>谨慎</td><td>加密、认证、支付类代码，AI 生成后必须专家审查</td></tr></tbody></table></div>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-47" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#vibe-coding-现代人机共创开发流" data-for="vibe-coding-现代人机共创开发流">Vibe Coding 现代人机共创开发流</a></li><li class="depth-0"><a href="#vibe-coding-入门教程" data-for="vibe-coding-入门教程">Vibe Coding 入门教程</a></li><li class="depth-1"><a href="#什么是-vibe-coding" data-for="什么是-vibe-coding">什么是 Vibe Coding</a></li><li class="depth-1"><a href="#vibe-coding-vs-传统编程" data-for="vibe-coding-vs-传统编程">Vibe Coding vs 传统编程</a></li><li class="depth-1"><a href="#为什么现在可以-vibe-coding" data-for="为什么现在可以-vibe-coding">为什么现在可以 Vibe Coding</a></li><li class="depth-2"><a href="#大模型编码能力的飞跃" data-for="大模型编码能力的飞跃">大模型编码能力的飞跃</a></li><li class="depth-2"><a href="#ai-编程工具的爆发" data-for="ai-编程工具的爆发">AI 编程工具的爆发</a></li><li class="depth-2"><a href="#agent-模式的出现" data-for="agent-模式的出现">Agent 模式的出现</a></li><li class="depth-1"><a href="#主流工具介绍" data-for="主流工具介绍">主流工具介绍</a></li><li class="depth-1"><a href="#快速开始" data-for="快速开始">快速开始</a></li><li class="depth-2"><a href="#第一个项目hello-vibe-world" data-for="第一个项目hello-vibe-world">第一个项目：Hello, Vibe World!</a></li><li class="depth-1"><a href="#vibe-coding-核心工作流" data-for="vibe-coding-核心工作流">Vibe Coding 核心工作流</a></li><li class="depth-2"><a href="#完整工作流图示" data-for="完整工作流图示">完整工作流图示</a></li><li class="depth-2"><a href="#第一步描述需求" data-for="第一步描述需求">第一步：描述需求</a></li><li class="depth-2"><a href="#第二步审查-diff" data-for="第二步审查-diff">第二步：审查 Diff</a></li><li class="depth-2"><a href="#第三步迭代修改" data-for="第三步迭代修改">第三步：迭代修改</a></li><li class="depth-2"><a href="#第四步交付" data-for="第四步交付">第四步：交付</a></li><li class="depth-1"><a href="#实战演示用-claude-code-从零构建一个-todo-应用" data-for="实战演示用-claude-code-从零构建一个-todo-应用">实战演示：用 Claude Code 从零构建一个 Todo 应用</a></li><li class="depth-2"><a href="#项目目标" data-for="项目目标">项目目标</a></li><li class="depth-2"><a href="#第一步初始化项目" data-for="第一步初始化项目">第一步：初始化项目</a></li><li class="depth-2"><a href="#第二步claude-code-做了什么" data-for="第二步claude-code-做了什么">第二步：Claude Code 做了什么</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#文件路径apppy" data-for="文件路径apppy">文件路径：app.py</a></li><li class="depth-0"><a href="#flask-主应用定义-api-路由和页面入口" data-for="flask-主应用定义-api-路由和页面入口">Flask 主应用，定义 API 路由和页面入口</a></li><li class="depth-0"><a href="#配置-sqlite-数据库路径" data-for="配置-sqlite-数据库路径">配置 SQLite 数据库路径</a></li><li class="depth-0"><a href="#初始化数据库扩展" data-for="初始化数据库扩展">初始化数据库扩展</a></li><li class="depth-0"><a href="#应用启动时自动创建表结构" data-for="应用启动时自动创建表结构">应用启动时自动创建表结构</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-0"><a href="#文件路径modelspy" data-for="文件路径modelspy">文件路径：models.py</a></li><li class="depth-0"><a href="#数据库模型定义使用-sqlalchemy-orm" data-for="数据库模型定义使用-sqlalchemy-orm">数据库模型定义，使用 SQLAlchemy ORM</a></li><li class="depth-0"><a href="#创建数据库实例后续在-apppy-中初始化" data-for="创建数据库实例后续在-apppy-中初始化">创建数据库实例，后续在 app.py 中初始化</a></li><li class="depth-2"><a href="#第三步审查代码" data-for="第三步审查代码">第三步：审查代码</a></li><li class="depth-2"><a href="#第四步运行测试" data-for="第四步运行测试">第四步：运行测试</a></li><li class="depth-2"><a href="#第五步提交代码" data-for="第五步提交代码">第五步：提交代码</a></li><li class="depth-1"><a href="#写好提示词的技巧" data-for="写好提示词的技巧">写好提示词的技巧</a></li><li class="depth-2"><a href="#四要素模型" data-for="四要素模型">四要素模型</a></li><li class="depth-2"><a href="#好提示词-vs-差提示词" data-for="好提示词-vs-差提示词">好提示词 vs 差提示词</a></li><li class="depth-1"><a href="#常见误区与注意事项" data-for="常见误区与注意事项">常见误区与注意事项</a></li><li class="depth-2"><a href="#误区一ai-可以替代所有编程知识" data-for="误区一ai-可以替代所有编程知识">误区一：AI 可以替代所有编程知识</a></li><li class="depth-2"><a href="#误区二一次性描述所有功能" data-for="误区二一次性描述所有功能">误区二：一次性描述所有功能</a></li><li class="depth-2"><a href="#误区三不读-ai-写的代码" data-for="误区三不读-ai-写的代码">误区三：不读 AI 写的代码</a></li><li class="depth-2"><a href="#注意事项" data-for="注意事项">注意事项</a></li><li class="depth-1"><a href="#适合-vibe-coding-的场景" data-for="适合-vibe-coding-的场景">适合 Vibe Coding 的场景</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>生产部署与工程化落地</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="生产部署与工程化落地"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="生产部署与工程化落地"/><meta name="twitter:description" content="生产部署与工程化落地 出处：www.runoob.com/ai-agent/production-deployment.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 AI Agent 生产部署与工程化 生产部署涉及可靠性、可扩展性、成本控制等多个方面。 工程化实践确保系统稳定运行并便于维护。 生产部署架构 生产环境对系统有更高的要求。 需要考虑可靠性、可扩展性、监控告警等多个方面。 部署模式 单机部署 适合开发和测试环境。 简单易部署，但无法应对生产级流量。 分布式部署 适合生产环境，需要考虑多个方面。 负载均衡：分发请求到多个实例。 服务发现：动态管理..."/><meta property="og:description" content="生产部署与工程化落地 出处：www.runoob.com/ai-agent/production-deployment.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 AI Agent 生产部署与工程化 生产部署涉及可靠性、可扩展性、成本控制等多个方面。 工程化实践确保系统稳定运行并便于维护。 生产部署架构 生产环境对系统有更高的要求。 需要考虑可靠性、可扩展性、监控告警等多个方面。 部署模式 单机部署 适合开发和测试环境。 简单易部署，但无法应对生产级流量。 分布式部署 适合生产环境，需要考虑多个方面。 负载均衡：分发请求到多个实例。 服务发现：动态管理..."/><meta property="og:image:alt" content="生产部署与工程化落地 出处：www.runoob.com/ai-agent/production-deployment.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 AI Agent 生产部署与工程化 生产部署涉及可靠性、可扩展性、成本控制等多个方面。 工程化实践确保系统稳定运行并便于维护。 生产部署架构 生产环境对系统有更高的要求。 需要考虑可靠性、可扩展性、监控告警等多个方面。 部署模式 单机部署 适合开发和测试环境。 简单易部署，但无法应对生产级流量。 分布式部署 适合生产环境，需要考虑多个方面。 负载均衡：分发请求到多个实例。 服务发现：动态管理..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/生产部署与工程化落地"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/生产部署与工程化落地"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="生产部署与工程化落地 出处：www.runoob.com/ai-agent/production-deployment.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：05-评估工程化与应用 AI Agent 生产部署与工程化 生产部署涉及可靠性、可扩展性、成本控制等多个方面。 工程化实践确保系统稳定运行并便于维护。 生产部署架构 生产环境对系统有更高的要求。 需要考虑可靠性、可扩展性、监控告警等多个方面。 部署模式 单机部署 适合开发和测试环境。 简单易部署，但无法应对生产级流量。 分布式部署 适合生产环境，需要考虑多个方面。 负载均衡：分发请求到多个实例。 服务发现：动态管理..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/生产部署与工程化落地-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/生产部署与工程化落地-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/05-评估工程化与应用/生产部署与工程化落地-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/05-评估工程化与应用/生产部署与工程化落地" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-48" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-48" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/05-评估工程化与应用/">05-评估工程化与应用</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>生产部署与工程化落地</a></div></nav><h1 class="article-title">生产部署与工程化落地</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/评估工程化与应用" class="internal internal-link tag-link">评估工程化与应用</a><span class="note-properties-separator">, </span><a href="../../../tags/生产部署与工程化落地" class="internal internal-link tag-link">生产部署与工程化落地</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>17分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="生产部署与工程化落地">生产部署与工程化落地<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#生产部署与工程化落地" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/production-deployment.html" class="external external-link">https://www.runoob.com/ai-agent/production-deployment.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>05-评估工程化与应用</code></p>
+</blockquote>
+<hr/>
+<h1 id="ai-agent-生产部署与工程化">AI Agent 生产部署与工程化<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ai-agent-生产部署与工程化" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>生产部署涉及可靠性、可扩展性、成本控制等多个方面。</p>
+<p>工程化实践确保系统稳定运行并便于维护。</p>
+<h2 id="生产部署架构">生产部署架构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#生产部署架构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>生产环境对系统有更高的要求。</p>
+<p>需要考虑可靠性、可扩展性、监控告警等多个方面。</p>
+<h3 id="部署模式">部署模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#部署模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="单机部署">单机部署<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#单机部署" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>适合开发和测试环境。</p>
+<p>简单易部署，但无法应对生产级流量。</p>
+<h4 id="分布式部署">分布式部署<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#分布式部署" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>适合生产环境，需要考虑多个方面。</p>
+<p>负载均衡：分发请求到多个实例。</p>
+<p>服务发现：动态管理实例列表。</p>
+<p>状态管理：处理分布式状态一致性问题。</p>
+<p>容错处理：单点故障不影响整体服务。</p>
+<h3 id="容器化部署">容器化部署<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#容器化部署" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="dockerfile-示例">Dockerfile 示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dockerfile-示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="基于-python-311-镜像">基于 Python 3.11 镜像<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#基于-python-311-镜像" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>FROM python:3.11-slim</p>
+<h1 id="设置工作目录">设置工作目录<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#设置工作目录" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>WORKDIR /app</p>
+<h1 id="安装依赖">安装依赖<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装依赖" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>COPY requirements.txt .</p>
+<p>RUN pip install —no-cache-dir -r requirements.txt</p>
+<h1 id="复制应用代码">复制应用代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#复制应用代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>COPY . .</p>
+<h1 id="创建非-root-用户安全考虑">创建非 root 用户（安全考虑）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建非-root-用户安全考虑" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>RUN useradd -m appuser &amp;&amp; chown -R appuser:appuser /app</p>
+<p>USER appuser</p>
+<h1 id="暴露端口">暴露端口<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#暴露端口" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>EXPOSE 8000</p>
+<h1 id="启动命令">启动命令<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#启动命令" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>CMD [“python”, “agent.py”]</p>
+<h3 id="kubernetes-部署">Kubernetes 部署<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#kubernetes-部署" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="kubernetes-deployment-配置">Kubernetes Deployment 配置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#kubernetes-deployment-配置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h2 id="span-stylecolor-greenapiversion-appsv1kind-deploymentmetadata-name-ai-agent-labels--app-ai-agentspec-副本数-replicas-3-selector--matchlabels---app-ai-agent-template--metadata---labels----app-ai-agent--spec---containers-----name-agent----image-your-registryai-agentlatest----ports------containerport-8000-----资源限制----resources-----limits------memory-2gi------cpu-1-----requests------memory-1gi------cpu-05-----健康检查----livenessprobe-----httpget------path-health------port-8000-----initialdelayseconds-10-----periodseconds-30----readinessprobe-----httpget------path-ready------port-8000-----initialdelayseconds-5-----periodseconds-10">span style=“color: green;”>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-agent
+  labels:
+    app: ai-agent
+spec:
+ # 副本数
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ai-agent
+  template:
+    metadata:
+      labels:
+        app: ai-agent
+    spec:
+      containers:
+      - name: agent
+        image: your-registry/ai-agent:latest
+        ports:
+        - containerPort: 8000
+        # 资源限制
+        resources:
+          limits:
+            memory: “2Gi”
+            cpu: “1”
+          requests:
+            memory: “1Gi”
+            cpu: “0.5”
+        # 健康检查
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#span-stylecolor-greenapiversion-appsv1kind-deploymentmetadata-name-ai-agent-labels--app-ai-agentspec-副本数-replicas-3-selector--matchlabels---app-ai-agent-template--metadata---labels----app-ai-agent--spec---containers-----name-agent----image-your-registryai-agentlatest----ports------containerport-8000-----资源限制----resources-----limits------memory-2gi------cpu-1-----requests------memory-1gi------cpu-05-----健康检查----livenessprobe-----httpget------path-health------port-8000-----initialdelayseconds-10-----periodseconds-30----readinessprobe-----httpget------path-ready------port-8000-----initialdelayseconds-5-----periodseconds-10" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>apiVersion: v1
+kind: Service
+metadata:
+  name: ai-agent-service
+spec:
+  selector:
+    app: ai-agent
+  ports:
+  - port: 80
+    targetPort: 8000
+  type: LoadBalancer</p>
+<h2 id="成本控制">成本控制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#成本控制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Agent 系统的成本主要来自 LLM API 调用。</p>
+<p>优化成本是生产部署的重要课题。</p>
+<h3 id="token-优化策略">Token 优化策略<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#token-优化策略" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>提示词压缩：精简提示词，减少不必要的文字。</p>
+<p>上下文截断：只保留关键的上下文内容。</p>
+<p>缓存响应：对相同或相似查询缓存响应。</p>
+<h3 id="代码实现">代码实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="成本优化-agent-实现">成本优化 Agent 实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#成本优化-agent-实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import hashlib
+import json
+from functools import lru_cache</p>
+<p>class CostOptimizedAgent:
+    &quot;&quot;&quot;
+    成本优化的 Agent
+    通过缓存和压缩减少 API 调用成本
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, base_agent, cache, embedder=None):
+        # 基础 Agent
+        self.base_agent = base_agent
+        # 缓存存储
+        self.cache = cache
+        # 嵌入器（用于相似度缓存匹配）
+        self.embedder = embedder
+   
+    def process(self, request):
+        &quot;&quot;&quot;
+        处理请求，包含成本优化逻辑
+        &quot;&quot;&quot;
+        # 生成请求指纹
+        request_fingerprint = self.generate_fingerprint(request)
+       
+        # 检查精确缓存
+        cached_result = self.cache.get(request_fingerprint)
+        if cached_result:
+            return {
+                **cached_result,
+                “from_cache”: True
+            }
+       
+        # 如果有嵌入器，检查语义相似缓存
+        if self.embedder:
+            similar = self.find_similar_cached(request)
+            if similar:
+                return {
+                    **similar,
+                    “from_cache”: True,
+                    “similar_to”: similar.get(“request_id”)
+                }
+       
+        # 执行请求
+        result = self.base_agent.process(request)
+       
+        # 缓存结果
+        self.cache.set(
+            request_fingerprint,
+            result,
+            ttl=3600  # 1 小时过期
+        )
+       
+        return {
+            **result,
+            “from_cache”: False
+        }
+   
+    def generate_fingerprint(self, request):
+        &quot;&quot;&quot;
+        生成请求指纹
+        用于精确缓存匹配
+        &quot;&quot;&quot;
+        content = json.dumps(request, sort_keys=True)
+        return hashlib.sha256(content.encode()).hexdigest()
+   
+    def find_similar_cached(self, request, threshold=0.95):
+        &quot;&quot;&quot;
+        查找语义相似的缓存结果
+        使用嵌入向量的余弦相似度
+        &quot;&quot;&quot;
+        if not self.embedder:
+            return None
+       
+        # 将请求向量化
+        request_vector = self.embedder.embed([str(request)])[0]
+       
+        # 在缓存中搜索相似请求
+        best_match = None
+        best_similarity = 0
+       
+        for cached in self.cache.get_all():
+            cached_vector = cached[“vector”]
+            similarity = cosine_similarity(request_vector, cached_vector)
+           
+            if similarity > best_similarity and similarity >= threshold:
+                best_similarity = similarity
+                best_match = cached
+       
+        return best_match</p>
+<p>class ResponseCache:
+    &quot;&quot;&quot;
+    响应缓存
+    简单的内存缓存实现
+    生产环境可使用 Redis
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self):
+        self.cache = {}
+        self.timestamps = {}
+   
+    def get(self, key):
+        &quot;&quot;&quot;获取缓存&quot;&quot;&quot;
+        if key in self.cache:
+            # 检查是否过期
+            if self.is_expired(key):
+                self.delete(key)
+                return None
+            return self.cache[key]
+        return None
+   
+    def set(self, key, value, ttl=3600):
+        &quot;&quot;&quot;设置缓存&quot;&quot;&quot;
+        self.cache[key] = value
+        self.timestamps[key] = time.time() + ttl
+   
+    def delete(self, key):
+        &quot;&quot;&quot;删除缓存&quot;&quot;&quot;
+        if key in self.cache:
+            del self.cache[key]
+        if key in self.timestamps:
+            del self.timestamps[key]
+   
+    def is_expired(self, key):
+        &quot;&quot;&quot;检查是否过期&quot;&quot;&quot;
+        if key not in self.timestamps:
+            return True
+        return time.time() > self.timestamps[key]
+   
+    def get_all(self):
+        &quot;&quot;&quot;获取所有缓存项&quot;&quot;&quot;
+        return list(self.cache.values())</p>
+<p>def cosine_similarity(vec1, vec2):
+    &quot;&quot;&quot;计算余弦相似度&quot;&quot;&quot;
+    dot_product = sum(a * b for a, b in zip(vec1, vec2))
+    norm1 = math.sqrt(sum(a * a for a in vec1))
+    norm2 = math.sqrt(sum(b * b for b in vec2))
+    return dot_product / (norm1 * norm2)</p>
+<h2 id="流式与异步">流式与异步<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#流式与异步" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="流式响应">流式响应<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#流式响应" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>流式响应减少等待时间，提升用户体验。</p>
+<p>不用等待完整响应，可以逐步显示生成内容。</p>
+<h3 id="代码实现-1">代码实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码实现-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="流式响应-agent">流式响应 Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#流式响应-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import asyncio</p>
+<p>class StreamingAgent:
+    &quot;&quot;&quot;
+    支持流式响应的 Agent
+    边生成边返回，减少等待时间
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, llm):
+        self.llm = llm
+   
+    async def stream_generate(self, prompt):
+        &quot;&quot;&quot;
+        流式生成响应
+        使用 async generator 模式
+        :yield: 生成的文本片段
+        &quot;&quot;&quot;
+        # 启动异步生成任务
+        async for chunk in self.llm.stream_generate(prompt):
+            yield chunk
+   
+    async def process_stream(self, request):
+        &quot;&quot;&quot;
+        处理流式请求
+        返回异步生成器
+        &quot;&quot;&quot;
+        prompt = self.build_prompt(request)
+       
+        # 返回生成器
+        async def generate():
+            async for chunk in self.stream_generate(prompt):
+                yield chunk
+       
+        return generate()</p>
+<h1 id="使用示例">使用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>async def main():
+    agent = StreamingAgent(llm)
+   
+    # 启动流式生成
+    async for token in agent.stream_generate(“解释量子计算”):
+        # 边生成边打印
+        print(token, end=&quot;&quot;, flush=True)
+    print()  # 换行</p>
+<h1 id="运行">运行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#运行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>asyncio.run(main())</p>
+<h3 id="异步任务队列">异步任务队列<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#异步任务队列" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>对于长时间运行的任务，使用异步队列处理。</p>
+<p>用户提交任务后立即返回，后台异步执行。</p>
+<h2 id="异步任务队列实现">异步任务队列实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#异步任务队列实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import asyncio
+from queue import Queue
+from threading import Thread
+import uuid</p>
+<p>class AsyncAgent:
+    &quot;&quot;&quot;
+    异步 Agent
+    使用任务队列处理长时间运行的任务
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, agent, task_queue):
+        # 基础 Agent
+        self.agent = agent
+        # 任务队列
+        self.task_queue = task_queue
+        # 结果存储
+        self.results = {}
+        # 启动后台工作线程
+        self.worker_thread = Thread(target=self.process_queue, daemon=True)
+        self.worker_thread.start()
+   
+    async def submit(self, task):
+        &quot;&quot;&quot;
+        提交任务
+        立即返回任务 ID
+        &quot;&quot;&quot;
+        # 生成唯一任务 ID
+        task_id = str(uuid.uuid4())
+       
+        # 添加到队列
+        await self.task_queue.enqueue({
+            “id”: task_id,
+            “task”: task,
+            “status”: “pending”,
+            “created_at”: time.time()
+        })
+       
+        return task_id
+   
+    async def get_result(self, task_id):
+        &quot;&quot;&quot;
+        获取任务结果
+        非阻塞式
+        &quot;&quot;&quot;
+        if task_id in self.results:
+            return self.results[task_id]
+       
+        # 检查任务状态
+        status = await self.task_queue.get_status(task_id)
+       
+        if status is None:
+            return None  # 任务不存在
+       
+        if status <span class="text-highlight"> &quot;pending&quot; or status </span> “processing”:
+            return {
+                “status”: status,
+                “result”: None
+            }
+       
+        return None
+   
+    def process_queue(self):
+        &quot;&quot;&quot;
+        后台工作线程
+        从队列取出任务并执行
+        &quot;&quot;&quot;
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+       
+        while True:
+            task = loop.run_until_complete(self.task_queue.dequeue())
+           
+            if task:
+                # 更新状态为处理中
+                loop.run_until_complete(
+                    self.task_queue.update_status(task[“id”], “processing”)
+                )
+               
+                try:
+                    # 执行任务
+                    result = self.agent.process(task[“task”])
+                   
+                    # 保存结果
+                    self.results[task[“id”]] = {
+                        “status”: “completed”,
+                        “result”: result,
+                        “completed_at”: time.time()
+                    }
+                   
+                    loop.run_until_complete(
+                        self.task_queue.update_status(task[“id”], “completed”)
+                    )
+                except Exception as e:
+                    self.results[task[“id”]] = {
+                        “status”: “failed”,
+                        “error”: str(e)
+                    }
+                   
+                    loop.run_until_complete(
+                        self.task_queue.update_status(task[“id”], “failed”)
+                    )</p>
+<p>class TaskQueue:
+    &quot;&quot;&quot;简单的任务队列实现&quot;&quot;&quot;
+   
+    def <strong>init</strong>(self):
+        self.queue = Queue()
+        self.statuses = {}
+   
+    async def enqueue(self, task):
+        &quot;&quot;&quot;添加任务到队列&quot;&quot;&quot;
+        self.queue.put(task)
+        self.statuses[task[“id”]] = “pending”
+   
+    async def dequeue(self):
+        &quot;&quot;&quot;取出一个任务&quot;&quot;&quot;
+        if not self.queue.empty():
+            return self.queue.get()
+        return None
+   
+    async def get_status(self, task_id):
+        &quot;&quot;&quot;获取任务状态&quot;&quot;&quot;
+        return self.statuses.get(task_id)
+   
+    async def update_status(self, task_id, status):
+        &quot;&quot;&quot;更新任务状态&quot;&quot;&quot;
+        self.statuses[task_id] = status</p>
+<h2 id="微服务化设计">微服务化设计<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#微服务化设计" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>将 Agent 系统拆分为多个独立服务，提高可维护性和可扩展性。</p>
+<h3 id="服务划分">服务划分<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#服务划分" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>服务</th><th>职责</th></tr></thead><tbody><tr><td>API 网关</td><td>统一入口，认证限流，路由转发</td></tr><tr><td>Agent 服务</td><td>核心逻辑，推理规划</td></tr><tr><td>工具服务</td><td>外部 API 集成，工具调用</td></tr><tr><td>存储服务</td><td>知识库，状态管理，缓存</td></tr><tr><td>监控服务</td><td>日志收集，指标监控，告警</td></tr></tbody></table></div>
+<h3 id="服务间通信">服务间通信<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#服务间通信" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>同步通信：HTTP/gRPC，用于实时请求响应。</p>
+<p>异步通信：消息队列，用于耗时操作和事件通知。</p>
+<h2 id="章节小结">章节小结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#章节小结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>本章节介绍了生产部署与工程化的关键实践。</p>
+<p>生产部署架构 从单机到分布式，逐步扩展。</p>
+<p>容器化部署 使用 Docker 和 Kubernetes。</p>
+<p>成本控制 通过缓存和 Token 优化降低成本。</p>
+<p>流式与异步 提升用户体验和系统吞吐量。</p>
+<p>微服务化设计 提高系统的可维护性和可扩展性。</p>
+<p>生产部署需要综合考虑可靠性、性能、成本等多个方面。</p>
+<p>建议从小规模开始，逐步增加复杂度。</p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-48" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#生产部署与工程化落地" data-for="生产部署与工程化落地">生产部署与工程化落地</a></li><li class="depth-0"><a href="#ai-agent-生产部署与工程化" data-for="ai-agent-生产部署与工程化">AI Agent 生产部署与工程化</a></li><li class="depth-1"><a href="#生产部署架构" data-for="生产部署架构">生产部署架构</a></li><li class="depth-2"><a href="#部署模式" data-for="部署模式">部署模式</a></li><li class="depth-2"><a href="#容器化部署" data-for="容器化部署">容器化部署</a></li><li class="depth-1"><a href="#dockerfile-示例" data-for="dockerfile-示例">Dockerfile 示例</a></li><li class="depth-0"><a href="#基于-python-311-镜像" data-for="基于-python-311-镜像">基于 Python 3.11 镜像</a></li><li class="depth-0"><a href="#设置工作目录" data-for="设置工作目录">设置工作目录</a></li><li class="depth-0"><a href="#安装依赖" data-for="安装依赖">安装依赖</a></li><li class="depth-0"><a href="#复制应用代码" data-for="复制应用代码">复制应用代码</a></li><li class="depth-0"><a href="#创建非-root-用户安全考虑" data-for="创建非-root-用户安全考虑">创建非 root 用户（安全考虑）</a></li><li class="depth-0"><a href="#暴露端口" data-for="暴露端口">暴露端口</a></li><li class="depth-0"><a href="#启动命令" data-for="启动命令">启动命令</a></li><li class="depth-2"><a href="#kubernetes-部署" data-for="kubernetes-部署">Kubernetes 部署</a></li><li class="depth-1"><a href="#kubernetes-deployment-配置" data-for="kubernetes-deployment-配置">Kubernetes Deployment 配置</a></li><li class="depth-1"><a href="#span-stylecolor-greenapiversion-appsv1kind-deploymentmetadata-name-ai-agent-labels--app-ai-agentspec-副本数-replicas-3-selector--matchlabels---app-ai-agent-template--metadata---labels----app-ai-agent--spec---containers-----name-agent----image-your-registryai-agentlatest----ports------containerport-8000-----资源限制----resources-----limits------memory-2gi------cpu-1-----requests------memory-1gi------cpu-05-----健康检查----livenessprobe-----httpget------path-health------port-8000-----initialdelayseconds-10-----periodseconds-30----readinessprobe-----httpget------path-ready------port-8000-----initialdelayseconds-5-----periodseconds-10" data-for="span-stylecolor-greenapiversion-appsv1kind-deploymentmetadata-name-ai-agent-labels--app-ai-agentspec-副本数-replicas-3-selector--matchlabels---app-ai-agent-template--metadata---labels----app-ai-agent--spec---containers-----name-agent----image-your-registryai-agentlatest----ports------containerport-8000-----资源限制----resources-----limits------memory-2gi------cpu-1-----requests------memory-1gi------cpu-05-----健康检查----livenessprobe-----httpget------path-health------port-8000-----initialdelayseconds-10-----periodseconds-30----readinessprobe-----httpget------path-ready------port-8000-----initialdelayseconds-5-----periodseconds-10">span style=“color: green;”>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-agent
+  labels:
+    app: ai-agent
+spec:
+ # 副本数
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ai-agent
+  template:
+    metadata:
+      labels:
+        app: ai-agent
+    spec:
+      containers:
+      - name: agent
+        image: your-registry/ai-agent:latest
+        ports:
+        - containerPort: 8000
+        # 资源限制
+        resources:
+          limits:
+            memory: “2Gi”
+            cpu: “1”
+          requests:
+            memory: “1Gi”
+            cpu: “0.5”
+        # 健康检查
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10</a></li><li class="depth-1"><a href="#成本控制" data-for="成本控制">成本控制</a></li><li class="depth-2"><a href="#token-优化策略" data-for="token-优化策略">Token 优化策略</a></li><li class="depth-2"><a href="#代码实现" data-for="代码实现">代码实现</a></li><li class="depth-1"><a href="#成本优化-agent-实现" data-for="成本优化-agent-实现">成本优化 Agent 实现</a></li><li class="depth-1"><a href="#流式与异步" data-for="流式与异步">流式与异步</a></li><li class="depth-2"><a href="#流式响应" data-for="流式响应">流式响应</a></li><li class="depth-2"><a href="#代码实现-1" data-for="代码实现-1">代码实现</a></li><li class="depth-1"><a href="#流式响应-agent" data-for="流式响应-agent">流式响应 Agent</a></li><li class="depth-0"><a href="#使用示例" data-for="使用示例">使用示例</a></li><li class="depth-0"><a href="#运行" data-for="运行">运行</a></li><li class="depth-2"><a href="#异步任务队列" data-for="异步任务队列">异步任务队列</a></li><li class="depth-1"><a href="#异步任务队列实现" data-for="异步任务队列实现">异步任务队列实现</a></li><li class="depth-1"><a href="#微服务化设计" data-for="微服务化设计">微服务化设计</a></li><li class="depth-2"><a href="#服务划分" data-for="服务划分">服务划分</a></li><li class="depth-2"><a href="#服务间通信" data-for="服务间通信">服务间通信</a></li><li class="depth-1"><a href="#章节小结" data-for="章节小结">章节小结</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

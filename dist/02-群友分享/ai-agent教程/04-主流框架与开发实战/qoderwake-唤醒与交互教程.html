@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>QoderWake 唤醒与交互教程</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="QoderWake 唤醒与交互教程"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="QoderWake 唤醒与交互教程"/><meta name="twitter:description" content="QoderWake 唤醒与交互教程 出处：www.runoob.com/ai-agent/qoderwake-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 QoderWake 入门教程 QoderWake 让你在本机组建一支数字员工团队（Wakers），每个员工有岗位、有名字、有人设、有专长，可以被你召唤聊天或干活，也可以按计划或事件自动开工。 产品核心理念：7x24 小时数字员工，“Always awake, always working.” QoderWake 是一款数字员工管理平台，支持本地部署和云端部署。 核心特性：安全可控、生产可..."/><meta property="og:description" content="QoderWake 唤醒与交互教程 出处：www.runoob.com/ai-agent/qoderwake-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 QoderWake 入门教程 QoderWake 让你在本机组建一支数字员工团队（Wakers），每个员工有岗位、有名字、有人设、有专长，可以被你召唤聊天或干活，也可以按计划或事件自动开工。 产品核心理念：7x24 小时数字员工，“Always awake, always working.” QoderWake 是一款数字员工管理平台，支持本地部署和云端部署。 核心特性：安全可控、生产可..."/><meta property="og:image:alt" content="QoderWake 唤醒与交互教程 出处：www.runoob.com/ai-agent/qoderwake-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 QoderWake 入门教程 QoderWake 让你在本机组建一支数字员工团队（Wakers），每个员工有岗位、有名字、有人设、有专长，可以被你召唤聊天或干活，也可以按计划或事件自动开工。 产品核心理念：7x24 小时数字员工，“Always awake, always working.” QoderWake 是一款数字员工管理平台，支持本地部署和云端部署。 核心特性：安全可控、生产可..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/qoderwake-唤醒与交互教程"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/qoderwake-唤醒与交互教程"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="QoderWake 唤醒与交互教程 出处：www.runoob.com/ai-agent/qoderwake-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 QoderWake 入门教程 QoderWake 让你在本机组建一支数字员工团队（Wakers），每个员工有岗位、有名字、有人设、有专长，可以被你召唤聊天或干活，也可以按计划或事件自动开工。 产品核心理念：7x24 小时数字员工，“Always awake, always working.” QoderWake 是一款数字员工管理平台，支持本地部署和云端部署。 核心特性：安全可控、生产可..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/qoderwake-唤醒与交互教程-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/qoderwake-唤醒与交互教程-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/qoderwake-唤醒与交互教程-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/04-主流框架与开发实战/qoderwake-唤醒与交互教程" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-38" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-38" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/04-主流框架与开发实战/">04-主流框架与开发实战</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>QoderWake 唤醒与交互教程</a></div></nav><h1 class="article-title">QoderWake 唤醒与交互教程</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/主流框架与开发实战" class="internal internal-link tag-link">主流框架与开发实战</a><span class="note-properties-separator">, </span><a href="../../../tags/qoderwake-" class="internal internal-link tag-link">qoderwake-</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>19分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="qoderwake-唤醒与交互教程">QoderWake 唤醒与交互教程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#qoderwake-唤醒与交互教程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/qoderwake-usage.html" class="external external-link">https://www.runoob.com/ai-agent/qoderwake-usage.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>04-主流框架与开发实战</code></p>
+</blockquote>
+<hr/>
+<h1 id="qoderwake-入门教程">QoderWake 入门教程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#qoderwake-入门教程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>QoderWake 让你在本机组建一支数字员工团队（Wakers），每个员工有岗位、有名字、有人设、有专长，可以被你召唤聊天或干活，也可以按计划或事件自动开工。</p>
+<p>产品核心理念：7x24 小时数字员工，“Always awake, always working.”</p>
+<p>QoderWake 是一款数字员工管理平台，支持本地部署和云端部署。</p>
+<ul>
+<li>核心特性：安全可控、生产可用、持续进化。</li>
+<li>核心概念：员工角色（Role）到数字员工（Agent）再到团队/组织（Agent Teams），三层递进。</li>
+</ul>
+<p>**我们先点击访问</p>
+<pre><code>  [QoderWork 官网](https://qoder.cn/referral?utm_source=paid&amp;utm_medium=affiliate&amp;utm_campaign=cainiaojiaocheng)
+  注册 QoderWork 账号**
+
+  免费试用 Pro + 300 Credits
+</code></pre>
+<p>注册完成后点击右上角的下载按钮：</p>
+<p>选择 QoderWake 选项，根据你的电脑系统，下载安装程序：</p>
+<p>下载后，双击安装，安装完成界面如下：</p>
+<p>左下角设置按钮，可以设置语言，切换到中文后，如下：</p>
+<h3 id="可用角色一览">可用角色一览<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#可用角色一览" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当前邀测覆盖以下角色，选最贴近你需求的即可：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>角色</th><th>岗位特性</th></tr></thead><tbody><tr><td>后端工程师</td><td>专注于 API 开发、数据建模、服务集成、性能优化和线上稳定性。遵循增量交付、测试验证和约定优先设计的工程实践。员工自动分析 Bug/Issue，改完代码直接提 PR。</td></tr><tr><td>前端工程师</td><td>专注前端界面设计与实现，擅长组件架构、视觉语言打磨、响应式适配、无障碍优化和性能调优。遵循增量交付、分层验证和基于证据的校验，兼顾用户体验与工程质量。</td></tr><tr><td>测试工程师</td><td>面向通用命令行工具和 Web 产品的质量保障角色，专注测试计划文档、端到端测试、缺陷复现和基于证据的报告；不运行单元测试，也不修复问题。</td></tr><tr><td>产品经理</td><td>面向软件产品的 AI 原生产品管理角色，专注目标驱动的需求全生命周期管理、PRD 生成、用户反馈分析、竞品研究和发布沟通，并对外部写入设置明确审批门禁。</td></tr><tr><td>数据分析师</td><td>面向问题框定、指标口径、数据收集、数据诊断、市场背景和证据化建议的 AI 原生数据分析师。</td></tr><tr><td>内容运营</td><td>面向账号定位、热点洞察、内容日历、小红书笔记创作、视觉素材 brief、审批后发布、评论互动、数据复盘、品牌合规和跨平台改写的 AI 原生内容运营角色。</td></tr><tr><td>自定义</td><td>自己定义岗位的工作方式与工作流，可挂载 MCP、Skill 等任意配置。</td></tr></tbody></table></div>
+<h2 id="安装环境说明">安装环境说明<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装环境说明" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>QoderWake 支持本地部署和云端部署。</p>
+<p>建议部署在稳定在线、网络良好的常开设备或云桌面环境中，以保障数字员工 7x24 小时持续运行。</p>
+<blockquote>
+<p>Windows 版本敬请期待，暂未对外开放，请先在 macOS 或 Linux 上使用。</p>
+</blockquote>
+<h3 id="本地部署要求">本地部署要求<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#本地部署要求" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>推荐部署在可长期稳定运行的本地设备上，例如 Mac mini，以获得更好的 7x24 小时运行体验。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>系统</th><th>版本要求</th></tr></thead><tbody><tr><td>macOS</td><td>13.0 及以上版本</td></tr><tr><td>Linux</td><td>推荐 Ubuntu 22.04 LTS 及以上版本，需启用 GUI 桌面以使用本地 Web Console</td></tr></tbody></table></div>
+<h3 id="云端部署要求">云端部署要求<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#云端部署要求" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>支持主流云桌面和云主机环境。</p>
+<p>为方便浏览器登录和本地 Web 管理，推荐使用无影云电脑企业版或个人版。</p>
+<h3 id="前置工具">前置工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#前置工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>产品预置多个软件研发类数字员工角色，安装前请先准备好 Git 环境，并确认当前账号能正常访问目标代码仓库：</p>
+<ul>
+<li>已安装 git</li>
+<li>已完成仓库认证配置</li>
+<li>可以正常执行 clone、pull、push 操作</li>
+</ul>
+<p>本地或云端部署环境均需支持外部网络访问，用于用户登录、模型调用、代码仓库访问等。</p>
+<p>在企业网络、代理或防火墙环境下，请提前放通必要的 HTTPS 出站访问。</p>
+<h2 id="步骤-1安装-qoderwake">步骤 1：安装 QoderWake<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#步骤-1安装-qoderwake" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>根据你的操作系统选择对应的安装方式。</p>
+<h3 id="macos-安装">macOS 安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#macos-安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>方式一：直接下载安装包。</p>
+<ul>
+<li>Apple 芯片（ARM）：<a href="https://download.qoder.com/qoderwake/installers/latest/qoderwake_latest_darwin_arm64.dmg" class="external external-link">下载 ARM 版<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Intel 芯片：<a href="https://download.qoder.com/qoderwake/installers/latest/qoderwake_latest_darwin_amd64.dmg" class="external external-link">下载 Intel 版<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<p>方式二：通过终端一键安装。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 一键安装命令，自动检测平台并完成安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">curl </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">fsSL https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">qoder</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">ide.oss</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ap</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">southeast</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1.</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">aliyuncs.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">qoderwake</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">install.sh </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> bash</span></span></code></pre></figure>
+<p>脚本会自动完成：检测平台、下载并校验安装包、安装主程序和资源文件、把命令入口加入 PATH、启动浏览器登录、启动本地常驻服务并打开 Web Console。</p>
+<p>安装完成后命令入口为：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">~/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.qoderwake</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">bin</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">qoderwake</span></span></code></pre></figure>
+<h3 id="linux-安装">Linux 安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#linux-安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>打开终端，运行与 macOS 相同的一键安装命令。</p>
+<p>安装脚本会自动完成以下步骤：</p>
+<ol>
+<li>检测 Linux CPU 架构</li>
+<li>下载并校验对应平台的 QoderWake 安装包</li>
+<li>安装 QoderWake 主程序和资源文件</li>
+<li>创建命令入口并尝试加入 PATH</li>
+<li>启动浏览器登录</li>
+<li>登录后启动或重启本地常驻服务</li>
+<li>自动打开本地 Web Console</li>
+</ol>
+<p>命令入口：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">~/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.qoderwake</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">bin</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">qoderwake</span></span></code></pre></figure>
+<p>默认 Web Console 地址：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">http:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">127.0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.0.1:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">19820</span></span></code></pre></figure>
+<h2 id="步骤-2打开控制台">步骤 2：打开控制台<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#步骤-2打开控制台" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>浏览器访问 <a href="http://127.0.0.1:19820/%EF%BC%8C%E8%BF%99%E6%98%AF" class="external external-link">http://127.0.0.1:19820/，这是<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> QoderWake 在你本机的管理台。</p>
+<p>员工管理、派活、配置权限都在这里完成。</p>
+<h3 id="界面布局说明">界面布局说明<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#界面布局说明" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>区域</th><th>功能说明</th></tr></thead><tbody><tr><td>左侧边栏</td><td>展示”我的 Waker”列表，显示所有已创建的员工和最近活动时间</td></tr><tr><td>顶部按钮</td><td>点击”创建 Waker”快速新建员工，右侧支持新建任务</td></tr><tr><td>主区域</td><td>进入某个员工后默认打开对话页面，可直接派活</td></tr><tr><td>右侧边栏</td><td>查看已创建的任务及当前运行中任务的详情</td></tr></tbody></table></div>
+<p>首次访问会引导你登录账户，按提示完成即可。</p>
+<h2 id="步骤-3创建数字员工">步骤 3：创建数字员工<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#步骤-3创建数字员工" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>点击左侧 “创建 Waker” 按钮进入创建流程。</p>
+<h3 id="创建流程">创建流程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建流程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>选一个角色模板：每个角色模板自带人设、典型工作流、核心技能集和默认问题，点击”查看详情”可以预览。</li>
+<li>或自定义角色：如果预置角色都不合适，可选择”自定义角色”，完全由你定义这位员工的人设、专长、工作风格，再为其配置技能、连接器和权限。</li>
+<li>填写基本信息：填写员工的名字、头像、简介。选择预置角色后内容会自动带过来，可按需调整。</li>
+<li>保存：点击保存，员工就创建好了。新员工首次创建后会进入引导，推荐你先挂哪些技能、接哪些渠道，可以跳过留待后续配置。</li>
+</ol>
+<blockquote>
+<p>为提升自定义角色的使用效果，建议在创建时尽量提供完整的角色信息——角色定位、核心职责、工作流程、所需技能以及 MCP 等工具能力配置。</p>
+</blockquote>
+<h2 id="步骤-4跟员工开始干活">步骤 4：跟员工开始干活<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#步骤-4跟员工开始干活" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>新员工创建完成后，可以选择 直接对话 或 创建自动任务 两种方式派活。</p>
+<h3 id="对话任务">对话任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#对话任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>直接在输入框输入需求并发送，员工就开始干活。</p>
+<p>过程中你可以进行的操作：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>说明</th></tr></thead><tbody><tr><td>追问、调方向</td><td>随时插话，员工接着上下文继续</td></tr><tr><td>附文件/截图</td><td>任何一轮发言都能再贴附件</td></tr><tr><td>打断</td><td>员工方向跑偏可以让他停</td></tr><tr><td>审批操作</td><td>当员工要动文件、跑命令、上网时会停下来征求同意，你点”允许”或”拒绝”</td></tr><tr><td>回答员工提问</td><td>他遇到选择会回头问你，直接在卡片上选</td></tr><tr><td>切换 AI 模型</td><td>对话中途感觉不够聪明或想省钱，顶部下拉可以换模型继续</td></tr><tr><td>看思考过程</td><td>能实时看到员工下决定前的推理思路</td></tr><tr><td>看产物</td><td>右侧面板实时展示员工产出的代码补丁、新生成的文件等</td></tr><tr><td>选择工作目录</td><td>在对话底部可以选择员工工作的本地目录</td></tr></tbody></table></div>
+<h3 id="自动任务">自动任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#自动任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>适合”每天跑一次”、“监听某个仓库变化就自动响应”这类场景。</p>
+<p>进入 Waker 详情 - 触发任务 - 新建，可配置以下内容：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>配置项</th><th>说明</th></tr></thead><tbody><tr><td>任务名和描述</td><td>员工读了就知道要做什么</td></tr><tr><td>AI 模型</td><td>选择使用的模型</td></tr><tr><td>工作目录</td><td>在本地哪个目录、哪个仓库或哪个项目工作区里执行</td></tr><tr><td>触发方式（最多 5 种）</td><td>定时（一次性/周期性/复杂周期）、事件驱动（监听 GitHub 仓库变化）、网络回调（第三方系统通过固定地址直接回调触发）</td></tr><tr><td>最大次数/截止日期（可选）</td><td>限制任务不要无限跑</td></tr></tbody></table></div>
+<p>保存后，员工按你设的节奏自动干活。</p>
+<p>你可以随时暂停/启用、立即运行测试、查看运行历史。</p>
+<h2 id="步骤-5管理你的数字员工">步骤 5：管理你的数字员工<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#步骤-5管理你的数字员工" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>进入员工详情页，可以查看和调整员工的所有配置。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>目录</th><th>功能说明</th></tr></thead><tbody><tr><td>首页</td><td>看头像、状态、入职天数、触发任务数、对话任务数、工作热力图</td></tr><tr><td>项目</td><td>给他绑定要工作的代码仓库或本地目录。一个项目可包含多个源（多个目录或仓库），项目记忆与员工个人记忆分开</td></tr><tr><td>触发任务</td><td>增/删/改/暂停他身上的自动化任务</td></tr><tr><td>对话任务</td><td>翻历史对话，继续聊</td></tr><tr><td>记忆</td><td>看/编辑他对你和项目的长期认知。来源：对话过程中自动沉淀、手动编辑、系统定期梳理与去重。本地存储，不上传云端</td></tr><tr><td>技能</td><td>从 Qoder 官方 Skills Marketplace 安装，本地上传自定义技能，或开关已有技能。内置技能不可卸载</td></tr><tr><td>连接器</td><td>对接外部工具/服务（GitHub、Jira、GitLab 等）</td></tr><tr><td>权限</td><td>工具防护、文件防护、内置工具策略。高危操作会弹出审批卡片</td></tr></tbody></table></div>
+<h2 id="员工配置详解">员工配置详解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#员工配置详解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="记忆管理">记忆管理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#记忆管理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>每个员工有自己的长期记忆，用于积累对你和项目的认知。</p>
+<p>记忆来源有三种：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>来源</th><th>说明</th></tr></thead><tbody><tr><td>自动沉淀</td><td>对话过程中员工认为值得记住的信息会自动写入</td></tr><tr><td>手动写入</td><td>你可以进记忆页直接编辑</td></tr><tr><td>系统整理</td><td>定期由系统帮他梳理和去重</td></tr></tbody></table></div>
+<p>进入 员工详情 - 记忆，可浏览、搜索、编辑所有记忆条目。</p>
+<p>记忆存储在本地，不上传云端。</p>
+<h3 id="技能skill">技能（Skill）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#技能skill" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>技能是员工在对话或触发任务中可以调用的专项能力包。</p>
+<ul>
+<li>技能市场：从 Qoder 官方 Skills Marketplace 安装</li>
+<li>上传 Skill：本地自行导入</li>
+<li>内置技能：系统自带，不可卸载</li>
+</ul>
+<p>进入 员工详情 - 技能，可查看已安装技能、搜索市场、上传自定义技能。</p>
+<h3 id="连接器connector">连接器（Connector）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#连接器connector" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>连接器是员工对接外部工具/服务的桥梁，支持手动添加连接器。</p>
+<h3 id="项目">项目<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#项目" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>项目是员工的工作空间。</p>
+<p>进入 员工详情 - 项目，可以绑定本地目录或 git 仓库，一个项目可以包含多个源（多个目录/仓库），项目有独立的记忆，跟员工个人记忆分开。</p>
+<h3 id="权限管理">权限管理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#权限管理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>权限控制员工能做什么、不能做什么。</p>
+<p>进入 员工详情 - 权限，包含两大类防护，外加内置工具策略。</p>
+<h4 id="工具防护">工具防护<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工具防护" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>基于内置安全规则对工具参数做校验，命中高危规则后会请求用户授权。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>规则分类</th><th>检测内容</th></tr></thead><tbody><tr><td>命令注入</td><td>检测 rm、mv 等危险操作</td></tr><tr><td>资源滥用</td><td>检测 fork 炸弹、系统重启等</td></tr><tr><td>代码执行</td><td>检测 curl</td></tr><tr><td>网络滥用</td><td>检测反弹 shell、本地回环访问</td></tr><tr><td>敏感文件访问</td><td>检测访问系统关键文件</td></tr><tr><td>权限提升</td><td>检测 sudo 等提权操作</td></tr></tbody></table></div>
+<h4 id="文件防护">文件防护<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件防护" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>控制员工对本地文件的读写权限。</p>
+<h4 id="内置工具">内置工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#内置工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>对 Waker 可用的内置工具设置 允许/询问/禁用 策略。</p>
+<blockquote>
+<p>当员工执行操作触发安全规则时，会弹出审批卡片让你决定是否允许。</p>
+</blockquote>
+<h2 id="场景示例自动修复-bug">场景示例：自动修复 Bug<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#场景示例自动修复-bug" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>两种驱动方式可以实现自动修复 Bug。</p>
+<h3 id="方法-a手动发起对话">方法 A：手动发起对话<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方法-a手动发起对话" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>打开控制台，选一个 后端工程师 角色的 Waker</li>
+<li>在对话框输入需求并附上报错信息</li>
+<li>员工分析问题、定位根因、给出修复方案</li>
+<li>确认后让他执行修复并提 PR</li>
+</ol>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="在对话框中输入类似以下内容附上报错日志">在对话框中输入类似以下内容，附上报错日志<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#在对话框中输入类似以下内容附上报错日志" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="帮我排查这个报错的根因并给出最小修复方案">”帮我排查这个报错的根因并给出最小修复方案”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#帮我排查这个报错的根因并给出最小修复方案" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="员工会执行类似以下操作">员工会执行类似以下操作：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#员工会执行类似以下操作" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="1-分析报错日志定位问题代码">1. 分析报错日志，定位问题代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-分析报错日志定位问题代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="2-给出修复方案供你确认">2. 给出修复方案供你确认<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-给出修复方案供你确认" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="3-执行代码修复">3. 执行代码修复<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-执行代码修复" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="4-提交-pr-到代码仓库">4. 提交 PR 到代码仓库<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-提交-pr-到代码仓库" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>过程中要执行命令或改文件时，他会先征求你同意。</p>
+<h3 id="方法-b设自动任务处理">方法 B：设自动任务处理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方法-b设自动任务处理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>进入 员工详情 - 触发任务 - 新建</li>
+<li>触发方式选 “事件”，监听 GitHub 仓库的 Issue 变化</li>
+<li>任务描述写：“有新 Bug Issue 进来时，自动分析并给出修复 PR。”</li>
+<li>保存后，每当仓库出现新的 Bug Issue，员工自动启动分析与修复</li>
+</ol>
+<blockquote>
+<p>两种方式各有适用场景：方法 A 适合临时、一次性的问题排查；方法 B 适合持续性的自动化运维，减少人工介入。</p>
+</blockquote>
+<h2 id="常见问题">常见问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="安装后无法打开-web-console">安装后无法打开 Web Console？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装后无法打开-web-console" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>确认本地服务是否正常运行，检查 <a href="http://127.0.0.1:19820" class="external external-link">http://127.0.0.1:19820<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 是否可以访问。</p>
+<p>如果端口冲突，可检查是否有其他程序占用了 19820 端口。</p>
+<h3 id="员工执行任务时卡住不动">员工执行任务时卡住不动？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#员工执行任务时卡住不动" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>检查员工是否需要你的审批确认，查看对话窗口是否有待处理的审批卡片。</p>
+<h3 id="自定义角色效果不好">自定义角色效果不好？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#自定义角色效果不好" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>建议在创建时提供完整的角色信息：包括角色定位、核心职责、工作流程、所需技能以及 MCP 等工具能力配置，信息越完整效果越好。</p>
+<h3 id="如何反馈问题">如何反馈问题？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#如何反馈问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>遇到任何问题或者有产品功能想反馈，点击控制台右下角的反馈按钮提交，团队会尽快回复并解决。</p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-38" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#qoderwake-唤醒与交互教程" data-for="qoderwake-唤醒与交互教程">QoderWake 唤醒与交互教程</a></li><li class="depth-0"><a href="#qoderwake-入门教程" data-for="qoderwake-入门教程">QoderWake 入门教程</a></li><li class="depth-2"><a href="#可用角色一览" data-for="可用角色一览">可用角色一览</a></li><li class="depth-1"><a href="#安装环境说明" data-for="安装环境说明">安装环境说明</a></li><li class="depth-2"><a href="#本地部署要求" data-for="本地部署要求">本地部署要求</a></li><li class="depth-2"><a href="#云端部署要求" data-for="云端部署要求">云端部署要求</a></li><li class="depth-2"><a href="#前置工具" data-for="前置工具">前置工具</a></li><li class="depth-1"><a href="#步骤-1安装-qoderwake" data-for="步骤-1安装-qoderwake">步骤 1：安装 QoderWake</a></li><li class="depth-2"><a href="#macos-安装" data-for="macos-安装">macOS 安装</a></li><li class="depth-2"><a href="#linux-安装" data-for="linux-安装">Linux 安装</a></li><li class="depth-1"><a href="#步骤-2打开控制台" data-for="步骤-2打开控制台">步骤 2：打开控制台</a></li><li class="depth-2"><a href="#界面布局说明" data-for="界面布局说明">界面布局说明</a></li><li class="depth-1"><a href="#步骤-3创建数字员工" data-for="步骤-3创建数字员工">步骤 3：创建数字员工</a></li><li class="depth-2"><a href="#创建流程" data-for="创建流程">创建流程</a></li><li class="depth-1"><a href="#步骤-4跟员工开始干活" data-for="步骤-4跟员工开始干活">步骤 4：跟员工开始干活</a></li><li class="depth-2"><a href="#对话任务" data-for="对话任务">对话任务</a></li><li class="depth-2"><a href="#自动任务" data-for="自动任务">自动任务</a></li><li class="depth-1"><a href="#步骤-5管理你的数字员工" data-for="步骤-5管理你的数字员工">步骤 5：管理你的数字员工</a></li><li class="depth-1"><a href="#员工配置详解" data-for="员工配置详解">员工配置详解</a></li><li class="depth-2"><a href="#记忆管理" data-for="记忆管理">记忆管理</a></li><li class="depth-2"><a href="#技能skill" data-for="技能skill">技能（Skill）</a></li><li class="depth-2"><a href="#连接器connector" data-for="连接器connector">连接器（Connector）</a></li><li class="depth-2"><a href="#项目" data-for="项目">项目</a></li><li class="depth-2"><a href="#权限管理" data-for="权限管理">权限管理</a></li><li class="depth-1"><a href="#场景示例自动修复-bug" data-for="场景示例自动修复-bug">场景示例：自动修复 Bug</a></li><li class="depth-2"><a href="#方法-a手动发起对话" data-for="方法-a手动发起对话">方法 A：手动发起对话</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#在对话框中输入类似以下内容附上报错日志" data-for="在对话框中输入类似以下内容附上报错日志">在对话框中输入类似以下内容，附上报错日志</a></li><li class="depth-0"><a href="#帮我排查这个报错的根因并给出最小修复方案" data-for="帮我排查这个报错的根因并给出最小修复方案">”帮我排查这个报错的根因并给出最小修复方案”</a></li><li class="depth-0"><a href="#员工会执行类似以下操作" data-for="员工会执行类似以下操作">员工会执行类似以下操作：</a></li><li class="depth-0"><a href="#1-分析报错日志定位问题代码" data-for="1-分析报错日志定位问题代码">1. 分析报错日志，定位问题代码</a></li><li class="depth-0"><a href="#2-给出修复方案供你确认" data-for="2-给出修复方案供你确认">2. 给出修复方案供你确认</a></li><li class="depth-0"><a href="#3-执行代码修复" data-for="3-执行代码修复">3. 执行代码修复</a></li><li class="depth-0"><a href="#4-提交-pr-到代码仓库" data-for="4-提交-pr-到代码仓库">4. 提交 PR 到代码仓库</a></li><li class="depth-2"><a href="#方法-b设自动任务处理" data-for="方法-b设自动任务处理">方法 B：设自动任务处理</a></li><li class="depth-1"><a href="#常见问题" data-for="常见问题">常见问题</a></li><li class="depth-2"><a href="#安装后无法打开-web-console" data-for="安装后无法打开-web-console">安装后无法打开 Web Console？</a></li><li class="depth-2"><a href="#员工执行任务时卡住不动" data-for="员工执行任务时卡住不动">员工执行任务时卡住不动？</a></li><li class="depth-2"><a href="#自定义角色效果不好" data-for="自定义角色效果不好">自定义角色效果不好？</a></li><li class="depth-2"><a href="#如何反馈问题" data-for="如何反馈问题">如何反馈问题？</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

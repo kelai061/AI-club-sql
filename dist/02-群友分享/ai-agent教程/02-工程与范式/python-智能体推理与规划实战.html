@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Python 智能体推理与规划实战</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="Python 智能体推理与规划实战"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Python 智能体推理与规划实战"/><meta name="twitter:description" content="Python 智能体推理与规划实战 出处：www.runoob.com/ai-agent/python-reasoning-planning.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Python 实现推理与规划 本章节介绍 AI Agent 的核心智能能力，即推理与规划能力。 不同于传统的指令执行模式，具备推理能力的 Agent 能够进行复杂的思考过程。 它能够将复杂任务分解为可执行的步骤，并基于上下文做出决策。 ReAct 框架 ReAct（Reasoning + Acting）是一种将推理与行动相结合的框架。 在 ReAct 模式中，Agent 会交..."/><meta property="og:description" content="Python 智能体推理与规划实战 出处：www.runoob.com/ai-agent/python-reasoning-planning.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Python 实现推理与规划 本章节介绍 AI Agent 的核心智能能力，即推理与规划能力。 不同于传统的指令执行模式，具备推理能力的 Agent 能够进行复杂的思考过程。 它能够将复杂任务分解为可执行的步骤，并基于上下文做出决策。 ReAct 框架 ReAct（Reasoning + Acting）是一种将推理与行动相结合的框架。 在 ReAct 模式中，Agent 会交..."/><meta property="og:image:alt" content="Python 智能体推理与规划实战 出处：www.runoob.com/ai-agent/python-reasoning-planning.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Python 实现推理与规划 本章节介绍 AI Agent 的核心智能能力，即推理与规划能力。 不同于传统的指令执行模式，具备推理能力的 Agent 能够进行复杂的思考过程。 它能够将复杂任务分解为可执行的步骤，并基于上下文做出决策。 ReAct 框架 ReAct（Reasoning + Acting）是一种将推理与行动相结合的框架。 在 ReAct 模式中，Agent 会交..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/python-智能体推理与规划实战"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/python-智能体推理与规划实战"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="Python 智能体推理与规划实战 出处：www.runoob.com/ai-agent/python-reasoning-planning.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Python 实现推理与规划 本章节介绍 AI Agent 的核心智能能力，即推理与规划能力。 不同于传统的指令执行模式，具备推理能力的 Agent 能够进行复杂的思考过程。 它能够将复杂任务分解为可执行的步骤，并基于上下文做出决策。 ReAct 框架 ReAct（Reasoning + Acting）是一种将推理与行动相结合的框架。 在 ReAct 模式中，Agent 会交..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/python-智能体推理与规划实战-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/python-智能体推理与规划实战-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/python-智能体推理与规划实战-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/02-工程与范式/python-智能体推理与规划实战" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-13" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-13" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/02-工程与范式/">02-工程与范式</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Python 智能体推理与规划实战</a></div></nav><h1 class="article-title">Python 智能体推理与规划实战</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/工程与范式" class="internal internal-link tag-link">工程与范式</a><span class="note-properties-separator">, </span><a href="../../../tags/python-智能体" class="internal internal-link tag-link">python-智能体</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>33分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="python-智能体推理与规划实战">Python 智能体推理与规划实战<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#python-智能体推理与规划实战" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/python-reasoning-planning.html" class="external external-link">https://www.runoob.com/ai-agent/python-reasoning-planning.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>02-工程与范式</code></p>
+</blockquote>
+<hr/>
+<h1 id="python-实现推理与规划">Python 实现推理与规划<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#python-实现推理与规划" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>本章节介绍 AI Agent 的核心智能能力，即推理与规划能力。</p>
+<p>不同于传统的指令执行模式，具备推理能力的 Agent 能够进行复杂的思考过程。</p>
+<p>它能够将复杂任务分解为可执行的步骤，并基于上下文做出决策。</p>
+<h2 id="react-框架">ReAct 框架<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#react-框架" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>ReAct（Reasoning + Acting）是一种将推理与行动相结合的框架。</p>
+<p>在 ReAct 模式中，Agent 会交替进行推理和行动，形成一个闭环。</p>
+<p>推理指导行动，行动结果又反馈给推理过程，如此循环往复。</p>
+<p>ReAct 模拟了人类的问题解决过程：在采取行动前先思考，行动后观察结果，然后基于新信息继续推理。</p>
+<h3 id="工作原理">工作原理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工作原理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>ReAct 的核心思想可以概括为三个阶段的循环：</p>
+<p>第一步，推理阶段。Agent 基于当前上下文生成下一步的行动思考。</p>
+<p>第二步，行动阶段。Agent 执行选定的工具或动作。</p>
+<p>第三步，观察阶段。Agent 接收行动结果，更新上下文，返回第一步继续推理。</p>
+<h3 id="代码实现">代码实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>下面是一个 ReAct Agent 的简化实现：</p>
+<h2 id="react-agent-基本实现">ReAct Agent 基本实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#react-agent-基本实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>class ReActAgent:
+    &quot;&quot;&quot;
+    ReAct 框架的 Agent 实现
+    核心机制：推理 -> 行动 -> 观察 -> 推理（循环）
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, llm, tools, max_iterations=5):
+        # LLM 实例，用于推理和生成
+        self.llm = llm
+        # 可用工具列表
+        self.tools = tools
+        # 最大迭代次数，防止无限循环
+        self.max_iterations = max_iterations
+   
+    def run(self, task):
+        &quot;&quot;&quot;
+        执行 ReAct 循环
+        :param task: 用户任务描述
+        :return: 执行结果
+        &quot;&quot;&quot;
+        # 初始化上下文，包含任务和历史信息
+        context = {
+            “task”: task,
+            “steps”: [],      # 已执行步骤的记录
+            “observations”: []  # 观察结果的记录
+        }
+       
+        for i in range(self.max_iterations):
+            # 阶段一：推理 - 基于当前上下文生成下一步行动
+            reasoning = self.llm.reason(context)
+           
+            # 判断是否需要执行工具，还是直接返回答案
+            if reasoning.needs_action:
+                # 选择要使用的工具
+                action = reasoning.select_tool(self.tools)
+                # 执行工具并获取观察结果
+                observation = action.execute(reasoning.tool_input)
+                # 将观察结果添加到上下文
+                context[“observations”].append(observation)
+            else:
+                # 不需要行动，直接返回推理得出的答案
+                return reasoning.answer
+       
+        # 达到最大迭代次数仍未完成
+        return “达到最大迭代次数限制”</p>
+<h3 id="典型应用场景">典型应用场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#典型应用场景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>ReAct 模式特别适合以下场景：</p>
+<p>需要在环境中探索、收集信息后才能完成的任务。</p>
+<p>智能搜索场景：Agent 需要先搜索信息，再基于搜索结果进行推理和总结。</p>
+<p>对话式问答：Agent 需要通过多轮对话澄清需求并获取信息。</p>
+<p>复杂问题求解：问题不能一步解决，需要多个中间步骤。</p>
+<blockquote>
+<p>注意：ReAct 模式的优势在于它的灵活性，能够根据每一步的执行结果动态调整后续行动。但这也意味着执行路径可能不稳定，适合需要探索的任务。</p>
+</blockquote>
+<h2 id="思维链chain-of-thought-cot">思维链（Chain of Thought, CoT）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#思维链chain-of-thought-cot" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>思维链是一种促使模型展示逐步推理过程的技术。</p>
+<p>CoT 不是让模型直接给出答案，而是引导它先展示推理步骤，再得出最终结论。</p>
+<h3 id="为什么需要思维链">为什么需要思维链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#为什么需要思维链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>直接让模型输出答案存在几个问题：</p>
+<p>复杂推理的中间步骤容易被忽略或跳过。</p>
+<p>难以定位错误发生在哪里。</p>
+<p>用户无法理解模型的思考过程。</p>
+<p>思维链通过要求模型展示推理过程，解决了这些问题。</p>
+<h3 id="zero-shot-cot">Zero-shot CoT<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#zero-shot-cot" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Zero-shot CoT 是一种无需示例即可激发逐步推理能力的方法。</p>
+<p>只需要在提示词末尾添加 “让我们一步一步地思考” 这样的触发语句。</p>
+<h2 id="zero-shot-cot-示例">Zero-shot CoT 示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#zero-shot-cot-示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="zero-shot-cot-的提示词模板">Zero-shot CoT 的提示词模板<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#zero-shot-cot-的提示词模板" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>prompt = &quot;&quot;&quot;
+问题：小明有 5 个苹果，小红给了他 3 个，小明吃掉了 2 个，还剩多少个？
+让我们一步一步地思考：
+&quot;&quot;&quot;</p>
+<h1 id="调用语言模型">调用语言模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#调用语言模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>response = llm.generate(prompt)</p>
+<h1 id="模型输出示例">模型输出示例：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模型输出示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="第一步计算小明收到苹果后的总数">第一步：计算小明收到苹果后的总数<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步计算小明收到苹果后的总数" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="小明原来有-5-个苹果小红给了他-3-个">小明原来有 5 个苹果，小红给了他 3 个<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#小明原来有-5-个苹果小红给了他-3-个" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="5--3--8-个">5 + 3 = 8 个<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5--3--8-个" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id></h1>
+<h1 id="第二步计算吃掉后的数量">第二步：计算吃掉后的数量<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步计算吃掉后的数量" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="小明吃掉了-2-个">小明吃掉了 2 个<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#小明吃掉了-2-个" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="8---2--6-个">8 - 2 = 6 个<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#8---2--6-个" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="-1"><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="结论还剩-6-个苹果">结论：还剩 6 个苹果<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#结论还剩-6-个苹果" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h3 id="few-shot-cot">Few-shot CoT<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#few-shot-cot" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Few-shot CoT 通过提供包含详细推理过程的示例，帮助模型学习特定的推理模式。</p>
+<p>当 Zero-shot CoT 效果不佳时，可以尝试 Few-shot CoT。</p>
+<h2 id="few-shot-cot-示例">Few-shot CoT 示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#few-shot-cot-示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="few-shot-cot-的提示词模板">Few-shot CoT 的提示词模板<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#few-shot-cot-的提示词模板" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>prompt = &quot;&quot;&quot;
+示例 1：
+问题：小张有 10 元钱，买了 3 本书，每本 2 元，还剩多少？
+让我们一步一步地思考：</p>
+<ul>
+<li>小张原来有 10 元</li>
+<li>每本书 2 元，买了 3 本，花费 3 × 2 = 6 元</li>
+<li>10 - 6 = 4 元
+答案：还剩 4 元</li>
+</ul>
+<p>示例 2：
+问题：一只猫每小时抓 2 只老鼠，8 小时抓了多少只？
+让我们一步一步地思考：</p>
+<ul>
+<li>每小时抓 2 只老鼠</li>
+<li>8 小时抓了 8 × 2 = 16 只
+答案：抓了 16 只</li>
+</ul>
+<p>问题：{user_question}
+让我们一步一步地思考：
+&quot;&quot;&quot;</p>
+<p>response = llm.generate(prompt)</p>
+<h3 id="思维链的优势">思维链的优势<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#思维链的优势" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>思维链技术带来三个核心价值：</p>
+<p>可追溯性：将复杂推理分解为可追踪的中间步骤，便于理解推理过程。</p>
+<p>可解释性：增强模型的可解释性，让用户知道答案从何而来。</p>
+<p>准确性提升：显著提升复杂推理任务的准确率，尤其在数学和逻辑任务上效果明显。</p>
+<h2 id="tree-of-thoughtstot">Tree of Thoughts（ToT）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tree-of-thoughtstot" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>思维树是思维链的扩展，它不再局限于线性推理。</p>
+<p>ToT 在每个推理节点探索多条可能的路径，形成树状结构。</p>
+<p>这使得 Agent 能够进行多路径探索、回溯和全局评估。</p>
+<h3 id="与思维链的区别">与思维链的区别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#与思维链的区别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>CoT 采用线性推理，每一步依赖前一步的结论，适合有明确路径的问题。</p>
+<p>ToT 采用空间推理，同时考虑多个可能的分支，适合需要探索和规划的问题。</p>
+<h3 id="代码实现-1">代码实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码实现-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="tot-agent-基本实现">ToT Agent 基本实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tot-agent-基本实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>class ToTAgent:
+    &quot;&quot;&quot;
+    Tree of Thoughts Agent 实现
+    核心机制：在每个节点生成多个候选分支，评估后选择最优继续
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, llm, max_depth=4, beam_size=3):
+        # LLM 实例
+        self.llm = llm
+        # 最大搜索深度
+        self.max_depth = max_depth
+        # 每层保留的候选节点数量（beam width）
+        self.beam_size = beam_size
+   
+    def solve(self, problem):
+        &quot;&quot;&quot;
+        使用 ToT 框架解决问题
+        :param problem: 问题描述
+        :return: 最优解
+        &quot;&quot;&quot;
+        # 创建根节点，包含问题作为初始状态
+        root = ThoughtNode(problem, depth=0)
+        # 初始化前沿节点列表（待扩展的节点）
+        frontier = [root]
+       
+        # 逐层扩展
+        for depth in range(self.max_depth):
+            # 存储所有候选节点
+            all_candidates = []
+           
+            # 遍历所有前沿节点
+            for node in frontier:
+                # 为当前节点生成多个候选下一步
+                candidates = self.llm.generate_thoughts(
+                    node.content,    # 当前节点内容
+                    n=self.beam_size  # 生成数量
+                )
+                # 创建新节点并加入候选列表
+                for cand in candidates:
+                    all_candidates.append(
+                        ThoughtNode(cand, depth + 1, parent=node)
+                    )
+           
+            # 评估所有候选节点
+            evaluated = self.evaluator.rank(all_candidates)
+           
+            # 选择最优的 beam_size 个节点作为下一轮前沿
+            frontier = evaluated[:self.beam_size]
+           
+            # 检查是否找到解决方案
+            if self.is_solution(frontier):
+                break
+       
+        # 回溯找到最优解
+        return self.backtrack_best(frontier)</p>
+<h3 id="应用场景">应用场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#应用场景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>ToT 特别适合需要做选择或规划的场景：</p>
+<p>创意写作：生成多个故事发展方向，评估后选择最优。</p>
+<p>战略规划：评估多个行动方案的潜在结果。</p>
+<p>复杂决策：需要考虑多种可能性的决策问题。</p>
+<h2 id="任务规划与-mcts">任务规划与 MCTS<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#任务规划与-mcts" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>蒙特卡洛树搜索（Monte Carlo Tree Search, MCTS）是一种用于复杂决策问题的启发式搜索算法。</p>
+<p>MCTS 在 Agent 规划中有广泛应用，尤其适合游戏 AI 和复杂任务规划。</p>
+<h3 id="核心思想">核心思想<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心思想" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>MCTS 通过模拟随机游戏来评估每个决策节点的潜在价值。</p>
+<p>它不需要评估所有可能的路径，而是通过抽样和统计来指导搜索方向。</p>
+<h3 id="mcts-的四个步骤">MCTS 的四个步骤<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#mcts-的四个步骤" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>第一步，选择（Selection）：从根节点开始，递归选择最优子节点直到达到叶节点。</p>
+<p>选择时使用 UCB（Upper Confidence Bound）公式平衡探索与利用。</p>
+<p>第二步，扩展（Expansion）：在叶节点添加一个或多个子节点。</p>
+<p>第三步，模拟（Simulation）：从新节点开始，随机模拟游戏直到结束。</p>
+<p>第四步，反向传播（Backpropagation）：更新模拟路径上所有节点的统计信息。</p>
+<h3 id="代码实现-2">代码实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码实现-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="mcts-规划器实现">MCTS 规划器实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#mcts-规划器实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import math</p>
+<p>class MCTSNode:
+    &quot;&quot;&quot;
+    MCTS 树节点
+    存储节点状态、统计数据和子节点关系
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, state, parent=None, action=None):
+        # 当前状态
+        self.state = state
+        # 父节点引用
+        self.parent = parent
+        # 从父节点到达此节点的动作
+        self.action = action
+        # 子节点列表
+        self.children = []
+        # 此节点的访问次数
+        self.visit_count = 0
+        # 此节点的累计奖励值
+        self.reward = 0.0
+   
+    def is_fully_expanded(self):
+        &quot;&quot;&quot;检查是否已扩展所有可能的子节点&quot;&quot;&quot;
+        return len(self.children) > 0
+   
+    def is_terminal(self):
+        &quot;&quot;&quot;检查是否为终止节点（游戏结束或目标达成）&quot;&quot;&quot;
+        return self.state.is_terminal()
+   
+    def uct_child(self):
+        &quot;&quot;&quot;
+        使用 UCT 公式选择最优子节点
+        UCT = reward/visits + C * sqrt(ln(parent_visits)/visits)
+        C 是探索常数，通常设为 sqrt(2)
+        &quot;&quot;&quot;
+        # 探索常数，平衡探索与利用
+        C = math.sqrt(2)
+       
+        return max(
+            self.children,
+            key=lambda c: c.reward / c.visit_count +
+                         C * math.sqrt(math.log(self.visit_count) / c.visit_count)
+        )</p>
+<p>class MCTSPlanner:
+    &quot;&quot;&quot;
+    MCTS 规划器
+    使用蒙特卡洛树搜索为 Agent 生成行动规划
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, simulation_limit=1000, exploration_constant=1.41):
+        # 最大模拟次数
+        self.simulation_limit = simulation_limit
+        # 探索常数
+        self.exploration_constant = exploration_constant
+   
+    def plan(self, initial_state):
+        &quot;&quot;&quot;
+        从初始状态开始规划
+        :param initial_state: 初始状态
+        :return: 最优动作
+        &quot;&quot;&quot;
+        # 创建根节点
+        root = MCTSNode(initial_state)
+       
+        # 执行多次模拟
+        for _ in range(self.simulation_limit):
+            # 1. 选择：从根节点向下选择最优子节点直到叶节点
+            node = self._selection(root)
+           
+            # 2. 扩展：如果不是终止节点，扩展一个新节点
+            if not node.is_terminal():
+                node = self._expansion(node)
+           
+            # 3. 模拟：从新节点开始随机模拟到终止
+            reward = self._simulation(node)
+           
+            # 4. 反向传播：更新路径上所有节点的统计
+            self._backpropagation(node, reward)
+       
+        # 返回根节点最优子节点对应的动作
+        return root.best_child().action
+   
+    def _selection(self, node):
+        &quot;&quot;&quot;选择阶段：选择最优子节点&quot;&quot;&quot;
+        while node.is_fully_expanded() and not node.is_terminal():
+            node = node.uct_child()
+        return node
+   
+    def _expansion(self, node):
+        &quot;&quot;&quot;扩展阶段：添加新子节点&quot;&quot;&quot;
+        # 生成所有可能的动作
+        possible_actions = node.state.get_possible_actions()
+        # 为每个动作创建一个子节点
+        for action in possible_actions:
+            new_state = node.state.apply_action(action)
+            child = MCTSNode(new_state, parent=node, action=action)
+            node.children.append(child)
+        # 返回随机一个子节点（也可使用确定性策略）
+        return node.children[0]
+   
+    def _simulation(self, node):
+        &quot;&quot;&quot;模拟阶段：随机模拟到游戏结束&quot;&quot;&quot;
+        state = node.state
+        while not state.is_terminal():
+            # 随机选择动作
+            actions = state.get_possible_actions()
+            action = random.choice(actions)
+            state = state.apply_action(action)
+        # 返回最终奖励
+        return state.get_reward()
+   
+    def _backpropagation(self, node, reward):
+        &quot;&quot;&quot;反向传播：更新统计信息&quot;&quot;&quot;
+        while node is not None:
+            node.visit_count += 1
+            node.reward += reward
+            node = node.parent</p>
+<blockquote>
+<p>注意：MCTS 的计算成本较高，适合需要深度规划但有明确终止条件的场景。对于实时性要求高的任务，可能需要限制模拟次数或使用其他方法。</p>
+</blockquote>
+<h2 id="reflexion自我反思">Reflexion（自我反思）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reflexion自我反思" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Reflexion 是一种让 Agent 具有自我反思能力的技术。</p>
+<p>通过为 Agent 添加反思机制，它能够在失败后分析错误原因，调整策略并重试。</p>
+<h3 id="核心思想-1">核心思想<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心思想-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agent 不仅执行动作，还要观察结果并反思：我为什么失败？下次应该如何改进？</p>
+<p>这种能力对于持续学习和自我改进至关重要。</p>
+<h3 id="代码实现-3">代码实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码实现-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="reflexion-agent-实现">Reflexion Agent 实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reflexion-agent-实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>class ReflexionAgent:
+    &quot;&quot;&quot;
+    具有自我反思能力的 Agent
+    核心机制：执行 -> 评审 -> 反思 -> 重试
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, actor, reviewer, max_retries=3):
+        # 执行器：负责执行具体任务
+        self.actor = actor
+        # 评审器：负责评估执行结果
+        self.reviewer = reviewer
+        # 最大重试次数
+        self.max_retries = max_retries
+   
+    def run(self, task):
+        &quot;&quot;&quot;
+        执行带自我反思的任务
+        :param task: 任务描述
+        :return: 执行结果
+        &quot;&quot;&quot;
+        # 维护执行历史
+        history = []
+       
+        for attempt in range(self.max_retries):
+            # 阶段一：尝试执行任务
+            result = self.actor.execute(task, history)
+           
+            # 记录本次尝试
+            history.append({
+                “attempt”: attempt,
+                “result”: result
+            })
+           
+            # 阶段二：评审结果
+            feedback = self.reviewer.evaluate(task, result)
+           
+            # 阶段三：检查是否成功
+            if feedback.is_success:
+                return result
+           
+            # 阶段四：反思失败原因
+            # 生成新的策略提示，指导下一次尝试
+            reflection = self.reviewer.reflect(
+                task,           # 原始任务
+                result,         # 失败结果
+                feedback        # 评审反馈
+            )
+           
+            # 将反思结果添加到历史，供下次尝试参考
+            history.append({
+                “type”: “reflection”,
+                “content”: reflection
+            })
+       
+        # 所有重试都失败，返回历史记录
+        return history</p>
+<p>class Reviewer:
+    &quot;&quot;&quot;评审器：评估执行结果并生成反思&quot;&quot;&quot;
+   
+    def evaluate(self, task, result):
+        &quot;&quot;&quot;
+        评估执行结果
+        :return: 包含是否成功及详细反馈的对象
+        &quot;&quot;&quot;
+        # 检查结果是否满足任务要求
+        is_success = self.check_success(task, result)
+       
+        if is_success:
+            return EvaluationResult(is_success=True)
+        else:
+            # 生成失败原因分析
+            failure_reasons = self.analyze_failures(task, result)
+            return EvaluationResult(
+                is_success=False,
+                reasons=failure_reasons
+            )
+   
+    def reflect(self, task, result, feedback):
+        &quot;&quot;&quot;
+        生成反思内容
+        帮助 Actor 理解失败原因并改进策略
+        &quot;&quot;&quot;
+        prompt = f&quot;&quot;&quot;
+任务：{task}
+执行结果：{result}
+失败原因：{feedback.reasons}</p>
+<p>请分析失败原因，并给出改进建议。
+重点说明：</p>
+<ol>
+<li>哪里出了问题？</li>
+<li>下次应该如何避免？</li>
+<li>需要改变什么策略？
+&quot;&quot;&quot;
+        return self.llm.generate(prompt)</li>
+</ol>
+<h3 id="应用场景-1">应用场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#应用场景-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Reflexion 特别适合以下场景：</p>
+<p>需要持续改进的任务，如对话系统、代码生成等。</p>
+<p>错误代价高但重试成本低的场景。</p>
+<p>需要从失败中学习的情况。</p>
+<h2 id="任务分解策略">任务分解策略<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#任务分解策略" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>复杂任务通常需要分解为可管理的子任务。</p>
+<p>有效的任务分解是规划能力的基础。</p>
+<h3 id="递归任务分解">递归任务分解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#递归任务分解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>将任务递归地分解为更小的子任务，直到子任务可以直接执行。</p>
+<h2 id="递归任务分解-1">递归任务分解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#递归任务分解-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>def decompose(task, is_executable_fn, decompose_fn):
+    &quot;&quot;&quot;
+    递归分解任务
+    :param task: 要分解的任务
+    :param is_executable_fn: 判断任务是否可直接执行的函数
+    :param decompose_fn: 分解任务的函数
+    :return: 可执行任务列表
+    &quot;&quot;&quot;
+    # 如果任务可以直接执行，直接返回
+    if is_executable_fn(task):
+        return [task]
+   
+    # 分解任务为子任务
+    subtasks = decompose_fn(task)
+   
+    # 递归分解每个子任务
+    result = []
+    for subtask in subtasks:
+        # 对子任务递归调用分解函数
+        result.extend(
+            decompose(subtask, is_executable_fn, decompose_fn)
+        )
+   
+    return result</p>
+<h1 id="示例判断任务是否可执行">示例：判断任务是否可执行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例判断任务是否可执行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def is_code_complete(task):
+    &quot;&quot;&quot;检查任务是否可以直接执行代码&quot;&quot;&quot;
+    return task.get(“type”) <span class="text-highlight"> &quot;code&quot; and len(task.get(&quot;dependencies&quot;, [])) </span> 0</p>
+<h1 id="示例分解复杂任务">示例：分解复杂任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例分解复杂任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def decompose_programming_task(task):
+    &quot;&quot;&quot;分解编程任务&quot;&quot;&quot;
+    if “write_function” in task[“type”]:
+        return [
+            {“type”: “understand_requirements”, “task”: task[“spec”]},
+            {“type”: “write_code”, “spec”: task[“spec”]},
+            {“type”: “write_tests”, “function”: task[“function_name”]},
+            {“type”: “verify_tests”, “function”: task[“function_name”]}
+        ]
+    return [task]</p>
+<h3 id="平行任务分解">平行任务分解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#平行任务分解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>识别可以并行执行的独立子任务，提高执行效率。</p>
+<p>这是加速任务执行的关键策略。</p>
+<h3 id="层次任务分解">层次任务分解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#层次任务分解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>将任务分为不同抽象层次，高层任务调用低层任务，形成任务层次树。</p>
+<p>适合需要多层抽象的复杂系统。</p>
+<h2 id="plan-and-execute-模式">Plan-and-Execute 模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan-and-execute-模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Plan-and-Execute 是一种将规划与执行分离的架构模式。</p>
+<p>Agent 首先完整地规划整个任务流程，然后按计划执行。</p>
+<h3 id="与-react-的区别">与 ReAct 的区别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#与-react-的区别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>ReAct 是边推理边执行，更灵活但路径可能不稳定。</p>
+<p>Plan-and-Execute 是先规划后执行，更稳定但缺乏动态调整能力。</p>
+<h3 id="代码实现-4">代码实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码实现-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="plan-and-execute-agent-实现">Plan-and-Execute Agent 实现<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan-and-execute-agent-实现" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>class PlanAndExecuteAgent:
+    &quot;&quot;&quot;
+    Plan-and-Execute 架构的 Agent
+    核心机制：先完整规划，再按计划执行
+    &quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, planner, executor):
+        # 规划器：负责制定执行计划
+        self.planner = planner
+        # 执行器：负责执行具体步骤
+        self.executor = executor
+   
+    def run(self, task):
+        &quot;&quot;&quot;
+        执行任务
+        分为规划阶段和执行阶段
+        &quot;&quot;&quot;
+        # ==================<span class="text-highlight"> 规划阶段 </span>==================
+        # 一次性生成完整的执行计划
+        plan = self.planner.create_plan(task)
+       
+        # ==================<span class="text-highlight"> 执行阶段 </span>==================
+        results = []
+       
+        # 按计划顺序执行
+        for step in plan.steps:
+            # 执行当前步骤
+            result = self.executor.execute(step)
+            results.append(result)
+           
+            # 检查是否需要重新规划
+            # 例如：执行结果与预期不符，或出现意外情况
+            if self.needs_replan(results):
+                # 基于当前结果重新规划
+                plan = self.planner.replan(task, results)
+       
+        # 整合所有结果
+        return self.summarize(results)
+   
+    def needs_replan(self, results):
+        &quot;&quot;&quot;
+        判断是否需要重新规划
+        检查执行结果是否符合预期
+        &quot;&quot;&quot;
+        # 获取最后一个结果
+        last_result = results[-1]
+       
+        # 如果结果明显不符合预期，需要重规划
+        if last_result.is_unexpected():
+            return True
+       
+        # 如果结果导致后续步骤无法执行，需要重规划
+        if last_result.blocks_future():
+            return True
+       
+        return False</p>
+<p>class Planner:
+    &quot;&quot;&quot;规划器：生成任务执行计划&quot;&quot;&quot;
+   
+    def create_plan(self, task):
+        &quot;&quot;&quot;创建初始执行计划&quot;&quot;&quot;
+        prompt = f&quot;&quot;&quot;
+任务：{task}</p>
+<p>请制定详细的执行计划，包括：</p>
+<ol>
+<li>需要执行的步骤顺序</li>
+<li>每个步骤的具体操作</li>
+<li>步骤之间的依赖关系</li>
+</ol>
+<p>输出格式：
+步骤1: [操作描述]
+步骤2: [操作描述]
+…
+&quot;&quot;&quot;
+        plan_text = self.llm.generate(prompt)
+        return Plan.parse(plan_text)
+   
+    def replan(self, task, results):
+        &quot;&quot;&quot;基于执行结果重新规划&quot;&quot;&quot;
+        # 分析已完成的结果
+        completed = [r for r in results if r.is_success]
+        failed = [r for r in results if not r.is_success]
+       
+        # 生成调整后的计划
+        prompt = f&quot;&quot;&quot;
+原始任务：{task}
+已完成步骤：{completed}
+失败步骤：{failed}</p>
+<p>请制定调整后的执行计划：
+&quot;&quot;&quot;
+        plan_text = self.llm.generate(prompt)
+        return Plan.parse(plan_text)</p>
+<p>class Executor:
+    &quot;&quot;&quot;执行器：执行具体的计划步骤&quot;&quot;&quot;
+   
+    def execute(self, step):
+        &quot;&quot;&quot;执行单个步骤&quot;&quot;&quot;
+        # 根据步骤类型选择执行方式
+        if step.type == “tool_call”:
+            return self.execute_tool_call(step)
+        elif step.type == “code”:
+            return self.execute_code(step)
+        elif step.type == “query”:
+            return self.execute_query(step)
+       
+        return Result(success=False, error=“Unknown step type”)</p>
+<blockquote>
+<p>注意：Plan-and-Execute 模式适合任务结构相对稳定、可以提前规划的场景。对于需要灵活应变的环境，ReAct 模式可能更合适。</p>
+</blockquote>
+<h2 id="章节小结">章节小结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#章节小结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>本章节介绍了 AI Agent 的推理与规划核心能力。</p>
+<p>ReAct 框架通过推理与行动的循环，让 Agent 能够边执行边调整策略。</p>
+<p>思维链（CoT） 通过展示逐步推理过程，提升复杂任务的执行准确性。</p>
+<p>思维树（ToT） 扩展了思维链，支持多路径探索和回溯。</p>
+<p>MCTS 是一种启发式搜索算法，适合复杂决策和规划问题。</p>
+<p>Reflexion 赋予 Agent 自我反思能力，从失败中学习和改进。</p>
+<p>任务分解策略 是规划能力的基础，包括递归分解、平行分解和层次分解。</p>
+<p>Plan-and-Execute 采用先规划后执行的模式，适合结构稳定的任务。</p>
+<p>这些技术可以单独使用，也可以组合使用，构建更强大的 Agent 系统。</p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-13" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#python-智能体推理与规划实战" data-for="python-智能体推理与规划实战">Python 智能体推理与规划实战</a></li><li class="depth-0"><a href="#python-实现推理与规划" data-for="python-实现推理与规划">Python 实现推理与规划</a></li><li class="depth-1"><a href="#react-框架" data-for="react-框架">ReAct 框架</a></li><li class="depth-2"><a href="#工作原理" data-for="工作原理">工作原理</a></li><li class="depth-2"><a href="#代码实现" data-for="代码实现">代码实现</a></li><li class="depth-1"><a href="#react-agent-基本实现" data-for="react-agent-基本实现">ReAct Agent 基本实现</a></li><li class="depth-2"><a href="#典型应用场景" data-for="典型应用场景">典型应用场景</a></li><li class="depth-1"><a href="#思维链chain-of-thought-cot" data-for="思维链chain-of-thought-cot">思维链（Chain of Thought, CoT）</a></li><li class="depth-2"><a href="#为什么需要思维链" data-for="为什么需要思维链">为什么需要思维链</a></li><li class="depth-2"><a href="#zero-shot-cot" data-for="zero-shot-cot">Zero-shot CoT</a></li><li class="depth-1"><a href="#zero-shot-cot-示例" data-for="zero-shot-cot-示例">Zero-shot CoT 示例</a></li><li class="depth-0"><a href="#zero-shot-cot-的提示词模板" data-for="zero-shot-cot-的提示词模板">Zero-shot CoT 的提示词模板</a></li><li class="depth-0"><a href="#调用语言模型" data-for="调用语言模型">调用语言模型</a></li><li class="depth-0"><a href="#模型输出示例" data-for="模型输出示例">模型输出示例：</a></li><li class="depth-0"><a href="#第一步计算小明收到苹果后的总数" data-for="第一步计算小明收到苹果后的总数">第一步：计算小明收到苹果后的总数</a></li><li class="depth-0"><a href="#小明原来有-5-个苹果小红给了他-3-个" data-for="小明原来有-5-个苹果小红给了他-3-个">小明原来有 5 个苹果，小红给了他 3 个</a></li><li class="depth-0"><a href="#5--3--8-个" data-for="5--3--8-个">5 + 3 = 8 个</a></li><li class="depth-0"><a href="#" data-for></a></li><li class="depth-0"><a href="#第二步计算吃掉后的数量" data-for="第二步计算吃掉后的数量">第二步：计算吃掉后的数量</a></li><li class="depth-0"><a href="#小明吃掉了-2-个" data-for="小明吃掉了-2-个">小明吃掉了 2 个</a></li><li class="depth-0"><a href="#8---2--6-个" data-for="8---2--6-个">8 - 2 = 6 个</a></li><li class="depth-0"><a href="#-1" data-for="-1"></a></li><li class="depth-0"><a href="#结论还剩-6-个苹果" data-for="结论还剩-6-个苹果">结论：还剩 6 个苹果</a></li><li class="depth-2"><a href="#few-shot-cot" data-for="few-shot-cot">Few-shot CoT</a></li><li class="depth-1"><a href="#few-shot-cot-示例" data-for="few-shot-cot-示例">Few-shot CoT 示例</a></li><li class="depth-0"><a href="#few-shot-cot-的提示词模板" data-for="few-shot-cot-的提示词模板">Few-shot CoT 的提示词模板</a></li><li class="depth-2"><a href="#思维链的优势" data-for="思维链的优势">思维链的优势</a></li><li class="depth-1"><a href="#tree-of-thoughtstot" data-for="tree-of-thoughtstot">Tree of Thoughts（ToT）</a></li><li class="depth-2"><a href="#与思维链的区别" data-for="与思维链的区别">与思维链的区别</a></li><li class="depth-2"><a href="#代码实现-1" data-for="代码实现-1">代码实现</a></li><li class="depth-1"><a href="#tot-agent-基本实现" data-for="tot-agent-基本实现">ToT Agent 基本实现</a></li><li class="depth-2"><a href="#应用场景" data-for="应用场景">应用场景</a></li><li class="depth-1"><a href="#任务规划与-mcts" data-for="任务规划与-mcts">任务规划与 MCTS</a></li><li class="depth-2"><a href="#核心思想" data-for="核心思想">核心思想</a></li><li class="depth-2"><a href="#mcts-的四个步骤" data-for="mcts-的四个步骤">MCTS 的四个步骤</a></li><li class="depth-2"><a href="#代码实现-2" data-for="代码实现-2">代码实现</a></li><li class="depth-1"><a href="#mcts-规划器实现" data-for="mcts-规划器实现">MCTS 规划器实现</a></li><li class="depth-1"><a href="#reflexion自我反思" data-for="reflexion自我反思">Reflexion（自我反思）</a></li><li class="depth-2"><a href="#核心思想-1" data-for="核心思想-1">核心思想</a></li><li class="depth-2"><a href="#代码实现-3" data-for="代码实现-3">代码实现</a></li><li class="depth-1"><a href="#reflexion-agent-实现" data-for="reflexion-agent-实现">Reflexion Agent 实现</a></li><li class="depth-2"><a href="#应用场景-1" data-for="应用场景-1">应用场景</a></li><li class="depth-1"><a href="#任务分解策略" data-for="任务分解策略">任务分解策略</a></li><li class="depth-2"><a href="#递归任务分解" data-for="递归任务分解">递归任务分解</a></li><li class="depth-1"><a href="#递归任务分解-1" data-for="递归任务分解-1">递归任务分解</a></li><li class="depth-0"><a href="#示例判断任务是否可执行" data-for="示例判断任务是否可执行">示例：判断任务是否可执行</a></li><li class="depth-0"><a href="#示例分解复杂任务" data-for="示例分解复杂任务">示例：分解复杂任务</a></li><li class="depth-2"><a href="#平行任务分解" data-for="平行任务分解">平行任务分解</a></li><li class="depth-2"><a href="#层次任务分解" data-for="层次任务分解">层次任务分解</a></li><li class="depth-1"><a href="#plan-and-execute-模式" data-for="plan-and-execute-模式">Plan-and-Execute 模式</a></li><li class="depth-2"><a href="#与-react-的区别" data-for="与-react-的区别">与 ReAct 的区别</a></li><li class="depth-2"><a href="#代码实现-4" data-for="代码实现-4">代码实现</a></li><li class="depth-1"><a href="#plan-and-execute-agent-实现" data-for="plan-and-execute-agent-实现">Plan-and-Execute Agent 实现</a></li><li class="depth-1"><a href="#章节小结" data-for="章节小结">章节小结</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

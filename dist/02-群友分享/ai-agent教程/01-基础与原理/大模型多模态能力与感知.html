@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>大模型多模态能力与感知</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="大模型多模态能力与感知"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="大模型多模态能力与感知"/><meta name="twitter:description" content="大模型多模态能力与感知 出处：www.runoob.com/ai-agent/llm-multimodal.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大模型多模态（Multimodal） 多模态（Multimodal）大模型让 AI 同时处理文本、图像、音频、视频等多种信息形式，是当前大模型最核心的发展方向之一。 本文从零开始讲解多模态的概念、发展过程、内部原理与典型能力，并在文末给出 5 分钟搭建第一个多模态应用 的可运行示例。 一、什么是多模态？ 普通大模型通常只能处理一种信息——文本，如果给传统 AI 一张图片，并问它”图片里有几只猫？“，如果不支持..."/><meta property="og:description" content="大模型多模态能力与感知 出处：www.runoob.com/ai-agent/llm-multimodal.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大模型多模态（Multimodal） 多模态（Multimodal）大模型让 AI 同时处理文本、图像、音频、视频等多种信息形式，是当前大模型最核心的发展方向之一。 本文从零开始讲解多模态的概念、发展过程、内部原理与典型能力，并在文末给出 5 分钟搭建第一个多模态应用 的可运行示例。 一、什么是多模态？ 普通大模型通常只能处理一种信息——文本，如果给传统 AI 一张图片，并问它”图片里有几只猫？“，如果不支持..."/><meta property="og:image:alt" content="大模型多模态能力与感知 出处：www.runoob.com/ai-agent/llm-multimodal.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大模型多模态（Multimodal） 多模态（Multimodal）大模型让 AI 同时处理文本、图像、音频、视频等多种信息形式，是当前大模型最核心的发展方向之一。 本文从零开始讲解多模态的概念、发展过程、内部原理与典型能力，并在文末给出 5 分钟搭建第一个多模态应用 的可运行示例。 一、什么是多模态？ 普通大模型通常只能处理一种信息——文本，如果给传统 AI 一张图片，并问它”图片里有几只猫？“，如果不支持..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大模型多模态能力与感知"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大模型多模态能力与感知"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="大模型多模态能力与感知 出处：www.runoob.com/ai-agent/llm-multimodal.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大模型多模态（Multimodal） 多模态（Multimodal）大模型让 AI 同时处理文本、图像、音频、视频等多种信息形式，是当前大模型最核心的发展方向之一。 本文从零开始讲解多模态的概念、发展过程、内部原理与典型能力，并在文末给出 5 分钟搭建第一个多模态应用 的可运行示例。 一、什么是多模态？ 普通大模型通常只能处理一种信息——文本，如果给传统 AI 一张图片，并问它”图片里有几只猫？“，如果不支持..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大模型多模态能力与感知-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大模型多模态能力与感知-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大模型多模态能力与感知-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/01-基础与原理/大模型多模态能力与感知" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-8" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-8" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/01-基础与原理/">01-基础与原理</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>大模型多模态能力与感知</a></div></nav><h1 class="article-title">大模型多模态能力与感知</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/基础与原理" class="internal internal-link tag-link">基础与原理</a><span class="note-properties-separator">, </span><a href="../../../tags/大模型多模态能力与感" class="internal internal-link tag-link">大模型多模态能力与感</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>18分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="大模型多模态能力与感知">大模型多模态能力与感知<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#大模型多模态能力与感知" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/llm-multimodal.html" class="external external-link">https://www.runoob.com/ai-agent/llm-multimodal.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>01-基础与原理</code></p>
+</blockquote>
+<hr/>
+<h1 id="大模型多模态multimodal">大模型多模态（Multimodal）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#大模型多模态multimodal" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>多模态（Multimodal）大模型让 AI 同时处理文本、图像、音频、视频等多种信息形式，是当前大模型最核心的发展方向之一。</p>
+<p>本文从零开始讲解多模态的概念、发展过程、内部原理与典型能力，并在文末给出 5 分钟搭建第一个多模态应用 的可运行示例。</p>
+<h2 id="一什么是多模态">一、什么是多模态？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一什么是多模态" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>普通大模型通常只能处理一种信息——文本，如果给传统 AI 一张图片，并问它”图片里有几只猫？“，如果不支持多模态，该模型就做不到。</p>
+<p>而现实世界不是由文字组成的，而是由多种感官信息共同构成：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>感官</th><th>对应信息</th></tr></thead><tbody><tr><td>眼睛</td><td>图像</td></tr><tr><td>耳朵</td><td>声音</td></tr><tr><td>嘴巴</td><td>语言</td></tr><tr><td>手</td><td>动作</td></tr><tr><td>视频</td><td>图像 + 时间</td></tr><tr><td>网页</td><td>文本 + 图片 + 结构</td></tr></tbody></table></div>
+<p>因此，多模态（Multimodal） 这一概念应运而生。</p>
+<p>用一句话理解：</p>
+<blockquote>
+<p>多模态 = 一个模型同时理解和生成多种信息形式。</p>
+</blockquote>
+<p>看两个典型例子：</p>
+<ul>
+<li>1、输入图片加问题：<strong>“这张图里的食物热量高吗？“</strong>，模型回答：<strong>“这是炸鸡和薯条，预计约 1200 大卡。”</strong></li>
+<li>2、输入语音：<strong>“帮我总结这段会议”</strong>，模型输出文字摘要并附带行动建议。</li>
+</ul>
+<p>这种看图说话、听音总结的能力，就是多模态最直接的体现。</p>
+<h2 id="二什么是模态modal">二、什么是模态（Modal）？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#二什么是模态modal" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>模态（Modality）就是信息的表现形式。</p>
+<p>不同的模态对应不同的输入与输出，下表列出常见模态及其典型应用：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>模态</th><th>输入示例</th><th>输出示例</th><th>典型应用</th></tr></thead><tbody><tr><td>Text（文本）</td><td>小说、聊天记录</td><td>回答、文章</td><td>问答、写作、翻译</td></tr><tr><td>Image（图像）</td><td>照片、截图</td><td>图片理解、生成图</td><td>OCR、视觉问答</td></tr><tr><td>Audio（音频）</td><td>语音、音乐</td><td>转写文字、合成语音</td><td>会议摘要、语音助手</td></tr><tr><td>Video（视频）</td><td>视频流</td><td>视频分析、时间轴</td><td>教学总结、内容检索</td></tr><tr><td>Sensor（传感器）</td><td>GPS、温度</td><td>控制信号</td><td>机器人、自动驾驶</td></tr><tr><td>Action（动作）</td><td>鼠标点击、键盘输入</td><td>执行动作</td><td>GUI Agent、自动化</td></tr></tbody></table></div>
+<p>模型支持的模态越多，能力就越接近人，这也是为什么所有头部实验室都在把文字模型升级为多模态模型。</p>
+<h2 id="三多模态大模型的发展过程">三、多模态大模型的发展过程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#三多模态大模型的发展过程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>从只能处理文字，到能看、能听、能输出视频，多模态大模型经历了三个清晰的阶段。</p>
+<h3 id="第一阶段语言模型llm">第一阶段：语言模型（LLM）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一阶段语言模型llm" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>这一阶段模型的输入和输出都是文字，代表产品包括 OpenAI GPT 系列、Anthropic Claude、Google Gemini。</p>
+<p>它们能写代码、写文章、做翻译、回答问题，能力很强，但有一个根本限制：看不见。</p>
+<h3 id="第二阶段视觉语言模型vlm">第二阶段：视觉语言模型（VLM）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二阶段视觉语言模型vlm" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>VLM 在 LLM 基础上增加了”看图”能力，典型用法是上传一张网页截图，问”为什么布局错了”，模型回答”CSS 冲突”。</p>
+<p>这一阶段模型开始具备：图像理解、OCR、图表理解等能力。</p>
+<h3 id="第三阶段原生多模态模型">第三阶段：原生多模态模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三阶段原生多模态模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>原生多模态模型不再把”图”和”文”当作两个拼接的模块，而是从训练开始就统一处理图像、声音、视频、文本。</p>
+<p>它具备完整能力：看、听、说、推理、执行，这也是当前业界的主流方向。</p>
+<h2 id="四多模态模型内部是怎么工作的">四、多模态模型内部是怎么工作的？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#四多模态模型内部是怎么工作的" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>多模态模型的内部工作可以概括为一句话：把所有数据转成统一向量空间。</p>
+<p>例如：</p>
+<blockquote>
+<p>“一只猫”、“cat”、cat.png 三种表达，虽然来自不同模态，编码后在向量空间里会落在接近区域。</p>
+</blockquote>
+<p>整体流程如下图所示：</p>
+<p>上图展示了从输入到输出的完整链路，下面拆解每一步。</p>
+<h3 id="第一步编码encoding">第一步：编码（Encoding）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步编码encoding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不同模态要先转成数字，模型才能处理。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>模态</th><th>原始数据</th><th>编码后</th></tr></thead><tbody><tr><td>文本</td><td>”你好”</td><td>[2034, 789] 一组 token id</td></tr><tr><td>图像</td><td>像素矩阵</td><td>视觉特征向量</td></tr><tr><td>音频</td><td>波形</td><td>频谱特征向量</td></tr></tbody></table></div>
+<h3 id="第二步统一语义空间">第二步：统一语义空间<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步统一语义空间" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>编码后的关键一步，是让”猫”、“cat”、cat.png 在向量空间里彼此接近。</p>
+<p>这就是”跨模态理解”的本质：把不同模态的特征投影到同一个空间里。</p>
+<h3 id="第三步生成输出">第三步：生成输出<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步生成输出" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在统一空间里推理之后，模型按需把结果”还原”成不同模态。</p>
+<p>输出可以是：文本、图像、音频、视频中的任意一种。</p>
+<p>例如：上传一张图片 → 描述 → 再生成一段介绍视频，这是完整的多模态生成链。</p>
+<h2 id="五为什么-transformer-能统一多模态">五、为什么 Transformer 能统一多模态？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#五为什么-transformer-能统一多模态" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>核心原因只有一个：Attention 机制。</p>
+<p>Transformer 的核心公式是 Attention(Q, K, V)，含义是”模型自己判断该关注什么”。</p>
+<p>举个例子：当用户问”图片里谁在打篮球？“时，模型会：</p>
+<ol>
+<li>先看图，识别出图中所有人物</li>
+<li>识别出图中的篮球</li>
+<li>判断”谁”和”篮球”之间的关系</li>
+<li>综合上下文输出答案</li>
+</ol>
+<p>这种”自主决定关注点”的能力，让 Transformer 天然适合处理多模态输入：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>输入</th><th>模型在关注什么</th></tr></thead><tbody><tr><td>纯文字</td><td>句子之间的语义关联</td></tr><tr><td>图片 + 文字</td><td>图像区域和文字描述的对应</td></tr><tr><td>视频 + 文字</td><td>时间轴片段和问题的关联</td></tr></tbody></table></div>
+<blockquote>
+<p>这也是为什么 Attention 几乎成了所有现代大模型的”标配”——它天生就是为跨模态设计的。</p>
+</blockquote>
+<h2 id="六多模态典型能力">六、多模态典型能力<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#六多模态典型能力" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>多模态模型具备五大典型能力，下图展示了它们之间的关系。</p>
+<h3 id="1-图像理解">1. 图像理解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-图像理解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>输入截图，模型输出页面问题、UI 分析或 OCR 结果。</p>
+<p>程序员最常用的场景是：截图报错，让 AI 定位问题。</p>
+<h3 id="2-图像生成">2. 图像生成<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-图像生成" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>输入”生成未来城市”这样的文字描述，模型返回 AI 图片。</p>
+<p>典型应用：海报、封面、游戏素材、产品草图。</p>
+<h3 id="3-语音交互">3. 语音交互<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-语音交互" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>说话即输入，模型实时回答，能力覆盖 ASR（语音转文字）、TTS（文字转语音）、对话。</p>
+<h3 id="4-视频理解">4. 视频理解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-视频理解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>上传一段教学视频，模型输出总结、时间轴、可问答的关键片段。</p>
+<h3 id="5-agent-智能体">5. Agent 智能体<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-agent-智能体" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>输入”帮我做 PPT”，模型开始执行完整行动链：搜索资料 → 生成大纲 → 制作幻灯片 → 修改 → 导出。</p>
+<p>Agent 是把”看、听、说”和”动手执行”结合的最终形态。</p>
+<h2 id="七初学者必须理解的五个术语">七、初学者必须理解的五个术语<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#七初学者必须理解的五个术语" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>阅读多模态相关文档时，下表中的术语会反复出现，先记住它们：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>术语</th><th>含义</th><th>举例</th></tr></thead><tbody><tr><td>Token（词元）</td><td>模型处理的最小单位，文本按词切分</td><td>”你好世界” → [你][好][世界]</td></tr><tr><td>Embedding（嵌入）</td><td>把信息转成数字坐标的过程</td><td>”猫” → [0.12, 0.78, 0.33, …]</td></tr><tr><td>Context（上下文）</td><td>当前对话的历史与背景信息</td><td>用户说”苹果”+“上下文：手机”= iPhone，而非水果</td></tr><tr><td>Attention（注意力）</td><td>决定模型关注输入哪一部分</td><td>看图时模型先看”人”再看”篮球”</td></tr><tr><td>Inference（推理）</td><td>模型根据输入生成输出的过程</td><td>用户输入问题后，模型”思考并回答”</td></tr></tbody></table></div>
+<blockquote>
+<p>这五个词贯穿所有大模型文档，先建立直觉，遇到细节再回查。</p>
+</blockquote>
+<h2 id="八动手体验5-分钟搭建你的第一个多模态应用">八、动手体验：5 分钟搭建你的第一个多模态应用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#八动手体验5-分钟搭建你的第一个多模态应用" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>本节目标：上传一张图片，AI 输出文字描述。</p>
+<p>整个流程不需要任何深度学习基础，只要会  Python 即可。</p>
+<h3 id="81-准备项目">8.1 准备项目<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#81-准备项目" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>先创建一个项目 multimodal-demo，并使用 openai 库来测试：</p>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="创建项目">创建项目<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建项目" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>mkdir multimodal-demo</p>
+<h1 id="进入项目目录">进入项目目录<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#进入项目目录" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>cd multimodal-demo</p>
+<h1 id="安装-openai-官方-sdk兼容多种多模态模型">安装 OpenAI 官方 SDK（兼容多种多模态模型）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装-openai-官方-sdk兼容多种多模态模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>pip install openai</p>
+<p>在 multimodal-demo 目录下上传一张图片 cat-cartoon.webp，图片如下（可以右击保存下来测试）：</p>
+<h3 id="82-编写调用代码">8.2 编写调用代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#82-编写调用代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>本实例采用的是<a href="https://www.volcengine.com/activity/ai618?utm_campaign=hw&amp;utm_content=hw&amp;utm_medium=devrel_tool_web&amp;utm_source=OWO&amp;utm_term=runoob" class="external external-link">节方舟的 Coding Plan<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>，他们的 doubao-seed-2.0-pro 模型支持多模态。</p>
+<p>把下面这段代码保存为  test.py：</p>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import base64
+import os
+from io import BytesIO
+from openai import OpenAI
+from PIL import Image</p>
+<h1 id="-方舟配置-">==================<span class="text-highlight"> 方舟配置 </span>==================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-方舟配置-" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>ARK_API_KEY = “ark-xxxx”             # 这里填写你的 Key
+ARK_BASE_URL = “<a href="https://ark.cn-beijing.volces.com/api/coding/v3" class="external external-link">https://ark.cn-beijing.volces.com/api/coding/v3<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”  # 推荐使用通用 v3 接口
+MODEL_ENDPOINT = “doubao-seed-2.0-pro”  # 支持多模态的模型</p>
+<h1 id="初始化客户端">初始化客户端<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#初始化客户端" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>client = OpenAI(
+    api_key=ARK_API_KEY,
+    base_url=ARK_BASE_URL,
+    timeout=60
+)</p>
+<p>def prepare_image_base64(image_path: str, max_size: int = 1024) -> str:
+    &quot;&quot;&quot;
+    读取本地图片，处理透明通道，缩放并转换为 base64 字符串
+    &quot;&quot;&quot;
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f”找不到测试图片: {image_path}”)
+       
+    with Image.open(image_path) as img:
+        # 1. 处理 RGBA 透明背景
+        if img.mode == “RGBA”:
+            background = Image.new(“RGB”, img.size, (255, 255, 255))
+            background.paste(img, mask=img.split()[-1])
+            img = background
+        elif img.mode != “RGB”:
+            img = img.convert(“RGB”)
+           
+        # 2. 等比例缩放（防大图撑爆 Payload/Token）
+        img.thumbnail((max_size, max_size))
+       
+        # 3. 转 Base64
+        buf = BytesIO()
+        img.save(buf, format=“JPEG”, quality=85)  # 适当压缩质量
+        b64 = base64.b64encode(buf.getvalue()).decode(“utf-8”)
+       
+    return f”data:image/jpeg;base64,{b64}”</p>
+<p>def multimodal_chat(img_path: str, prompt: str):
+    &quot;&quot;&quot;多模态对话测试&quot;&quot;&quot;
+    try:
+        print(f”正在处理图片: {img_path} …”)
+        img_b64 = prepare_image_base64(img_path)
+       
+        print(“正在发送请求至火山引擎方舟平台…”)
+        res = client.chat.completions.create(
+            model=MODEL_ENDPOINT,
+            messages=[
+                {
+                    “role”: “user”,
+                    “content”: [
+                        {“type”: “text”, “text”: prompt},
+                        {“type”: “image_url”, “image_url”: {“url”: img_b64}}
+                    ]
+                }
+            ],
+            temperature=0.7,
+            max_tokens=1024
+        )
+       
+        print(“\n” + ”=“*10 + ” 识别结果 ” + ”=“*10)
+        print(res.choices[0].message.content)
+        print(”=“*30)
+        return res</p>
+<p>    except FileNotFoundError as e:
+        print(f”【错误】{e}”)
+    except Exception as e:
+        print(f”【API 请求失败】请检查网络或 Endpoint/Key 是否正确。错误信息:\n{e}”)
+        return None</p>
+<p>if <strong>name</strong> == “<strong>main</strong>”:
+    # 测试配置
+    image_file = ”./cat-cartoon.webp”
+    question = “详细描述这张图片里的内容，分析画面主体、色彩和场景”
+   
+    # 模拟创建一个临时测试图（若本地没有相应图片，方便快速肉眼 debug）
+    if not os.path.exists(image_file):
+        print(f”未检测到 {image_file}，正在生成一张临时测试图…”)
+        Image.new(‘RGB’, (200, 200), color = (73, 109, 137)).save(image_file)
+       
+    multimodal_chat(image_file, question)</p>
+<p>运行 Pyhton，输出结果如下：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">在发送请求至火山引擎方舟平台</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span></span>
+<span data-line> </span>
+<span data-line> </span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">==========</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 识别结果 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">==========</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">这是一张</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Q版萌系卡通风格的数字角色插画</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">，整体背景为纯净的纯白色，没有任何环境元素，所有视觉重心都集中在中心的小猫主体上，是典型的独立角色立绘</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">吉祥物设计。</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">### 一、画面主体详细描述</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">主体是一只端正坐姿的卡通幼橘猫，是经过萌化设计的家养橘白虎斑猫形象，整体气质乖巧天真、亲人友好：</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.  </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">比例与姿态</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：采用萌系设计特有的大头短身比例，头部占整体高度的60</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">左右，</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span></span></code></pre></figure>
+<p>打开浏览器控制台，就能看到模型对图片的文字描述。整个链路是：</p>
+<blockquote>
+<p>用户上传图片 → 浏览器把图片 URL 传给 OpenAI SDK → 多模态模型理解图片 → 返回文字描述 → 打印到控制台。</p>
+</blockquote>
+<h3 id="83-常见扩展">8.3 常见扩展<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#83-常见扩展" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>完成上面这段最小可运行代码后，你可以继续扩展：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>想做什么</th><th>怎么改</th></tr></thead><tbody><tr><td>改成上传本地文件</td><td>用户上传图片后读取后转为 base64，再赋给 image_file</td></tr><tr><td>支持连续多轮对话</td><td>把历史问答追加到 messages 数组</td></tr><tr><td>换成其它厂商模型</td><td>构造 OpenAI 客户端时指定 baseURL，如 Qwen、OpenAI、Anthropic 兼容端点</td></tr><tr><td>处理语音</td><td>把 type: “image_url” 换成 type: “input_audio”，并提供 base64 音频</td></tr></tbody></table></div>
+<h2 id="九学习路线推荐">九、学习路线（推荐）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#九学习路线推荐" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>如果你刚接触大模型，下图是一条经过验证的 6 周学习路径。</p>
+<h2 id="十未来会发生什么">十、未来会发生什么？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#十未来会发生什么" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>回顾软件形态的演变，可以看到清晰的趋势：</p>
+<blockquote>
+<p>过去：软件 = 功能。</p>
+<p>现在：软件 = 模型。</p>
+<p>未来：软件 = 多模态智能体。</p>
+</blockquote>
+<p>这意味着未来用户只需说一句话，例如”做个网站”，模型就会自动完成设计、编码、部署、运营的全流程。</p>
+<p>多模态并不是”给模型加一个看图功能”那么简单。</p>
+<p>它真正改变的是：</p>
+<blockquote>
+<p>让计算机开始直接理解现实世界。</p>
+</blockquote>
+<p>这正是当前 AI 行业最重要的范式转变，也是所有开发者值得投入的方向。</p>
+<h2 id="常见问题">常见问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="多模态模型和普通-llm-哪个更好用">多模态模型和普通 LLM 哪个更好用？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#多模态模型和普通-llm-哪个更好用" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>取决于场景：纯文本写作、代码生成、翻译，普通 LLM 性价比更高；需要看图、听音频、理解视频时，多模态模型是唯一选择。</p>
+<h3 id="本地能跑多模态模型吗">本地能跑多模态模型吗？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#本地能跑多模态模型吗" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>可以，但成本较高。小参数 VLM（如 Qwen2-VL-7B）可在 16GB 显存的消费级显卡上运行；更大模型通常需要云端 GPU 或调用 API。</p>
+<h3 id="多模态模型的输出一定是文字吗">多模态模型的输出一定是文字吗？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#多模态模型的输出一定是文字吗" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不一定。原生多模态模型可以输出文字、图像、音频甚至视频；纯 VLM 通常只输出文字。</p>
+<h3 id="如何选择多模态-api">如何选择多模态 API？<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#如何选择多模态-api" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果只做图像理解：OpenAI gpt-4o、Gemini 2.5 Flash、Qwen2-VL 都是性价比高的选择；如果要”看 + 听 + 实时语音”，建议直接使用 OpenAI Realtime API 或 Gemini Live。</p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-8" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#大模型多模态能力与感知" data-for="大模型多模态能力与感知">大模型多模态能力与感知</a></li><li class="depth-0"><a href="#大模型多模态multimodal" data-for="大模型多模态multimodal">大模型多模态（Multimodal）</a></li><li class="depth-1"><a href="#一什么是多模态" data-for="一什么是多模态">一、什么是多模态？</a></li><li class="depth-1"><a href="#二什么是模态modal" data-for="二什么是模态modal">二、什么是模态（Modal）？</a></li><li class="depth-1"><a href="#三多模态大模型的发展过程" data-for="三多模态大模型的发展过程">三、多模态大模型的发展过程</a></li><li class="depth-2"><a href="#第一阶段语言模型llm" data-for="第一阶段语言模型llm">第一阶段：语言模型（LLM）</a></li><li class="depth-2"><a href="#第二阶段视觉语言模型vlm" data-for="第二阶段视觉语言模型vlm">第二阶段：视觉语言模型（VLM）</a></li><li class="depth-2"><a href="#第三阶段原生多模态模型" data-for="第三阶段原生多模态模型">第三阶段：原生多模态模型</a></li><li class="depth-1"><a href="#四多模态模型内部是怎么工作的" data-for="四多模态模型内部是怎么工作的">四、多模态模型内部是怎么工作的？</a></li><li class="depth-2"><a href="#第一步编码encoding" data-for="第一步编码encoding">第一步：编码（Encoding）</a></li><li class="depth-2"><a href="#第二步统一语义空间" data-for="第二步统一语义空间">第二步：统一语义空间</a></li><li class="depth-2"><a href="#第三步生成输出" data-for="第三步生成输出">第三步：生成输出</a></li><li class="depth-1"><a href="#五为什么-transformer-能统一多模态" data-for="五为什么-transformer-能统一多模态">五、为什么 Transformer 能统一多模态？</a></li><li class="depth-1"><a href="#六多模态典型能力" data-for="六多模态典型能力">六、多模态典型能力</a></li><li class="depth-2"><a href="#1-图像理解" data-for="1-图像理解">1. 图像理解</a></li><li class="depth-2"><a href="#2-图像生成" data-for="2-图像生成">2. 图像生成</a></li><li class="depth-2"><a href="#3-语音交互" data-for="3-语音交互">3. 语音交互</a></li><li class="depth-2"><a href="#4-视频理解" data-for="4-视频理解">4. 视频理解</a></li><li class="depth-2"><a href="#5-agent-智能体" data-for="5-agent-智能体">5. Agent 智能体</a></li><li class="depth-1"><a href="#七初学者必须理解的五个术语" data-for="七初学者必须理解的五个术语">七、初学者必须理解的五个术语</a></li><li class="depth-1"><a href="#八动手体验5-分钟搭建你的第一个多模态应用" data-for="八动手体验5-分钟搭建你的第一个多模态应用">八、动手体验：5 分钟搭建你的第一个多模态应用</a></li><li class="depth-2"><a href="#81-准备项目" data-for="81-准备项目">8.1 准备项目</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#创建项目" data-for="创建项目">创建项目</a></li><li class="depth-0"><a href="#进入项目目录" data-for="进入项目目录">进入项目目录</a></li><li class="depth-0"><a href="#安装-openai-官方-sdk兼容多种多模态模型" data-for="安装-openai-官方-sdk兼容多种多模态模型">安装 OpenAI 官方 SDK（兼容多种多模态模型）</a></li><li class="depth-2"><a href="#82-编写调用代码" data-for="82-编写调用代码">8.2 编写调用代码</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-0"><a href="#span-classtext-highlight-方舟配置-span" data-for="span-classtext-highlight-方舟配置-span">==================&lt;span class=&quot;text-highlight&quot;> 方舟配置 &lt;/span>==================</a></li><li class="depth-0"><a href="#初始化客户端" data-for="初始化客户端">初始化客户端</a></li><li class="depth-2"><a href="#83-常见扩展" data-for="83-常见扩展">8.3 常见扩展</a></li><li class="depth-1"><a href="#九学习路线推荐" data-for="九学习路线推荐">九、学习路线（推荐）</a></li><li class="depth-1"><a href="#十未来会发生什么" data-for="十未来会发生什么">十、未来会发生什么？</a></li><li class="depth-1"><a href="#常见问题" data-for="常见问题">常见问题</a></li><li class="depth-2"><a href="#多模态模型和普通-llm-哪个更好用" data-for="多模态模型和普通-llm-哪个更好用">多模态模型和普通 LLM 哪个更好用？</a></li><li class="depth-2"><a href="#本地能跑多模态模型吗" data-for="本地能跑多模态模型吗">本地能跑多模态模型吗？</a></li><li class="depth-2"><a href="#多模态模型的输出一定是文字吗" data-for="多模态模型的输出一定是文字吗">多模态模型的输出一定是文字吗？</a></li><li class="depth-2"><a href="#如何选择多模态-api" data-for="如何选择多模态-api">如何选择多模态 API？</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

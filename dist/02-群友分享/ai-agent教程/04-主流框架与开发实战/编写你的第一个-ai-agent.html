@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>编写你的第一个 AI Agent</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="编写你的第一个 AI Agent"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="编写你的第一个 AI Agent"/><meta name="twitter:description" content="编写你的第一个 AI Agent 出处：www.runoob.com/ai-agent/first-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 第一个 AI Agent AI Agent 平台种类繁多，但核心目的相同：让模型从回答问题升级为自动执行任务，有的主打零代码拖拽，有的强调工程化定制，也有专门做流程集成或多代理协作。 不同层级的使用场景拆成三个面向：搭建速度、系统衔接、可控深度。 核心需求推荐工具关键优势MonkeyCode，AI 应用开发平台MonkeyCode 官网直接在平台里创建任务，让 AI 编码，在云端开发环境中使..."/><meta property="og:description" content="编写你的第一个 AI Agent 出处：www.runoob.com/ai-agent/first-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 第一个 AI Agent AI Agent 平台种类繁多，但核心目的相同：让模型从回答问题升级为自动执行任务，有的主打零代码拖拽，有的强调工程化定制，也有专门做流程集成或多代理协作。 不同层级的使用场景拆成三个面向：搭建速度、系统衔接、可控深度。 核心需求推荐工具关键优势MonkeyCode，AI 应用开发平台MonkeyCode 官网直接在平台里创建任务，让 AI 编码，在云端开发环境中使..."/><meta property="og:image:alt" content="编写你的第一个 AI Agent 出处：www.runoob.com/ai-agent/first-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 第一个 AI Agent AI Agent 平台种类繁多，但核心目的相同：让模型从回答问题升级为自动执行任务，有的主打零代码拖拽，有的强调工程化定制，也有专门做流程集成或多代理协作。 不同层级的使用场景拆成三个面向：搭建速度、系统衔接、可控深度。 核心需求推荐工具关键优势MonkeyCode，AI 应用开发平台MonkeyCode 官网直接在平台里创建任务，让 AI 编码，在云端开发环境中使..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/编写你的第一个-ai-agent"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/编写你的第一个-ai-agent"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="编写你的第一个 AI Agent 出处：www.runoob.com/ai-agent/first-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 第一个 AI Agent AI Agent 平台种类繁多，但核心目的相同：让模型从回答问题升级为自动执行任务，有的主打零代码拖拽，有的强调工程化定制，也有专门做流程集成或多代理协作。 不同层级的使用场景拆成三个面向：搭建速度、系统衔接、可控深度。 核心需求推荐工具关键优势MonkeyCode，AI 应用开发平台MonkeyCode 官网直接在平台里创建任务，让 AI 编码，在云端开发环境中使..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/编写你的第一个-ai-agent-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/编写你的第一个-ai-agent-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/编写你的第一个-ai-agent-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/04-主流框架与开发实战/编写你的第一个-ai-agent" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-42" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-42" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/04-主流框架与开发实战/">04-主流框架与开发实战</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>编写你的第一个 AI Agent</a></div></nav><h1 class="article-title">编写你的第一个 AI Agent</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/主流框架与开发实战" class="internal internal-link tag-link">主流框架与开发实战</a><span class="note-properties-separator">, </span><a href="../../../tags/编写你的第一个-ai" class="internal internal-link tag-link">编写你的第一个-ai</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>9分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="编写你的第一个-ai-agent">编写你的第一个 AI Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#编写你的第一个-ai-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/first-ai-agent.html" class="external external-link">https://www.runoob.com/ai-agent/first-ai-agent.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>04-主流框架与开发实战</code></p>
+</blockquote>
+<hr/>
+<h1 id="第一个-ai-agent">第一个 AI Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一个-ai-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>AI Agent 平台种类繁多，但核心目的相同：让模型从回答问题升级为自动执行任务，有的主打零代码拖拽，有的强调工程化定制，也有专门做流程集成或多代理协作。</p>
+<p>不同层级的使用场景拆成三个面向：搭建速度、系统衔接、可控深度。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>核心需求</th><th>推荐工具</th><th>关键优势</th></tr></thead><tbody><tr><td>MonkeyCode，AI 应用开发平台</td><td><a href="https://monkeycode-ai.com/?ic=019d94af-c5d0-7207-a923-89d7ccf67d91" class="external external-link">MonkeyCode 官网<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>直接在平台里创建任务，让 AI 编码，在云端开发环境中使用终端、文件管理和预览</td></tr><tr><td>小云雀，剪映的 AI 视频生成</td><td><a href="https://xyq.jianying.com?utm_medium=paidads&amp;utm_source=aitools&amp;utm_campaign=hw_xyq_runoob" class="external external-link">剪映-小云雀<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>字节自研 Seedance 2.0 视频模型 + Seedream 5.0 图像模型，搭配豆包大模型做文案理解</td></tr><tr><td>自动化触发与系统对接</td><td><a href="https://github.com/n8n-io/n8n" class="external external-link">n8n<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>集成面广，可自托管，常规内部系统都能打通</td></tr><tr><td>开发者可控的深度定制</td><td><a href="https://github.com/langgenius/dify" class="external external-link">Dify<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> / <a href="https://github.com/langchain-ai/langchain" class="external external-link">LangChain<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>前者提供完整开源方案；后者适合构建复杂推理链路</td></tr><tr><td>多角色协作与任务分解</td><td><a href="https://github.com/microsoft/autogen" class="external external-link">AutoGen<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> / <a href="https://github.com/crewAIInc/crewAI" class="external external-link">CrewAI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>前者强调动态协作；后者以清晰角色体系驱动流程</td></tr></tbody></table></div>
+<h2 id="0-代码进行-vibe-coding">0 代码进行 Vibe Coding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#0-代码进行-vibe-coding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>MonkeyCode 不仅是可以进行 Vibe Coding 的 AI 编程工具，它覆盖了 需求 → 设计 → 开发 → Review 全流程，免费使用，无需安装，内置云端开发环境。</p>
+<h3 id="注册与登录">注册与登录<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#注册与登录" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>**首次使用 MonkeyCode，先完成账号注册。</p>
+<pre><code>  点击
+  [进入官网](https://monkeycode-ai.com/?ic=019d94af-c5d0-7207-a923-89d7ccf67d91)
+  ，右上角注册或直接登录，成功后会自动进入主界面开始使用。**
+</code></pre>
+<p>进入页面后，点击右上角 <strong>注册</strong> 创建新账号，已有账号可直接登录使用。</p>
+<p>注册成功后，我们进入控制台，输入我们的需求：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">帮我写一个 JavaScript 小游戏：程序随机生成 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 到 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">100</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 的数字，让我猜，猜大了提示「太大了」，猜小了提示「太小了」，猜中了就结束。</span></span></code></pre></figure>
+<p>点击执行，并选择模型，国内的很多模型都是免费支持的，这里采用 qwen3.8-flash：</p>
+<p>开始任务：</p>
+<p>任务完成后可以查看生成的效果地址：</p>
+<p>查看效果：</p>
+<h3 id="切换不同模型">切换不同模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#切换不同模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>我们也可以切换模型，这样可以比较不同模型生成的效果，<strong>旗舰版还执行 Astra。</strong></p>
+<p>使用不同模型再测试这个应用，左边上角可以切换模型：</p>
+<p>输入以下内容：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">重新优化整个界面</span></span></code></pre></figure>
+<p>修改完成后，访问它生成的链接：</p>
+<p>完整效果，好多了：</p>
+<hr/>
+<h2 id="0-生成应用代码">0 生成应用代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#0-生成应用代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+<p>padding:14px 18px;</p>
+<p>margin:16px 0;</p>
+<p>border:1px solid <a href="../../.././../../tags/cfe8d5" class="tag-link internal internal-link alias" data-slug="tags/cfe8d5">cfe8d5</a>;</p>
+<p>border-radius:12px;</p>
+<p>background:linear-gradient(135deg,#f4fbf6,#eefaf1);</p>
+<p>color:#1f2937;</p>
+<p>font-size:15px;</p>
+<p>line-height:1.8;</p>
+<p>display:flex;</p>
+<p>align-items:flex-start;</p>
+<p>gap:10px;</p>
+<p>”></p>
+<p>&lt;i class=“fa fa-leaf” style=”</p>
+<pre><code>color:#4caf7a;
+font-size:16px;
+margin-top:4px;
+flex-shrink:0;
+</code></pre>
+<p>”></p>
+  <div>
+<pre><code>&lt;strong>
+  我们可以先用最简单的秒哒来生成应用，
+  先访问官网注册
+  &lt;a href=&quot;https://www.miaoda.cn/?invitecode=user-93thly701s00&quot;
+     target=&quot;_blank&quot;
+     style=&quot;
+       color:#2f855a;
+       text-decoration:none;
+       font-weight:700;
+     &quot;>
+    秒哒官网
+  &lt;/a>
+  ，登录后在输入框输入要生成的应用。
+&lt;/strong>
+</code></pre>
+  </div>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/3cbb89ab-9035-49cf-9d37-10d699f56608.png"/></p><p>
+</p><p>接下来秒哒就开始生成一份需求文档，还是很详细的，然后我们可以在右侧点编辑文档或生成应用按钮，它就会根据我们的需求直接开始生成应用：</p><p></p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/a79f912c-ac27-499b-8dcc-5185f8ae4992.png"/></p>
+<p>接下来就会开始生成代码，整个过程，都不用写一行代码，直接生成：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/6871e121-8c71-45b4-9733-c5d1c6bea507.png"/></p>
+<p>看下界面及使用效果，非常好用：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/20559228-55a3-4544-896f-cab55d636178-1.png"/></p>
+<p>另外插件部分还提供了其他高级功能支持，比如视频：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/3c692dbf-a9a1-4ba1-82cb-1eb9bd5f725e.png"/></p>
+<p>如果你还不知道能看啥，还能去应用广场看看其他人做的优秀产品：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/5db9f27d-eaab-4984-a75c-a32f1608aa47.png"/></p>
+<hr/><h2 id="桌面级-agent">桌面级 Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#桌面级-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>DuMate 是百度推出的桌面级 AI 办公智能体,它可以操作文件、读写 Excel、整理数据、生成 PPT、操作浏览器。</p>
+<p>
+</p><p>我们只需用自然语言描述任务，DuMate 就能端到端完成交付。</p><p></p>
+<h3 id="下载与安装">下载与安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#下载与安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>DuMate 支持以下操作系统：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table class="reference"><thead><tr><th>操作系统</th><th>芯片架构</th><th>说明</th></tr></thead><tbody><tr><td>macOS</td><td>Apple Silicon（M 系列芯片）</td><td>原生支持，性能更优</td></tr><tr><td>Windows</td><td>X86</td><td>传统桌面端支持</td></tr></tbody></table></div>
+<p>padding:14px 18px;</p>
+<p>margin:16px 0;</p>
+<p>border:1px solid <a href="../../.././../../tags/cfe8d5" class="tag-link internal internal-link alias" data-slug="tags/cfe8d5">cfe8d5</a>;</p>
+<p>border-radius:12px;</p>
+<p>background:linear-gradient(135deg,#f4fbf6,#eefaf1);</p>
+<p>color:#1f2937;</p>
+<p>font-size:15px;</p>
+<p>line-height:1.8;</p>
+<p>display:flex;</p>
+<p>align-items:flex-start;</p>
+<p>gap:10px;</p>
+<p>”></p>
+<p>&lt;i class=“fa fa-leaf” style=”</p>
+<pre><code>color:#4caf7a;
+font-size:16px;
+margin-top:4px;
+flex-shrink:0;
+</code></pre>
+<p>”></p>
+  <div>
+<pre><code>&lt;strong>
+  我们先点击访问
+  &lt;a href=&quot;https://www.dumate.cn/?track=aiwebsite_3&quot;
+     target=&quot;_blank&quot;
+     style=&quot;
+       color:#2f855a;
+       text-decoration:none;
+       font-weight:700;
+     &quot;>
+    DuMate 官网
+  &lt;/a>
+  注册 DuMate 账号，
+&lt;/strong>
+  会下载对应系统的安装包。
+</code></pre>
+  </div>
+
+<p>双击安装包，按照引导完成安装。</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2026/05/runoob_1779694866991.png"/></p>
+<p>h3>登录账号</p>
+<p>DuMate 支持以下账号登录方式：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table class="reference"><thead><tr><th>登录方式</th><th>说明</th></tr></thead><tbody><tr><td>百度账号</td><td>使用已有的百度账号直接登录</td></tr><tr><td>百度智能云账号</td><td>使用百度智能云账号登录，适合企业用户</td></tr><tr><td>手机号注册</td><td>未注册用户支持手机号一键注册后登录</td></tr></tbody></table></div>
+<h3 id="新建任务">新建任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#新建任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>点击左侧栏顶部「新任务」按钮，即可进入对话主界面。</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob1_8522f39.png"/></p>
+<h3 id="新建任务-1">新建任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#新建任务-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>可通过「设置工作区」划定专属文件夹，作为 DuMate 独立运行目录，工作区遵循最小权限机制，仅开放AI任务必要访问范围；授权目录内程序拥有完整操作权限，具体包含：</p>
+<ul>
+<pre><code>&lt;li>读取：查阅全部文件内容&lt;/li>
+&lt;li>编辑：改动已有文件&lt;/li>
+&lt;li>创建：新增文件与文件夹&lt;/li>
+&lt;li>删除：可执行文件删除操作，操作前会弹窗二次确认&lt;/li>
+</code></pre>
+</ul>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob2_8522f39.png"/></p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob3_8522f39.png"/></p>
+<h3 id="操作流程">操作流程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#操作流程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="创建任务">创建任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>在对话输入框填写任务内容，回车发送即可发起任务，如需关联本地文件，点击输入框旁「+」按钮选取目标文件。<br/>平台兼容主流格式，支持Word、PPT、Excel、TXT、Markdown、图片、视频、压缩包等文件处理。</p><p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob4_8522f39.png"/></p>
+<h4 id="右侧功能栏说明">右侧功能栏说明<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#右侧功能栏说明" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<pre><code>&lt;li>&lt;strong>任务进程&lt;/strong>：复杂多步骤任务会自动生成执行清单，可实时查看待办事项与运行状态&lt;/li>
+&lt;li>&lt;strong>任务文件&lt;/strong>：展示任务中途文件及最终产出，部分格式支持在线预览，也可调用本地程序打开查看&lt;/li>
+&lt;li>&lt;strong>调用能力&lt;/strong>：包含工具连接器Connectors与功能技能Skills两类，分别对应运行调用工具与实操技能&lt;/li>
+</code></pre>
+</ul><p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob5_8522f39.png"/></p>
+<h4 id="任务终止与增补">任务终止与增补<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#任务终止与增补" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>任务运行中，点击输入框右下角停止按键即可中止进程。<br/>直接输入新需求并发送，系统会自动结束当前任务，切换执行新增指令。</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob6_8522f39.png"/></p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob7_8522f39.png"/></p>
+<h4 id="任务删除">任务删除<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#任务删除" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>在左侧对话列表右键选中对应任务，便可完成删除操作。</p><p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob8_8522f39.png"/></p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/runoob9_8522f39.png"/></p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-42" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#编写你的第一个-ai-agent" data-for="编写你的第一个-ai-agent">编写你的第一个 AI Agent</a></li><li class="depth-0"><a href="#第一个-ai-agent" data-for="第一个-ai-agent">第一个 AI Agent</a></li><li class="depth-1"><a href="#0-代码进行-vibe-coding" data-for="0-代码进行-vibe-coding">0 代码进行 Vibe Coding</a></li><li class="depth-2"><a href="#注册与登录" data-for="注册与登录">注册与登录</a></li><li class="depth-2"><a href="#切换不同模型" data-for="切换不同模型">切换不同模型</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

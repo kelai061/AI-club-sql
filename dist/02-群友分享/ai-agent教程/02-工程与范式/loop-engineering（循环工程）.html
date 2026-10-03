@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Loop Engineering（循环工程）</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="Loop Engineering（循环工程）"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Loop Engineering（循环工程）"/><meta name="twitter:description" content="Loop Engineering（循环工程） 出处：www.runoob.com/ai-agent/loop-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Loop Engineering（循环工程） Loop Engineering（循环工程）是 2026 年 6 月在 AI 编程社区迅速传播的一个新概念，由 Google 工程师 Addy Osmani 系统整理，Anthropic Claude Code 负责人 Boris Cherny 和开发者 Peter Steinberger 分别在公开场合提出了相同的观点。 本文将带你从零..."/><meta property="og:description" content="Loop Engineering（循环工程） 出处：www.runoob.com/ai-agent/loop-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Loop Engineering（循环工程） Loop Engineering（循环工程）是 2026 年 6 月在 AI 编程社区迅速传播的一个新概念，由 Google 工程师 Addy Osmani 系统整理，Anthropic Claude Code 负责人 Boris Cherny 和开发者 Peter Steinberger 分别在公开场合提出了相同的观点。 本文将带你从零..."/><meta property="og:image:alt" content="Loop Engineering（循环工程） 出处：www.runoob.com/ai-agent/loop-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Loop Engineering（循环工程） Loop Engineering（循环工程）是 2026 年 6 月在 AI 编程社区迅速传播的一个新概念，由 Google 工程师 Addy Osmani 系统整理，Anthropic Claude Code 负责人 Boris Cherny 和开发者 Peter Steinberger 分别在公开场合提出了相同的观点。 本文将带你从零..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/loop-engineering（循环工程）"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/loop-engineering（循环工程）"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="Loop Engineering（循环工程） 出处：www.runoob.com/ai-agent/loop-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Loop Engineering（循环工程） Loop Engineering（循环工程）是 2026 年 6 月在 AI 编程社区迅速传播的一个新概念，由 Google 工程师 Addy Osmani 系统整理，Anthropic Claude Code 负责人 Boris Cherny 和开发者 Peter Steinberger 分别在公开场合提出了相同的观点。 本文将带你从零..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/loop-engineering（循环工程）-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/loop-engineering（循环工程）-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/loop-engineering（循环工程）-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/02-工程与范式/loop-engineering（循环工程）" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-12" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-12" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/02-工程与范式/">02-工程与范式</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Loop Engineering（循环工程）</a></div></nav><h1 class="article-title">Loop Engineering（循环工程）</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/工程与范式" class="internal internal-link tag-link">工程与范式</a><span class="note-properties-separator">, </span><a href="../../../tags/loop-engin" class="internal internal-link tag-link">loop-engin</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>29分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="loop-engineering循环工程">Loop Engineering（循环工程）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#loop-engineering循环工程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/loop-engineering.html" class="external external-link">https://www.runoob.com/ai-agent/loop-engineering.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>02-工程与范式</code></p>
+</blockquote>
+<hr/>
+<h1 id="loop-engineering循环工程-1">Loop Engineering（循环工程）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#loop-engineering循环工程-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Loop Engineering（循环工程）是 2026 年 6 月在 AI 编程社区迅速传播的一个新概念，由 Google 工程师 Addy Osmani 系统整理，Anthropic Claude Code 负责人 Boris Cherny 和开发者 Peter Steinberger 分别在公开场合提出了相同的观点。</p>
+<p>本文将带你从零理解什么是 Loop Engineering、它与 Prompt Engineering 的本质区别、构成一个完整 Agent Loop 的六大要素，以及如何设计自己的第一个可运行的 Loop。</p>
+<h3 id="ai-工程的演进过程">AI 工程的演进过程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ai-工程的演进过程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>过去两年，AI 开发的重点正在不断变化：从研究如何写好提示词（Prompt），逐步发展到组织上下文（Context）、编排工具与流程（Harness），再到构建能够自主运行、持续交付结果的循环系统（Loop）。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Prompt：怎么问 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">↓
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Context：给 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 什么信息
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">↓
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Harness：如何组织 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 的能力
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">↓
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Loop：如何让 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 持续创造结果</span></span></code></pre></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>工程阶段</th><th>核心思想</th><th>关注点</th><th>输入内容</th><th>AI 能力</th><th>人的角色</th><th>典型场景</th></tr></thead><tbody><tr><td>Prompt Engineering（提示词工程）</td><td>通过设计提示词获得更好的输出</td><td>怎么问问题</td><td>Prompt / 指令</td><td>单轮生成</td><td>提问者</td><td>聊天、写作、代码生成</td></tr><tr><td>Context Engineering（上下文工程）</td><td>组织并提供完整背景信息</td><td>给 AI 什么信息</td><td>知识库、历史记录、约束条件、上下文</td><td>上下文理解</td><td>信息组织者</td><td>RAG、AI 搜索、代码助手</td></tr><tr><td>Harness Engineering（编排工程）</td><td>连接模型、工具、数据形成工作流</td><td>如何调用能力</td><td>上下文 + API + 工具链</td><td>执行任务</td><td>系统设计者</td><td>Agent、自动化流程、多工具协同</td></tr><tr><td>Loop Engineering（循环工程）</td><td>构建目标驱动的自主闭环系统</td><td>如何持续完成目标</td><td>目标、状态、记忆、验证机制</td><td>规划 → 执行 → 验证 → 修复 → 持续运行</td><td>规则制定者</td><td>Claude Code、AI 编程、自动运营、AI 员工</td></tr></tbody></table></div>
+<h2 id="loop-engineering-的起源">Loop Engineering 的起源<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#loop-engineering-的起源" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Loop Engineering 的出现有一个清晰的时间节点：2026 年 6 月。</p>
+<h3 id="引爆点两句话百万次转发">引爆点：两句话，百万次转发<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#引爆点两句话百万次转发" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>2026 年 6 月初，Anthropic Claude Code 负责人 <strong>Boris Cherny</strong> 在一次公开演讲中说道：</p>
+<blockquote>
+<p>“I don’t prompt Claude anymore. I have loops running. They’re the ones prompting Claude and figuring out what to do. My job is to write loops.”（我不再直接提示 Claude 了。我有一套 Loop 在运行，它们负责提示 Claude 并决定下一步做什么。我的工作是编写 Loop。）</p>
+</blockquote>
+<p>几天后，2026 年 6 月 7 日，开发者 <strong>Peter Steinberger</strong>——开源 AI Agent 项目 OpenClaw（GitHub 历史上获星最快的新仓库）的创作者——发了一条十二个字的推文：</p>
+<blockquote>
+<p>“You shouldn’t be prompting coding agents anymore. You should be designing loops that prompt your agents.”（你不应该再手动提示 AI 编程助手了。你应该设计让 Agent 自己提示自己的 Loop。）</p>
+</blockquote>
+<ul>
+<li><strong>Prompt Engineering</strong> 是「教 AI 怎么做」</li>
+<li><strong>Loop Engineering</strong> 是「设计一个系统，让 AI 自己持续做」</li>
+</ul>
+<p>这两句话在 AI 开发者社区引发了巨大的讨论，因为它们精准地描述了一种很多人已经感受到但尚未命名的趋势：<strong>提示词写得好不好，已经不是瓶颈了；瓶颈在于你为 Agent 设计的整套运行系统</strong>。</p>
+<p>随后，Addy Osmani 在 Substack 发表了长文，将这一实践正式命名并系统化为 Loop Engineering，使其成为独立的工程学科。</p>
+<h3 id="背景ai-编程工具的三代演进">背景：AI 编程工具的三代演进<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#背景ai-编程工具的三代演进" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Loop Engineering 并非凭空而来，它是 AI 编程工具能力演进的自然结果。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>阶段</th><th>代表工具</th><th>工作方式</th><th>瓶颈</th></tr></thead><tbody><tr><td>第一代：自动补全</td><td>GitHub Copilot 早期版本</td><td>补全当前行或函数，人类主导所有决策</td><td>只能辅助，不能自主</td></tr><tr><td>第二代：对话式</td><td>ChatGPT、Claude.ai</td><td>问一句，答一句，人类手动推进每一步</td><td>人类成为瓶颈，速度受限于打字速度</td></tr><tr><td>第三代：Agent 自主循环</td><td>Claude Code、OpenAI Codex Agent</td><td>Agent 自主规划、执行、验证，循环迭代直到完成</td><td>如何设计让 Loop 可靠运行的系统</td></tr></tbody></table></div>
+<p>第三代工具的出现意味着，工程师的核心竞争力从会写提示词变成了会设计 Loop。</p>
+<h2 id="什么是-loop-engineering">什么是 Loop Engineering<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么是-loop-engineering" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Loop Engineering 是设计、运营和持续改进反馈循环的工程实践，这些循环使 AI 编程 Agent 能够自主完成规划、执行代码修改、观察结果并在多轮迭代中完成任务。</p>
+<p>用一句话概括：</p>
+<blockquote>
+<p><strong>Loop Engineering 是把你从”提示 Agent 的人”变成”设计提示 Agent 的系统”的工程师。</strong></p>
+</blockquote>
+<h3 id="什么是-loop循环">什么是 Loop（循环）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么是-loop循环" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>一个 Loop 是一个递归目标系统：你定义一个目的，Agent 不断迭代，直到工作真正完成。</p>
+<p>每个 Agent 在执行任务时已经内置了一个”内循环”：感知（Perceive）→ 推理（Reason）→ 行动（Act）→ 观察（Observe），然后再次循环。</p>
+<p>Loop Engineering 工作在这个内循环的<strong>上一层</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>层级</th><th>谁在驱动</th><th>做什么</th></tr></thead><tbody><tr><td>内循环（Agent 内置）</td><td>Agent 自身</td><td>读文件 → 修改代码 → 运行测试 → 读错误 → 再修改</td></tr><tr><td>外循环（你来设计）</td><td>你设计的系统</td><td>按计划发现任务 → 分派 Agent → 验证结果 → 记录状态 → 开启下一轮</td></tr></tbody></table></div>
+<p>你不再坐在 Agent 旁边，为每一步打下一条指令。你在设计一套外部系统，它替你驾驶内循环，而你去做更有判断价值的事。</p>
+<h3 id="loop-engineering-与-prompt-engineering-的区别">Loop Engineering 与 Prompt Engineering 的区别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#loop-engineering-与-prompt-engineering-的区别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>Prompt Engineering</th><th>Loop Engineering</th></tr></thead><tbody><tr><td>优化对象</td><td>你手写的单条指令</td><td>自动决定”提示什么、什么时候提示、结果是否可接受”的整套系统</td></tr><tr><td>工作单位</td><td>一次你手动输入的对话轮次</td><td>跨越多轮次、自动运行的完整工作流</td></tr><tr><td>成功衡量</td><td>第一个回复的质量</td><td>最终输出的结果质量</td></tr><tr><td>失败模式</td><td>模型给出了一个差劲的回答</td><td>系统的 Loop 设计不良：循环太早停止、忽视错误信号、无法验证完成</td></tr><tr><td>对 Agent 的视角</td><td>你手持的工具</td><td>你调度的长期运行进程</td></tr></tbody></table></div>
+<blockquote>
+<p>Prompt Engineering 并没有消亡。一个 Loop 是由多个 Prompt 组成的，写得差的 Prompt 放进 Loop 里只会让糟糕的工作以更快的速度产出。Loop Engineering 是在 Prompt Engineering 之上的层次，而不是替代它。</p>
+</blockquote>
+<p>三个层次的完整技术栈：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>层次</th><th>优化的是什么</th><th>工作单位</th></tr></thead><tbody><tr><td>Prompt Engineering</td><td>如何措辞一条指令</td><td>你手动输入的一次对话</td></tr><tr><td>Context Engineering</td><td>放什么内容进上下文窗口：文档、历史、工具定义</td><td>围绕一次回答的环境条件</td></tr><tr><td>Loop Engineering</td><td>决定提示什么、何时提示、结果是否可接受的自运行系统</td><td>跨越多个内循环的自动工作流</td></tr></tbody></table></div>
+<h2 id="loop-的核心循环">Loop 的核心循环<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#loop-的核心循环" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>一个 Agent Loop 的基础结构由五个阶段构成，它们首尾相连，不断迭代。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>阶段</th><th>英文名</th><th>做什么</th><th>典型信号来源</th></tr></thead><tbody><tr><td>意图</td><td>Intent</td><td>定义目标结果：成功是什么样子，约束是什么</td><td>开发者或外部系统（Issue、CI 报告）</td></tr><tr><td>上下文</td><td>Context</td><td>收集相关代码、文档、报错日志、约定规范</td><td>代码库、测试输出、历史对话</td></tr><tr><td>行动</td><td>Action</td><td>编辑文件、运行命令、调用工具、草拟方案</td><td>Agent 自主执行</td></tr><tr><td>观察</td><td>Observation</td><td>获取测试结果、编译错误、运行时输出、代码 Diff</td><td>测试框架、类型检查、CI、人工 Review</td></tr><tr><td>调整</td><td>Adjustment</td><td>根据观察更新计划，重复循环直到任务完成或被阻塞</td><td>下一轮内循环</td></tr></tbody></table></div>
+<blockquote>
+<p>Loop 的力量不在于任何单独的步骤，而在于<strong>闭环</strong>。测试失败不只是一条错误消息，它是新的上下文；类型错误不只是阻断，它是一个关于错误假设的信号；Code Review 评论不只是反馈，它是驱动下一步行动的新观察。</p>
+</blockquote>
+<h2 id="六大构成要素">六大构成要素<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#六大构成要素" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>一个能够真正独立运行的 Loop 需要五个核心组件，加上一个贯穿始终的记忆系统，缺一不可。</p>
+<h3 id="要素一自动触发器automations">要素一：自动触发器（Automations）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#要素一自动触发器automations" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>自动触发器是 Loop 的心跳。没有自动触发，Loop 就只是”你做了一次的操作”，而不是真正意义上的循环。</p>
+<p>触发器定义了：<strong>什么时候？做什么？</strong></p>
+<p>在 Claude Code 中，使用 <code>/loop</code> 命令创建定时触发的 Loop：</p>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="每天工作日早上-9-点运行读取前一天的-ci-失败和-issue">每天工作日早上 9 点运行：读取前一天的 CI 失败和 Issue，<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#每天工作日早上-9-点运行读取前一天的-ci-失败和-issue" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="将发现写入-todomd并为标记为-quick-win-的问题起草修复方案">将发现写入 TODO.md，并为标记为 quick-win 的问题起草修复方案<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#将发现写入-todomd并为标记为-quick-win-的问题起草修复方案" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>/loop “Read yesterday’s CI failures and open issues, write findings <br/>
+      to TODO.md, and draft fixes for anything labeled quick-win” <br/>
+       —schedule “0 9 * * 1-5”</p>
+<h1 id="goal运行直到一个可验证的条件成立">/goal：运行直到一个可验证的条件成立<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#goal运行直到一个可验证的条件成立" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="下面的命令会持续执行直到认证模块的所有测试通过且-lint-干净">下面的命令会持续执行，直到认证模块的所有测试通过且 lint 干净<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#下面的命令会持续执行直到认证模块的所有测试通过且-lint-干净" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>/goal “All tests in test/auth pass and lint is clean”</p>
+<p>在 OpenAI Codex 中，Automations 有专属的 UI 面板，你可以设置项目、Prompt、节奏（cadence），以及是在本地检出还是后台 Worktree 中运行。发现内容的运行会进入 Triage 收件箱，未发现内容的会自动归档。</p>
+<blockquote>
+<p>**Token 成本警告：**带验证子 Agent 的定时 Loop 每次触发都会消耗 Token，且消耗量因任务复杂度变化显著。建议先设置较慢的节奏（如每天一次），观察几天成本后再加快频率。</p>
+</blockquote>
+<h3 id="要素二并行隔离worktrees">要素二：并行隔离（Worktrees）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#要素二并行隔离worktrees" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当你同时运行多个 Agent 时，文件冲突是最容易出问题的地方。两个 Agent 同时写同一个文件，就像两个工程师同时提交到同一行代码，结果是灾难性的。</p>
+<p>Git Worktree 是解决方案：为每个 Agent 提供独立的工作目录，各自在独立的分支上操作，共享同一个 Git 历史，但文件改动完全隔离。</p>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="手动创建-worktreeclaude-code-和-codex-都支持自动管理">手动创建 worktree（Claude Code 和 Codex 都支持自动管理）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#手动创建-worktreeclaude-code-和-codex-都支持自动管理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>git worktree add ../agent-fix-auth feature/fix-auth-tests
+git worktree add ../agent-upgrade-deps feature/upgrade-axios</p>
+<h1 id="在-claude-code-中为子-agent-配置-worktree-隔离">在 Claude Code 中，为子 Agent 配置 worktree 隔离<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#在-claude-code-中为子-agent-配置-worktree-隔离" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="在-claudeagentsreviewermd-的-frontmatter-中添加">在 .claude/agents/reviewer.md 的 frontmatter 中添加：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#在-claudeagentsreviewermd-的-frontmatter-中添加" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="isolation-worktree---每个-agent-获得独立的检出完成后自动清理">isolation: worktree   → 每个 Agent 获得独立的检出，完成后自动清理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#isolation-worktree---每个-agent-获得独立的检出完成后自动清理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p>Worktree 消除了机械性的文件冲突，但不能消除<strong>审查瓶颈</strong>。你处理和批准代码变更的速度，才是决定你能并行运行多少个 Agent 的真正上限，而不是工具能开多少个 Worktree。</p>
+</blockquote>
+<h3 id="要素三技能文件skills">要素三：技能文件（Skills）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#要素三技能文件skills" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Skills（技能文件）解决的是一个每次都在浪费的成本：<strong>每次新对话，Agent 都要从零推断你的项目规范</strong>。</p>
+<p>Skill 是一个包含 <code>SKILL.md</code> 文件的文件夹，写明了项目约定、构建步骤、“我们不这样做是因为那次事故”等知识。Agent 在每次会话开始时加载 Skill，而不是每次都重新猜测。</p>
+<h2 id="实例-2">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+<hr/>
+<h2 id="name-project-conventionsdescription-项目编码规范和构建步骤凡是涉及代码修改的任务都应加载此技能">name: project-conventions
+description: 项目编码规范和构建步骤。凡是涉及代码修改的任务都应加载此技能。<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#name-project-conventionsdescription-项目编码规范和构建步骤凡是涉及代码修改的任务都应加载此技能" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h2 id="技术栈">技术栈<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#技术栈" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>后端：Node.js 20 + TypeScript 5.4 + Fastify</li>
+<li>数据库：PostgreSQL 16，ORM 使用 Drizzle</li>
+<li>测试：Vitest，测试文件放在 src/ 同级的 <strong>tests</strong>/ 下</li>
+</ul>
+<h2 id="构建命令">构建命令<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#构建命令" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>安装依赖：pnpm install</li>
+<li>运行测试：pnpm test</li>
+<li>类型检查：pnpm typecheck</li>
+<li>构建产物：pnpm build</li>
+</ul>
+<h2 id="核心约定">核心约定<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心约定" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>所有数据库查询必须经过 src/db/queries/ 中的封装函数，禁止在业务层直接写 SQL</li>
+<li>错误统一使用 AppError 类（src/errors/AppError.ts），禁止 throw 裸字符串</li>
+<li>API 路由文件命名：{resource}.routes.ts，放在 src/routes/</li>
+<li>新增 API 必须同时更新 docs/api.md</li>
+</ul>
+<h2 id="禁止事项">禁止事项<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#禁止事项" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>不得直接修改 migrations/ 目录下的历史迁移文件</li>
+<li>不得在 .env 文件中提交真实密钥，使用 .env.example 占位</li>
+</ul>
+<h3 id="要素四连接器connectors--mcp">要素四：连接器（Connectors / MCP）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#要素四连接器connectors--mcp" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>一个只能看到本地文件系统的 Loop 能做的事情非常有限。连接器（基于 MCP——模型上下文协议）让 Agent 能够读取 Issue 追踪、查询数据库、调用 API、在 Slack 发消息。</p>
+<p>这是”Agent 说’这里是修复方案‘“和”Loop 自动开 PR、关联 Ticket、CI 通过后通知频道”之间的核心差异。</p>
+<p>Claude Code 和 OpenAI Codex 均原生支持 MCP 协议，为一个工具编写的连接器通常可以在两者中通用。</p>
+<h2 id="实例在-claude-code-中配置-mcp-连接器">实例：在 Claude Code 中配置 MCP 连接器<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例在-claude-code-中配置-mcp-连接器" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>// 文件路径：.claude/mcp.json
+// 配置 MCP 连接器，让 Agent 可以操作 GitHub 和发送 Slack 通知
+{
+  “connectors”: [
+    {
+      “name”: “github”,
+      “command”: “npx”,
+      “args”: [“-y”, “@modelcontextprotocol/server-github”],
+      “env”: {
+        “GITHUB_TOKEN”: “<span class="katex-error" title="ParseError: KaTeX parse error: Expected 'EOF', got '}' at position 24: …TOKEN}&quot;
+      }̲
+    },
+    {…" style="color:#cc0000;">{GITHUB_TOKEN}&quot;
+      }
+    },
+    {
+      &quot;name&quot;: &quot;slack&quot;,
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-slack&quot;],
+      &quot;env&quot;: {
+        &quot;SLACK_BOT_TOKEN&quot;: &quot;</span>{SLACK_BOT_TOKEN}”
+      }
+    }
+  ]
+}</p>
+<blockquote>
+<p>给 Agent 接入连接器意味着它可以在真实环境中采取真实行动。必须为每个连接器配置最小权限，高风险操作（推送代码、合并 PR、发送外部通知）应当要求人工审批，不能全自动执行。</p>
+</blockquote>
+<h3 id="要素五子-agentsub-agents">要素五：子 Agent（Sub-Agents）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#要素五子-agentsub-agents" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Loop 中最重要的架构决策之一：<strong>把写代码的 Agent 和检查代码的 Agent 分开</strong>。</p>
+<p>写了代码的模型在评分自己的作业时会过于宽容。一个有不同指令的独立检查器——有时还使用不同的模型——能够抓住第一个 Agent 自圆其说忽略的问题。</p>
+<p>这种”制作者-检查者”（Maker-Checker）模式也被应用到了 Loop 的停止条件上：Claude Code 的 <code>/goal</code> 命令在每次迭代后，会用一个单独的模型来判断是否”完成”，而不是让做了工作的那个模型来判断。</p>
+<h2 id="实例定义检查者子-agent">实例：定义检查者子 Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例定义检查者子-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+<hr/>
+<h2 id="name-spec-reviewerdescription-对完成的代码变更进行对抗性审查验证其符合规范和测试要求model-opus-------使用更强的模型作为验证者isolation-worktree---独立检出避免污染制作者的工作区">name: spec-reviewer
+description: 对完成的代码变更进行对抗性审查，验证其符合规范和测试要求。
+model: opus            # 使用更强的模型作为验证者
+isolation: worktree    # 独立检出，避免污染制作者的工作区<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#name-spec-reviewerdescription-对完成的代码变更进行对抗性审查验证其符合规范和测试要求model-opus-------使用更强的模型作为验证者isolation-worktree---独立检出避免污染制作者的工作区" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>你是一个对抗性代码审查员。你的工作不是认可，而是质疑。</p>
+<p>收到一个 diff 后，你需要：</p>
+<ol>
+<li>运行完整测试套件（pnpm test），记录失败项</li>
+<li>运行类型检查（pnpm typecheck）</li>
+<li>对照 SKILL.md 中的项目规范检查 diff</li>
+<li>验证用户可见的行为变化是否符合原始需求</li>
+</ol>
+<p>只有当所有测试通过、类型检查干净、规范无违反时，才输出 APPROVED。
+否则输出具体的拒绝理由，不要给出模糊评价。</p>
+<h3 id="要素六持久记忆memory">要素六：持久记忆（Memory）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#要素六持久记忆memory" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>记忆是所有能跨对话持续运行的 Loop 的核心支柱。</p>
+<p>模型在每次对话之间会完全遗忘。如果没有外部记忆，每次 Loop 触发时 Agent 都从零开始，不知道昨天做了什么、哪些修复已经合并、哪些任务还在开放。</p>
+<p>解决方案极其简单：<strong>把状态写在文件里，文件放在仓库里</strong>。仓库记得，即使模型不记得。</p>
+<h2 id="实例loop-状态文件">实例：Loop 状态文件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例loop-状态文件" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+<h1 id="loop-任务状态">Loop 任务状态<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#loop-任务状态" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>最后更新：2026-06-14 09:03 UTC（由自动 Loop 更新）</p>
+<h2 id="进行中">进行中<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#进行中" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul class="contains-task-list">
+<li class="task-list-item" data-task=" "><input type="checkbox" class="checkbox-toggle"/> test/auth/login.spec.ts 中的 flaky test（CI Run #4821，失败 3 次）
+  - 假设：并发测试之间的 session 状态泄漏
+  - 已尝试：隔离 test 数据库连接 → 无效
+  - 下一步：检查 beforeEach 中的 cleanup 逻辑</li>
+</ul>
+<h2 id="待处理">待处理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#待处理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul class="contains-task-list">
+<li class="task-list-item" data-task=" "><input type="checkbox" class="checkbox-toggle"/> 将 axios 升级到 1.7.x（安全漏洞 CVE-2026-xxxxx）</li>
+<li class="task-list-item" data-task=" "><input type="checkbox" class="checkbox-toggle"/> API 文档更新（PR #308 合并后落后于代码）</li>
+</ul>
+<h2 id="已完成">已完成<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#已完成" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul class="contains-task-list">
+<li class="task-list-item is-checked" data-task="x"><input type="checkbox" checked class="checkbox-toggle"/> 修复 billing 模块中含单引号公司名称导致的 500 错误（PR #312，已合并）</li>
+<li class="task-list-item is-checked" data-task="x"><input type="checkbox" checked class="checkbox-toggle"/> 将 Node.js 版本升级到 20.x（PR #307，已合并）</li>
+</ul>
+<h2 id="五种常见-loop-模式">五种常见 Loop 模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#五种常见-loop-模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>不同类型的工作任务需要不同的反馈信号和停止条件，因此发展出了几种经典的 Loop 模式。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>模式</th><th>核心观察信号</th><th>停止条件</th><th>典型场景</th></tr></thead><tbody><tr><td>测试驱动 Loop</td><td>测试通过 / 失败</td><td>目标测试全部通过</td><td>Bug 修复、回归测试、数据转换逻辑</td></tr><tr><td>编译器驱动 Loop</td><td>类型错误、编译错误列表</td><td>类型检查零错误</td><td>TypeScript 迁移、依赖升级、重构</td></tr><tr><td>Review 驱动 Loop</td><td>人工 Review 评论</td><td>所有评论被处理或有据可查地忽略</td><td>PR Review 的机械性跟进</td></tr><tr><td>运行时调试 Loop</td><td>日志、堆栈跟踪、HTTP 响应</td><td>问题可复现 → 提出假设 → 验证修复</td><td>生产 Bug、性能问题、接口异常</td></tr><tr><td>产品迭代 Loop</td><td>截图、浏览器检查、可访问性报告</td><td>与设计稿对齐、响应式正常、规范无违反</td><td>落地页、UI 调整、营销组件</td></tr></tbody></table></div>
+<h2 id="构建你的第一个-loop">构建你的第一个 Loop<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#构建你的第一个-loop" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>不要一开始就尝试构建一个全自动、多 Agent、自动合并 PR 的复杂 Loop。从最小可用的 Loop 开始，理解它的行为后再逐步扩展。</p>
+<h3 id="第一步从一个窄任务开始">第一步：从一个窄任务开始<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步从一个窄任务开始" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>任务越窄，Agent 越清楚哪些文件重要、哪些验证信号相关。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>不好的任务定义</th><th>好的任务定义</th></tr></thead><tbody><tr><td>”优化仪表盘性能&quot;</td><td>&quot;将仪表盘首次加载时间减少 30%，方法是推迟非关键图表加载，同时保持现有过滤器正常工作&quot;</td></tr><tr><td>&quot;修复 checkout 问题&quot;</td><td>&quot;修复 test/checkout/tax.spec.ts 中失败的税额计算测试&quot;</td></tr><tr><td>&quot;改进设置页面&quot;</td><td>&quot;修复账户删除按钮在移动端（375px 宽度）被截断的布局问题”</td></tr></tbody></table></div>
+<h3 id="第二步明确告知验证方式">第二步：明确告知验证方式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步明确告知验证方式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Loop 需要知道”完成”意味着什么。如果你知道验证命令，把它直接写进指令。</p>
+<h2 id="实例带验证条件的-loop-指令">实例：带验证条件的 Loop 指令<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例带验证条件的-loop-指令" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="差没有验证条件agent-不知道何时停止">差：没有验证条件，Agent 不知道何时停止<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#差没有验证条件agent-不知道何时停止" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>/goal “Fix the auth bug”</p>
+<h1 id="好有具体的验证命令和成功标准">好：有具体的验证命令和成功标准<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#好有具体的验证命令和成功标准" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>/goal “Fix the session leak causing flaky tests in test/auth/login.spec.ts.
+       Success condition: run ‘pnpm test test/auth/login.spec.ts’ 5 times
+       consecutively with zero failures. Do not touch other test files.”</p>
+<h3 id="第三步设置保险机制">第三步：设置保险机制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步设置保险机制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在 Loop 能够自动开 PR 之前，先让它只写文件、不做任何外部操作，你来审查 diff 再决定是否提交。</p>
+<h2 id="实例每日-ci-故障分类-loop最小安全版本">实例：每日 CI 故障分类 Loop（最小安全版本）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例每日-ci-故障分类-loop最小安全版本" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="这是推荐的第一个-loop">这是推荐的第一个 Loop：<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#这是推荐的第一个-loop" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="--只读操作读-ci-日志读-issues">- 只读操作（读 CI 日志、读 Issues）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#--只读操作读-ci-日志读-issues" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="--只写-todomd不触碰其他文件">- 只写 TODO.md（不触碰其他文件）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#--只写-todomd不触碰其他文件" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="--不开-pr不合并代码">- 不开 PR、不合并代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#--不开-pr不合并代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="--你每天早上看一眼-todomd手动决定下一步">- 你每天早上看一眼 TODO.md，手动决定下一步<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#--你每天早上看一眼-todomd手动决定下一步" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>/loop “Read yesterday’s CI failure logs and GitHub Issues labeled ‘bug’.
+       Categorize findings by likely cause.
+       Write a summary with prioritized action items to TODO.md.
+       Do NOT edit any source files. Do NOT open any PRs.” <br/>
+       —schedule “0 8 * * 1-5”</p>
+<blockquote>
+<p>这个最小版本的 Loop 已经很有价值：它每天早上帮你整理好昨天的问题清单，你到公司打开 TODO.md 就能知道今天该做什么，而不是花半小时翻 CI 日志。这是理解 Loop 行为的最好起点，风险几乎为零。</p>
+</blockquote>
+<h3 id="第四步逐步提升自主程度">第四步：逐步提升自主程度<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第四步逐步提升自主程度" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>阶段</th><th>Loop 能做的事</th><th>人类做的事</th></tr></thead><tbody><tr><td>阶段 1（只读）</td><td>发现问题、分类任务、写状态文件</td><td>审查 TODO.md，手动决定处理顺序</td></tr><tr><td>阶段 2（草稿）</td><td>起草修复方案、运行测试、写入分支</td><td>审查 diff，手动执行 git push</td></tr><tr><td>阶段 3（半自动）</td><td>开 Draft PR，运行 CI，通知 Slack</td><td>审查 PR，手动点击 Merge</td></tr><tr><td>阶段 4（全自动）</td><td>制作者 + 检查者双 Agent，CI 通过后自动合并</td><td>异常时人工介入，定期审计合并历史</td></tr></tbody></table></div>
+<h2 id="loop-engineering-的三大风险">Loop Engineering 的三大风险<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#loop-engineering-的三大风险" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Loop 改变了工作方式，但不会消除工程师的责任。有三个问题会随着 Loop 变好而变得更严峻，而不是更容易。</p>
+<h3 id="风险一验证仍然是你的责任">风险一：验证仍然是你的责任<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#风险一验证仍然是你的责任" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>无人值守运行的 Loop，也是无人值守地制造错误的 Loop。设置检查者子 Agent 是降低风险的好方法，但”通过了验证”是一个声明，不是证明。</p>
+<p>无论 Loop 多么可靠，对合并代码的人工审查都不能消失。</p>
+<h3 id="风险二理解债comprehension-debt积累更快">风险二：理解债（Comprehension Debt）积累更快<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#风险二理解债comprehension-debt积累更快" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Loop 产出代码的速度越快，你实际理解的代码比例就越低。这不是 AI 编程才有的问题，但 Loop 把它加速了。</p>
+<p>唯一的解药是：<strong>读 Loop 产出的代码</strong>。不要因为 Loop 运行顺畅就停止理解它在做什么。</p>
+<h3 id="风险三认知投降cognitive-surrender">风险三：认知投降（Cognitive Surrender）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#风险三认知投降cognitive-surrender" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当 Loop 自动运转时，接受它返回的任何结果是最舒适的选择。这是 Loop Engineering 最隐性的危险。</p>
+<blockquote>
+<p>两个人可以构建完全相同的 Loop，却得到截然相反的结果：一个用它在深度理解的基础上更快推进，另一个用它来回避理解工作本身。Loop 不知道区别。你知道。</p>
+</blockquote>
+<p>四类 Loop 故障模式及应对方法：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>故障模式</th><th>表现</th><th>根本原因</th><th>解决方法</th></tr></thead><tbody><tr><td>空转（Thrashing）</td><td>Agent 反复修改代码，但没有收敛</td><td>目标不清晰，或验证信号有噪声，或每次修改范围太大</td><td>缩小目标范围，减少每次 diff 的大小，使用更可靠的验证命令</td></tr><tr><td>过拟合测试</td><td>所有测试通过，但功能实际上是错的</td><td>测试覆盖太窄，没有验证真实用户场景</td><td>结合自动测试和人工验收检查，增加端到端测试</td></tr><tr><td>上下文漂移</td><td>Agent 基于过期的假设持续工作，忽略新出现的变化</td><td>没有在关键观察后刷新上下文</td><td>在重要观察后重新收集上下文，不把初始计划视为神圣</td></tr><tr><td>不安全的自主</td><td>Agent 在没有授权的情况下执行破坏性操作</td><td>权限范围过宽，没有明确的停止条件</td><td>最小权限原则，高风险操作必须人工审批，设置明确的停止规则</td></tr></tbody></table></div>
+<h2 id="最佳实践总结">最佳实践总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#最佳实践总结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>以下是构建可靠 Loop 的核心原则，每条都对应一类常见的失败。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>原则</th><th>具体做法</th></tr></thead><tbody><tr><td>从窄任务开始</td><td>每次只定义一个有明确边界的目标，宽泛的目标让 Agent 无法判断哪些文件、哪些验证信号是相关的</td></tr><tr><td>告诉 Agent 如何验证</td><td>在指令中直接写明验证命令（<code>pnpm test test/auth</code>）、验收场景或 API 端点，让”完成”可测量</td></tr><tr><td>偏好小的可逆变更</td><td>要求 Agent 做最小的连贯修改，运行验证后再扩展；大范围推测性重写难以判断是哪个假设出了问题</td></tr><tr><td>尊重现有代码模式</td><td>让 Agent 先检查相邻的实现，复用现有组件，遵循现有命名，避免引入不必要的新抽象</td></tr><tr><td>人类保持判断席位</td><td>Agent 处理证据收集和机械性修复；产品判断、架构决策、最终 Review 保留给人类</td></tr><tr><td>沉淀可复用 Loop</td><td>当某个 Loop 跑得好的时候，把它固化为 Skill 文件或标准化的触发器，降低未来的重复成本</td></tr></tbody></table></div>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-12" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#loop-engineering循环工程" data-for="loop-engineering循环工程">Loop Engineering（循环工程）</a></li><li class="depth-0"><a href="#loop-engineering循环工程-1" data-for="loop-engineering循环工程-1">Loop Engineering（循环工程）</a></li><li class="depth-2"><a href="#ai-工程的演进过程" data-for="ai-工程的演进过程">AI 工程的演进过程</a></li><li class="depth-1"><a href="#loop-engineering-的起源" data-for="loop-engineering-的起源">Loop Engineering 的起源</a></li><li class="depth-2"><a href="#引爆点两句话百万次转发" data-for="引爆点两句话百万次转发">引爆点：两句话，百万次转发</a></li><li class="depth-2"><a href="#背景ai-编程工具的三代演进" data-for="背景ai-编程工具的三代演进">背景：AI 编程工具的三代演进</a></li><li class="depth-1"><a href="#什么是-loop-engineering" data-for="什么是-loop-engineering">什么是 Loop Engineering</a></li><li class="depth-2"><a href="#什么是-loop循环" data-for="什么是-loop循环">什么是 Loop（循环）</a></li><li class="depth-2"><a href="#loop-engineering-与-prompt-engineering-的区别" data-for="loop-engineering-与-prompt-engineering-的区别">Loop Engineering 与 Prompt Engineering 的区别</a></li><li class="depth-1"><a href="#loop-的核心循环" data-for="loop-的核心循环">Loop 的核心循环</a></li><li class="depth-1"><a href="#六大构成要素" data-for="六大构成要素">六大构成要素</a></li><li class="depth-2"><a href="#要素一自动触发器automations" data-for="要素一自动触发器automations">要素一：自动触发器（Automations）</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#每天工作日早上-9-点运行读取前一天的-ci-失败和-issue" data-for="每天工作日早上-9-点运行读取前一天的-ci-失败和-issue">每天工作日早上 9 点运行：读取前一天的 CI 失败和 Issue，</a></li><li class="depth-0"><a href="#将发现写入-todomd并为标记为-quick-win-的问题起草修复方案" data-for="将发现写入-todomd并为标记为-quick-win-的问题起草修复方案">将发现写入 TODO.md，并为标记为 quick-win 的问题起草修复方案</a></li><li class="depth-0"><a href="#goal运行直到一个可验证的条件成立" data-for="goal运行直到一个可验证的条件成立">/goal：运行直到一个可验证的条件成立</a></li><li class="depth-0"><a href="#下面的命令会持续执行直到认证模块的所有测试通过且-lint-干净" data-for="下面的命令会持续执行直到认证模块的所有测试通过且-lint-干净">下面的命令会持续执行，直到认证模块的所有测试通过且 lint 干净</a></li><li class="depth-2"><a href="#要素二并行隔离worktrees" data-for="要素二并行隔离worktrees">要素二：并行隔离（Worktrees）</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-0"><a href="#手动创建-worktreeclaude-code-和-codex-都支持自动管理" data-for="手动创建-worktreeclaude-code-和-codex-都支持自动管理">手动创建 worktree（Claude Code 和 Codex 都支持自动管理）</a></li><li class="depth-0"><a href="#在-claude-code-中为子-agent-配置-worktree-隔离" data-for="在-claude-code-中为子-agent-配置-worktree-隔离">在 Claude Code 中，为子 Agent 配置 worktree 隔离</a></li><li class="depth-0"><a href="#在-claudeagentsreviewermd-的-frontmatter-中添加" data-for="在-claudeagentsreviewermd-的-frontmatter-中添加">在 .claude/agents/reviewer.md 的 frontmatter 中添加：</a></li><li class="depth-0"><a href="#isolation-worktree---每个-agent-获得独立的检出完成后自动清理" data-for="isolation-worktree---每个-agent-获得独立的检出完成后自动清理">isolation: worktree   → 每个 Agent 获得独立的检出，完成后自动清理</a></li><li class="depth-2"><a href="#要素三技能文件skills" data-for="要素三技能文件skills">要素三：技能文件（Skills）</a></li><li class="depth-1"><a href="#实例-2" data-for="实例-2">实例</a></li><li class="depth-1"><a href="#name-project-conventionsdescription-项目编码规范和构建步骤凡是涉及代码修改的任务都应加载此技能" data-for="name-project-conventionsdescription-项目编码规范和构建步骤凡是涉及代码修改的任务都应加载此技能">name: project-conventions
+description: 项目编码规范和构建步骤。凡是涉及代码修改的任务都应加载此技能。</a></li><li class="depth-1"><a href="#技术栈" data-for="技术栈">技术栈</a></li><li class="depth-1"><a href="#构建命令" data-for="构建命令">构建命令</a></li><li class="depth-1"><a href="#核心约定" data-for="核心约定">核心约定</a></li><li class="depth-1"><a href="#禁止事项" data-for="禁止事项">禁止事项</a></li><li class="depth-2"><a href="#要素四连接器connectors--mcp" data-for="要素四连接器connectors--mcp">要素四：连接器（Connectors / MCP）</a></li><li class="depth-1"><a href="#实例在-claude-code-中配置-mcp-连接器" data-for="实例在-claude-code-中配置-mcp-连接器">实例：在 Claude Code 中配置 MCP 连接器</a></li><li class="depth-2"><a href="#要素五子-agentsub-agents" data-for="要素五子-agentsub-agents">要素五：子 Agent（Sub-Agents）</a></li><li class="depth-1"><a href="#实例定义检查者子-agent" data-for="实例定义检查者子-agent">实例：定义检查者子 Agent</a></li><li class="depth-1"><a href="#name-spec-reviewerdescription-对完成的代码变更进行对抗性审查验证其符合规范和测试要求model-opus-------使用更强的模型作为验证者isolation-worktree---独立检出避免污染制作者的工作区" data-for="name-spec-reviewerdescription-对完成的代码变更进行对抗性审查验证其符合规范和测试要求model-opus-------使用更强的模型作为验证者isolation-worktree---独立检出避免污染制作者的工作区">name: spec-reviewer
+description: 对完成的代码变更进行对抗性审查，验证其符合规范和测试要求。
+model: opus            # 使用更强的模型作为验证者
+isolation: worktree    # 独立检出，避免污染制作者的工作区</a></li><li class="depth-2"><a href="#要素六持久记忆memory" data-for="要素六持久记忆memory">要素六：持久记忆（Memory）</a></li><li class="depth-1"><a href="#实例loop-状态文件" data-for="实例loop-状态文件">实例：Loop 状态文件</a></li><li class="depth-0"><a href="#loop-任务状态" data-for="loop-任务状态">Loop 任务状态</a></li><li class="depth-1"><a href="#进行中" data-for="进行中">进行中</a></li><li class="depth-1"><a href="#待处理" data-for="待处理">待处理</a></li><li class="depth-1"><a href="#已完成" data-for="已完成">已完成</a></li><li class="depth-1"><a href="#五种常见-loop-模式" data-for="五种常见-loop-模式">五种常见 Loop 模式</a></li><li class="depth-1"><a href="#构建你的第一个-loop" data-for="构建你的第一个-loop">构建你的第一个 Loop</a></li><li class="depth-2"><a href="#第一步从一个窄任务开始" data-for="第一步从一个窄任务开始">第一步：从一个窄任务开始</a></li><li class="depth-2"><a href="#第二步明确告知验证方式" data-for="第二步明确告知验证方式">第二步：明确告知验证方式</a></li><li class="depth-1"><a href="#实例带验证条件的-loop-指令" data-for="实例带验证条件的-loop-指令">实例：带验证条件的 Loop 指令</a></li><li class="depth-0"><a href="#差没有验证条件agent-不知道何时停止" data-for="差没有验证条件agent-不知道何时停止">差：没有验证条件，Agent 不知道何时停止</a></li><li class="depth-0"><a href="#好有具体的验证命令和成功标准" data-for="好有具体的验证命令和成功标准">好：有具体的验证命令和成功标准</a></li><li class="depth-2"><a href="#第三步设置保险机制" data-for="第三步设置保险机制">第三步：设置保险机制</a></li><li class="depth-1"><a href="#实例每日-ci-故障分类-loop最小安全版本" data-for="实例每日-ci-故障分类-loop最小安全版本">实例：每日 CI 故障分类 Loop（最小安全版本）</a></li><li class="depth-0"><a href="#这是推荐的第一个-loop" data-for="这是推荐的第一个-loop">这是推荐的第一个 Loop：</a></li><li class="depth-0"><a href="#--只读操作读-ci-日志读-issues" data-for="--只读操作读-ci-日志读-issues">- 只读操作（读 CI 日志、读 Issues）</a></li><li class="depth-0"><a href="#--只写-todomd不触碰其他文件" data-for="--只写-todomd不触碰其他文件">- 只写 TODO.md（不触碰其他文件）</a></li><li class="depth-0"><a href="#--不开-pr不合并代码" data-for="--不开-pr不合并代码">- 不开 PR、不合并代码</a></li><li class="depth-0"><a href="#--你每天早上看一眼-todomd手动决定下一步" data-for="--你每天早上看一眼-todomd手动决定下一步">- 你每天早上看一眼 TODO.md，手动决定下一步</a></li><li class="depth-2"><a href="#第四步逐步提升自主程度" data-for="第四步逐步提升自主程度">第四步：逐步提升自主程度</a></li><li class="depth-1"><a href="#loop-engineering-的三大风险" data-for="loop-engineering-的三大风险">Loop Engineering 的三大风险</a></li><li class="depth-2"><a href="#风险一验证仍然是你的责任" data-for="风险一验证仍然是你的责任">风险一：验证仍然是你的责任</a></li><li class="depth-2"><a href="#风险二理解债comprehension-debt积累更快" data-for="风险二理解债comprehension-debt积累更快">风险二：理解债（Comprehension Debt）积累更快</a></li><li class="depth-2"><a href="#风险三认知投降cognitive-surrender" data-for="风险三认知投降cognitive-surrender">风险三：认知投降（Cognitive Surrender）</a></li><li class="depth-1"><a href="#最佳实践总结" data-for="最佳实践总结">最佳实践总结</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

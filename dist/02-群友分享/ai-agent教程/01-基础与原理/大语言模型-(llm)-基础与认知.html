@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>大语言模型 (LLM) 基础与认知</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="大语言模型 (LLM) 基础与认知"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="大语言模型 (LLM) 基础与认知"/><meta name="twitter:description" content="大语言模型 (LLM) 基础与认知 出处：www.runoob.com/ai-agent/ai-agent-llm.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大语言模型基础（LLM） 大语言模型（Large Language Model，简称 LLM）是 AI Agent 的大脑，理解它是构建智能 Agent 的基础。 大语言模型之所以能与你对话、写文章、编程，本质上是它在根据你给出的文本（提示），一个字一个字地猜出最合理的下文。 简单来说，大语言模型是一个经过海量文本数据训练的深度学习模型，它能够理解和生成人类语言。大语言模型通过分析互联网上的海量文本，..."/><meta property="og:description" content="大语言模型 (LLM) 基础与认知 出处：www.runoob.com/ai-agent/ai-agent-llm.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大语言模型基础（LLM） 大语言模型（Large Language Model，简称 LLM）是 AI Agent 的大脑，理解它是构建智能 Agent 的基础。 大语言模型之所以能与你对话、写文章、编程，本质上是它在根据你给出的文本（提示），一个字一个字地猜出最合理的下文。 简单来说，大语言模型是一个经过海量文本数据训练的深度学习模型，它能够理解和生成人类语言。大语言模型通过分析互联网上的海量文本，..."/><meta property="og:image:alt" content="大语言模型 (LLM) 基础与认知 出处：www.runoob.com/ai-agent/ai-agent-llm.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大语言模型基础（LLM） 大语言模型（Large Language Model，简称 LLM）是 AI Agent 的大脑，理解它是构建智能 Agent 的基础。 大语言模型之所以能与你对话、写文章、编程，本质上是它在根据你给出的文本（提示），一个字一个字地猜出最合理的下文。 简单来说，大语言模型是一个经过海量文本数据训练的深度学习模型，它能够理解和生成人类语言。大语言模型通过分析互联网上的海量文本，..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大语言模型-(llm)-基础与认知"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大语言模型-(llm)-基础与认知"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="大语言模型 (LLM) 基础与认知 出处：www.runoob.com/ai-agent/ai-agent-llm.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：01-基础与原理 大语言模型基础（LLM） 大语言模型（Large Language Model，简称 LLM）是 AI Agent 的大脑，理解它是构建智能 Agent 的基础。 大语言模型之所以能与你对话、写文章、编程，本质上是它在根据你给出的文本（提示），一个字一个字地猜出最合理的下文。 简单来说，大语言模型是一个经过海量文本数据训练的深度学习模型，它能够理解和生成人类语言。大语言模型通过分析互联网上的海量文本，..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大语言模型-(llm)-基础与认知-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大语言模型-(llm)-基础与认知-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/01-基础与原理/大语言模型-(llm)-基础与认知-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/01-基础与原理/大语言模型-(llm)-基础与认知" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-9" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-9" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/01-基础与原理/">01-基础与原理</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>大语言模型 (LLM) 基础与认知</a></div></nav><h1 class="article-title">大语言模型 (LLM) 基础与认知</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/基础与原理" class="internal internal-link tag-link">基础与原理</a><span class="note-properties-separator">, </span><a href="../../../tags/大语言模型-(llm" class="internal internal-link tag-link">大语言模型-(llm</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>17分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="大语言模型-llm-基础与认知">大语言模型 (LLM) 基础与认知<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#大语言模型-llm-基础与认知" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/ai-agent-llm.html" class="external external-link">https://www.runoob.com/ai-agent/ai-agent-llm.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>01-基础与原理</code></p>
+</blockquote>
+<hr/>
+<h1 id="大语言模型基础llm">大语言模型基础（LLM）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#大语言模型基础llm" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>大语言模型（Large Language Model，简称 LLM）是 AI Agent 的大脑，理解它是构建智能 Agent 的基础。</p>
+<p>大语言模型之所以能与你对话、写文章、编程，本质上是它在根据你给出的文本（提示），一个字一个字地猜出最合理的下文。</p>
+<p>简单来说，大语言模型是一个经过海量文本数据训练的深度学习模型，它能够理解和生成人类语言。大语言模型通过分析互联网上的海量文本，学习语言的统计规律，当收到输入时，根据学到的规律生成最合理的续写。</p>
+<p>我们可以把大语言模型想象成一个<strong>极其用功、记忆力超群的学生</strong>：</p>
+<ul>
+<li><strong>学习阶段（训练）</strong>：它阅读了互联网上几乎所有公开的文本——书籍、文章、网页、代码等（数据量可达万亿单词级别）。在这个过程中，它不是在背诵，而是在学习一套极其复杂的语言规律。</li>
+<li><strong>应用阶段（推理）</strong>：当你向它提问或给出指令时，它就会运用学到的规律，一个字接一个字地生成出最合乎逻辑和语境的回答。</li>
+</ul>
+<p>它的”大”主要体现在两个方面：</p>
+<ul>
+<li><strong>参数规模大</strong>：模型内部有数百亿甚至上万亿个可调节的参数，记录了学到的语言知识。</li>
+<li><strong>训练数据大</strong>：用于训练的文本数据量巨大，涵盖互联网公开信息的精华。</li>
+</ul>
+<p>下图展示了 LLM 逐词生成文本的过程——它每次只预测一个词，然后将这个新词纳入输入，继续预测下一个词，如此循环直到生成完整回答：</p>
+<p>动画演示：</p>
+<p>大模型正在思考…</p>
+<p>每一步只做一件事：根据前文，猜下一个字</p>
+<p>▌</p>
+<p>下一个字的候选
+Top-5 概率</p>
+<p>step <strong>0</strong>
+已选：<strong>—</strong></p>
+<p>尽管 LLM 很强大，但它也有明确的局限性：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>能力</th><th>说明</th><th>局限性</th></tr></thead><tbody><tr><td><strong>知识截止</strong></td><td>训练数据有截止日期</td><td>无法获知训练后的新信息</td></tr><tr><td><strong>数学计算</strong></td><td>能做简单计算</td><td>复杂计算容易出错</td></tr><tr><td><strong>实时信息</strong></td><td>需要外部工具辅助</td><td>本身无法获取实时数据</td></tr><tr><td><strong>事实准确性</strong></td><td>可能生成错误信息</td><td>需要事实核查</td></tr><tr><td><strong>长文本处理</strong></td><td>上下文长度有限制</td><td>超长文本会丢失信息</td></tr><tr><td><strong>逻辑一致性</strong></td><td>可能前后矛盾</td><td>需要仔细设计和验证</td></tr></tbody></table></div>
+<blockquote>
+<p>**重要提醒：**LLM 不是全知全能的，它本质上是基于统计的模式匹配系统。理解它的局限性，才能更好地利用它的能力。</p>
+</blockquote>
+<h2 id="核心工作原理transformer-架构简析">核心工作原理：Transformer 架构简析<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心工作原理transformer-架构简析" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>LLM 的惊人能力，离不开其底层核心技术——<strong>Transformer 架构</strong>。不需要深究复杂的数学原理，但可以理解它的核心思想。</p>
+<p>想象你要写一篇关于太阳系的文章：</p>
+<ul>
+<li><strong>通读资料</strong>：你会先看很多相关的书籍和网页。</li>
+<li><strong>抓住重点</strong>：你会注意到太阳、行星、轨道、引力这些词频繁出现且相互关联。</li>
+<li><strong>组织语言</strong>：根据你想表达的重点（比如介绍火星），你会选择性地运用之前看到的关于火星大小、颜色、位置等信息，并组织成通顺的句子。</li>
+</ul>
+<p>Transformer 的工作方式与此类似，它的核心流程分为三个阶段：</p>
+<ol>
+<li><strong>输入处理</strong>：你的话被拆分成词或字（Token），并转换成计算机能理解的数字（向量）。</li>
+<li><strong>理解上下文（核心）</strong>：<strong>自注意力机制（Self-Attention）<strong>开始工作。它让模型在处理句子中每一个词时，都能权衡句子中</strong>所有其他词</strong>的重要性。这个过程是<strong>并行</strong>的，速度极快。</li>
+<li><strong>生成与循环</strong>：模型基于对所有词的理解，计算出概率分布，预测下一个最可能出现的词。选中并输出这个词后，将其作为新的输入，重复整个过程，直到生成完整回答。</li>
+</ol>
+<p>自注意力机制是 Transformer 最关键的创新。以句子”苹果的手机它的电池很大”为例，当模型处理它这个词时，自注意力机制会帮助模型判断它与苹果和手机高度相关。下图展示了这一过程中的注意力权重分布：</p>
+<p>正是这种能<strong>并行处理</strong>并<strong>深度理解全局上下文</strong>的能力，使得基于 Transformer 的 LLM 在语言任务上远超以往技术（如 RNN）。</p>
+<h2 id="如何与-llm-交互prompt-工程入门">如何与 LLM 交互：Prompt 工程入门<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#如何与-llm-交互prompt-工程入门" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>**Prompt（提示词）**是你给 LLM 的输入，它告诉模型你想要什么，就像给助理下达指令——指令越清晰，结果越好。Prompt 的质量直接决定了回答的质量。</p>
+<p>一个好的 Prompt 通常由以下四个部分组成：</p>
+<h3 id="基本原则">基本原则<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#基本原则" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>明确具体</strong>：避免模糊表达。不要说写点关于狗的东西，而应该说用生动活泼的语言，为 6-8 岁儿童写一段 100 字左右的关于金毛寻回犬性格特点的简短介绍。</li>
+<li><strong>提供上下文</strong>：告诉模型你的身份、背景和目标。例如：你是一位经验丰富的 Python 编程导师。请向一个刚学完基本语法的初学者解释什么是列表推导式，并提供一个简单的例子。</li>
+<li><strong>指定格式</strong>：如果需要特定格式的输出，请明确说明，例如：请将以下要点总结为三个 bullet points 或 请以 JSON 格式输出。</li>
+<li><strong>分步思考（Chain-of-Thought）</strong>：对于复杂问题，可以在 Prompt 中引导模型逐步推理，例如：请一步一步地分析这个问题，先列出已知条件，再推导中间步骤，最后给出结论。 这种方式能显著提升复杂推理任务的准确率。</li>
+</ul>
+<h3 id="llm-的常见应用场景">LLM 的常见应用场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#llm-的常见应用场景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>场景类别</th><th>具体示例</th><th>说明</th></tr></thead><tbody><tr><td><strong>内容创作与编辑</strong></td><td>撰写邮件、报告、博客；续写故事；润色文案；翻译不同风格文本</td><td>快速生成草稿，提供灵感和多种表达方式</td></tr><tr><td><strong>信息检索与总结</strong></td><td>快速阅读长文档并提炼核心观点；基于知识库的问答</td><td>比传统搜索更”理解”问题，能进行归纳和整合</td></tr><tr><td><strong>编程辅助</strong></td><td>解释代码、生成代码片段、调试错误、重构代码、编写测试用例</td><td>充当全天候的编程伙伴，极大提升开发效率</td></tr><tr><td><strong>对话与客服</strong></td><td>智能聊天机器人、个性化导师、角色扮演</td><td>提供拟人化、上下文连贯的交互体验</td></tr><tr><td><strong>逻辑推理与分析</strong></td><td>解数学题、进行基础逻辑推理、分析数据趋势、制定计划</td><td>在限定领域内展示出令人惊讶的推理能力</td></tr></tbody></table></div>
+<h2 id="api-调用与参数设置">API 调用与参数设置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#api-调用与参数设置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>要构建 AI Agent，你需要学会如何通过 API 调用 LLM。</p>
+<p>本章节我们以 OpenAI API 为例，介绍基本的调用方法。</p>
+<p>openai 是一个强大的 Python 库，用于与 OpenAI 的一系列模型和服务进行交互，详细内容参考：<a href="https://www.runoob.com/python3/python-openai.html" class="external external-link">Python OpenAI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<p>开源地址：<a href="https://github.com/openai/openai-python" class="external external-link">https://github.com/openai/openai-python<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<h3 id="基础-api-调用">基础 API 调用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#基础-api-调用" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="1-安装必要的库">1. 安装必要的库<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-安装必要的库" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install openai</span></span></code></pre></figure>
+<p>然后需要去 OpenAI 官网注册账号，并在 API 密钥页面生成一个 API Key。</p>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from openai import OpenAI</p>
+<p>client = OpenAI(
+    # This is the default and can be omitted
+    api_key=“你申请的 API key”,
+)</p>
+<p>response = client.responses.create(
+    model=“gpt-4o”,
+    instructions=“You are a coding assistant that talks like a pirate.”,
+    input=“How do I check if a Python object is an instance of a class?”,
+)</p>
+<p>print(response.output_text)</p>
+<p>我们国内目前访问 openai 还是有点麻烦，国内很多也支持 openai，比如 DeepSeek、阿里的千问。</p>
+<h3 id="deepseek">DeepSeek<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#deepseek" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>DeepSeek API 完全兼容 OpenAI 的 API 格式，只需修改少量配置，即可直接使用 OpenAI SDK 或兼容工具访问 DeepSeek API。</p>
+<h4 id="核心配置参数">核心配置参数:<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心配置参数" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>参数</th><th>取值/说明</th></tr></thead><tbody><tr><td>base_url</td><td>必填，固定值：<code>https://api.deepseek.com</code>（也可填 <code>https://api.deepseek.com/v1</code>，仅为兼容OpenAI，v1与模型版本无关）</td></tr><tr><td>api_key</td><td>必填，需先在 DeepSeek 官网申请专属 API Key（申请地址：<a href="https://platform.deepseek.com/" class="external external-link">https://platform.deepseek.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>）</td></tr><tr><td>model</td><td>必填，  - <code>deepseek-v4-flash</code>：对应 DeepSeek 的<strong>非思考模式</strong>，响应速度快，适合常规问答； - <code>deepseek-v4-pro</code>：对应 DeepSeek 的<strong>思考模式</strong>，推理能力更强，适合复杂问题求解。</td></tr></tbody></table></div>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from openai import OpenAI</p>
+<h1 id="初始化客户端核心配置替换为你的api-key">初始化客户端（核心配置：替换为你的API Key）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#初始化客户端核心配置替换为你的api-key" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>client = OpenAI(
+    api_key=os.environ.get(‘DEEPSEEK_API_KEY’),  # 推荐通过环境变量配置，也可直接写死（不推荐）
+    base_url=“<a href="https://api.deepseek.com" class="external external-link">https://api.deepseek.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”  # DeepSeek 固定域名
+)</p>
+<h1 id="调用对话api">调用对话API<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#调用对话api" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>try:
+    response = client.chat.completions.create(
+        model=“deepseek-v4-flash”,  # 指定模型，可选 deepseek-v4-flash / deepseek-v4-pro
+        messages=[
+            {“role”: “system”, “content”: “You are a helpful assistant”},  # 系统角色定义
+            {“role”: “user”, “content”: “Hello”},  # 用户提问
+        ],
+        stream=False  # 非流式输出（一次性返回完整结果）
+    )
+    # 打印回复内容
+    print(“回复结果：”, response.choices[0].message.content)
+except Exception as e:
+    print(“调用失败：”, str(e))</p>
+<h3 id="阿里百炼">阿里百炼<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#阿里百炼" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>阿里云百炼的通义千问模型支持 OpenAI 兼容接口，您只需调整 API Key、BASE_URL 和模型名称，即可将原有 OpenAI 代码迁移至阿里云百炼服务使用。</p>
+<p>我们需要开通阿里云百炼模型服务并获得 API-KEY。</p>
+<p>我们可以先使用阿里云主账号访问百炼模型服务平台：<a href="https://bailian.console.aliyun.com/cn-beijing/?userCode=i5mn5r7m&amp;tab=globalset#/efm/api_key" class="external external-link">https://bailian.console.aliyun.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>，然后点击右上角登录，登录成功后点击右上角的齿轮⚙️图标，选择 API key，然后复制 API key，如果没有也可以创建 API key：</p>
+<p>开通阿里云百炼不会产生费用，仅模型调用（超出免费额度后）、模型部署、模型调优会产生相应计费。</p>
+<p>现在要使用 API，都需要按 token 来计费，还好都不贵，我们可以先购买个最便宜的包：<a href="https://www.aliyun.com/minisite/goods?userCode=i5mn5r7m" class="external external-link">阿里云百炼大模型服务平台<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<blockquote>
+<p>也可以直接使用百炼与方舟的 Coding Plan 套餐：<a href="https://www.runoob.com/claude-code/coding-plan.html" class="external external-link">https://www.runoob.com/claude-code/coding-plan.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+</blockquote>
+<h2 id="使用方式">使用方式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用方式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>接下来我们使用 OpenAI SDK 访问百炼服务上的通义千问模型。</p>
+<h3 id="非流式调用示例">非流式调用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#非流式调用示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="实例-2">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>from openai import OpenAI
+import os</p>
+<p>def get_response():
+    client = OpenAI(
+        api_key=“sk-xxx”,  # 请用阿里云百炼 API Key
+        base_url=“<a href="https://dashscope.aliyuncs.com/compatible-mode/v1" class="external external-link">https://dashscope.aliyuncs.com/compatible-mode/v1<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”,  # 填写DashScope SDK的base_url
+    )
+    completion = client.chat.completions.create(
+        model=“qwen-plus”,  # 此处以qwen-plus为例，可按需更换模型名称。模型列表：<a href="https://help.aliyun.com/zh/model-studio/getting-started/models" class="external external-link">https://help.aliyun.com/zh/model-studio/getting-started/models<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+        messages=[{‘role’: ‘system’, ‘content’: ‘You are a helpful assistant.’},
+                  {‘role’: ‘user’, ‘content’: ‘你是谁？’}]
+        )
+    # json 数据
+    <a href="../../.././../../tags/print" class="tag-link internal internal-link alias" data-slug="tags/print">print</a>(completion.model_dump_json())
+    print(completion.choices[0].message.content)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>’:
+    get_response()</p>
+<p>运行代码可以获得以下结果：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">我是通义千问，阿里巴巴集团旗下的通义实验室自主研发的超大规模语言模型。我可以帮助你回答问题、创作文字，比如写故事、写公文、写邮件、写剧本、逻辑推理、编程等等，还能表达观点，玩游戏等。如果你有任何问题或需要帮助，欢迎随时告诉我！</span></span></code></pre></figure>
+<h3 id="流式调用示例">流式调用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#流式调用示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="实例-3">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>from openai import OpenAI</p>
+<p>def get_response():
+    client = OpenAI(
+        api_key=“sk-xxx”,
+        base_url=“<a href="https://dashscope.aliyuncs.com/compatible-mode/v1" class="external external-link">https://dashscope.aliyuncs.com/compatible-mode/v1<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”,
+    )</p>
+<p>    completion = client.chat.completions.create(
+        model=“qwen-plus”,
+        messages=[
+            {‘role’: ‘system’, ‘content’: ‘You are a helpful assistant.’},
+            {‘role’: ‘user’, ‘content’: ‘你是谁？’}
+        ],
+        stream=True,
+        stream_options={“include_usage”: True}
+    )</p>
+<p>    for chunk in completion:
+        # chunk 里可能没有 choices 或 delta
+        if hasattr(chunk, “choices”) and len(chunk.choices) > 0:
+            choice = chunk.choices[0]
+            if hasattr(choice, “delta”) and hasattr(choice.delta, “content”):
+                print(choice.delta.content, end=”, flush=True)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>’:
+    get_response()</p>
+<p>运行代码可以获得以下结果：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">我是通义千问，阿里巴巴集团旗下的通义实验室自主研发的超大规模语言模型。我可以帮助你回答问题、创作文字，比如写故事、写公文、写邮件、写剧本、逻辑推理、编程等等，还能表达观点，玩游戏等。如果你有任何问题或需要帮助，欢迎随时告诉我！</span></span></code></pre></figure>
+<h3 id="主流大语言模型">主流大语言模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#主流大语言模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>以下是主流大语言模型的官网与 API 文档地址整理：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>模型名称</th><th>所属公司/组织</th><th>官网/API 文档地址</th></tr></thead><tbody><tr><td><strong>GPT 系列</strong></td><td>OpenAI</td><td>官网：<a href="https://openai.com/" class="external external-link">https://openai.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://platform.openai.com/docs/api-reference" class="external external-link">https://platform.openai.com/docs/api-reference<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>Claude 系列</strong></td><td>Anthropic</td><td>官网：<a href="https://www.anthropic.com/" class="external external-link">https://www.anthropic.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://docs.anthropic.com/claude/reference/getting-started-with-the-api" class="external external-link">https://docs.anthropic.com/claude/reference/getting-started-with-the-api<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>Gemini 系列</strong></td><td>Google</td><td>官网：<a href="https://deepmind.google/technologies/gemini/" class="external external-link">https://deepmind.google/technologies/gemini/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://docs.gemini.com/rest-api/" class="external external-link">https://docs.gemini.com/rest-api/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>通义千问</strong></td><td>阿里巴巴</td><td>官网：<a href="https://www.qianwen.com/" class="external external-link">https://www.qianwen.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://help.aliyun.com/zh/dashscope/developer-reference/api-details" class="external external-link">https://help.aliyun.com/zh/dashscope/developer-reference/api-details<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>文心一言</strong></td><td>百度</td><td>官网：<a href="https://yiyan.baidu.com/" class="external external-link">https://yiyan.baidu.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://qianfan.cloud.baidu.com/docs/" class="external external-link">https://qianfan.cloud.baidu.com/docs/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>智谱清言</strong></td><td>智谱AI</td><td>官网：<a href="https://chatglm.cn/" class="external external-link">https://chatglm.cn/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://open.bigmodel.cn/dev/api" class="external external-link">https://open.bigmodel.cn/dev/api<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>Kimi</strong></td><td>月之暗面</td><td>官网：<a href="https://kimi.moonshot.cn/" class="external external-link">https://kimi.moonshot.cn/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://platform.moonshot.cn/docs/api/chat" class="external external-link">https://platform.moonshot.cn/docs/api/chat<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>DeepSeek 系列</strong></td><td>DeepSeek</td><td>官网：<a href="https://www.deepseek.com/" class="external external-link">https://www.deepseek.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://api-docs.deepseek.com/" class="external external-link">https://api-docs.deepseek.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>Llama 系列</strong></td><td>Meta</td><td>官网：<a href="https://www.llama.com/" class="external external-link">https://www.llama.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://www.llama.com/docs/overview/" class="external external-link">https://www.llama.com/docs/overview/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>Grok 系列</strong></td><td>xAI</td><td>官网：<a href="https://x.ai/" class="external external-link">https://x.ai/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://docs.x.ai/overview" class="external external-link">https://docs.x.ai/overview<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>MiniMax</strong></td><td>MiniMax</td><td>官网：<a href="https://www.minimaxi.com/" class="external external-link">https://www.minimaxi.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://api.minimax.chat/docs/api/" class="external external-link">https://api.minimax.chat/docs/api/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>百川智能</strong></td><td>百川智能</td><td>官网：<a href="https://www.baichuan-ai.com/" class="external external-link">https://www.baichuan-ai.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://platform.baichuan-ai.com/docs/api" class="external external-link">https://platform.baichuan-ai.com/docs/api<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>Ollama</strong></td><td>Ollama</td><td>官网：<a href="https://ollama.com/" class="external external-link">https://ollama.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://github.com/ollama/ollama/blob/main/docs/api.md" class="external external-link">https://github.com/ollama/ollama/blob/main/docs/api.md<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td><strong>豆包大模型</strong></td><td>字节跳动</td><td>官网：<a href="https://www.doubao.com/" class="external external-link">https://www.doubao.com/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>API 地址：<a href="https://www.volcengine.com/docs/82379/1399008?lang=zh" class="external external-link">https://www.volcengine.com/docs/82379/1399008?lang=zh<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr></tbody></table></div>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-9" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#大语言模型-llm-基础与认知" data-for="大语言模型-llm-基础与认知">大语言模型 (LLM) 基础与认知</a></li><li class="depth-0"><a href="#大语言模型基础llm" data-for="大语言模型基础llm">大语言模型基础（LLM）</a></li><li class="depth-1"><a href="#核心工作原理transformer-架构简析" data-for="核心工作原理transformer-架构简析">核心工作原理：Transformer 架构简析</a></li><li class="depth-1"><a href="#如何与-llm-交互prompt-工程入门" data-for="如何与-llm-交互prompt-工程入门">如何与 LLM 交互：Prompt 工程入门</a></li><li class="depth-2"><a href="#基本原则" data-for="基本原则">基本原则</a></li><li class="depth-2"><a href="#llm-的常见应用场景" data-for="llm-的常见应用场景">LLM 的常见应用场景</a></li><li class="depth-1"><a href="#api-调用与参数设置" data-for="api-调用与参数设置">API 调用与参数设置</a></li><li class="depth-2"><a href="#基础-api-调用" data-for="基础-api-调用">基础 API 调用</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-2"><a href="#deepseek" data-for="deepseek">DeepSeek</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-0"><a href="#初始化客户端核心配置替换为你的api-key" data-for="初始化客户端核心配置替换为你的api-key">初始化客户端（核心配置：替换为你的API Key）</a></li><li class="depth-0"><a href="#调用对话api" data-for="调用对话api">调用对话API</a></li><li class="depth-2"><a href="#阿里百炼" data-for="阿里百炼">阿里百炼</a></li><li class="depth-1"><a href="#使用方式" data-for="使用方式">使用方式</a></li><li class="depth-2"><a href="#非流式调用示例" data-for="非流式调用示例">非流式调用示例</a></li><li class="depth-1"><a href="#实例-2" data-for="实例-2">实例</a></li><li class="depth-2"><a href="#流式调用示例" data-for="流式调用示例">流式调用示例</a></li><li class="depth-1"><a href="#实例-3" data-for="实例-3">实例</a></li><li class="depth-2"><a href="#主流大语言模型" data-for="主流大语言模型">主流大语言模型</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

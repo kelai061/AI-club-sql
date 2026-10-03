@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Python 从零纯手写 AI Agent</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="Python 从零纯手写 AI Agent"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Python 从零纯手写 AI Agent"/><meta name="twitter:description" content="Python 从零纯手写 AI Agent 出处：www.runoob.com/ai-agent/python-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Python 实现 AI Agent 在深入代码之前，让我们先建立一个清晰的认知，可以把 AI Agent 想象成一个拥有大脑和手脚的智能程序。 大脑（核心）：一个能够理解、推理和决策的模型（比如大型语言模型 LLM）。它负责处理信息，制定计划。 感知（输入）：Agent 通过感官获取外部信息，如用户的指令、数据库查询结果、网页内容、传感器数据等。 行动（输出）：Agent 通过..."/><meta property="og:description" content="Python 从零纯手写 AI Agent 出处：www.runoob.com/ai-agent/python-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Python 实现 AI Agent 在深入代码之前，让我们先建立一个清晰的认知，可以把 AI Agent 想象成一个拥有大脑和手脚的智能程序。 大脑（核心）：一个能够理解、推理和决策的模型（比如大型语言模型 LLM）。它负责处理信息，制定计划。 感知（输入）：Agent 通过感官获取外部信息，如用户的指令、数据库查询结果、网页内容、传感器数据等。 行动（输出）：Agent 通过..."/><meta property="og:image:alt" content="Python 从零纯手写 AI Agent 出处：www.runoob.com/ai-agent/python-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Python 实现 AI Agent 在深入代码之前，让我们先建立一个清晰的认知，可以把 AI Agent 想象成一个拥有大脑和手脚的智能程序。 大脑（核心）：一个能够理解、推理和决策的模型（比如大型语言模型 LLM）。它负责处理信息，制定计划。 感知（输入）：Agent 通过感官获取外部信息，如用户的指令、数据库查询结果、网页内容、传感器数据等。 行动（输出）：Agent 通过..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/python-从零纯手写-ai-agent"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/python-从零纯手写-ai-agent"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="Python 从零纯手写 AI Agent 出处：www.runoob.com/ai-agent/python-ai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Python 实现 AI Agent 在深入代码之前，让我们先建立一个清晰的认知，可以把 AI Agent 想象成一个拥有大脑和手脚的智能程序。 大脑（核心）：一个能够理解、推理和决策的模型（比如大型语言模型 LLM）。它负责处理信息，制定计划。 感知（输入）：Agent 通过感官获取外部信息，如用户的指令、数据库查询结果、网页内容、传感器数据等。 行动（输出）：Agent 通过..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/python-从零纯手写-ai-agent-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/python-从零纯手写-ai-agent-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/python-从零纯手写-ai-agent-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/04-主流框架与开发实战/python-从零纯手写-ai-agent" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-36" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-36" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/04-主流框架与开发实战/">04-主流框架与开发实战</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Python 从零纯手写 AI Agent</a></div></nav><h1 class="article-title">Python 从零纯手写 AI Agent</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/主流框架与开发实战" class="internal internal-link tag-link">主流框架与开发实战</a><span class="note-properties-separator">, </span><a href="../../../tags/python-从零纯" class="internal internal-link tag-link">python-从零纯</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>30分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="python-从零纯手写-ai-agent">Python 从零纯手写 AI Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#python-从零纯手写-ai-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/python-ai-agent.html" class="external external-link">https://www.runoob.com/ai-agent/python-ai-agent.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>04-主流框架与开发实战</code></p>
+</blockquote>
+<hr/>
+<h1 id="python-实现-ai-agent">Python 实现 AI Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#python-实现-ai-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>在深入代码之前，让我们先建立一个清晰的认知，可以把 AI Agent 想象成一个<strong>拥有大脑和手脚的智能程序</strong>。</p>
+<ul>
+<li><strong>大脑（核心）</strong>：一个能够<strong>理解、推理和决策</strong>的模型（比如大型语言模型 LLM）。它负责处理信息，制定计划。</li>
+<li><strong>感知（输入）</strong>：Agent 通过感官获取外部信息，如用户的指令、数据库查询结果、网页内容、传感器数据等。</li>
+<li><strong>行动（输出）</strong>：Agent 通过手脚影响外部世界，例如调用一个函数、发送一封邮件、在屏幕上输出文本、控制机械臂等。</li>
+<li><strong>目标</strong>：Agent 的一切行为都围绕着一个明确的<strong>目标</strong>展开，比如：帮我查一下北京明天的天气。</li>
+</ul>
+<p>其核心工作流程是一个经典的 <strong>感知-思考-行动</strong> 循环，如下图所示：</p>
+<h2 id="简单的测试案例">简单的测试案例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#简单的测试案例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">demo</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  agent.py        </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 主实现（下面给出）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  tools.py        </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 工具实现（可单独文件）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  memory.py       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 简单记忆实现（可单独文件）
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">  README</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.md</span></span></code></pre></figure>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>&quot;&quot;&quot;
+agent.py - 极简 AI Agent 原型（可直接运行）
+说明：</p>
+<ul>
+<li>LLM 部分用一个非常简单的”规则回答器”模拟，实际接入 LLM 时替换 LLMInterface.generate(…)</li>
+<li>包含组件：LLM 抽象、大脑(解析/决策)、规划器、工具注册器、内存、执行器
+&quot;&quot;&quot;</li>
+</ul>
+<p>from typing import Any, Dict, List, Callable
+import time</p>
+<h1 id="-----------------------------">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-----------------------------" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="memory非常轻量">Memory（非常轻量）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#memory非常轻量" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="------------------------------1">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class Memory:
+    def <strong>init</strong>(self):
+        self.short = {}   # 当前会话上下文
+        self.long = {}    # 长期偏好/联系人等</p>
+<p>    def get_short(self, k, default=None):
+        return self.short.get(k, default)</p>
+<p>    def set_short(self, k, v):
+        self.short[k] = v</p>
+<p>    def get_long(self, k, default=None):
+        return self.long.get(k, default)</p>
+<p>    def set_long(self, k, v):
+        self.long[k] = v</p>
+<h1 id="------------------------------2">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="llm-抽象替换点">LLM 抽象（替换点）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#llm-抽象替换点" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="------------------------------3">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class LLMInterface:
+    def generate(self, prompt: str) -> str:
+        &quot;&quot;&quot;
+        这里给出一个非常简单的规则式模拟回答器。
+        真实使用时：替换为 OpenAI/其它模型的调用代码，返回 model 文本。
+        &quot;&quot;&quot;
+        # 极简解析示例：识别是否需要判断”下雨”
+        if “是否下雨” in prompt or “下雨” in prompt:
+            return “请先查询天气；如果有雨，请生成提醒并发送给目标联系人。”
+        if “生成提醒” in prompt:
+            return “请提醒小王：明天北京有雨，请带伞。”
+        return “我理解了。“</p>
+<h1 id="------------------------------4">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="工具注册与模拟工具">工具注册与模拟工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工具注册与模拟工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="------------------------------5">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class ToolRegistry:
+    def <strong>init</strong>(self):
+        self.tools: Dict[str, Callable[…, Any]] = {}</p>
+<p>    def register(self, name: str, fn: Callable[…, Any]):
+        self.tools[name] = fn</p>
+<p>    def call(self, name: str, *args, **kwargs):
+        if name not in self.tools:
+            raise ValueError(f”工具未注册: {name}”)
+        return self.tools[name](*args, **kwargs)</p>
+<h1 id="模拟工具天气查询真实情况会调用天气-api">模拟工具：天气查询（真实情况会调用天气 API）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模拟工具天气查询真实情况会调用天气-api" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def mock_weather_api(city: str, date: str) -> Dict[str, Any]:
+    # 简单规则：如果 city 包含 “北京” 且 date 包含 “明天”，返回下雨示例
+    if “北京” in city and “明天” in date:
+        return {“city”: city, “date”: date, “cond”: “雨”, “precip_mm”: 5}
+    return {“city”: city, “date”: date, “cond”: “晴”, “precip_mm”: 0}</p>
+<h1 id="模拟工具发送消息真实情况会调用短信邮件企业微信等">模拟工具：发送消息（真实情况会调用短信/邮件/企业微信等）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模拟工具发送消息真实情况会调用短信邮件企业微信等" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def mock_send_message(contact: str, message: str) -> bool:
+    print(f”[发送消息] to={contact} message={message}”)
+    return True</p>
+<h1 id="模拟工具简单搜索示意">模拟工具：简单搜索（示意）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模拟工具简单搜索示意" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def mock_search(query: str) -> str:
+    return f”模拟搜索结果：关于 <code>{query}</code> 的信息摘要。“</p>
+<h1 id="------------------------------6">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------6" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="planner--executor">Planner / Executor<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#planner--executor" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="------------------------------7">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------7" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class SimplePlanner:
+    def plan(self, goal: str) -> List[Dict[str, Any]]:
+        &quot;&quot;&quot;
+        将目标拆解为步骤列表（非常简化的实现）
+        每一步包含：action(工具名或内部动作)、params
+        &quot;&quot;&quot;
+        steps = []
+        # 例：若提示包含”天气”，生成两个步骤：查天气、判断并可能发提醒
+        if “天气” in goal or “下雨” in goal:
+            steps.append({“action”: “query_weather”, “params”: {“city”: “北京”, “date”: “明天”}})
+            steps.append({“action”: “decide_and_notify”, “params”: {“contact_name”: “小王”}})
+        else:
+            steps.append({“action”: “search”, “params”: {“query”: goal}})
+        return steps</p>
+<p>class Executor:
+    def <strong>init</strong>(self, tools: ToolRegistry, memory: Memory, llm: LLMInterface):
+        self.tools = tools
+        self.memory = memory
+        self.llm = llm</p>
+<p>    def run_step(self, step: Dict[str, Any]):
+        action = step[“action”]
+        params = step.get(“params”, {})
+        if action == “query_weather”:
+            res = self.tools.call(“weather”, params[“city”], params[“date”])
+            self.memory.set_short(“last_weather”, res)
+            return res
+        if action == “decide_and_notify”:
+            weather = self.memory.get_short(“last_weather”, {})
+            # 简单规则决策
+            if weather.get(“cond”) == “雨”:
+                # 让 LLM 生成提醒文本（示例）
+                prompt = f”基于天气信息：{weather}，生成一条发给{params[‘contact_name’]}的提醒。”
+                reminder = self.llm.generate(prompt)
+                # 从长期记忆中获取联系方式
+                contact = self.memory.get_long(params[“contact_name”]) or “13800000000”
+                ok = self.tools.call(“send_message”, contact, reminder)
+                return {“notified”: ok, “message”: reminder}
+            else:
+                return {“notified”: False, “reason”: “天气晴朗”}
+        if action == “search”:
+            return self.tools.call(“search”, params[“query”])
+        raise ValueError(f”未知动作: {action}”)</p>
+<h1 id="------------------------------8">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------8" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="agent-本体">Agent 本体<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-本体" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="------------------------------9">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------9" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>class SimpleAgent:
+    def <strong>init</strong>(self):
+        self.memory = Memory()
+        self.tools = ToolRegistry()
+        self.llm = LLMInterface()
+        self.planner = SimplePlanner()
+        self.executor = Executor(self.tools, self.memory, self.llm)
+        # 注册默认工具
+        self.tools.register(“weather”, mock_weather_api)
+        self.tools.register(“send_message”, mock_send_message)
+        self.tools.register(“search”, mock_search)
+        # 假设长期记忆里存了小王的联系方式
+        self.memory.set_long(“小王”, “13911112222”)</p>
+<p>    def handle(self, user_prompt: str):
+        # 1) 大脑解析（用 LLM 抽象）
+        intent = self.llm.generate(user_prompt)
+        # 2) 规划
+        steps = self.planner.plan(user_prompt)
+        # 3) 逐步执行
+        results = []
+        for step in steps:
+            r = self.executor.run_step(step)
+            results.append({“step”: step, “result”: r})
+        # 4) 输出合并
+        return {“intent”: intent, “steps”: results}</p>
+<h1 id="------------------------------10">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------10" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="运行示例">运行示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#运行示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="------------------------------11">-----------------------------<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#------------------------------11" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>if <strong>name</strong> == “<strong>main</strong>”:
+    agent = SimpleAgent()
+    task = “查一下明天北京的天气，如果下雨，帮我写个提醒并发给小王。”
+    out = agent.handle(task)
+    import json
+    print(json.dumps(out, ensure_ascii=False, indent=2))</p>
+<p><strong>说明：</strong></p>
+<ol>
+<li><strong>LLM 抽象</strong>：<code>LLMInterface.generate()</code> 是可替换点。把这里换成对接 OpenAI、Claude 或本地 LLM 的代码即可。</li>
+<li><strong>规划器（Planner）</strong>：负责把自然语言目标拆成有序步骤。入门可以用规则或模板；进阶可用 LLM 输出步骤并解析为动作。</li>
+<li><strong>工具层（Tools）</strong>：每个工具是独立函数，统一注册到 <code>ToolRegistry</code>。真实项目中可能是 HTTP 请求、SDK 调用、数据库读写等。</li>
+<li><strong>记忆（Memory）</strong>：区分短期/长期。短期用于当前任务中间结果，长期用于联系人、偏好等。</li>
+<li><strong>执行器（Executor）</strong>：把步骤映射为工具调用并处理返回值、失败和重试逻辑。</li>
+</ol>
+<h2 id="构建你的第一个-ai-agent任务规划助手">构建你的第一个 AI Agent：任务规划助手<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#构建你的第一个-ai-agent任务规划助手" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>我们将构建一个 <strong>任务规划助手</strong>。它的目标是：根据用户给出的一个复杂任务（例如：我想去旅行），自动将其分解成一系列有序的、可执行的具体步骤。</p>
+<p>目录结构如下：</p>
+<h3 id="第一步搭建智能大脑">第一步：搭建智能大脑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步搭建智能大脑" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agent 的大脑需要推理能力。我们将使用 OpenAI 的 GPT 模型（通过 API 调用）作为我们 Agent 的大脑。</p>
+<p>你需要准备一个 OpenAI API 密钥，也可以使用 DeepSeek 的 API key，可以兼容。</p>
+<p>本章节测试示例使用了 DeepSeek 的 API key， 我们可以先去 <a href="https://platform.deepseek.com/api_keys" class="external external-link">https://platform.deepseek.com/api_keys<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 申请 。</p>
+<blockquote>
+<p>也可以直接使用百炼与方舟的 Coding Plan 套餐：<a href="https://www.runoob.com/claude-code/coding-plan.html" class="external external-link">https://www.runoob.com/claude-code/coding-plan.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+</blockquote>
+<p>首先，安装必要的库：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip3 install openai</span></span></code></pre></figure>
+<p>可以使用以下代码测试使用运行成功：</p>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from openai import OpenAI</p>
+<p>DEEPSEEK_API_KEY = “sk-xxxxxxx”  # 这里设置你申请的 key
+DEEPSEEK_API_URL = “<a href="https://api.deepseek.com/v1" class="external external-link">https://api.deepseek.com/v1<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”</p>
+<p>client = OpenAI(
+    api_key = DEEPSEEK_API_KEY,
+    base_url = DEEPSEEK_API_URL)</p>
+<p>response = client.chat.completions.create(
+    model=“deepseek-v4-flash”,
+    messages=[
+        {“role”: “system”, “content”: “You are a helpful assistant”},
+        {“role”: “user”, “content”: “Hello”},
+    ],
+    stream=False
+)</p>
+<p>print(response.choices[0].message.content)</p>
+<p>如果安装配置成功会输出类似如下内容：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Hello! How can I assist you today</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">?</span></span></code></pre></figure>
+<p>然后，让我们创建一个最简单的大脑模块：</p>
+<h2 id="brainpy-文件代码">brain.py 文件代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#brainpy-文件代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="brainpy">brain.py<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#brainpy" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>from openai import OpenAI
+import os</p>
+<p>DEEPSEEK_API_KEY = “sk-xxxxxxx”  # 这里设置你申请的 key
+DEEPSEEK_API_URL = “<a href="https://api.deepseek.com/v1" class="external external-link">https://api.deepseek.com/v1<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”</p>
+<p>client = OpenAI(
+    api_key = DEEPSEEK_API_KEY,
+    base_url = DEEPSEEK_API_URL)</p>
+<p>class AgentBrain:
+    &quot;&quot;&quot;Agent 的大脑，负责思考与决策&quot;&quot;&quot;
+   
+    def <strong>init</strong>(self, model=“deepseek-v4-flash”):
+        self.model = model
+   
+    def think(self, prompt):
+        &quot;&quot;&quot;核心思考函数：接收提示，返回模型的思考结果&quot;&quot;&quot;
+        try:
+            # 使用客户端调用 Chat Completions API（v1.x 版本写法）
+            response = client.chat.completions.create(
+                model=self.model,
+                messages=[{“role”: “user”, “content”: prompt}],
+                temperature=0.5,  # 控制创造性，越低越专注
+                max_tokens=500    # 控制回复长度
+            )
+            # 提取模型返回的文本内容（v1.x 版本属性路径变更）
+            reasoning = response.choices[0].message.content
+            return reasoning.strip()
+        except Exception as e:
+            return f”思考过程出错: {e}“</p>
+<h1 id="简单测试一下大脑是否工作">简单测试一下大脑是否工作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#简单测试一下大脑是否工作" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>if <strong>name</strong> == “<strong>main</strong>”:
+    brain = AgentBrain()
+    test_prompt = “你好，请简单介绍一下你自己。”
+    print(“测试提问：”, test_prompt)
+    print(“大脑回复：”, brain.think(test_prompt))</p>
+<p>执行以上代码，输出结果大概如下：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">测试提问： 你好，请简单介绍一下你自己。
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">大脑回复： 你好！我是DeepSeek，由深度求索公司创造的AI助手，很高兴认识你！</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&amp;</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">#x1f60a;
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">让我简单介绍一下自己：
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">我的特点：</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">完全免费</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：目前没有任何收费计划，你可以放心使用
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">知识丰富</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：知识截止到2024年7月，涵盖各个领域
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">对话能力强</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">：支持128K上下文，可以进行长篇深入对话</span></span></code></pre></figure>
+<p><strong>代码解析</strong>：</p>
+<ol>
+<li>我们创建了一个 <code>AgentBrain</code> 类来封装与 LLM 的交互。</li>
+<li><code>think</code> 方法是核心，它接收一个字符串 <code>prompt</code>（提示词），将其发送给 GPT API。</li>
+<li><code>temperature</code> 参数很重要：设置为 0.5 能让 Agent 在创造性和稳定性之间取得平衡，适合做规划任务。</li>
+<li>最后返回模型生成的文本，这就是 Agent 思考的结果。</li>
+</ol>
+<h3 id="第二步定义手脚工具与行动">第二步：定义手脚：工具与行动<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步定义手脚工具与行动" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agent 需要有执行能力。我们为它定义几个简单的工具（函数），让它能够动手做事。</p>
+<h2 id="toolspy-文件代码">tools.py 文件代码<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#toolspy-文件代码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="toolspy">tools.py<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#toolspy" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>import datetime</p>
+<p>class AgentTools:
+    &quot;&quot;&quot;Agent 可以使用的工具集合&quot;&quot;&quot;
+   
+    @staticmethod
+    def search_web(query):
+        &quot;&quot;&quot;模拟网络搜索工具（此处为模拟）&quot;&quot;&quot;
+        mock_results = {
+            “旅行目的地推荐”: “巴黎、东京、马尔代夫、云南丽江…”,
+            “北京天气”: “明天晴，气温 15-25°C，微风。”,
+            “Python 教程”: “推荐菜鸟教程等网站。”
+        }
+        for key, value in mock_results.items():
+            if key in query:
+                return f”[网络搜索] 关于 ‘{query}’ 的结果：{value}”
+        return f”[网络搜索] 未找到 ‘{query}’ 的明确信息。”
+   
+    @staticmethod
+    def make_schedule(steps):
+        &quot;&quot;&quot;制定日程计划工具&quot;&quot;&quot;
+        schedule = “生成的日程计划：\n”
+        for i, step in enumerate(steps, 1):
+            schedule += f”{i}. {step}\n”
+        return schedule
+   
+    @staticmethod
+    def get_current_time():
+        &quot;&quot;&quot;获取当前时间工具&quot;&quot;&quot;
+        now = datetime.datetime.now()
+        return f”[系统时间] 现在是：{now.strftime(‘%Y-%m-%d %H:%M:%S’)}”
+   
+    @staticmethod
+    def calculate(expression):
+        &quot;&quot;&quot;简单计算器工具（安全版本，修复兼容性问题）&quot;&quot;&quot;
+        try:
+            # 1. 严格过滤非法字符（仅允许数字、基础运算符、括号、空格）
+            allowed_chars = set(“0123456789+-*/(). ”)
+            if not all(c in allowed_chars for c in expression):
+                return “[计算器] 表达式包含非法字符，拒绝计算。”
+           
+            # 2. 简化安全校验：移除易出错的 ast.walk 逻辑，改用基础语法检查
+            # 先替换空格，避免空表达式
+            clean_expr = expression.strip().replace(” ”, &quot;&quot;)
+            if not clean_expr:
+                return “[计算器] 表达式不能为空。”
+           
+            # 3. 安全执行计算（限制内置函数，仅保留基础运算）
+            # 自定义安全的全局环境，仅允许基础数学运算
+            safe_globals = {
+                ‘<strong>builtins</strong>’: {},
+                ‘pow’: pow,
+                ‘abs’: abs
+            }
+            # 使用 eval 但严格限制环境，且已过滤非法字符，大幅降低风险
+            result = eval(clean_expr, safe_globals)
+            return f”[计算器] {expression} = {result}”
+       
+        except ZeroDivisionError:
+            return “[计算器] 错误：除数不能为零。”
+        except SyntaxError:
+            return “[计算器] 表达式语法错误（如括号不匹配、运算符错误）。”
+        except Exception as e:
+            return f”[计算器] 计算错误: {str(e)}“</p>
+<h1 id="测试工具">测试工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#测试工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>if <strong>name</strong> == “<strong>main</strong>”:
+    print(AgentTools.search_web(“北京天气”))
+    print(AgentTools.get_current_time())
+    print(AgentTools.calculate(“3 + 5 * 2”))       # 正常计算
+    print(AgentTools.calculate(“10 / 0”))          # 除零错误
+    print(AgentTools.calculate(“<strong>import</strong>(‘os’).system(‘ls’)”))  # 非法字符过滤</p>
+<p><strong>代码解析</strong>：</p>
+<ol>
+<li>每个 <code>@staticmethod</code> 都定义了一个 Agent 可以调用的工具。</li>
+<li><code>search_web</code> 目前是模拟的，真实场景需要接入真正的搜索 API。</li>
+<li><code>make_schedule</code> 用于将任务列表格式化为计划。</li>
+<li><strong>重要安全提示</strong>：<code>calculate</code> 工具中的 <code>eval()</code> 函数在真实产品中极其危险，必须用更安全的方式（如 <code>ast.literal_eval</code>）替换或彻底移除。这里仅为演示 Agent 如何调用函数。</li>
+</ol>
+<h3 id="第三步组装-agent实现核心循环">第三步：组装 Agent：实现核心循环<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步组装-agent实现核心循环" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>现在，我们将大脑和工具组装起来，并实现核心的决策循环。我们将设计一个简单的规则：让大脑根据任务决定使用哪个工具。</p>
+<h2 id="实例-2">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="agentpy">agent.py<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agentpy" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>from brain import AgentBrain
+from tools import AgentTools</p>
+<p>class SimpleAgent:
+    &quot;&quot;&quot;一个简单的任务规划 AI Agent&quot;&quot;&quot;
+   
+    def <strong>init</strong>(self):
+        self.brain = AgentBrain()
+        # 静态工具类无需实例化
+        self.tools = AgentTools
+        # 定义 Agent 知道的工具列表及其描述，用于提示大脑
+        self.tool_descriptions = &quot;&quot;&quot;
+        你可以使用以下工具：
+        1. 搜索工具：当你需要获取最新、未知的信息时使用，例如’搜索 北京天气’。
+        2. 计划工具：当你需要将多个步骤整理成计划时使用，例如’制定计划 [步骤1，步骤2]’。
+        3. 时间工具：当你需要知道当前时间时使用，指令就是’获取时间’。
+        4. 计算工具：当你需要进行数学计算时使用，例如’计算 3+5*2’。
+        &quot;&quot;&quot;
+   
+    def run(self, user_task):
+        &quot;&quot;&quot;运行 Agent 的主循环&quot;&quot;&quot;
+        print(f”🎯 用户任务: {user_task}”)
+        print(”=” * 40)
+       
+        # 第一步：感知与初步思考
+        initial_prompt = f&quot;&quot;&quot;
+        你的角色是一个任务规划助手。
+        {self.tool_descriptions}
+       
+        用户的任务是：{user_task}
+       
+        请严格按照以下固定格式回答，不要添加额外内容：
+        思考：[简要分析任务需要什么]
+        工具：[选择要使用的工具名称，如果没有合适的就写’无’]
+        指令：[发送给该工具的具体指令内容]
+        &quot;&quot;&quot;
+       
+        initial_response = self.brain.think(initial_prompt)
+        print(”🧠 初始思考结果：”)
+        print(initial_response)
+        print(”-” * 20)
+       
+        # 第二步：解析思考结果，提取工具和指令（鲁棒性优化）
+        lines = [line.strip() for line in initial_response.split(‘\n’) if line.strip()]
+        tool_to_use = “无”
+        tool_instruction = &quot;&quot;
+       
+        for line in lines:
+            if line.startswith(“思考：”):
+                continue  # 跳过思考行
+            elif line.startswith(“工具：”):
+                tool_to_use = line.replace(“工具：”, &quot;&quot;).strip()
+            elif line.startswith(“指令：”):
+                tool_instruction = line.replace(“指令：”, &quot;&quot;).strip()
+       
+        # 第三步：执行行动
+        result = self._use_tool(tool_to_use, tool_instruction)
+        print(“🛠️  执行结果：”)
+        print(result)
+        print(”=” * 40)
+       
+        # 第四步：整合结果并反馈给用户
+        final_prompt = f&quot;&quot;&quot;
+        用户原始任务：{user_task}
+        你已经进行了思考并使用了工具。
+        思考过程：{initial_response}
+        工具执行结果：{result}
+       
+        现在，请生成一段完整的、对用户的最终回复，直接给出有帮助的答案或计划，语言要自然友好。
+        &quot;&quot;&quot;
+       
+        final_response = self.brain.think(final_prompt)
+        print(”💡 最终回复给用户：”)
+        print(final_response)
+       
+        return final_response
+   
+    def _use_tool(self, tool_name, instruction):
+        &quot;&quot;&quot;根据工具名称调用具体的工具函数&quot;&quot;&quot;
+        # 统一工具名称匹配（兼容大小写/多余空格）
+        tool_name = tool_name.strip()
+       
+        if tool_name == “搜索工具”:
+            return self.tools.search_web(instruction)
+        elif tool_name == “计划工具”:
+            # 兼容中英文逗号、括号，处理空指令
+            if not instruction:
+                return “[计划工具] 未提供计划步骤，无法生成日程。”
+            # 移除括号并拆分步骤（兼容 []/()/{} 括号）
+            clean_instr = instruction.strip(’<a href="../../.." class="internal internal-link" data-slug="index"></a>{}‘).strip()
+            # 同时支持中英文逗号拆分
+            steps = [s.strip() for s in clean_instr.replace(’，’, ’,‘).split(’,’) if s.strip()]
+            return self.tools.make_schedule(steps)
+        elif tool_name == “时间工具”:
+            return self.tools.get_current_time()
+        elif tool_name == “计算工具”:
+            return self.tools.calculate(instruction)
+        elif tool_name == “无”:
+            return “[系统] 无需使用工具，直接回答用户即可。”
+        else:
+            return f”[系统] 未知工具：{tool_name}，无法执行。“</p>
+<h1 id="运行我们的-agent">运行我们的 Agent！<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#运行我们的-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>if <strong>name</strong> == “<strong>main</strong>”:
+    print(”🤖 启动 SimpleAgent…”)
+    my_agent = SimpleAgent()
+   
+    # 测试几个不同的任务
+    test_tasks = [
+        “我想去旅行，帮我规划一下需要准备什么”,
+        “现在几点了？”,
+        “计算一下 15 的平方加上 20 的三分之一是多少”,
+    ]
+   
+    for task in test_tasks:
+        my_agent.run(task)
+        print(“\n” + ”#” * 50 + “\n”)</p>
+<p>执行代码，输出类似如下：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">启动 SimpleAgent</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">用户任务: 我想去旅行，帮我规划一下需要准备什么
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">========================================</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">初始思考结果：
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">思考：用户需要规划旅行前的准备工作。这是一个通用任务，不需要最新信息或计算，但需要将多个准备步骤整理成一个清晰的计划。
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">工具：计划工具
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">指令：制定计划 [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 确定目的地和旅行时间，</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 预订交通票（机票</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">火车票）和住宿，</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 准备旅行证件（身份证、护照、签证等），</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 安排行程和景点门票，</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 打包行李（衣物、洗漱用品、药品、充电器等），</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">6</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 安排家中事务（宠物、植物、邮件等），</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">7</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 兑换货币或准备支付方式，</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">8</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 购买旅行保险]
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--------------------</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">执行结果：
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span></span></code></pre></figure>
+<p><strong>代码解析与运行流程</strong>：</p>
+<ol>
+<li><strong>初始化</strong>：Agent 创建了自己的大脑 (<code>AgentBrain</code>) 和工具箱 (<code>AgentTools</code>)。</li>
+<li><strong>接收任务</strong>：<code>run</code> 方法启动，接收 <code>user_task</code>（如”我想去旅行”）。</li>
+<li><strong>思考阶段</strong>：将任务和工具描述组合成 <code>initial_prompt</code>，发送给大脑。大脑返回的文本中包含了它选择的”工具”和给工具的”指令”。</li>
+<li><strong>行动阶段</strong>：<code>_use_tool</code> 函数根据大脑的选择，调用对应的工具函数并返回结果。</li>
+<li><strong>反馈与总结</strong>：将原始任务、思考过程和行动结果再次发送给大脑，让它生成一个对用户友好的最终回复。</li>
+</ol>
+<p>运行这个程序，你会看到 Agent 如何一步步分析任务、选择工具、执行并给出答案。</p>
+<h2 id="实践练习升级你的-agent">实践练习：升级你的 Agent<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实践练习升级你的-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>你已经拥有了一个能跑通的 AI Agent！但这只是起点。尝试完成以下练习，让它变得更强大：</p>
+<ol>
+<li><strong>练习一：增加记忆功能</strong></li>
+</ol>
+<ul>
+<li><strong>目标</strong>：让 Agent 能记住对话历史。</li>
+<li><strong>提示</strong>：在 <code>SimpleAgent</code> 类中添加一个 <code>self.conversation_history = []</code> 列表。每次调用 <code>brain.think</code> 时，不仅发送当前提示，还将之前的历史对话也作为上下文发送。执行后，将新的对话回合（用户输入、AI 思考、工具结果）加入历史列表。</li>
+</ul>
+<ol start="2">
+<li><strong>练习二：实现自动工具选择</strong></li>
+</ol>
+<ul>
+<li><strong>目标</strong>：让大脑的回复是标准的 JSON 格式，便于程序自动解析，而不是依赖文本提取。</li>
+<li><strong>提示</strong>：修改提示词，要求大脑必须返回如 <code>{&quot;thought&quot;: &quot;…&quot;， &quot;tool&quot;: &quot;…&quot;， &quot;instruction&quot;: &quot;…&quot;}</code> 的 JSON 字符串。然后在代码中使用 <code>json.loads()</code> 来解析，提高稳定性和准确性。</li>
+</ul>
+<ol start="3">
+<li><strong>练习三：添加一个新工具</strong></li>
+</ol>
+<ul>
+<li><strong>目标</strong>：让 Agent 能处理待办事项。</li>
+<li><strong>提示</strong>：在 <code>AgentTools</code> 类中添加 <code>todo_list = []</code> 和两个新方法：<code>add_todo(item)</code> 和 <code>show_todos()</code>。在工具描述中告诉大脑这个新工具的存在，并更新 <code>_use_tool</code> 方法来调用它。</li>
+</ul>
+<h2 id="总结与展望">总结与展望<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#总结与展望" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>恭喜你！你已经成功构建了一个具备基本 <strong>感知-思考-行动</strong> 循环的 AI Agent。我们回顾一下关键点：</p>
+<ul>
+<li><strong>核心概念</strong>：AI Agent = 大脑（LLM） + 感知 + 行动 + 目标。</li>
+<li><strong>实现关键</strong>：</li>
+</ul>
+<ol>
+<li><strong>大脑</strong>：通过 API 调用 LLM（如 GPT）进行推理。</li>
+<li><strong>工具</strong>：将具体能力封装成函数，供 Agent 调用。</li>
+<li><strong>循环</strong>：用代码逻辑将思考、决策、执行串联起来。</li>
+</ol>
+<p>这只是 AI Agent 世界的冰山一角。工业级框架如 <strong>LangChain</strong>、<strong>AutoGen</strong> 提供了更强大的工具集成、记忆管理、多 Agent 协作等功能。要深入探索，建议你：</p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-36" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#python-从零纯手写-ai-agent" data-for="python-从零纯手写-ai-agent">Python 从零纯手写 AI Agent</a></li><li class="depth-0"><a href="#python-实现-ai-agent" data-for="python-实现-ai-agent">Python 实现 AI Agent</a></li><li class="depth-1"><a href="#简单的测试案例" data-for="简单的测试案例">简单的测试案例</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#-----------------------------" data-for="-----------------------------">-----------------------------</a></li><li class="depth-0"><a href="#memory非常轻量" data-for="memory非常轻量">Memory（非常轻量）</a></li><li class="depth-0"><a href="#------------------------------1" data-for="------------------------------1">-----------------------------</a></li><li class="depth-0"><a href="#------------------------------2" data-for="------------------------------2">-----------------------------</a></li><li class="depth-0"><a href="#llm-抽象替换点" data-for="llm-抽象替换点">LLM 抽象（替换点）</a></li><li class="depth-0"><a href="#------------------------------3" data-for="------------------------------3">-----------------------------</a></li><li class="depth-0"><a href="#------------------------------4" data-for="------------------------------4">-----------------------------</a></li><li class="depth-0"><a href="#工具注册与模拟工具" data-for="工具注册与模拟工具">工具注册与模拟工具</a></li><li class="depth-0"><a href="#------------------------------5" data-for="------------------------------5">-----------------------------</a></li><li class="depth-0"><a href="#模拟工具天气查询真实情况会调用天气-api" data-for="模拟工具天气查询真实情况会调用天气-api">模拟工具：天气查询（真实情况会调用天气 API）</a></li><li class="depth-0"><a href="#模拟工具发送消息真实情况会调用短信邮件企业微信等" data-for="模拟工具发送消息真实情况会调用短信邮件企业微信等">模拟工具：发送消息（真实情况会调用短信/邮件/企业微信等）</a></li><li class="depth-0"><a href="#模拟工具简单搜索示意" data-for="模拟工具简单搜索示意">模拟工具：简单搜索（示意）</a></li><li class="depth-0"><a href="#------------------------------6" data-for="------------------------------6">-----------------------------</a></li><li class="depth-0"><a href="#planner--executor" data-for="planner--executor">Planner / Executor</a></li><li class="depth-0"><a href="#------------------------------7" data-for="------------------------------7">-----------------------------</a></li><li class="depth-0"><a href="#------------------------------8" data-for="------------------------------8">-----------------------------</a></li><li class="depth-0"><a href="#agent-本体" data-for="agent-本体">Agent 本体</a></li><li class="depth-0"><a href="#------------------------------9" data-for="------------------------------9">-----------------------------</a></li><li class="depth-0"><a href="#------------------------------10" data-for="------------------------------10">-----------------------------</a></li><li class="depth-0"><a href="#运行示例" data-for="运行示例">运行示例</a></li><li class="depth-0"><a href="#------------------------------11" data-for="------------------------------11">-----------------------------</a></li><li class="depth-1"><a href="#构建你的第一个-ai-agent任务规划助手" data-for="构建你的第一个-ai-agent任务规划助手">构建你的第一个 AI Agent：任务规划助手</a></li><li class="depth-2"><a href="#第一步搭建智能大脑" data-for="第一步搭建智能大脑">第一步：搭建智能大脑</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-1"><a href="#brainpy-文件代码" data-for="brainpy-文件代码">brain.py 文件代码</a></li><li class="depth-0"><a href="#brainpy" data-for="brainpy">brain.py</a></li><li class="depth-0"><a href="#简单测试一下大脑是否工作" data-for="简单测试一下大脑是否工作">简单测试一下大脑是否工作</a></li><li class="depth-2"><a href="#第二步定义手脚工具与行动" data-for="第二步定义手脚工具与行动">第二步：定义手脚：工具与行动</a></li><li class="depth-1"><a href="#toolspy-文件代码" data-for="toolspy-文件代码">tools.py 文件代码</a></li><li class="depth-0"><a href="#toolspy" data-for="toolspy">tools.py</a></li><li class="depth-0"><a href="#测试工具" data-for="测试工具">测试工具</a></li><li class="depth-2"><a href="#第三步组装-agent实现核心循环" data-for="第三步组装-agent实现核心循环">第三步：组装 Agent：实现核心循环</a></li><li class="depth-1"><a href="#实例-2" data-for="实例-2">实例</a></li><li class="depth-0"><a href="#agentpy" data-for="agentpy">agent.py</a></li><li class="depth-0"><a href="#运行我们的-agent" data-for="运行我们的-agent">运行我们的 Agent！</a></li><li class="depth-1"><a href="#实践练习升级你的-agent" data-for="实践练习升级你的-agent">实践练习：升级你的 Agent</a></li><li class="depth-1"><a href="#总结与展望" data-for="总结与展望">总结与展望</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

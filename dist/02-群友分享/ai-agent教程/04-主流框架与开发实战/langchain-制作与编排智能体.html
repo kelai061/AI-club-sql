@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>LangChain 制作与编排智能体</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="LangChain 制作与编排智能体"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="LangChain 制作与编排智能体"/><meta name="twitter:description" content="LangChain 制作与编排智能体 出处：www.runoob.com/ai-agent/langchain-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 LangChain 制作智能体 LangChain 是一个用于构建 LLM 应用的框架，可以把模型调用升级为可组合、可控制、可扩展的应用系统。 LangChain 解决的不是怎么调模型，而是： 多步骤推理如何组织 外部数据如何接入 工具如何被模型安全调用 上下文如何被长期管理 开源地址：github.com/langchain-ai/langchain。 LangChain 教程：ww..."/><meta property="og:description" content="LangChain 制作与编排智能体 出处：www.runoob.com/ai-agent/langchain-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 LangChain 制作智能体 LangChain 是一个用于构建 LLM 应用的框架，可以把模型调用升级为可组合、可控制、可扩展的应用系统。 LangChain 解决的不是怎么调模型，而是： 多步骤推理如何组织 外部数据如何接入 工具如何被模型安全调用 上下文如何被长期管理 开源地址：github.com/langchain-ai/langchain。 LangChain 教程：ww..."/><meta property="og:image:alt" content="LangChain 制作与编排智能体 出处：www.runoob.com/ai-agent/langchain-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 LangChain 制作智能体 LangChain 是一个用于构建 LLM 应用的框架，可以把模型调用升级为可组合、可控制、可扩展的应用系统。 LangChain 解决的不是怎么调模型，而是： 多步骤推理如何组织 外部数据如何接入 工具如何被模型安全调用 上下文如何被长期管理 开源地址：github.com/langchain-ai/langchain。 LangChain 教程：ww..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/langchain-制作与编排智能体"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/langchain-制作与编排智能体"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="LangChain 制作与编排智能体 出处：www.runoob.com/ai-agent/langchain-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 LangChain 制作智能体 LangChain 是一个用于构建 LLM 应用的框架，可以把模型调用升级为可组合、可控制、可扩展的应用系统。 LangChain 解决的不是怎么调模型，而是： 多步骤推理如何组织 外部数据如何接入 工具如何被模型安全调用 上下文如何被长期管理 开源地址：github.com/langchain-ai/langchain。 LangChain 教程：ww..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/langchain-制作与编排智能体-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/langchain-制作与编排智能体-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/langchain-制作与编排智能体-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/04-主流框架与开发实战/langchain-制作与编排智能体" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-31" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-31" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/04-主流框架与开发实战/">04-主流框架与开发实战</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>LangChain 制作与编排智能体</a></div></nav><h1 class="article-title">LangChain 制作与编排智能体</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/主流框架与开发实战" class="internal internal-link tag-link">主流框架与开发实战</a><span class="note-properties-separator">, </span><a href="../../../tags/langchain-" class="internal internal-link tag-link">langchain-</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>27分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="langchain-制作与编排智能体">LangChain 制作与编排智能体<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#langchain-制作与编排智能体" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/langchain-agent.html" class="external external-link">https://www.runoob.com/ai-agent/langchain-agent.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>04-主流框架与开发实战</code></p>
+</blockquote>
+<hr/>
+<h1 id="langchain-制作智能体">LangChain 制作智能体<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#langchain-制作智能体" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>LangChain 是一个用于构建 LLM 应用的框架，可以把模型调用升级为可组合、可控制、可扩展的应用系统。</p>
+<p>LangChain 解决的不是怎么调模型，而是：</p>
+<ul>
+<li>多步骤推理如何组织</li>
+<li>外部数据如何接入</li>
+<li>工具如何被模型安全调用</li>
+<li>上下文如何被长期管理</li>
+</ul>
+<blockquote>
+<p>开源地址：<strong><a href="https://github.com/langchain-ai/langchain" class="external external-link">https://github.com/langchain-ai/langchain<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></strong>。</p>
+<p>LangChain 教程：<a href="https://www.runoob.com/langchain/langchain-tutorial.html" class="external external-link">https://www.runoob.com/langchain/langchain-tutorial.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+</blockquote>
+<blockquote>
+<p>想象一下，你正在建造一个智能机器人助手，这个助手需要能够理解你的问题、从各种资料中查找信息、进行逻辑推理，最后用自然语言回答你。单独使用像 GPT 这样的语言模型，就像只给机器人装了一个聪明的大脑，但它还缺少手和眼睛——它不知道如何获取外部数据、如何执行具体任务。</p>
+</blockquote>
+<p><strong>LangChain</strong> 就是这样一个框架，它充当了连接器和协调者的角色。</p>
+<p><strong>LangChain</strong> 将强大的语言模型（如 GPT-4、DeepSeek）与外部数据源、计算工具以及记忆系统巧妙地连接起来，构建出功能强大、可实际应用的 AI 应用程序。</p>
+<p>简单来说，LangChain 的核心价值在于：<strong>让语言模型变得有用</strong>，解决了大语言模型（LLM）的几个关键限制：</p>
+<ol>
+<li><strong>知识实时性</strong>：LLM 的训练数据有截止日期，无法获取最新信息。</li>
+<li><strong>领域专精性</strong>：通用 LLM 缺乏特定行业或公司的私有知识。</li>
+<li><strong>可操作性</strong>：LLM 本身无法执行如计算、查询数据库、调用 API 等动作。</li>
+<li><strong>对话连贯性</strong>：在多轮对话中，LLM 需要记住之前的聊天历史。</li>
+</ol>
+<p>LangChain 通过一系列标准化的链（Chains）和组件（Components）来组织这些功能，让开发者能够像搭积木一样，快速构建复杂的 AI 应用。</p>
+<p>LangChain 模块总览：</p>
+<ul>
+<li><strong>LLMs / ChatModels</strong>：模型接口</li>
+<li><strong>Prompt Templates</strong>：Prompt 结构化</li>
+<li><strong>Chains</strong>：流程编排</li>
+<li><strong>Memory</strong>：上下文管理</li>
+<li><strong>Retrievers / VectorStores</strong>：知识检索</li>
+<li><strong>Agents &amp; Tools</strong>：自动决策与执行</li>
+</ul>
+<h3 id="环境准备">环境准备<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#环境准备" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>使用国内镜像安装：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install langchain langchain</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">openai langchain</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">community python</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">dotenv </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">i https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">mirrors.aliyun.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pypi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">simple</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span></span></code></pre></figure>
+<p>如果你使用 OpenAI 的话，可以配置环境变量：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">OPENAI_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你的key</span></span></code></pre></figure>
+<p>然后使用以下代码测试：</p>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>from langchain_openai import ChatOpenAI</p>
+<p>llm = ChatOpenAI(model=“gpt-4o-mini”, temperature=0)</p>
+<p>resp = llm.invoke(“用一句话解释什么是 LangChain”)
+print(resp.content)</p>
+<p>国内我们可以采用 DeepSeek 大模型来测试，如果还没有需要先去 <a href="https://platform.deepseek.com/api_keys" class="external external-link">https://platform.deepseek.com/api_keys<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 创建一个 API key。</p>
+<p>DeepSeek 的 API 文档参考：<a href="https://api-docs.deepseek.com/zh-cn/" class="external external-link">https://api-docs.deepseek.com/zh-cn/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<p>如果你需要统一管理多个第三方模型，可以选择安装 LiteLLM 作为模型网关：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">U litellm</span></span></code></pre></figure>
+<p>不过本文的示例直接使用 <code>ChatOpenAI</code> 配合 <code>openai_api_base</code> 参数连接 DeepSeek，无需额外安装 LiteLLM。</p>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from langchain_openai import ChatOpenAI</p>
+<h1 id="建议将-api-key-放在环境变量中或者直接在此处赋值生产环境请勿硬编码">建议将 API Key 放在环境变量中，或者直接在此处赋值（生产环境请勿硬编码）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#建议将-api-key-放在环境变量中或者直接在此处赋值生产环境请勿硬编码" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="osenvirondeepseek_api_key--sk-你的deepseek密钥">os.environ[“DEEPSEEK_API_KEY”] = “sk-你的DeepSeek密钥”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#osenvirondeepseek_api_key--sk-你的deepseek密钥" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="初始化模型">初始化模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#初始化模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = ChatOpenAI(
+    model=“deepseek-v4-pro”,             # DeepSeek V4 模型名称
+    openai_api_key=“sk-你的Key”,        # 填入你的 DeepSeek API Key
+    openai_api_base=“<a href="https://api.deepseek.com" class="external external-link">https://api.deepseek.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”, # DeepSeek 的 API 地址
+    temperature=0.7,
+    max_tokens=1024
+)</p>
+<h1 id="测试一下">测试一下<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#测试一下" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>response = llm.invoke(“你好，DeepSeek！请做一个简短的自我介绍。”)
+print(response.content)</p>
+<p>执行以上代码，就会输出内容：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你好！很高兴认识你！
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">我是DeepSeek，由深度求索公司创造的AI助手。我的特点包括：
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">。。。</span></span></code></pre></figure>
+<h2 id="构建-lcel-链-langchain-expression-language">构建 LCEL 链 (LangChain Expression Language)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#构建-lcel-链-langchain-expression-language" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>单纯调用模型不够强大，我们需要构建一个标准的处理流程：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Prompt </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">-></span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> LLM</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error"> -></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> OutputParser</span></span></code></pre></figure>
+<p>完整代码如下：</p>
+<h2 id="实例-2">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import ChatOpenAI</p>
+<h1 id="1-定义模型-model">1. 定义模型 (Model)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-定义模型-model" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = ChatOpenAI(
+    model=“deepseek-v4-pro”,
+    openai_api_key=“你的_DEEPSEEK_API_KEY”,
+    openai_api_base=“<a href="https://api.deepseek.com" class="external external-link">https://api.deepseek.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”
+)</p>
+<h1 id="2-定义提示词模板-prompt">2. 定义提示词模板 (Prompt)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-定义提示词模板-prompt" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="system-设定-ai-的角色">system: 设定 AI 的角色<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#system-设定-ai-的角色" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="user-用户的具体输入">user: 用户的具体输入<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#user-用户的具体输入" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>prompt = ChatPromptTemplate.from_messages([
+    (“system”, “你是一个资深的技术专家，擅长用通俗易懂的’大白话’解释复杂的科技概念。你的解释应该包含一个生动的比喻。”),
+    (“user”, “{concept}”)
+])</p>
+<h1 id="3-定义输出解析器-output-parser">3. 定义输出解析器 (Output Parser)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-定义输出解析器-output-parser" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="将模型的-message-对象直接转为纯字符串">将模型的 Message 对象直接转为纯字符串<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#将模型的-message-对象直接转为纯字符串" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>parser = StrOutputParser()</p>
+<h1 id="4-构建链-chain---使用管道符--连接">4. 构建链 (Chain) - 使用管道符 | 连接<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-构建链-chain---使用管道符--连接" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="流程输入字典---填充-prompt---发给-llm---解析输出">流程：输入字典 -> 填充 Prompt -> 发给 LLM -> 解析输出<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#流程输入字典---填充-prompt---发给-llm---解析输出" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>chain = prompt | llm | parser</p>
+<h1 id="5-调用链">5. 调用链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-调用链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>concept_to_explain = “量子纠缠”
+print(f”正在解释概念：{concept_to_explain}…\n”)</p>
+<p>result = chain.invoke({“concept”: concept_to_explain})</p>
+<p>print(”--- DeepSeek 回答 ---”)
+print(result)</p>
+<h3 id="流式输出-streaming">流式输出 (Streaming)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#流式输出-streaming" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在实际应用（如聊天机器人）中，我们需要像 ChatGPT 那样一个字一个字地吐出文字，而不是等生成完了才一次性显示。</p>
+<p>LangChain 对此支持非常简单，使用 .stream() 替代 .invoke()：</p>
+<h2 id="实例-3">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import ChatOpenAI</p>
+<h1 id="1-定义模型-model-1">1. 定义模型 (Model)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-定义模型-model-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = ChatOpenAI(
+    model=“deepseek-v4-pro”,
+    openai_api_key=“你的_DEEPSEEK_API_KEY”,
+    openai_api_base=“<a href="https://api.deepseek.com" class="external external-link">https://api.deepseek.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”
+)</p>
+<h1 id="2-定义提示词模板-prompt-1">2. 定义提示词模板 (Prompt)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-定义提示词模板-prompt-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="system-设定-ai-的角色-1">system: 设定 AI 的角色<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#system-设定-ai-的角色-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="user-用户的具体输入-1">user: 用户的具体输入<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#user-用户的具体输入-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>prompt = ChatPromptTemplate.from_messages([
+    (“system”, “你是一个资深的技术专家，擅长用通俗易懂的’大白话’解释复杂的科技概念。你的解释应该包含一个生动的比喻。”),
+    (“user”, “{concept}”)
+])</p>
+<h1 id="3-定义输出解析器-output-parser-1">3. 定义输出解析器 (Output Parser)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-定义输出解析器-output-parser-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="将模型的-message-对象直接转为纯字符串-1">将模型的 Message 对象直接转为纯字符串<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#将模型的-message-对象直接转为纯字符串-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>parser = StrOutputParser()</p>
+<h1 id="4-构建链-chain---使用管道符--连接-1">4. 构建链 (Chain) - 使用管道符 | 连接<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-构建链-chain---使用管道符--连接-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="流程输入字典---填充-prompt---发给-llm---解析输出-1">流程：输入字典 -> 填充 Prompt -> 发给 LLM -> 解析输出<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#流程输入字典---填充-prompt---发给-llm---解析输出-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>chain = prompt | llm | parser</p>
+<h1 id="5-调用链-1">5. 调用链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-调用链-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>concept_to_explain = “量子纠缠”
+print(f”正在解释概念：{concept_to_explain} (流式输出)…\n”)</p>
+<h1 id="这里的-chunk-是每次生成的片段">这里的 chunk 是每次生成的片段<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#这里的-chunk-是每次生成的片段" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>for chunk in chain.stream({“concept”: “递归神经网络”}):
+    print(chunk, end=&quot;&quot;, flush=True)</p>
+<h3 id="代码结构">代码结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 id="prompt">Prompt<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#prompt" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li><code>ChatPromptTemplate</code> 明确区分 <code>system / user</code></li>
+<li>Prompt 是<strong>结构化输入函数</strong>，不是字符串</li>
+</ul>
+<h4 id="llm">LLM<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#llm" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li><code>ChatOpenAI</code> 只是统一接口</li>
+<li>LangChain 不增强模型能力，只增强<strong>可控性</strong></li>
+</ul>
+<h4 id="outputparser">OutputParser<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#outputparser" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>模型输出永远是 <code>Message</code></li>
+<li><code>StrOutputParser</code> 是<strong>显式类型转换</strong></li>
+<li>没有 Parser，工程不可控</li>
+</ul>
+<h2 id="核心组件详解">核心组件详解<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心组件详解" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="1-模型-models">1. 模型 (Models)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-模型-models" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>LangChain 提供了统一的抽象接口，现在主要推荐使用 <strong>Chat Models</strong>，因为目前的模型（如 DeepSeek, GPT-4）大多针对对话进行了优化。</p>
+<ul>
+<li><strong>Chat Models</strong>: 输入和输出是结构化的消息。</li>
+<li><code>SystemMessage</code>: 设定 AI 角色。</li>
+<li><code>HumanMessage</code>: 用户发送的消息。</li>
+<li><code>AIMessage</code>: AI 返回的消息。</li>
+</ul>
+<h3 id="2-提示词-prompts">2. 提示词 (Prompts)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-提示词-prompts" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>新版本中，推荐使用 <code>ChatPromptTemplate</code> 来构建对话式提示词，它更符合当前主流 LLM 的调用习惯。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> langchain_core.prompts </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> ChatPromptTemplate
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 使用 from_messages 构建结构化模板
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">prompt_template </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> ChatPromptTemplate.from_messages([
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    (</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;system&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;你是一位专业的</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">{role}</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">。&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">),
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    (</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;user&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">{content}</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">])
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 动态填充变量
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">prompt </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> prompt_template.invoke({</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;role&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;美食评论家&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;content&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;评价一下这碗炸酱面&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">})
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 输出：包含 SystemMessage 和 HumanMessage 的列表</span></span></code></pre></figure>
+<h3 id="3-链-chains--lcel">3. 链 (Chains) &amp; LCEL<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-链-chains--lcel" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>重要更新：</strong> <code>LLMChain</code> 已被弃用。现在使用 <strong>LCEL (管道符 <code>|</code>)</strong> 语法。这种方式更灵活、支持异步和流式输出。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 现代写法：Prompt | Model | OutputParser
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> langchain_core.output_parsers </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> StrOutputParser
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 这里的 llm 是 ChatOpenAI(model=&quot;deepseek-v4-pro&quot;) 的实例
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">chain </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> prompt_template </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> llm </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> StrOutputParser()
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 调用链
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">result </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> chain.invoke({</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;role&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;导游&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;content&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;介绍一下故宫&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">})
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(result) </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 直接输出字符串</span></span></code></pre></figure>
+<h3 id="4-索引与检索-indexes--retrieval">4. 索引与检索 (Indexes &amp; Retrieval)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-索引与检索-indexes--retrieval" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>这是 <strong>RAG (检索增强生成)</strong> 的核心。新版本强调了将文档转化为”检索器”的过程。</p>
+<ul>
+<li><strong>流程</strong>: <code>DocumentLoaders</code> (加载) -> <code>TextSplitter</code> (切片) -> <code>Embeddings</code> (向量化) -> <code>VectorStore</code> (存储)。</li>
+<li><strong>Retriever</strong>: 不再仅仅是数据库搜索，它是一个可以集成在链中的组件。</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 将向量库转为检索器
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">retriever </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> vectorstore.as_retriever()
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 在新版链中引用
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># chain = {&quot;context&quot;: retriever, &quot;question&quot;: RunnablePassthrough()} | prompt | llm</span></span></code></pre></figure>
+<p><strong>完整 RAG 实战示例</strong></p>
+<p>下面我们来实现一个完整的 RAG 应用。首先需要安装额外依赖：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install langchain</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">community faiss</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">cpu sentence</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">transformers </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">i https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">mirrors.aliyun.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pypi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">simple</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span></span></code></pre></figure>
+<h2 id="实例-4">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_community.vectorstores import FAISS
+from langchain.text_splitter import RecursiveCharacterTextSplitter</p>
+<h1 id="加载环境变量">加载环境变量<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#加载环境变量" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>load_dotenv()</p>
+<h1 id="初始化模型和-embedding">初始化模型和 Embedding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#初始化模型和-embedding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = ChatOpenAI(
+    model=os.getenv(‘DEEPSEEK_MODEL’, ‘deepseek-v4-pro’),
+    openai_api_key=os.getenv(‘DEEPSEEK_API_KEY’),
+    openai_api_base=os.getenv(‘DEEPSEEK_BASE_URL’, ‘<a href="https://api.deepseek.com" class="external external-link">https://api.deepseek.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>’),
+)</p>
+<h1 id="使用免费的本地-embedding-模型首次运行会自动下载">使用免费的本地 Embedding 模型（首次运行会自动下载）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用免费的本地-embedding-模型首次运行会自动下载" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>embeddings = HuggingFaceEmbeddings(
+    model_name=“sentence-transformers/all-MiniLM-L6-v2”
+)</p>
+<h1 id="----1-准备知识文档----">--- 1. 准备知识文档 ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----1-准备知识文档----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="实际项目中这些文档可以从文件网页数据库等加载">实际项目中，这些文档可以从文件、网页、数据库等加载<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实际项目中这些文档可以从文件网页数据库等加载" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>documents = [
+    “LangChain 是一个用于构建大语言模型应用的开源框架，由 Harrison Chase 于 2022 年创建。”,
+    “LangChain 的核心组件包括：模型接口、提示词模板、链、记忆、检索和代理。”,
+    “LCEL（LangChain Expression Language）是 LangChain 的新一代链构建语法，使用管道符 | 连接各组件。”,
+    “RAG（检索增强生成）通过在生成前检索相关文档，让 LLM 能回答训练数据之外的问题。”,
+    “LangGraph 是 LangChain 团队推出的新框架，专门用于构建复杂的多步骤 AI 代理工作流。”,
+    “LangSmith 是 LangChain 的可观测性平台，用于调试、测试和监控 LLM 应用。”,
+]</p>
+<h1 id="----2-文本切片----">--- 2. 文本切片 ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----2-文本切片----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=100,
+    chunk_overlap=20
+)</p>
+<h1 id="这里文档已经较短实际场景中长文档会被切成多个片段">这里文档已经较短，实际场景中长文档会被切成多个片段<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#这里文档已经较短实际场景中长文档会被切成多个片段" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>texts = text_splitter.create_documents(documents)</p>
+<h1 id="----3-向量化并存入-faiss----">--- 3. 向量化并存入 FAISS ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----3-向量化并存入-faiss----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>vectorstore = FAISS.from_documents(texts, embeddings)</p>
+<h1 id="----4-创建检索器----">--- 4. 创建检索器 ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----4-创建检索器----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>retriever = vectorstore.as_retriever(search_kwargs={“k”: 2})</p>
+<h1 id="----5-构建-rag-链----">--- 5. 构建 RAG 链 ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----5-构建-rag-链----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>rag_prompt = ChatPromptTemplate.from_messages([
+    (“system”, “你是一个知识助手。根据以下检索到的上下文来回答问题。如果上下文中没有答案，就说你不知道。\n\n上下文：{context}”),
+    (“human”, “{question}”)
+])</p>
+<h1 id="辅助函数将检索到的文档拼接为字符串">辅助函数：将检索到的文档拼接为字符串<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#辅助函数将检索到的文档拼接为字符串" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def format_docs(docs):
+    return “\n”.join(doc.page_content for doc in docs)</p>
+<p>rag_chain = (
+    {“context”: retriever | format_docs, “question”: RunnablePassthrough()}
+    | rag_prompt
+    | llm
+    | StrOutputParser()
+)</p>
+<h1 id="----6-测试-rag----">--- 6. 测试 RAG ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----6-测试-rag----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>question = “LangChain 的核心组件有哪些？”
+print(f”问题：{question}”)
+print(f”回答：{rag_chain.invoke(question)}”)</p>
+<p><strong>RAG 技术要点说明：</strong></p>
+<ul>
+<li><strong>FAISS</strong> 是 Facebook 开源的向量相似度搜索库，适合本地开发测试，数据存储在内存中</li>
+<li><strong>生产环境</strong> 建议使用 Pinecone、Milvus、Chroma、Weaviate 等专业向量数据库，支持持久化和分布式</li>
+<li><strong>Embedding 模型</strong>：本示例使用 HuggingFace 的 <code>all-MiniLM-L6-v2</code> 模型，首次运行会自动下载（约 80MB）</li>
+<li>如果你有 OpenAI API Key，也可以使用 <code>OpenAIEmbeddings</code> 获得更好的中文效果</li>
+<li>国内中文场景推荐使用 <code>BAAI/bge-small-zh-v1.5</code> 等中文 Embedding 模型</li>
+<li><strong>chunk_size</strong> 和 <strong>chunk_overlap</strong> 需要根据实际文档特点调优，过大可能丢失精度，过小可能丢失上下文</li>
+</ul>
+<h3 id="5-记忆-memory">5. 记忆 (Memory)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-记忆-memory" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>重要更新：</strong> 传统的 <code>ConversationBufferMemory</code> 在复杂的 LCEL 链中较难集成。最新推荐使用 <code>ChatMessageHistory</code> 配合 <code>RunnableWithMessageHistory</code>。</p>
+<ul>
+<li><strong>核心逻辑</strong>: 记忆不再是链的一个属性，而是一个独立的消息存储库，通过 <code>session_id</code> 区分不同用户。</li>
+<li><strong>持久化</strong>: 支持存入 Redis、PostgreSQL 或内存。</li>
+</ul>
+<h3 id="6-代理-agents">6. 代理 (Agents)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-代理-agents" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>代理（Agent）是 LangChain 最强大的功能之一。与链（Chain）不同，代理可以根据用户输入<strong>自主决策</strong>调用哪些工具、以什么顺序执行，是真正的”智能体”。</p>
+<p>Agent 的核心循环：接收任务 -> 思考（选择工具）-> 执行工具 -> 观察结果 -> 继续思考或给出最终答案。</p>
+<p>使用 <code>@tool</code> 装饰器可以将任何 Python 函数转为 LLM 可调用的工具。LangChain 会自动将函数名和 docstring 传递给模型，让模型知道何时以及如何使用这个工具。</p>
+<p>下面是一个完整的 Agent 实战示例，包含天气查询、数学计算和知识搜索三个工具：</p>
+<h2 id="实例-5">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.tools import tool
+from langchain.agents import AgentExecutor, create_tool_calling_agent</p>
+<h1 id="加载环境变量-1">加载环境变量<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#加载环境变量-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>load_dotenv()</p>
+<h1 id="初始化-deepseek-模型">初始化 DeepSeek 模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#初始化-deepseek-模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = ChatOpenAI(
+    model=os.getenv(‘DEEPSEEK_MODEL’, ‘deepseek-v4-pro’),
+    openai_api_key=os.getenv(‘DEEPSEEK_API_KEY’),
+    openai_api_base=os.getenv(‘DEEPSEEK_BASE_URL’, ‘<a href="https://api.deepseek.com" class="external external-link">https://api.deepseek.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>’),
+)</p>
+<h1 id="----定义工具----">--- 定义工具 ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----定义工具----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="使用-tool-装饰器langchain-会自动将函数名和-docstring-告知模型">使用 @tool 装饰器，LangChain 会自动将函数名和 docstring 告知模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用-tool-装饰器langchain-会自动将函数名和-docstring-告知模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>@tool
+def get_current_weather(city: str) -> str:
+    &quot;&quot;&quot;获取指定城市的当前天气信息。当用户询问天气时使用此工具。&quot;&quot;&quot;
+    # 实际应用中，这里会调用真实的天气 API
+    weather_data = {
+        “北京”: “晴天，气温 28°C，湿度 45%”,
+        “上海”: “多云，气温 25°C，湿度 70%”,
+        “深圳”: “雷阵雨，气温 30°C，湿度 85%”,
+    }
+    return weather_data.get(city, f”抱歉，暂无 {city} 的天气数据”)</p>
+<p>@tool
+def calculate(expression: str) -> str:
+    &quot;&quot;&quot;计算数学表达式。当用户需要进行数学计算时使用此工具。
+    支持基本的四则运算，如 ‘2 + 3 * 4’。&quot;&quot;&quot;
+    import ast
+    import operator
+   
+    # 安全的运算符映射
+    ops = {
+        ast.Add: operator.add,
+        ast.Sub: operator.sub,
+        ast.Mult: operator.mul,
+        ast.Div: operator.truediv,
+        ast.Pow: operator.pow,
+        ast.USub: operator.neg,
+    }
+   
+    def safe_eval(node):
+        if isinstance(node, ast.Expression):
+            return safe_eval(node.body)
+        elif isinstance(node, ast.Constant):
+            return node.value
+        elif isinstance(node, ast.BinOp):
+            left = safe_eval(node.left)
+            right = safe_eval(node.right)
+            return ops[type(node.op)](left, right)
+        elif isinstance(node, ast.UnaryOp):
+            operand = safe_eval(node.operand)
+            return ops<a href="../../../operand" class="internal internal-link alias" data-slug="operand">type(node.op)</a>
+        else:
+            raise ValueError(f”不支持的表达式类型: {type(node)}”)
+   
+    try:
+        tree = ast.parse(expression, mode=‘eval’)
+        result = safe_eval(tree)
+        return f”计算结果：{expression} = {result}”
+    except Exception as e:
+        return f”计算错误：{e}”</p>
+<p>@tool
+def search_knowledge(query: str) -> str:
+    &quot;&quot;&quot;搜索知识库获取相关信息。当用户询问事实性问题时使用此工具。&quot;&quot;&quot;
+    # 实际应用中，这里会连接向量数据库或搜索引擎
+    knowledge = {
+        “LangChain”: “LangChain 是一个用于构建 LLM 应用的开源框架，支持链式调用、记忆管理和工具集成。”,
+        “Python”: “Python 是一种高级编程语言，以简洁易读著称，广泛用于 AI、数据科学等领域。”,
+    }
+    for key, value in knowledge.items():
+        if key.lower() in query.lower():
+            return value
+    return f”未找到与 ‘{query}’ 相关的信息”</p>
+<h1 id="----组装工具列表----">--- 组装工具列表 ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----组装工具列表----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>tools = [get_current_weather, calculate, search_knowledge]</p>
+<h1 id="----创建-agent-的提示词----">--- 创建 Agent 的提示词 ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----创建-agent-的提示词----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>prompt = ChatPromptTemplate.from_messages([
+    (“system”, “你是一个功能强大的 AI 助手，可以使用工具来帮助用户。根据用户的问题，判断是否需要使用工具，选择最合适的工具来获取信息。”),
+    (“human”, “{input}”),
+    MessagesPlaceholder(variable_name=“agent_scratchpad”),
+])</p>
+<h1 id="----创建-agent----">--- 创建 Agent ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----创建-agent----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>agent = create_tool_calling_agent(llm, tools, prompt)</p>
+<h1 id="----创建-agentexecutor代理执行器---">--- 创建 AgentExecutor（代理执行器）---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----创建-agentexecutor代理执行器---" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="verbosetrue-可以看到-agent-的完整思考过程">verbose=True 可以看到 Agent 的完整思考过程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#verbosetrue-可以看到-agent-的完整思考过程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)</p>
+<h1 id="----测试-agent----">--- 测试 Agent ---<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#----测试-agent----" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="测试-1天气查询">测试 1：天气查询<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#测试-1天气查询" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>print(”=” * 50)
+response = agent_executor.invoke({“input”: “北京今天天气怎么样？”})
+print(f”\n最终回答: {response[‘output’]}“)</p>
+<h1 id="测试-2数学计算">测试 2：数学计算<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#测试-2数学计算" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>print(“\n” + ”=” * 50)
+response = agent_executor.invoke({“input”: “帮我算一下 (15 * 37 + 228) / 3 等于多少”})
+print(f”\n最终回答: {response[‘output’]}“)</p>
+<h1 id="测试-3综合问题agent-需要自己判断用哪个工具">测试 3：综合问题（Agent 需要自己判断用哪个工具）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#测试-3综合问题agent-需要自己判断用哪个工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>print(“\n” + ”=” * 50)
+response = agent_executor.invoke({“input”: “LangChain 是什么？另外帮我算下 2 的 10 次方”})
+print(f”\n最终回答: {response[‘output’]}”)</p>
+<p><strong>运行上述代码，你会看到</strong>（verbose=True 时的思考链输出）：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">==================================================</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Entering new AgentExecutor chain</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">Invoking: </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">`get_current_weather`</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> with</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error"> `{</span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'city'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'北京'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">晴天，气温 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">28</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">°C，湿度 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">45</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">根据查询结果，北京今天的天气是晴天，气温 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">28</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">°C，湿度 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">45</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">。
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> Finished chain.
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">最终回答: 北京今天天气晴朗，气温 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">28</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">°C，湿度 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">45</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">，适合外出活动。
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">==================================================</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Entering new AgentExecutor chain</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">Invoking: </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">`calculate`</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> with</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error"> `{</span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'expression'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'(15 * 37 + 228) / 3'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">计算结果：(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">15</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> *</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 37</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> +</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 228</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 3</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 261.0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> Finished chain.
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">最终回答: (</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">15</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> *</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 37</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> +</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 228</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 的计算结果是 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">261.0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">==================================================</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Entering new AgentExecutor chain</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">Invoking: </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">`search_knowledge`</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> with</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error"> `{</span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'query'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'LangChain'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">Invoking: </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">`calculate`</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword"> with</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error"> `{</span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'expression'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">'2 ** 10'</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">}`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">LangChain 是一个用于构建 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">LLM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 应用的开源框架</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">计算结果：</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> **</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 10</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 1024</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> Finished chain.
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">最终回答: LangChain 是一个用于构建 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">LLM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 应用的开源框架，支持链式调用、记忆管理和工具集成。另外，</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 的 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 次方等于 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1024</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">。</span></span></code></pre></figure>
+<p>**安全提示：**本示例使用安全的 AST 解析替代了 eval()。在实际项目中，切勿对用户输入直接使用 eval()，这会带来严重的远程代码执行风险。</p>
+<p><strong>理解 Agent 的”思考过程”：</strong></p>
+<ul>
+<li><code>verbose=True</code> 让我们看到 Agent 的完整决策链路，便于调试和理解其行为</li>
+<li>Agent 会自动判断需要调用什么工具，不需要人工指定调用顺序</li>
+<li>如果问题不需要工具（如简单的闲聊），Agent 会直接用自身知识回答</li>
+<li>对于复杂问题，Agent 可能会多次调用工具，甚至并行调用多个工具</li>
+</ul>
+<h2 id="快速开始构建你的第一个-langchain-应用">快速开始：构建你的第一个 LangChain 应用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#快速开始构建你的第一个-langchain-应用" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>让我们通过一个简单的例子，感受一下 LangChain 的便捷性。</p>
+<p>实际的开发中，我们可以把 API 的相关信息保存在项目根目录的 <code>.env</code> 文件中，方便使用。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># .env 文件内容
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">DEEPSEEK_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">sk</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">xxx
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">DEEPSEEK_BASE_URL</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">api.deepseek.com
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">DEEPSEEK_MODEL</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">deepseek</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">v4</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pro</span></span></code></pre></figure>
+<p>使用 LangChain 的 ChatOpenAI 时，openai_api_base 建议配置为 <a href="https://api.deepseek.com%EF%BC%8C%E6%97%A0%E9%9C%80%E6%89%8B%E5%8A%A8%E5%8A%A0" class="external external-link">https://api.deepseek.com，无需手动加<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> /v1，LangChain 会自动拼接路径。</p>
+<h3 id="示例-1基础问答链">示例 1：基础问答链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-1基础问答链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="实例-6">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-6" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from dotenv import load_dotenv</p>
+<h1 id="正确的导入路径">正确的导入路径<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#正确的导入路径" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import ChatOpenAI</p>
+<h1 id="加载环境变量-2">加载环境变量<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#加载环境变量-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>load_dotenv()</p>
+<p>llm = ChatOpenAI(
+    model=os.getenv(‘DEEPSEEK_MODEL’),
+    openai_api_key=os.getenv(‘DEEPSEEK_API_KEY’),
+    openai_api_base=os.getenv(‘DEEPSEEK_BASE_URL’),
+)</p>
+<h1 id="创建提示词模板">创建提示词模板<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建提示词模板" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>template = &quot;&quot;&quot;
+你是一位友好的助手。
+请回答以下问题：</p>
+<p>问题：{question}
+回答：
+&quot;&quot;&quot;
+prompt = PromptTemplate.from_template(template)</p>
+<h1 id="使用-lcel-语法创建链-推荐方式">使用 LCEL 语法创建链 (推荐方式)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用-lcel-语法创建链-推荐方式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="结构prompt---llm---解析为字符串">结构：Prompt -> LLM -> 解析为字符串<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#结构prompt---llm---解析为字符串" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>chain = prompt | llm | StrOutputParser()</p>
+<h1 id="运行链">运行链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#运行链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>question = “LangChain 是什么？它有什么主要用途？”</p>
+<p>response = chain.invoke({“question”: question})</p>
+<p>print(“问题：”, question)
+print(”-” * 20)
+print(“回答：”, response)</p>
+<h3 id="示例-2带记忆的对话链">示例 2：带记忆的对话链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例-2带记忆的对话链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>让我们创建一个能记住对话历史的简单聊天机器人。</p>
+<h2 id="实例-7">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-7" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory</p>
+<h1 id="1-加载配置">1. 加载配置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-加载配置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>load_dotenv()</p>
+<h1 id="2-初始化-deepseek-模型">2. 初始化 DeepSeek 模型<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-初始化-deepseek-模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = ChatOpenAI(
+    model=os.getenv(‘DEEPSEEK_MODEL’, ‘deepseek-v4-pro’),
+    openai_api_key=os.getenv(‘DEEPSEEK_API_KEY’),
+    openai_api_base=os.getenv(‘DEEPSEEK_BASE_URL’, ‘<a href="https://api.deepseek.com" class="external external-link">https://api.deepseek.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>’),
+)</p>
+<h1 id="3-定义提示词模板">3. 定义提示词模板<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-定义提示词模板" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="messagesplaceholder-会在运行时被对话历史填充">MessagesPlaceholder 会在运行时被对话历史填充<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#messagesplaceholder-会在运行时被对话历史填充" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>prompt = ChatPromptTemplate.from_messages([
+    (“system”, “你是一个乐于助人的 AI 助手。”),
+    MessagesPlaceholder(variable_name=“history”),
+    (“human”, “{question}”),
+])</p>
+<h1 id="4-构建链">4. 构建链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-构建链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>chain = prompt | llm</p>
+<h1 id="5-管理内存创建一个字典来存储不同用户的历史记录">5. 管理内存：创建一个字典来存储不同用户的历史记录<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-管理内存创建一个字典来存储不同用户的历史记录" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>store = {}</p>
+<p>def get_session_history(session_id: str) -> BaseChatMessageHistory:
+    if session_id not in store:
+        store[session_id] = ChatMessageHistory()
+    return store[session_id]</p>
+<h1 id="6-使用-runnablewithmessagehistory-包装我们的链">6. 使用 RunnableWithMessageHistory 包装我们的链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-使用-runnablewithmessagehistory-包装我们的链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="这样-langchain-会自动处理历史记录的读取和更新">这样 LangChain 会自动处理历史记录的读取和更新<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#这样-langchain-会自动处理历史记录的读取和更新" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>with_message_history = RunnableWithMessageHistory(
+    chain,
+    get_session_history,
+    input_messages_key=“question”,
+    history_messages_key=“history”,
+)</p>
+<h1 id="7-进入对话循环">7. 进入对话循环<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#7-进入对话循环" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>print(”--- 已进入 DeepSeek 聊天模式 (输入 ‘exit’ 退出) ---”)
+session_config = {“configurable”: {“session_id”: “user_001”}} # 区分不同会话的 ID</p>
+<p>while True:
+    user_input = input(“你: ”)
+    if user_input.lower() in [“exit”, “quit”, “退出”]:
+        break
+       
+    # 调用带记忆的链
+    response = with_message_history.invoke(
+        {“question”: user_input},
+        config=session_config
+    )
+   
+    print(f”AI: {response.content}\n”)</p>
+<p><strong>运行上述代码，你会看到</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> 已进入 DeepSeek 聊天模式 (输入 </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">'exit'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> 退出) </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">你: 你好
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: 你好！很高兴见到你！ 有什么我可以帮助你的吗？无论是回答问题、聊天，还是协助解决问题，我都很乐意为你提供帮助！
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">你: 我叫小明
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: 你好，小明！很高兴认识你！ 
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">如果你有任何问题、想法，或者需要帮助的地方，随时告诉我哦～
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">你: 我叫什么记得吗？
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: 当然记得！你刚刚告诉我你叫</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">小明</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">～  
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">我会认真记住我们的对话内容，在之后的交流中尽量保持上下文连贯。不过如果对话过长或间隔太久，我可能需要你提醒一下哦～  
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">有什么想聊的或需要帮助的吗？</span></span></code></pre></figure>
+<h2 id="总结">总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#总结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>本文介绍了 LangChain 框架的核心概念和实战应用。LangChain 通过标准化的组件和链式调用，让开发者能够快速构建功能强大的 AI 应用。</p>
+<p>下表总结了本文涉及的核心知识点：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>概念</th><th>说明</th><th>关键代码</th></tr></thead><tbody><tr><td><strong>LCEL 链</strong></td><td>用管道符</td><td>连接 Prompt、Model、Parser</td></tr><tr><td><strong>提示词模板</strong></td><td>结构化的 Prompt，区分 system/user 角色</td><td><code>ChatPromptTemplate.from_messages()</code></td></tr><tr><td><strong>流式输出</strong></td><td>逐字输出，提升用户体验</td><td><code>chain.stream()</code></td></tr><tr><td><strong>对话记忆</strong></td><td>通过 session_id 管理多轮对话历史</td><td><code>RunnableWithMessageHistory</code></td></tr><tr><td><strong>RAG 检索增强</strong></td><td>外部知识接入，突破 LLM 知识边界</td><td>`retriever</td></tr><tr><td><strong>Agent 智能体</strong></td><td>自主决策调用工具，最核心的高级功能</td><td><code>create_tool_calling_agent()</code></td></tr></tbody></table></div>
+<h3 id="推荐学习路径">推荐学习路径<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#推荐学习路径" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-31" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#langchain-制作与编排智能体" data-for="langchain-制作与编排智能体">LangChain 制作与编排智能体</a></li><li class="depth-0"><a href="#langchain-制作智能体" data-for="langchain-制作智能体">LangChain 制作智能体</a></li><li class="depth-2"><a href="#环境准备" data-for="环境准备">环境准备</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-0"><a href="#建议将-api-key-放在环境变量中或者直接在此处赋值生产环境请勿硬编码" data-for="建议将-api-key-放在环境变量中或者直接在此处赋值生产环境请勿硬编码">建议将 API Key 放在环境变量中，或者直接在此处赋值（生产环境请勿硬编码）</a></li><li class="depth-0"><a href="#osenvirondeepseek_api_key--sk-你的deepseek密钥" data-for="osenvirondeepseek_api_key--sk-你的deepseek密钥">os.environ[“DEEPSEEK_API_KEY”] = “sk-你的DeepSeek密钥”</a></li><li class="depth-0"><a href="#初始化模型" data-for="初始化模型">初始化模型</a></li><li class="depth-0"><a href="#测试一下" data-for="测试一下">测试一下</a></li><li class="depth-1"><a href="#构建-lcel-链-langchain-expression-language" data-for="构建-lcel-链-langchain-expression-language">构建 LCEL 链 (LangChain Expression Language)</a></li><li class="depth-1"><a href="#实例-2" data-for="实例-2">实例</a></li><li class="depth-0"><a href="#1-定义模型-model" data-for="1-定义模型-model">1. 定义模型 (Model)</a></li><li class="depth-0"><a href="#2-定义提示词模板-prompt" data-for="2-定义提示词模板-prompt">2. 定义提示词模板 (Prompt)</a></li><li class="depth-0"><a href="#system-设定-ai-的角色" data-for="system-设定-ai-的角色">system: 设定 AI 的角色</a></li><li class="depth-0"><a href="#user-用户的具体输入" data-for="user-用户的具体输入">user: 用户的具体输入</a></li><li class="depth-0"><a href="#3-定义输出解析器-output-parser" data-for="3-定义输出解析器-output-parser">3. 定义输出解析器 (Output Parser)</a></li><li class="depth-0"><a href="#将模型的-message-对象直接转为纯字符串" data-for="将模型的-message-对象直接转为纯字符串">将模型的 Message 对象直接转为纯字符串</a></li><li class="depth-0"><a href="#4-构建链-chain---使用管道符--连接" data-for="4-构建链-chain---使用管道符--连接">4. 构建链 (Chain) - 使用管道符 | 连接</a></li><li class="depth-0"><a href="#流程输入字典---填充-prompt---发给-llm---解析输出" data-for="流程输入字典---填充-prompt---发给-llm---解析输出">流程：输入字典 -> 填充 Prompt -> 发给 LLM -> 解析输出</a></li><li class="depth-0"><a href="#5-调用链" data-for="5-调用链">5. 调用链</a></li><li class="depth-2"><a href="#流式输出-streaming" data-for="流式输出-streaming">流式输出 (Streaming)</a></li><li class="depth-1"><a href="#实例-3" data-for="实例-3">实例</a></li><li class="depth-0"><a href="#1-定义模型-model-1" data-for="1-定义模型-model-1">1. 定义模型 (Model)</a></li><li class="depth-0"><a href="#2-定义提示词模板-prompt-1" data-for="2-定义提示词模板-prompt-1">2. 定义提示词模板 (Prompt)</a></li><li class="depth-0"><a href="#system-设定-ai-的角色-1" data-for="system-设定-ai-的角色-1">system: 设定 AI 的角色</a></li><li class="depth-0"><a href="#user-用户的具体输入-1" data-for="user-用户的具体输入-1">user: 用户的具体输入</a></li><li class="depth-0"><a href="#3-定义输出解析器-output-parser-1" data-for="3-定义输出解析器-output-parser-1">3. 定义输出解析器 (Output Parser)</a></li><li class="depth-0"><a href="#将模型的-message-对象直接转为纯字符串-1" data-for="将模型的-message-对象直接转为纯字符串-1">将模型的 Message 对象直接转为纯字符串</a></li><li class="depth-0"><a href="#4-构建链-chain---使用管道符--连接-1" data-for="4-构建链-chain---使用管道符--连接-1">4. 构建链 (Chain) - 使用管道符 | 连接</a></li><li class="depth-0"><a href="#流程输入字典---填充-prompt---发给-llm---解析输出-1" data-for="流程输入字典---填充-prompt---发给-llm---解析输出-1">流程：输入字典 -> 填充 Prompt -> 发给 LLM -> 解析输出</a></li><li class="depth-0"><a href="#5-调用链-1" data-for="5-调用链-1">5. 调用链</a></li><li class="depth-0"><a href="#这里的-chunk-是每次生成的片段" data-for="这里的-chunk-是每次生成的片段">这里的 chunk 是每次生成的片段</a></li><li class="depth-2"><a href="#代码结构" data-for="代码结构">代码结构</a></li><li class="depth-1"><a href="#核心组件详解" data-for="核心组件详解">核心组件详解</a></li><li class="depth-2"><a href="#1-模型-models" data-for="1-模型-models">1. 模型 (Models)</a></li><li class="depth-2"><a href="#2-提示词-prompts" data-for="2-提示词-prompts">2. 提示词 (Prompts)</a></li><li class="depth-2"><a href="#3-链-chains--lcel" data-for="3-链-chains--lcel">3. 链 (Chains) &amp; LCEL</a></li><li class="depth-2"><a href="#4-索引与检索-indexes--retrieval" data-for="4-索引与检索-indexes--retrieval">4. 索引与检索 (Indexes &amp; Retrieval)</a></li><li class="depth-1"><a href="#实例-4" data-for="实例-4">实例</a></li><li class="depth-0"><a href="#加载环境变量" data-for="加载环境变量">加载环境变量</a></li><li class="depth-0"><a href="#初始化模型和-embedding" data-for="初始化模型和-embedding">初始化模型和 Embedding</a></li><li class="depth-0"><a href="#使用免费的本地-embedding-模型首次运行会自动下载" data-for="使用免费的本地-embedding-模型首次运行会自动下载">使用免费的本地 Embedding 模型（首次运行会自动下载）</a></li><li class="depth-0"><a href="#----1-准备知识文档----" data-for="----1-准备知识文档----">--- 1. 准备知识文档 ---</a></li><li class="depth-0"><a href="#实际项目中这些文档可以从文件网页数据库等加载" data-for="实际项目中这些文档可以从文件网页数据库等加载">实际项目中，这些文档可以从文件、网页、数据库等加载</a></li><li class="depth-0"><a href="#----2-文本切片----" data-for="----2-文本切片----">--- 2. 文本切片 ---</a></li><li class="depth-0"><a href="#这里文档已经较短实际场景中长文档会被切成多个片段" data-for="这里文档已经较短实际场景中长文档会被切成多个片段">这里文档已经较短，实际场景中长文档会被切成多个片段</a></li><li class="depth-0"><a href="#----3-向量化并存入-faiss----" data-for="----3-向量化并存入-faiss----">--- 3. 向量化并存入 FAISS ---</a></li><li class="depth-0"><a href="#----4-创建检索器----" data-for="----4-创建检索器----">--- 4. 创建检索器 ---</a></li><li class="depth-0"><a href="#----5-构建-rag-链----" data-for="----5-构建-rag-链----">--- 5. 构建 RAG 链 ---</a></li><li class="depth-0"><a href="#辅助函数将检索到的文档拼接为字符串" data-for="辅助函数将检索到的文档拼接为字符串">辅助函数：将检索到的文档拼接为字符串</a></li><li class="depth-0"><a href="#----6-测试-rag----" data-for="----6-测试-rag----">--- 6. 测试 RAG ---</a></li><li class="depth-2"><a href="#5-记忆-memory" data-for="5-记忆-memory">5. 记忆 (Memory)</a></li><li class="depth-2"><a href="#6-代理-agents" data-for="6-代理-agents">6. 代理 (Agents)</a></li><li class="depth-1"><a href="#实例-5" data-for="实例-5">实例</a></li><li class="depth-0"><a href="#加载环境变量-1" data-for="加载环境变量-1">加载环境变量</a></li><li class="depth-0"><a href="#初始化-deepseek-模型" data-for="初始化-deepseek-模型">初始化 DeepSeek 模型</a></li><li class="depth-0"><a href="#----定义工具----" data-for="----定义工具----">--- 定义工具 ---</a></li><li class="depth-0"><a href="#使用-tool-装饰器langchain-会自动将函数名和-docstring-告知模型" data-for="使用-tool-装饰器langchain-会自动将函数名和-docstring-告知模型">使用 @tool 装饰器，LangChain 会自动将函数名和 docstring 告知模型</a></li><li class="depth-0"><a href="#----组装工具列表----" data-for="----组装工具列表----">--- 组装工具列表 ---</a></li><li class="depth-0"><a href="#----创建-agent-的提示词----" data-for="----创建-agent-的提示词----">--- 创建 Agent 的提示词 ---</a></li><li class="depth-0"><a href="#----创建-agent----" data-for="----创建-agent----">--- 创建 Agent ---</a></li><li class="depth-0"><a href="#----创建-agentexecutor代理执行器---" data-for="----创建-agentexecutor代理执行器---">--- 创建 AgentExecutor（代理执行器）---</a></li><li class="depth-0"><a href="#verbosetrue-可以看到-agent-的完整思考过程" data-for="verbosetrue-可以看到-agent-的完整思考过程">verbose=True 可以看到 Agent 的完整思考过程</a></li><li class="depth-0"><a href="#----测试-agent----" data-for="----测试-agent----">--- 测试 Agent ---</a></li><li class="depth-0"><a href="#测试-1天气查询" data-for="测试-1天气查询">测试 1：天气查询</a></li><li class="depth-0"><a href="#测试-2数学计算" data-for="测试-2数学计算">测试 2：数学计算</a></li><li class="depth-0"><a href="#测试-3综合问题agent-需要自己判断用哪个工具" data-for="测试-3综合问题agent-需要自己判断用哪个工具">测试 3：综合问题（Agent 需要自己判断用哪个工具）</a></li><li class="depth-1"><a href="#快速开始构建你的第一个-langchain-应用" data-for="快速开始构建你的第一个-langchain-应用">快速开始：构建你的第一个 LangChain 应用</a></li><li class="depth-2"><a href="#示例-1基础问答链" data-for="示例-1基础问答链">示例 1：基础问答链</a></li><li class="depth-1"><a href="#实例-6" data-for="实例-6">实例</a></li><li class="depth-0"><a href="#正确的导入路径" data-for="正确的导入路径">正确的导入路径</a></li><li class="depth-0"><a href="#加载环境变量-2" data-for="加载环境变量-2">加载环境变量</a></li><li class="depth-0"><a href="#创建提示词模板" data-for="创建提示词模板">创建提示词模板</a></li><li class="depth-0"><a href="#使用-lcel-语法创建链-推荐方式" data-for="使用-lcel-语法创建链-推荐方式">使用 LCEL 语法创建链 (推荐方式)</a></li><li class="depth-0"><a href="#结构prompt---llm---解析为字符串" data-for="结构prompt---llm---解析为字符串">结构：Prompt -> LLM -> 解析为字符串</a></li><li class="depth-0"><a href="#运行链" data-for="运行链">运行链</a></li><li class="depth-2"><a href="#示例-2带记忆的对话链" data-for="示例-2带记忆的对话链">示例 2：带记忆的对话链</a></li><li class="depth-1"><a href="#实例-7" data-for="实例-7">实例</a></li><li class="depth-0"><a href="#1-加载配置" data-for="1-加载配置">1. 加载配置</a></li><li class="depth-0"><a href="#2-初始化-deepseek-模型" data-for="2-初始化-deepseek-模型">2. 初始化 DeepSeek 模型</a></li><li class="depth-0"><a href="#3-定义提示词模板" data-for="3-定义提示词模板">3. 定义提示词模板</a></li><li class="depth-0"><a href="#messagesplaceholder-会在运行时被对话历史填充" data-for="messagesplaceholder-会在运行时被对话历史填充">MessagesPlaceholder 会在运行时被对话历史填充</a></li><li class="depth-0"><a href="#4-构建链" data-for="4-构建链">4. 构建链</a></li><li class="depth-0"><a href="#5-管理内存创建一个字典来存储不同用户的历史记录" data-for="5-管理内存创建一个字典来存储不同用户的历史记录">5. 管理内存：创建一个字典来存储不同用户的历史记录</a></li><li class="depth-0"><a href="#6-使用-runnablewithmessagehistory-包装我们的链" data-for="6-使用-runnablewithmessagehistory-包装我们的链">6. 使用 RunnableWithMessageHistory 包装我们的链</a></li><li class="depth-0"><a href="#这样-langchain-会自动处理历史记录的读取和更新" data-for="这样-langchain-会自动处理历史记录的读取和更新">这样 LangChain 会自动处理历史记录的读取和更新</a></li><li class="depth-0"><a href="#7-进入对话循环" data-for="7-进入对话循环">7. 进入对话循环</a></li><li class="depth-1"><a href="#总结" data-for="总结">总结</a></li><li class="depth-2"><a href="#推荐学习路径" data-for="推荐学习路径">推荐学习路径</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

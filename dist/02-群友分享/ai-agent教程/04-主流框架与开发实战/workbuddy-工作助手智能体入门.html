@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>WorkBuddy 工作助手智能体入门</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="WorkBuddy 工作助手智能体入门"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="WorkBuddy 工作助手智能体入门"/><meta name="twitter:description" content="WorkBuddy 工作助手智能体入门 出处：www.runoob.com/ai-agent/workbuddy-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 WorkBuddy 入门教程 WorkBuddy 是腾讯云出品的全场景 AI 办公工作台，一句话下达任务，自动拆解、规划并执行，交付可直接验收的成果文件。 与只会聊天的传统 AI 不同，WorkBuddy 能直接操作你电脑上的文件，真正替你干活。 核心工作流程 WorkBuddy 处理一个任务会经历拆解、规划、执行、交付四个阶段，全程不需要你手动操作文件。 一句话需求 到 交付成果 ..."/><meta property="og:description" content="WorkBuddy 工作助手智能体入门 出处：www.runoob.com/ai-agent/workbuddy-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 WorkBuddy 入门教程 WorkBuddy 是腾讯云出品的全场景 AI 办公工作台，一句话下达任务，自动拆解、规划并执行，交付可直接验收的成果文件。 与只会聊天的传统 AI 不同，WorkBuddy 能直接操作你电脑上的文件，真正替你干活。 核心工作流程 WorkBuddy 处理一个任务会经历拆解、规划、执行、交付四个阶段，全程不需要你手动操作文件。 一句话需求 到 交付成果 ..."/><meta property="og:image:alt" content="WorkBuddy 工作助手智能体入门 出处：www.runoob.com/ai-agent/workbuddy-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 WorkBuddy 入门教程 WorkBuddy 是腾讯云出品的全场景 AI 办公工作台，一句话下达任务，自动拆解、规划并执行，交付可直接验收的成果文件。 与只会聊天的传统 AI 不同，WorkBuddy 能直接操作你电脑上的文件，真正替你干活。 核心工作流程 WorkBuddy 处理一个任务会经历拆解、规划、执行、交付四个阶段，全程不需要你手动操作文件。 一句话需求 到 交付成果 ..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/workbuddy-工作助手智能体入门"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/workbuddy-工作助手智能体入门"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="WorkBuddy 工作助手智能体入门 出处：www.runoob.com/ai-agent/workbuddy-usage.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 WorkBuddy 入门教程 WorkBuddy 是腾讯云出品的全场景 AI 办公工作台，一句话下达任务，自动拆解、规划并执行，交付可直接验收的成果文件。 与只会聊天的传统 AI 不同，WorkBuddy 能直接操作你电脑上的文件，真正替你干活。 核心工作流程 WorkBuddy 处理一个任务会经历拆解、规划、执行、交付四个阶段，全程不需要你手动操作文件。 一句话需求 到 交付成果 ..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/workbuddy-工作助手智能体入门-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/workbuddy-工作助手智能体入门-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/workbuddy-工作助手智能体入门-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/04-主流框架与开发实战/workbuddy-工作助手智能体入门" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-40" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-40" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/04-主流框架与开发实战/">04-主流框架与开发实战</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>WorkBuddy 工作助手智能体入门</a></div></nav><h1 class="article-title">WorkBuddy 工作助手智能体入门</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/主流框架与开发实战" class="internal internal-link tag-link">主流框架与开发实战</a><span class="note-properties-separator">, </span><a href="../../../tags/workbuddy-" class="internal internal-link tag-link">workbuddy-</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>20分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="workbuddy-工作助手智能体入门">WorkBuddy 工作助手智能体入门<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#workbuddy-工作助手智能体入门" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/workbuddy-usage.html" class="external external-link">https://www.runoob.com/ai-agent/workbuddy-usage.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>04-主流框架与开发实战</code></p>
+</blockquote>
+<hr/>
+<h1 id="workbuddy-入门教程">WorkBuddy 入门教程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#workbuddy-入门教程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>WorkBuddy 是腾讯云出品的全场景 AI 办公工作台，一句话下达任务，自动拆解、规划并执行，交付可直接验收的成果文件。</p>
+<p>与只会聊天的传统 AI 不同，WorkBuddy 能直接操作你电脑上的文件，真正替你干活。</p>
+<h3 id="核心工作流程">核心工作流程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心工作流程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>WorkBuddy 处理一个任务会经历拆解、规划、执行、交付四个阶段，全程不需要你手动操作文件。</p>
+<p>一句话需求 到 交付成果 之间，WorkBuddy 会读取授权的文件夹、生成中间文件、运行必要的脚本，整个过程在对话区实时可见。</p>
+<h3 id="与传统-ai-对话的区别">与传统 AI 对话的区别<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#与传统-ai-对话的区别" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>理解 WorkBuddy，最直接的方式是把它和平时用过的 AI 聊天工具做对比。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>对比维度</th><th>传统 AI 对话</th><th>WorkBuddy</th></tr></thead><tbody><tr><td><strong>能力定位</strong></td><td>只能对话，提供建议</td><td>能够实际执行任务</td></tr><tr><td><strong>文件处理</strong></td><td>需要你手动操作文件</td><td>自动读写本地文件</td></tr><tr><td><strong>任务复杂度</strong></td><td>单步骤简单问答</td><td>多步骤复杂任务</td></tr><tr><td><strong>交付形态</strong></td><td>输出文字回复</td><td>交付可验收的成果（文档 / 表格 / PPT / 网页）</td></tr></tbody></table></div>
+<blockquote>
+<p>**定位差异：**传统 AI 是「顾问」，负责给建议；WorkBuddy 是「同事」，负责把活干完。</p>
+</blockquote>
+<h2 id="三种工作模式">三种工作模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#三种工作模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>创建任务时需要选择工作模式。WorkBuddy 内置三种模式，对应不同的任务性质与积分消耗。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>模式</th><th>行为</th><th>适用场景</th><th>积分消耗</th></tr></thead><tbody><tr><td><strong>Ask 问一问</strong></td><td>只看不改，纯问答，不读写文件</td><td>查资料、咨询方案、分析文档</td><td>最少</td></tr><tr><td><strong>Plan 想一想</strong></td><td>先给出分步执行方案，你确认后才动手</td><td>多步骤复杂任务、重要报表与合同</td><td>适中</td></tr><tr><td><strong>Craft 做一做</strong></td><td>直接执行，读写文件产出成果</td><td>目标明确的生成与修改任务</td><td>较高</td></tr></tbody></table></div>
+<blockquote>
+<p>**新手提醒：**WorkBuddy 默认使用 Craft 模式，随手发一条消息就会直接开干并消耗积分。</p>
+<p>如果只是想聊天问问题，记得先切到 Ask 模式。</p>
+</blockquote>
+<h3 id="模式选择建议">模式选择建议<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模式选择建议" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>简单问答用 Ask，复杂或高风险任务先用 Plan 看方案，目标明确的活交给 Craft 直接干。</p>
+<p>拿不准时，默认选 Craft 即可；熟练后你会发现，选对模式既是效率问题，也是积分消耗问题。</p>
+<h2 id="安装与登录">安装与登录<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装与登录" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>WorkBuddy 的安装全程无需命令行，也不需要配置任何环境，几分钟即可完成。</p>
+<h3 id="系统要求">系统要求<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#系统要求" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>安装前先对照下表确认电脑满足要求。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>项目</th><th>要求</th></tr></thead><tbody><tr><td>操作系统</td><td>Windows 10 及以上，或 macOS 12（Monterey）及以上</td></tr><tr><td>Mac 芯片</td><td>M 系列芯片选 Mac ARM64，Intel 芯片选 Mac X64</td></tr><tr><td>内存</td><td>最低 4 GB，推荐 8 GB 以上</td></tr><tr><td>网络</td><td>需要联网调用 AI 模型服务</td></tr></tbody></table></div>
+<p>查看芯片型号：点击屏幕左上角苹果图标，选择「关于本机」即可看到。</p>
+<h3 id="下载与安装">下载与安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#下载与安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>访问 <a href="https://cloud.tencent.com/act/cps/redirect?redirect=6871&amp;cps_key=4537fb0f9e70f157220dafdec0f9c750&amp;from=console" class="external external-link">WorkBuddy 官网<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>，点击「下载 WorkBuddy」获取对应系统的安装包。</p>
+<p><strong>Windows 安装步骤：</strong></p>
+<p>双击安装包，勾选「我同意此协议」，选择安装路径（默认即可），勾选「创建桌面快捷方式」，点击「安装」等待完成。</p>
+<p>若安装过程被安全软件拦截，可先关闭第三方杀毒软件再重试，自动化模块偶尔会被误判。</p>
+<p><strong>macOS 安装步骤：</strong></p>
+<p>双击下载的 .dmg 磁盘映像，把 WorkBuddy 图标拖入「应用程序」文件夹。</p>
+<p>首次启动若提示「无法验证开发者」，需在系统设置中允许打开。</p>
+<h3 id="登录账号">登录账号<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#登录账号" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>启动 WorkBuddy，点击「登录」，勾选《服务条款》与《隐私协议》，使用微信扫码即可完成登录。</p>
+<p>也支持企业微信、QQ、手机号、腾讯云账号等方式登录，推荐微信，方便后续联动小程序与微信助理。</p>
+<p>登录完成后，界面如下：</p>
+<h3 id="文件夹授权">文件夹授权<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件夹授权" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>首次使用，WorkBuddy 会请求访问本地文件夹，这是它能帮你操作文件的前提。</p>
+<blockquote>
+<p>**安全原则：最小授权。**只授权桌面、文档、下载等必要的工作目录，不要全盘授权，更不要授权含密码、密钥的目录。</p>
+<p>未授权的目录 WorkBuddy 无法读取；系统敏感目录会被自动拦截，高危操作需要二次确认。</p>
+</blockquote>
+<h3 id="领取新手福利">领取新手福利<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#领取新手福利" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>新用户注册后可领取积分礼包，在左下角头像进入「个人中心」查看与领取。</p>
+<p>每日签到也能获得积分，连续签到 7 天有周礼包奖励。积分用于调用模型服务，Ask 模式消耗最少。</p>
+<h2 id="界面认识">界面认识<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#界面认识" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>登录后，WorkBuddy 主界面分为三大区域，理解了它们就等于理解了整个产品。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>区域</th><th>功能</th><th>要点</th></tr></thead><tbody><tr><td><strong>① 侧边栏</strong></td><td>任务列表、新建任务、技能、专家、连接器、自动化入口</td><td>按文件夹分组管理任务，底部是头像与设置</td></tr><tr><td><strong>② 对话区</strong></td><td>输入需求、查看执行过程、持续追问</td><td>支持拖拽上传文件、@ 引用文件、粘贴截图</td></tr><tr><td><strong>③ 结果区</strong></td><td>查看交付文件、网页预览、变更记录</td><td>产物可预览、分享或上传到云端</td></tr></tbody></table></div>
+<p>侧边栏还聚合了 Claw 远程控制、专家中心、技能市场、自动化任务等进阶入口，后文会逐一介绍。</p>
+<p>结果区是验收成果的地方：生成的 Word、Excel、PPT 都在「产物」中查看，网页类成果可在内置浏览器中实时预览。</p>
+<h2 id="快速上手创建第一个任务">快速上手：创建第一个任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#快速上手创建第一个任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>跑通一个真实任务，比读十页说明书更有用。下面五步，带你完成第一个交付。</p>
+<h3 id="第一步新建任务">第一步：新建任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步新建任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>回到主界面，点击「新建任务」开始创建 PC 端任务。</p>
+<p>手机端发送的任务，可以在「助理」中查看。</p>
+<h3 id="第二步选择工作空间">第二步：选择工作空间<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步选择工作空间" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>点击输入框左下角「选择工作空间」，指定任务使用的工作目录。</p>
+<p>建议固定用一个文件夹长期沉淀工作上下文，这样成果好找，AI 对你的背景也越用越熟。</p>
+<h3 id="第三步描述任务">第三步：描述任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步描述任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在对话框中用一句话描述你的要求，建议一次说清「目标 + 输入 + 输出格式 + 约束」四个要素。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">制作一个 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">WWW</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">RUNOOB</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">COM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 网站的宣传页面，HTML格式即可</span></span></code></pre></figure>
+<p>描述越具体，交付质量越高，返工越少。</p>
+<h3 id="第四步开始执行">第四步：开始执行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第四步开始执行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>点击「发送」，WorkBuddy 开始自主拆解任务、规划步骤并执行。</p>
+<p>左侧对话区会实时展示执行过程与阶段说明，你可以随时观察进度，类似下面的执行日志。</p>
+<h3 id="第五步查看结果">第五步：查看结果<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第五步查看结果" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>打开右侧窗口查看任务结果，生成的交付文件在「产物」中查看，中间文件在「工作空间文件」中查看。</p>
+<p>不满意就继续追问，它会基于已有上下文修改，无需从头再来。</p>
+<blockquote>
+<p><strong>核心心法：</strong>「你说需求，它交成果」——中途不必盯着，跑完来验收即可。</p>
+</blockquote>
+<h2 id="需求描述技巧">需求描述技巧<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#需求描述技巧" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>给 AI 下需求，和人沟通一样：说得越清楚，对方干得越准。</p>
+<p>一次合格的需求描述，通常包含以下四个要素。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>要素</th><th>含义</th><th>示例</th></tr></thead><tbody><tr><td><strong>目标</strong></td><td>要生成什么 / 处理什么文件</td><td>生成一份销售复盘报告</td></tr><tr><td><strong>输入</strong></td><td>需要分析的数据、参考文档在哪里</td><td>读取桌面「销售数据.xlsx」</td></tr><tr><td><strong>输出格式</strong></td><td>Word / Excel / PPT / 网页，多长，什么风格</td><td>输出 Word 文档，商务风格</td></tr><tr><td><strong>约束</strong></td><td>范围、篇幅、截止时间等限制</td><td>2000 字左右，今天 18 点前完成</td></tr></tbody></table></div>
+<h3 id="模糊与清晰的对比">模糊与清晰的对比<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模糊与清晰的对比" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>模糊需求得到模糊结果，清晰需求才能得到精准交付，这是最值得记住的一条经验。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>类型</th><th>说法</th><th>结果</th></tr></thead><tbody><tr><td><strong>模糊</strong></td><td>帮我写个总结</td><td>不知道写什么、写给谁、要什么格式</td></tr><tr><td><strong>清晰</strong></td><td>基于附件 3 份会议纪要，整理一份 2000 字左右的会议总结，分「决定事项 / 待办 / 风险」三部分，输出 Word</td><td>一次成型，基本不用改</td></tr></tbody></table></div>
+<p>给 AI 下需求时，优先把文件拖拽上传到输入框，而不是只写文件路径，可以避免识别出错。</p>
+<h2 id="常用示例">常用示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常用示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>下面六个高频办公场景，直接照搬指令即可使用。</p>
+<h3 id="文件夹智能整理">文件夹智能整理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#文件夹智能整理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>把散乱的文件按类型分类归档，重名文件自动加前缀避免覆盖。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">把桌面「待归档」中的文件按类型分入 文档 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 图片 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 表格 三个文件夹，重名文件自动加前缀避免覆盖</span></span></code></pre></figure>
+<p>执行完成后会给出变更清单，每一条移动与重命名都可追溯。</p>
+<h3 id="周报一键生成">周报一键生成<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#周报一键生成" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>基于工作记录数据，自动汇总并按项目维度生成结构化周报。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">读取桌面「工作周记.xlsx」的任务记录，重点标注 runoob 项目的进展，按项目汇总本周完成情况，生成周报（本周总结 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 问题与风险 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 下周计划），输出 Word 文档</span></span></code></pre></figure>
+<p>从读取数据到排版成稿，通常 1 到 2 分钟，传统手写需要半小时以上。</p>
+<h3 id="excel-清洗与可视化">Excel 清洗与可视化<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#excel-清洗与可视化" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>清洗混乱的销售数据：去重、统一格式、汇总、标异常，并生成图表。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">读取「RUNOOB销售数据.xlsx」，按订单号列去重，按月份汇总各区域销售额，生成柱状图，输出新的 Excel 文件</span></span></code></pre></figure>
+<p>几万行数据的处理通常在 1 分钟以内完成，省去大量手工操作。</p>
+<h3 id="ppt-一键生成">PPT 一键生成<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ppt-一键生成" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>从需求描述直接生成演示文稿，自动排版为商务风格。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">根据这份销售数据生成 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">8</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 页月度汇报 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">PPT</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">，商务风格，逻辑清晰，标题醒目</span></span></code></pre></figure>
+<p>几分钟出初稿，之后可以继续追问「第三页改成一页两图」「把字体调大一点」等细节。</p>
+<h3 id="发票信息提取">发票信息提取<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#发票信息提取" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>批量读取发票截图，提取关键字段，整理成可报销的 Excel 表格。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">读取文件夹中的 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">30</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 张发票截图，提取日期、金额、税号，整理成 Excel，信息不确定的标黄</span></span></code></pre></figure>
+<p>批量提取只需几十秒，无法确认的信息会自动标记出来，方便人工复核。</p>
+<h3 id="定时自动化任务">定时自动化任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#定时自动化任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>用自然语言设置定时任务，到点自动执行，成果可推送到手机。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">每天早上 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">9</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 点读取今日计划，生成优先级清单，推送到我的微信</span></span></code></pre></figure>
+<p>支持每日 / 每周 / 每月 / 一次性多种周期，配置后无需守着电脑。</p>
+<h2 id="进阶能力">进阶能力<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#进阶能力" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>跑通基础任务后，下面这四个能力能让效率再上一个台阶，点击左侧栏专家菜单查看：</p>
+<h3 id="技能-skills">技能 Skills<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#技能-skills" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>技能是把高频长指令、固定流程打包成的「操作手册」，适合周报生成、数据清洗、格式转换等重复工作。</p>
+<p>在输入框打 / 可快速调用已安装的技能，也可以直接说「帮我找一个做周报的技能」，自动搜索技能市场安装。</p>
+<p>技能还支持自建：把一段稳定的工作流保存下来，下次一键复用。</p>
+<h3 id="专家-experts">专家 Experts<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#专家-experts" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>专家是封装了专业领域流程的 AI 智能体，覆盖技术开发、产品设计、数据分析等方向。</p>
+<p>给任务加一个「领域人设」后，术语更准、产出更贴合行业惯例，相当于请了一位对口顾问。</p>
+<p>复杂任务还可以组建「专家团」，多角色分工协作、并行执行、汇总交付。</p>
+<h3 id="连接器-connectors">连接器 Connectors<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#连接器-connectors" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>连接器把外部服务接进 WorkBuddy，底层协议是 MCP（Model Context Protocol）。</p>
+<p>目前已支持腾讯文档、QQ 邮箱、GitHub、Notion、高德地图等 30 多个连接器。</p>
+<p>授权后可以直接说「把我刚才的报告存到腾讯文档」「拉一下沪深300近一月走势画张图」，数据、图表、结论一次到位。</p>
+<h3 id="定时自动化与移动端">定时自动化与移动端<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#定时自动化与移动端" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>新建任务时选择定时模式，一句话即可设置自动化，例如每天早上抓取行业新闻摘要。</p>
+<p>WorkBuddy 支持微信小程序 / App、微信助理、企微助理、QQ 机器人、飞书、钉钉机器人等移动端入口。</p>
+<p>配置 Claw 远程控制后，还可以用手机微信远程操控电脑执行任务，地铁上发条消息，到公司成果已经躺桌面。</p>
+<blockquote>
+<p>**注意：**定时任务需要 WorkBuddy 客户端保持运行；远程操控时，电脑端也需开机联网，且只能访问已授权的文件夹。</p>
+</blockquote>
+<h3 id="模型切换">模型切换<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#模型切换" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>WorkBuddy 内置多款大模型，可根据任务类型灵活切换。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>模型</th><th>特点</th><th>建议场景</th></tr></thead><tbody><tr><td>混元</td><td>腾讯自研，综合表现均衡</td><td>日常办公</td></tr><tr><td>DeepSeek</td><td>逻辑推理与代码能力强</td><td>代码开发、逻辑分析</td></tr><tr><td>Kimi</td><td>长文本处理能力突出</td><td>长文档理解、提炼</td></tr><tr><td>GLM / MiniMax</td><td>通用能力，消耗较低</td><td>简单任务、省积分</td></tr></tbody></table></div>
+<p>拿不准时选择 Auto 自动模式，由系统按任务类型推荐模型。</p>
+<p>不同模型的积分消耗不同，简单任务切到轻量模型，消耗只有深度推理模型的三分之一。</p>
+<p>自定义模型可以通过设置菜单，选择模型来设置：</p>
+<p>选择模型菜单，在下拉菜单设置自定义模型：</p>
+<h2 id="常见问题">常见问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>WorkBuddy 需要联网吗？</strong></p>
+<p>需要。AI 模型服务通过网络调用，请保持网络连接稳定。</p>
+<p>但你的文件处理默认在本地完成，原始数据不上传云端，服务端只处理数据片段、用后即弃。</p>
+<p><strong>它能访问我电脑上的所有文件吗？</strong></p>
+<p>不能。WorkBuddy 只能访问你主动勾选授权的文件夹，系统敏感目录会自动拦截，高危操作需要二次确认。</p>
+<p><strong>任务执行到一半能停下吗？</strong></p>
+<p>可以。执行中的任务可随时「停止」，中断后可以补充说明、调整需求重新发送，或基于已有内容继续推进。</p>
+<p><strong>上传文件失败怎么办？</strong></p>
+<p>先检查文件格式是否受支持，大文件可先压缩或拆分再上传，若持续失败建议检查网络连接。</p>
+<p><strong>生成的成果怎么分享给别人？</strong></p>
+<p>对话区顶部「分享任务」可以生成公开链接；结果区的产物文件也有分享入口。</p>
+<p>还可以上传到云端，在腾讯文档、网盘等多端同步查看。</p>
+<p><strong>积分不够用怎么办？</strong></p>
+<p>纯查资料用 Ask 模式最省积分，简单任务切轻量模型；日常坚持签到，新用户记得先领注册礼包。</p>
+<blockquote>
+<p>**最后提醒：**WorkBuddy 上手的关键不是背功能，而是把「目标 + 输入 + 输出格式 + 约束」四个要素一次说清。</p>
+<p>从一个小任务开始，跑通第一次「说需求、看成果」的循环，剩下的功能都会自然串起来。</p>
+</blockquote>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-40" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#workbuddy-工作助手智能体入门" data-for="workbuddy-工作助手智能体入门">WorkBuddy 工作助手智能体入门</a></li><li class="depth-0"><a href="#workbuddy-入门教程" data-for="workbuddy-入门教程">WorkBuddy 入门教程</a></li><li class="depth-2"><a href="#核心工作流程" data-for="核心工作流程">核心工作流程</a></li><li class="depth-2"><a href="#与传统-ai-对话的区别" data-for="与传统-ai-对话的区别">与传统 AI 对话的区别</a></li><li class="depth-1"><a href="#三种工作模式" data-for="三种工作模式">三种工作模式</a></li><li class="depth-2"><a href="#模式选择建议" data-for="模式选择建议">模式选择建议</a></li><li class="depth-1"><a href="#安装与登录" data-for="安装与登录">安装与登录</a></li><li class="depth-2"><a href="#系统要求" data-for="系统要求">系统要求</a></li><li class="depth-2"><a href="#下载与安装" data-for="下载与安装">下载与安装</a></li><li class="depth-2"><a href="#登录账号" data-for="登录账号">登录账号</a></li><li class="depth-2"><a href="#文件夹授权" data-for="文件夹授权">文件夹授权</a></li><li class="depth-2"><a href="#领取新手福利" data-for="领取新手福利">领取新手福利</a></li><li class="depth-1"><a href="#界面认识" data-for="界面认识">界面认识</a></li><li class="depth-1"><a href="#快速上手创建第一个任务" data-for="快速上手创建第一个任务">快速上手：创建第一个任务</a></li><li class="depth-2"><a href="#第一步新建任务" data-for="第一步新建任务">第一步：新建任务</a></li><li class="depth-2"><a href="#第二步选择工作空间" data-for="第二步选择工作空间">第二步：选择工作空间</a></li><li class="depth-2"><a href="#第三步描述任务" data-for="第三步描述任务">第三步：描述任务</a></li><li class="depth-2"><a href="#第四步开始执行" data-for="第四步开始执行">第四步：开始执行</a></li><li class="depth-2"><a href="#第五步查看结果" data-for="第五步查看结果">第五步：查看结果</a></li><li class="depth-1"><a href="#需求描述技巧" data-for="需求描述技巧">需求描述技巧</a></li><li class="depth-2"><a href="#模糊与清晰的对比" data-for="模糊与清晰的对比">模糊与清晰的对比</a></li><li class="depth-1"><a href="#常用示例" data-for="常用示例">常用示例</a></li><li class="depth-2"><a href="#文件夹智能整理" data-for="文件夹智能整理">文件夹智能整理</a></li><li class="depth-2"><a href="#周报一键生成" data-for="周报一键生成">周报一键生成</a></li><li class="depth-2"><a href="#excel-清洗与可视化" data-for="excel-清洗与可视化">Excel 清洗与可视化</a></li><li class="depth-2"><a href="#ppt-一键生成" data-for="ppt-一键生成">PPT 一键生成</a></li><li class="depth-2"><a href="#发票信息提取" data-for="发票信息提取">发票信息提取</a></li><li class="depth-2"><a href="#定时自动化任务" data-for="定时自动化任务">定时自动化任务</a></li><li class="depth-1"><a href="#进阶能力" data-for="进阶能力">进阶能力</a></li><li class="depth-2"><a href="#技能-skills" data-for="技能-skills">技能 Skills</a></li><li class="depth-2"><a href="#专家-experts" data-for="专家-experts">专家 Experts</a></li><li class="depth-2"><a href="#连接器-connectors" data-for="连接器-connectors">连接器 Connectors</a></li><li class="depth-2"><a href="#定时自动化与移动端" data-for="定时自动化与移动端">定时自动化与移动端</a></li><li class="depth-2"><a href="#模型切换" data-for="模型切换">模型切换</a></li><li class="depth-1"><a href="#常见问题" data-for="常见问题">常见问题</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

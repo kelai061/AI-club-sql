@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>向量数据库原理与检索应用</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="向量数据库原理与检索应用"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="向量数据库原理与检索应用"/><meta name="twitter:description" content="向量数据库原理与检索应用 出处：www.runoob.com/ai-agent/vector-database.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 向量数据库（Vector Database） 向量数据库（Vector Database）是一种专门用于存储、索引和检索高维向量数据的数据库系统。 你可以把它理解为：把意思相近的东西存在一起，并能快速找到和这个最像的那些东西。 与传统数据库通过精确匹配来查询（WHERE name = ‘Alice’）不同，向量数据库通过相似度来查询（找到和这张图最相似的 10 张图）。 一个直观的类比 想象一个图书馆..."/><meta property="og:description" content="向量数据库原理与检索应用 出处：www.runoob.com/ai-agent/vector-database.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 向量数据库（Vector Database） 向量数据库（Vector Database）是一种专门用于存储、索引和检索高维向量数据的数据库系统。 你可以把它理解为：把意思相近的东西存在一起，并能快速找到和这个最像的那些东西。 与传统数据库通过精确匹配来查询（WHERE name = ‘Alice’）不同，向量数据库通过相似度来查询（找到和这张图最相似的 10 张图）。 一个直观的类比 想象一个图书馆..."/><meta property="og:image:alt" content="向量数据库原理与检索应用 出处：www.runoob.com/ai-agent/vector-database.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 向量数据库（Vector Database） 向量数据库（Vector Database）是一种专门用于存储、索引和检索高维向量数据的数据库系统。 你可以把它理解为：把意思相近的东西存在一起，并能快速找到和这个最像的那些东西。 与传统数据库通过精确匹配来查询（WHERE name = ‘Alice’）不同，向量数据库通过相似度来查询（找到和这张图最相似的 10 张图）。 一个直观的类比 想象一个图书馆..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/向量数据库原理与检索应用"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/向量数据库原理与检索应用"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="向量数据库原理与检索应用 出处：www.runoob.com/ai-agent/vector-database.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：03-核心机制与记忆 向量数据库（Vector Database） 向量数据库（Vector Database）是一种专门用于存储、索引和检索高维向量数据的数据库系统。 你可以把它理解为：把意思相近的东西存在一起，并能快速找到和这个最像的那些东西。 与传统数据库通过精确匹配来查询（WHERE name = ‘Alice’）不同，向量数据库通过相似度来查询（找到和这张图最相似的 10 张图）。 一个直观的类比 想象一个图书馆..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/向量数据库原理与检索应用-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/向量数据库原理与检索应用-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/03-核心机制与记忆/向量数据库原理与检索应用-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/03-核心机制与记忆/向量数据库原理与检索应用" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-20" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-20" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/03-核心机制与记忆/">03-核心机制与记忆</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>向量数据库原理与检索应用</a></div></nav><h1 class="article-title">向量数据库原理与检索应用</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/核心机制与记忆" class="internal internal-link tag-link">核心机制与记忆</a><span class="note-properties-separator">, </span><a href="../../../tags/向量数据库原理与检索" class="internal internal-link tag-link">向量数据库原理与检索</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>20分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="向量数据库原理与检索应用">向量数据库原理与检索应用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#向量数据库原理与检索应用" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/vector-database.html" class="external external-link">https://www.runoob.com/ai-agent/vector-database.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>03-核心机制与记忆</code></p>
+</blockquote>
+<hr/>
+<h1 id="向量数据库vector-database">向量数据库（Vector Database）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#向量数据库vector-database" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>向量数据库（Vector Database）是一种专门用于存储、索引和检索高维向量数据的数据库系统。</p>
+<p>你可以把它理解为：把意思相近的东西存在一起，并能快速找到和这个最像的那些东西。</p>
+<p>与传统数据库通过精确匹配来查询（WHERE name = ‘Alice’）不同，向量数据库通过相似度来查询（找到和这张图最相似的 10 张图）。</p>
+<h3 id="一个直观的类比">一个直观的类比<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一个直观的类比" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>想象一个图书馆的场景：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>数据库类型</th><th>检索方式</th><th>类比</th></tr></thead><tbody><tr><td>传统数据库</td><td>按书号、书名精确检索</td><td>找一本指定编号的书</td></tr><tr><td>向量数据库</td><td>按内容相关性检索</td><td>找”所有和《三体》风格类似的科幻小说”</td></tr></tbody></table></div>
+<p>这种语义上的相似，正是向量数据库解决的核心问题。</p>
+<h2 id="为什么需要向量数据库">为什么需要向量数据库<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#为什么需要向量数据库" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>在深入技术细节之前，我们先理解向量数据库解决了什么问题。</p>
+<h3 id="传统数据库的局限">传统数据库的局限<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#传统数据库的局限" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>传统关系型数据库（MySQL、PostgreSQL）非常擅长处理结构化数据，但在面对以下需求时力不从心：</p>
+<ul>
+<li>图片搜索（找出视觉相似的图片）</li>
+<li>语义搜索（用户搜”苹果手机”，能找到”iPhone”的相关内容）</li>
+<li>推荐系统（找到”和你喜欢的歌曲风格类似的歌”）</li>
+<li>异常检测（找到”和正常行为差异最大的日志”）</li>
+</ul>
+<p>这些问题的共同特征是：需要理解内容的”含义”，而不是做字面匹配。</p>
+<h3 id="传统方案的问题">传统方案的问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#传统方案的问题" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">用 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">LIKE</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> '%苹果%'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 搜索 → 找不到 </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;iPhone&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">、</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;Apple&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">用全文索引搜索     → 找不到语义相关但用词不同的内容</span></span></code></pre></figure>
+<h3 id="对比示意图">对比示意图<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#对比示意图" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>下面的图表直观展示了传统数据库和向量数据库在查询方式上的根本差异。</p>
+<h2 id="核心概念向量与嵌入">核心概念：向量与嵌入<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心概念向量与嵌入" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>理解向量和嵌入是掌握向量数据库的第一步。</p>
+<h3 id="什么是向量vector">什么是向量（Vector）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么是向量vector" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在数学上，向量就是一组有序的数字。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.12</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.54</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.87</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.03</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.61</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]   ← 这就是一个向量</span></span></code></pre></figure>
+<p>在机器学习中，这组数字代表某个对象的语义特征，维度通常在 128 到 4096 之间。</p>
+<h3 id="什么是嵌入embedding">什么是嵌入（Embedding）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#什么是嵌入embedding" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>嵌入（Embedding）是将现实世界的对象（文字、图片、音频等）转换成向量的过程和结果。</p>
+<p>这个转换由嵌入模型完成，其核心思想是：语义相近的对象，其向量在空间中的距离也更近。</p>
+<h3 id="语义近则向量近">语义近则向量近<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#语义近则向量近" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>用一个 2D 简化示例来理解（实际是几百至几千维）：</p>
+<blockquote>
+<p>关键理解：向量空间中距离近的两个向量，其原始内容在语义上也更相近。这是向量数据库所有能力的基础。</p>
+</blockquote>
+<h2 id="相似度计算方法">相似度计算方法<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#相似度计算方法" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>找到”最相似的向量”的核心是计算两个向量的距离或相似度。以下是三种最常用的方法。</p>
+<h3 id="余弦相似度cosine-similarity">余弦相似度（Cosine Similarity）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#余弦相似度cosine-similarity" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>余弦相似度衡量两个向量的方向角，忽略长度。这是最常用的方法，尤其适合文本场景。</p>
+<p>公式：</p>
+<p>[</p>
+<p>\text{CosineSimilarity}(A, B)</p>
+<p>=</p>
+<p>\frac{A \cdot B}</p>
+<p>{|A||B|}</p>
+<p>=</p>
+<p>\frac{\sum_{i=1}^{n} A_i B_i}</p>
+<p id="2}}">{\sqrt{\sum_{i=1}^{n} A_i^2}\sqrt{\sum_{i=1}^{n} B_i</p>
+<p>]</p>
+<ul>
+<li>结果范围：-1 到 1，值越大越相似</li>
+<li>适用场景：文本语义搜索、文档相似度</li>
+</ul>
+<h3 id="欧氏距离euclidean-distance">欧氏距离（Euclidean Distance）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#欧氏距离euclidean-distance" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>欧氏距离衡量两点之间的直线距离，距离越小越相似。</p>
+<p>公式：</p>
+<p>[</p>
+<p>d(A,B)</p>
+<p>=</p>
+<p id="2}">\sqrt{\sum_{i=1}^{n}(A_i-B_i)</p>
+<p>]</p>
+<ul>
+<li>结果范围：0 到 ∞，值越小越相似</li>
+<li>适用场景：图像检索、地理位置相关应用</li>
+</ul>
+<h3 id="点积dot-product">点积（Dot Product）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#点积dot-product" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>点积是向量相乘求和，结合了方向和长度信息。</p>
+<p>公式：</p>
+<p>[</p>
+<p>A \cdot B</p>
+<p>=</p>
+<p>\sum_{i=1}^{n} A_i B_i</p>
+<p>]</p>
+<ul>
+<li>适用场景：推荐系统（向量已归一化时等价于余弦相似度）</li>
+</ul>
+<h3 id="三种方法对比">三种方法对比<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#三种方法对比" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h3 id="python-代码示例">Python 代码示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#python-代码示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>以下示例演示了三种相似度计算方法的 Python 实现：</p>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import numpy as np</p>
+<h1 id="余弦相似度衡量方向相似性">余弦相似度：衡量方向相似性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#余弦相似度衡量方向相似性" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def cosine_similarity(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))</p>
+<h1 id="欧氏距离衡量绝对位置差异">欧氏距离：衡量绝对位置差异<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#欧氏距离衡量绝对位置差异" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def euclidean_distance(a, b):
+    return np.linalg.norm(a - b)</p>
+<h1 id="点积结合方向与长度">点积：结合方向与长度<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#点积结合方向与长度" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>def dot_product(a, b):
+    return np.dot(a, b)</p>
+<h1 id="示例向量">示例向量<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例向量" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>v1 = np.array([0.12, -0.54, 0.87, 0.03])
+v2 = np.array([0.10, -0.50, 0.90, 0.05])
+v3 = np.array([-0.80, 0.20, -0.30, 0.70])</p>
+<p>print(f”v1 vs v2 余弦相似度: {cosine_similarity(v1, v2):.4f}”)  # 约 0.9997（非常相似）
+print(f”v1 vs v3 余弦相似度: {cosine_similarity(v1, v3):.4f}”)  # 约 -0.55（不相似）</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">v1 vs v2 余弦相似度: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.9997</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">v1 vs v3 余弦相似度: </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.5512</span></span></code></pre></figure>
+<h2 id="向量索引算法">向量索引算法<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#向量索引算法" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>数据量大时（百万、亿级），对每一条数据做相似度计算（暴力检索）太慢。向量数据库使用专门的索引算法来加速查询。</p>
+<h3 id="暴力检索flat--brute-force">暴力检索（Flat / Brute-force）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#暴力检索flat--brute-force" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>暴力检索遍历所有向量，逐一计算相似度。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>说明</th></tr></thead><tbody><tr><td>原理</td><td>遍历所有向量，逐一计算相似度</td></tr><tr><td>优点</td><td>结果 100% 精确</td></tr><tr><td>缺点</td><td>数据量大时极慢，O(n) 复杂度</td></tr><tr><td>适用</td><td>数据量小于 10 万，对精度要求极高</td></tr></tbody></table></div>
+<h3 id="ivf倒排文件索引">IVF（倒排文件索引）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ivf倒排文件索引" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>IVF 执行步骤：</p>
+<ol>
+<li>训练阶段：用 K-Means 将所有向量聚成 N 个簇，记录每个簇的中心</li>
+<li>查询阶段：先找出距离最近的几个簇的中心，再只在这些簇内做精确搜索</li>
+</ol>
+<h3 id="hnsw分层导航小世界图">HNSW（分层导航小世界图）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#hnsw分层导航小世界图" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>HNSW 是目前最主流的向量索引算法，兼顾速度和精度。</p>
+<p>HNSW 核心思路：</p>
+<ul>
+<li>构建多层图结构，顶层稀疏，底层密集</li>
+<li>查询时从顶层入口开始，做”跳格游戏”：每层贪心地往更近的节点跳，再下探到下一层</li>
+<li>大幅减少需要比较的节点数，时间复杂度近似 O(log n)</li>
+</ul>
+<h3 id="其他常用索引">其他常用索引<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#其他常用索引" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>索引类型</th><th>特点</th><th>适用场景</th></tr></thead><tbody><tr><td>Flat（暴力）</td><td>精确但慢</td><td>小数据集、精度优先</td></tr><tr><td>IVF_Flat</td><td>聚类后精确搜索，速度快</td><td>中大规模，内存充足</td></tr><tr><td>IVF_PQ</td><td>量化压缩，节省内存</td><td>超大规模，内存受限</td></tr><tr><td>HNSW</td><td>速度快、精度高，内存占用高</td><td>最常用，推荐首选</td></tr><tr><td>ScaNN</td><td>Google 出品，优化吞吐量</td><td>高并发生产环境</td></tr></tbody></table></div>
+<h2 id="主流向量数据库对比">主流向量数据库对比<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#主流向量数据库对比" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>以下是当前最主流的向量数据库横向对比，帮助你在不同场景下做出选择。</p>
+<blockquote>
+<p>新手建议：从 Chroma 或 pgvector 起步，前者适合 AI 应用原型，后者适合已有 PostgreSQL 的项目。</p>
+</blockquote>
+<h2 id="快速上手python-示例">快速上手：Python 示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#快速上手python-示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>下面用 Chroma（最易入门）演示完整的增删改查流程。</p>
+<h3 id="安装">安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>pip install chromadb openai</p>
+<h3 id="完整示例构建一个文档语义搜索系统">完整示例：构建一个文档语义搜索系统<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#完整示例构建一个文档语义搜索系统" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>以下代码从头到尾演示了如何使用 Chroma 构建一个基于语义的文档搜索系统。</p>
+<h2 id="实例-2">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import chromadb
+from chromadb.utils import embedding_functions</p>
+<h1 id="-1-初始化客户端-">─── 1. 初始化客户端 ───────────────────────────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-初始化客户端-" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="持久化到本地推荐">持久化到本地（推荐）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#持久化到本地推荐" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>client = chromadb.PersistentClient(path=”./my_vector_db”)</p>
+<h1 id="使用-openai-嵌入模型也可换成本地模型">使用 OpenAI 嵌入模型（也可换成本地模型）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用-openai-嵌入模型也可换成本地模型" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>openai_ef = embedding_functions.OpenAIEmbeddingFunction(
+    api_key=“your-openai-api-key”,       # 必填：替换为你的 API Key
+    model_name=“text-embedding-3-small”   # 1536 维，性价比高
+)</p>
+<h1 id="-2-创建集合类似关系库里的表">─── 2. 创建集合（类似关系库里的”表”）────────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-2-创建集合类似关系库里的表" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>collection = client.get_or_create_collection(
+    name=“my_documents”,                   # 集合名称
+    embedding_function=openai_ef,          # 绑定嵌入函数
+    metadata={“hnsw:space”: “cosine”}      # 使用余弦相似度
+)</p>
+<h1 id="-3-插入文档-">─── 3. 插入文档 ──────────────────────────────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-插入文档-" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>documents = [
+    “Python 是一种面向对象的解释型编程语言，广泛用于数据科学和 AI 开发”,
+    “机器学习是人工智能的子领域，让计算机从数据中学习规律”,
+    “深度学习使用多层神经网络，在图像识别和 NLP 任务中表现优异”,
+    “向量数据库专门存储高维向量，支持语义相似度搜索”,
+    “PostgreSQL 是功能强大的开源关系型数据库”,
+    “Redis 是基于内存的高性能键值数据库，常用于缓存”,
+    “Docker 容器化技术让应用可以在任何环境中一致运行”,
+    “Git 是分布式版本控制系统，是现代软件开发的基础工具”,
+]</p>
+<p>ids = [f”doc_{i}” for i in range(len(documents))]</p>
+<h1 id="批量插入chroma-自动调用嵌入模型转为向量后存储">批量插入（Chroma 自动调用嵌入模型转为向量后存储）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#批量插入chroma-自动调用嵌入模型转为向量后存储" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>collection.add(
+    documents=documents,
+    ids=ids,
+    metadatas=[{“source”: “tutorial”, “index”: i} for i in range(len(documents))]
+)</p>
+<p>print(f”已插入 {len(documents)} 条文档”)</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">已插入 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">8</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 条文档</span></span></code></pre></figure>
+<h2 id="实例-3">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="-4-语义搜索-">─── 4. 语义搜索 ──────────────────────────────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-语义搜索-" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>query = “如何用 Python 做人工智能”</p>
+<p>results = collection.query(
+    query_texts=[query],
+    n_results=3,                # 返回最相似的 3 条
+    include=[“documents”, “distances”, “metadatas”]
+)</p>
+<p>print(f”\n查询：{query}”)
+print(”-” * 50)
+for i, (doc, dist) in enumerate(zip(
+    results[“documents”][0],
+    results[“distances”][0]
+)):
+    similarity = 1 - dist   # 余弦距离转相似度
+    print(f”第 {i+1} 名（相似度 {similarity:.4f}）：”)
+    print(f”  {doc}”)
+    print()</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">查询：如何用 Python 做人工智能
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--------------------------------------------------</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 名（相似度 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.9231</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">）：Python 是一种面向对象的解释型编程语言</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 名（相似度 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.8874</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">）：机器学习是人工智能的子领域</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">第 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 名（相似度 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.8612</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">）：深度学习使用多层神经网络</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span></span></code></pre></figure>
+<h2 id="实例-4">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="-5-带过滤条件的搜索元数据过滤">─── 5. 带过滤条件的搜索（元数据过滤）───────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-5-带过滤条件的搜索元数据过滤" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>results_filtered = collection.query(
+    query_texts=[“数据库技术”],
+    n_results=2,
+    where={“source”: “tutorial”},        # 只在 source=tutorial 的文档里搜索
+    include=[“documents”, “distances”]
+)</p>
+<h1 id="-6-更新文档-">─── 6. 更新文档 ──────────────────────────────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-6-更新文档-" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>collection.update(
+    ids=[“doc_0”],
+    documents=[“Python 是目前最流行的编程语言，在 AI、数据分析、Web 开发中均有广泛应用”],
+    metadatas=[{“source”: “tutorial”, “index”: 0, “updated”: True}]
+)</p>
+<h1 id="-7-删除文档-">─── 7. 删除文档 ──────────────────────────────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-7-删除文档-" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>collection.delete(ids=[“doc_7”])   # 删除 Git 相关文档</p>
+<h1 id="-8-查看集合统计-">─── 8. 查看集合统计 ──────────────────────────────────────────<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-8-查看集合统计-" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>print(f”当前集合文档数：{collection.count()}“)</p>
+<h3 id="不使用第三方嵌入-api纯本地">不使用第三方嵌入 API（纯本地）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#不使用第三方嵌入-api纯本地" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果你不想使用 OpenAI API，可以用本地嵌入模型完全离线运行。</p>
+<h2 id="实例-5">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import chromadb
+from sentence_transformers import SentenceTransformer</p>
+<h1 id="使用本地嵌入模型无需-api-key完全离线">使用本地嵌入模型（无需 API Key，完全离线）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#使用本地嵌入模型无需-api-key完全离线" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>model = SentenceTransformer(“paraphrase-multilingual-MiniLM-L12-v2”)  # 支持中文</p>
+<p>client = chromadb.Client()
+collection = client.create_collection(“local_demo”)</p>
+<p>texts = [“今天天气很好”, “阳光明媚，适合出门”, “股市大涨了”, “明天可能会下雨”]</p>
+<h1 id="手动生成向量后插入">手动生成向量后插入<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#手动生成向量后插入" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>embeddings = model.encode(texts).tolist()
+collection.add(
+    embeddings=embeddings,
+    documents=texts,
+    ids=[f”id_{i}” for i in range(len(texts))]
+)</p>
+<h1 id="查询">查询<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#查询" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>query_embedding = model.encode([“今天天气怎么样”]).tolist()
+results = collection.query(query_embeddings=query_embedding, n_results=2)
+print(results[“documents”])</p>
+<h1 id="输出-今天天气很好-阳光明媚适合出门">输出: <a href="../../../'今天天气很好',-'阳光明媚，适合出门'" class="internal internal-link alias" data-slug="'今天天气很好',-'阳光明媚，适合出门'">‘今天天气很好’, ‘阳光明媚，适合出门’</a><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#输出-今天天气很好-阳光明媚适合出门" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h3 id="pgvector-示例postgresql-用户">pgvector 示例（PostgreSQL 用户）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pgvector-示例postgresql-用户" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果你的项目已经使用 PostgreSQL，pgvector 是最轻量的接入方式。</p>
+<h2 id="实例-6">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-6" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>— 安装扩展
+CREATE EXTENSION IF NOT EXISTS vector;</p>
+<p>— 建表：存储文章标题及其向量（1536维）
+CREATE TABLE articles (
+    id       SERIAL PRIMARY KEY,
+    title    TEXT NOT NULL,
+    content  TEXT,
+    embedding vector(1536)           — 向量列，1536 维
+);</p>
+<p>— 创建 HNSW 索引加速查询
+CREATE INDEX ON articles
+USING hnsw (embedding vector_cosine_ops)
+WITH (m = 16, ef_construction = 64);</p>
+<p>— 插入数据（向量由应用层生成后传入）
+INSERT INTO articles (title, embedding)
+VALUES (‘Python 入门指南’, ‘[0.12, -0.54, 0.87, …]’::vector);</p>
+<p>— 语义搜索：找最相似的 5 篇文章
+SELECT id, title,
+       1 - (embedding &lt;=> ‘[0.10, -0.50, 0.90, …]’::vector) AS similarity
+FROM articles
+ORDER BY embedding &lt;=> ‘[0.10, -0.50, 0.90, …]’::vector
+LIMIT 5;</p>
+<blockquote>
+<p>注意：&lt;=> 是 pgvector 提供的向量距离运算符，用于计算余弦距离。用 1 减去余弦距离即得到余弦相似度。</p>
+</blockquote>
+<h2 id="典型应用场景">典型应用场景<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#典型应用场景" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>向量数据库在 AI 时代的应用场景非常广泛，以下是六个最典型的场景概览。</p>
+<h3 id="rag检索增强生成架构">RAG（检索增强生成）架构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#rag检索增强生成架构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>RAG 是目前向量数据库最主要的应用场景之一。下面是其核心工作流程：</p>
+<h2 id="选型建议与最佳实践">选型建议与最佳实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#选型建议与最佳实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="选型决策树">选型决策树<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#选型决策树" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>根据你的具体情况，按照以下决策树选择合适的向量数据库：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你的情况是什么？
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├─── 已有 PostgreSQL，且数据量 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 500</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 万
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│    └──</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 用 pgvector，无缝集成，零额外运维
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├─── 做 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AI</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">LLM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 应用原型，快速验证
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│    └──</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 用 Chroma，几行代码跑起来
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├─── 需要生产级部署，性能优先，数据量 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">500</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 万 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">~</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 亿
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│    └──</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 用 Qdrant，Rust 实现，性能强
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├─── 超大规模（</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 亿），有 K8s 运维能力
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│    └──</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 用 Milvus，分布式，功能最全
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">└─── 团队没有运维能力，愿意付费
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">     └──</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 用 Pinecone 云服务，开箱即用</span></span></code></pre></figure>
+<h3 id="嵌入模型的选择">嵌入模型的选择<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#嵌入模型的选择" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>选择合适的嵌入模型是向量数据库应用的关键第一步。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>需求</th><th>推荐模型</th></tr></thead><tbody><tr><td>中英文文本（高质量）</td><td>OpenAI text-embedding-3-small</td></tr><tr><td>中文文本（本地离线）</td><td>BAAI/bge-large-zh-v1.5</td></tr><tr><td>多语言通用</td><td>paraphrase-multilingual-MiniLM-L12-v2</td></tr><tr><td>图文多模态</td><td>OpenAI CLIP 系列</td></tr></tbody></table></div>
+<h3 id="性能优化技巧">性能优化技巧<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#性能优化技巧" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>批量插入：一次插入多条，避免频繁单条写入。</li>
+</ol>
+<h2 id="实例-7">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-7" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="推荐批量插入">推荐：批量插入<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#推荐批量插入" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>collection.add(documents=docs_list, ids=ids_list)</p>
+<h1 id="不推荐循环单条每次都重新索引效率极低">不推荐：循环单条（每次都重新索引，效率极低）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#不推荐循环单条每次都重新索引效率极低" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="for-doc-id-in-zipdocs_list-ids_list">for doc, id in zip(docs_list, ids_list):<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#for-doc-id-in-zipdocs_list-ids_list" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="--collectionadddocumentsdoc-idsid">    collection.add(documents=[doc], ids=[id])<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#--collectionadddocumentsdoc-idsid" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<ol start="2">
+<li>向量归一化：使用余弦相似度前，提前归一化向量可加速计算。</li>
+</ol>
+<h2 id="实例-8">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-8" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>import numpy as np</p>
+<p>def normalize(v):
+    &quot;&quot;&quot;对向量做 L2 归一化，使模长为 1&quot;&quot;&quot;
+    return v / np.linalg.norm(v)</p>
+<ol start="3">
+<li>
+<p>合理设置 n_results：不要无脑设置很大的 top_k，一般 RAG 场景 3~10 条足够。</p>
+</li>
+<li>
+<p>善用元数据过滤：在搜索时配合 where 条件，缩小搜索范围。</p>
+</li>
+</ol>
+<h2 id="实例-9">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-9" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="只在技术文档分类里搜索缩小范围提升精度">只在”技术文档”分类里搜索，缩小范围提升精度<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#只在技术文档分类里搜索缩小范围提升精度" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>collection.query(
+    query_texts=[“Python 异常处理”],
+    where={“category”: “tech_doc”},
+    n_results=5
+)</p>
+<ol start="5">
+<li>定期重建索引：数据量增长后，适时重建 HNSW 索引以维持查询性能。</li>
+</ol>
+<h3 id="常见踩坑">常见踩坑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见踩坑" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>以下是初学者使用向量数据库时最容易遇到的问题及解决方案。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>问题</th><th>说明</th><th>解决方案</th></tr></thead><tbody><tr><td>嵌入模型要统一</td><td>插入和查询必须用同一个模型</td><td>在配置文件中固定模型版本</td></tr><tr><td>维度不匹配</td><td>换了模型但没重建集合</td><td>换模型时删除重建集合</td></tr><tr><td>文本过长</td><td>大多数模型有 token 限制（512~8192）</td><td>超长文本先分块（chunking）</td></tr><tr><td>相似度不准确</td><td>文本没有分块，语义被稀释</td><td>按段落或固定长度切分文档</td></tr><tr><td>冷启动慢</td><td>数据量大时首次加载索引耗时</td><td>提前预热，或使用持久索引</td></tr></tbody></table></div>
+<h2 id="总结">总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#总结" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>让我们回顾本教程的核心知识点：</p>
+<p>向量数据库是 AI 时代基础设施的重要一环。</p>
+<p>它解决了传统数据库无法处理的语义相似性搜索问题，是构建 RAG 系统、推荐系统、多模态搜索的核心组件。</p>
+<h3 id="学习路径建议">学习路径建议<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#学习路径建议" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>第一步：理解向量和嵌入的概念，运行本文的 Chroma 示例</li>
+<li>第二步：尝试用 LangChain + Chroma 构建一个简单的文档问答系统</li>
+<li>第三步：学习 HNSW 等索引算法，理解精度与速度的权衡</li>
+<li>第四步：根据实际项目需求，选择合适的向量数据库并在生产环境部署</li>
+</ol>
+<h2 id="参考资源">参考资源<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#参考资源" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://docs.trychroma.com" class="external external-link">Chroma 官方文档<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://qdrant.tech/documentation" class="external external-link">Qdrant 官方文档<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/pgvector/pgvector" class="external external-link">pgvector GitHub<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://milvus.io/docs" class="external external-link">Milvus 官方文档<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://arxiv.org/abs/1603.09320" class="external external-link">HNSW 论文原文<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://platform.openai.com/docs/guides/embeddings" class="external external-link">OpenAI Embeddings 指南<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://huggingface.co/spaces/mteb/leaderboard" class="external external-link">HuggingFace 文本嵌入排行榜（MTEB）<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-20" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#向量数据库原理与检索应用" data-for="向量数据库原理与检索应用">向量数据库原理与检索应用</a></li><li class="depth-0"><a href="#向量数据库vector-database" data-for="向量数据库vector-database">向量数据库（Vector Database）</a></li><li class="depth-2"><a href="#一个直观的类比" data-for="一个直观的类比">一个直观的类比</a></li><li class="depth-1"><a href="#为什么需要向量数据库" data-for="为什么需要向量数据库">为什么需要向量数据库</a></li><li class="depth-2"><a href="#传统数据库的局限" data-for="传统数据库的局限">传统数据库的局限</a></li><li class="depth-2"><a href="#传统方案的问题" data-for="传统方案的问题">传统方案的问题</a></li><li class="depth-2"><a href="#对比示意图" data-for="对比示意图">对比示意图</a></li><li class="depth-1"><a href="#核心概念向量与嵌入" data-for="核心概念向量与嵌入">核心概念：向量与嵌入</a></li><li class="depth-2"><a href="#什么是向量vector" data-for="什么是向量vector">什么是向量（Vector）</a></li><li class="depth-2"><a href="#什么是嵌入embedding" data-for="什么是嵌入embedding">什么是嵌入（Embedding）</a></li><li class="depth-2"><a href="#语义近则向量近" data-for="语义近则向量近">语义近则向量近</a></li><li class="depth-1"><a href="#相似度计算方法" data-for="相似度计算方法">相似度计算方法</a></li><li class="depth-2"><a href="#余弦相似度cosine-similarity" data-for="余弦相似度cosine-similarity">余弦相似度（Cosine Similarity）</a></li><li class="depth-2"><a href="#欧氏距离euclidean-distance" data-for="欧氏距离euclidean-distance">欧氏距离（Euclidean Distance）</a></li><li class="depth-2"><a href="#点积dot-product" data-for="点积dot-product">点积（Dot Product）</a></li><li class="depth-2"><a href="#三种方法对比" data-for="三种方法对比">三种方法对比</a></li><li class="depth-2"><a href="#python-代码示例" data-for="python-代码示例">Python 代码示例</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#余弦相似度衡量方向相似性" data-for="余弦相似度衡量方向相似性">余弦相似度：衡量方向相似性</a></li><li class="depth-0"><a href="#欧氏距离衡量绝对位置差异" data-for="欧氏距离衡量绝对位置差异">欧氏距离：衡量绝对位置差异</a></li><li class="depth-0"><a href="#点积结合方向与长度" data-for="点积结合方向与长度">点积：结合方向与长度</a></li><li class="depth-0"><a href="#示例向量" data-for="示例向量">示例向量</a></li><li class="depth-1"><a href="#向量索引算法" data-for="向量索引算法">向量索引算法</a></li><li class="depth-2"><a href="#暴力检索flat--brute-force" data-for="暴力检索flat--brute-force">暴力检索（Flat / Brute-force）</a></li><li class="depth-2"><a href="#ivf倒排文件索引" data-for="ivf倒排文件索引">IVF（倒排文件索引）</a></li><li class="depth-2"><a href="#hnsw分层导航小世界图" data-for="hnsw分层导航小世界图">HNSW（分层导航小世界图）</a></li><li class="depth-2"><a href="#其他常用索引" data-for="其他常用索引">其他常用索引</a></li><li class="depth-1"><a href="#主流向量数据库对比" data-for="主流向量数据库对比">主流向量数据库对比</a></li><li class="depth-1"><a href="#快速上手python-示例" data-for="快速上手python-示例">快速上手：Python 示例</a></li><li class="depth-2"><a href="#安装" data-for="安装">安装</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-2"><a href="#完整示例构建一个文档语义搜索系统" data-for="完整示例构建一个文档语义搜索系统">完整示例：构建一个文档语义搜索系统</a></li><li class="depth-1"><a href="#实例-2" data-for="实例-2">实例</a></li><li class="depth-0"><a href="#-1-初始化客户端-" data-for="-1-初始化客户端-">─── 1. 初始化客户端 ───────────────────────────────────────────</a></li><li class="depth-0"><a href="#持久化到本地推荐" data-for="持久化到本地推荐">持久化到本地（推荐）</a></li><li class="depth-0"><a href="#使用-openai-嵌入模型也可换成本地模型" data-for="使用-openai-嵌入模型也可换成本地模型">使用 OpenAI 嵌入模型（也可换成本地模型）</a></li><li class="depth-0"><a href="#-2-创建集合类似关系库里的表" data-for="-2-创建集合类似关系库里的表">─── 2. 创建集合（类似关系库里的”表”）────────────────────────</a></li><li class="depth-0"><a href="#-3-插入文档-" data-for="-3-插入文档-">─── 3. 插入文档 ──────────────────────────────────────────────</a></li><li class="depth-0"><a href="#批量插入chroma-自动调用嵌入模型转为向量后存储" data-for="批量插入chroma-自动调用嵌入模型转为向量后存储">批量插入（Chroma 自动调用嵌入模型转为向量后存储）</a></li><li class="depth-1"><a href="#实例-3" data-for="实例-3">实例</a></li><li class="depth-0"><a href="#-4-语义搜索-" data-for="-4-语义搜索-">─── 4. 语义搜索 ──────────────────────────────────────────────</a></li><li class="depth-1"><a href="#实例-4" data-for="实例-4">实例</a></li><li class="depth-0"><a href="#-5-带过滤条件的搜索元数据过滤" data-for="-5-带过滤条件的搜索元数据过滤">─── 5. 带过滤条件的搜索（元数据过滤）───────────────────────</a></li><li class="depth-0"><a href="#-6-更新文档-" data-for="-6-更新文档-">─── 6. 更新文档 ──────────────────────────────────────────────</a></li><li class="depth-0"><a href="#-7-删除文档-" data-for="-7-删除文档-">─── 7. 删除文档 ──────────────────────────────────────────────</a></li><li class="depth-0"><a href="#-8-查看集合统计-" data-for="-8-查看集合统计-">─── 8. 查看集合统计 ──────────────────────────────────────────</a></li><li class="depth-2"><a href="#不使用第三方嵌入-api纯本地" data-for="不使用第三方嵌入-api纯本地">不使用第三方嵌入 API（纯本地）</a></li><li class="depth-1"><a href="#实例-5" data-for="实例-5">实例</a></li><li class="depth-0"><a href="#使用本地嵌入模型无需-api-key完全离线" data-for="使用本地嵌入模型无需-api-key完全离线">使用本地嵌入模型（无需 API Key，完全离线）</a></li><li class="depth-0"><a href="#手动生成向量后插入" data-for="手动生成向量后插入">手动生成向量后插入</a></li><li class="depth-0"><a href="#查询" data-for="查询">查询</a></li><li class="depth-0"><a href="#输出-今天天气很好-阳光明媚适合出门" data-for="输出-今天天气很好-阳光明媚适合出门">输出: ‘今天天气很好’, ‘阳光明媚，适合出门’</a></li><li class="depth-2"><a href="#pgvector-示例postgresql-用户" data-for="pgvector-示例postgresql-用户">pgvector 示例（PostgreSQL 用户）</a></li><li class="depth-1"><a href="#实例-6" data-for="实例-6">实例</a></li><li class="depth-1"><a href="#典型应用场景" data-for="典型应用场景">典型应用场景</a></li><li class="depth-2"><a href="#rag检索增强生成架构" data-for="rag检索增强生成架构">RAG（检索增强生成）架构</a></li><li class="depth-1"><a href="#选型建议与最佳实践" data-for="选型建议与最佳实践">选型建议与最佳实践</a></li><li class="depth-2"><a href="#选型决策树" data-for="选型决策树">选型决策树</a></li><li class="depth-2"><a href="#嵌入模型的选择" data-for="嵌入模型的选择">嵌入模型的选择</a></li><li class="depth-2"><a href="#性能优化技巧" data-for="性能优化技巧">性能优化技巧</a></li><li class="depth-1"><a href="#实例-7" data-for="实例-7">实例</a></li><li class="depth-0"><a href="#推荐批量插入" data-for="推荐批量插入">推荐：批量插入</a></li><li class="depth-0"><a href="#不推荐循环单条每次都重新索引效率极低" data-for="不推荐循环单条每次都重新索引效率极低">不推荐：循环单条（每次都重新索引，效率极低）</a></li><li class="depth-0"><a href="#for-doc-id-in-zipdocs_list-ids_list" data-for="for-doc-id-in-zipdocs_list-ids_list">for doc, id in zip(docs_list, ids_list):</a></li><li class="depth-0"><a href="#--collectionadddocumentsdoc-idsid" data-for="--collectionadddocumentsdoc-idsid">    collection.add(documents=[doc], ids=[id])</a></li><li class="depth-1"><a href="#实例-8" data-for="实例-8">实例</a></li><li class="depth-1"><a href="#实例-9" data-for="实例-9">实例</a></li><li class="depth-0"><a href="#只在技术文档分类里搜索缩小范围提升精度" data-for="只在技术文档分类里搜索缩小范围提升精度">只在”技术文档”分类里搜索，缩小范围提升精度</a></li><li class="depth-2"><a href="#常见踩坑" data-for="常见踩坑">常见踩坑</a></li><li class="depth-1"><a href="#总结" data-for="总结">总结</a></li><li class="depth-2"><a href="#学习路径建议" data-for="学习路径建议">学习路径建议</a></li><li class="depth-1"><a href="#参考资源" data-for="参考资源">参考资源</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

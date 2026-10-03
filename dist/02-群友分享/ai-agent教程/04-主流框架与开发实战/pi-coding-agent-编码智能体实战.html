@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Pi Coding Agent 编码智能体实战</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="Pi Coding Agent 编码智能体实战"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Pi Coding Agent 编码智能体实战"/><meta name="twitter:description" content="Pi Coding Agent 编码智能体实战 出处：www.runoob.com/ai-agent/pi-coding-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Pi Coding Agent 入门教程 Pi 是一个运行在终端里的 AI 编码 Agent，类似于 Claude Code、OpenAI Codex CLI 这类工具。 Pi 的官方理念是：“There are many agent harnesses but this one is yours”（Agent 工具很多，但这个是你自己的）。 你给 Pi 一句话，它就能在你的..."/><meta property="og:description" content="Pi Coding Agent 编码智能体实战 出处：www.runoob.com/ai-agent/pi-coding-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Pi Coding Agent 入门教程 Pi 是一个运行在终端里的 AI 编码 Agent，类似于 Claude Code、OpenAI Codex CLI 这类工具。 Pi 的官方理念是：“There are many agent harnesses but this one is yours”（Agent 工具很多，但这个是你自己的）。 你给 Pi 一句话，它就能在你的..."/><meta property="og:image:alt" content="Pi Coding Agent 编码智能体实战 出处：www.runoob.com/ai-agent/pi-coding-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Pi Coding Agent 入门教程 Pi 是一个运行在终端里的 AI 编码 Agent，类似于 Claude Code、OpenAI Codex CLI 这类工具。 Pi 的官方理念是：“There are many agent harnesses but this one is yours”（Agent 工具很多，但这个是你自己的）。 你给 Pi 一句话，它就能在你的..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/pi-coding-agent-编码智能体实战"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/pi-coding-agent-编码智能体实战"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="Pi Coding Agent 编码智能体实战 出处：www.runoob.com/ai-agent/pi-coding-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 Pi Coding Agent 入门教程 Pi 是一个运行在终端里的 AI 编码 Agent，类似于 Claude Code、OpenAI Codex CLI 这类工具。 Pi 的官方理念是：“There are many agent harnesses but this one is yours”（Agent 工具很多，但这个是你自己的）。 你给 Pi 一句话，它就能在你的..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/pi-coding-agent-编码智能体实战-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/pi-coding-agent-编码智能体实战-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/pi-coding-agent-编码智能体实战-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/04-主流框架与开发实战/pi-coding-agent-编码智能体实战" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-35" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-35" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/04-主流框架与开发实战/">04-主流框架与开发实战</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Pi Coding Agent 编码智能体实战</a></div></nav><h1 class="article-title">Pi Coding Agent 编码智能体实战</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/主流框架与开发实战" class="internal internal-link tag-link">主流框架与开发实战</a><span class="note-properties-separator">, </span><a href="../../../tags/pi-coding-" class="internal internal-link tag-link">pi-coding-</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>35分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="pi-coding-agent-编码智能体实战">Pi Coding Agent 编码智能体实战<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pi-coding-agent-编码智能体实战" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/pi-coding-agent.html" class="external external-link">https://www.runoob.com/ai-agent/pi-coding-agent.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>04-主流框架与开发实战</code></p>
+</blockquote>
+<hr/>
+<h1 id="pi-coding-agent-入门教程">Pi Coding Agent 入门教程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pi-coding-agent-入门教程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Pi 是一个运行在终端里的 AI 编码 Agent，类似于 Claude Code、OpenAI Codex CLI 这类工具。</p>
+<p>Pi 的官方理念是：“There are many agent harnesses but this one is yours”（Agent 工具很多，但这个是你自己的）。</p>
+<p>你给 Pi 一句话，它就能在你的项目目录里读文件、写文件、跑命令，循环调用大模型直到完成任务。</p>
+<p>核心理念是用最小的内核加极强的可扩展性，让你把工具改造成适合自己的样子，而不是反过来去适应工具。</p>
+<blockquote>
+<p>Pi Agent 完整教程：<a href="https://www.runoob.com/pi-agent/pi-agent-tutorial.html" class="external external-link">https://www.runoob.com/pi-agent/pi-agent-tutorial.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+</blockquote>
+<h3 id="pi-包含什么">Pi 包含什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pi-包含什么" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 不是一个单独的程序，而是一套由四个 npm 包组成的工具链。</p>
+<p>普通用户只需安装最上层的 <code>@earendil-works/pi-coding-agent</code>，就能得到一个开箱即用的命令行 Agent。</p>
+<h3 id="适合谁用">适合谁用<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#适合谁用" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 特别适合以下场景和人群：</p>
+<ul>
+<li>偏好终端工作流、不想在 IDE 和命令行之间来回切换的开发者</li>
+<li>想要一个可以深度定制、甚至让 Agent 自己改写自己的工具的进阶用户</li>
+<li>需要同时接入多家大模型（Anthropic、OpenAI、Google 等）的人</li>
+<li>想把 Agent 能力嵌入到自己程序里的开发者（通过 SDK 或 RPC 模式）</li>
+</ul>
+<blockquote>
+<p>注意：Pi 默认以你的用户权限运行，没有内置沙箱。在不受信任的代码仓库上使用前，请先阅读本文的「安全须知」章节。</p>
+</blockquote>
+<h2 id="核心设计哲学原语而非功能">核心设计哲学：原语而非功能<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心设计哲学原语而非功能" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>理解 Pi 的设计哲学，你会明白它为什么故意「不内置」很多其他 Agent 都有的功能。</p>
+<p>Pi 把这个理念叫做 Primitives, Not Features（提供原语，而非功能）。</p>
+<h3 id="故意不内置的功能">故意不内置的功能<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#故意不内置的功能" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>下面这些功能，Pi 都没有内置，而是让你按需通过扩展或外部工具来实现：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>不内置的功能</th><th>Pi 的替代方案</th></tr></thead><tbody><tr><td>MCP 协议集成</td><td>把工具写成带 README 的 CLI，或装一个 MCP 扩展</td></tr><tr><td>子 Agent（subagents）</td><td>用 tmux 开多个会话，或自己写扩展</td></tr><tr><td>权限确认弹窗</td><td>放进容器里跑，或自己写确认流程扩展</td></tr><tr><td>计划模式（plan mode）</td><td>把计划写到文件里，或写扩展</td></tr><tr><td>内置待办事项</td><td>用一个 TODO.md 文件，或装扩展</td></tr><tr><td>后台 bash</td><td>用 tmux 获得完整可观测性</td></tr></tbody></table></div>
+<h3 id="为什么要这样做">为什么要这样做<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#为什么要这样做" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 认为这些功能在不同团队里需求差异巨大，强行内置反而会让工具变得臃肿且难以贴合实际工作流。</p>
+<p>所以它的做法是：保留一个干净的最小内核，把所有「功能」都变成可安装、可编写、可分享的扩展、技能、提示模板和主题。</p>
+<p>甚至你可以直接让 Pi 帮你把这些功能写出来，写完用 <code>/reload</code> 重载，立刻就能用。</p>
+<blockquote>
+<p>这句话值得记住：Adapt Pi to your workflows, not the other way around（让 Pi 适应你的工作流，而不是你适应 Pi）。</p>
+</blockquote>
+<h2 id="架构与核心包">架构与核心包<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#架构与核心包" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pi 由四个层级分明的包组成，上层依赖下层。</p>
+<p>你平时用的 <code>pi</code> 命令，只是最上层那个包提供的入口。</p>
+<h3 id="四个核心包">四个核心包<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#四个核心包" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>包名</th><th>作用</th><th>何时会单独用到</th></tr></thead><tbody><tr><td><code>@earendil-works/pi-coding-agent</code></td><td>交互式编码 Agent CLI，用户直接安装使用的入口</td><td>绝大多数情况只需这个</td></tr><tr><td><code>@earendil-works/pi-agent-core</code></td><td>Agent 运行时，负责工具调用循环和状态管理</td><td>想自己搭一个非编码类的 Agent 时</td></tr><tr><td><code>@earendil-works/pi-ai</code></td><td>统一的多厂商 LLM API（OpenAI、Anthropic、Google 等）</td><td>只想用一个统一接口调多家模型时</td></tr><tr><td><code>@earendil-works/pi-tui</code></td><td>终端 UI 库，支持差分渲染</td><td>想写自己的终端应用时</td></tr></tbody></table></div>
+<h3 id="四种运行模式">四种运行模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#四种运行模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 不只能交互式运行，它提供了四种模式来适配不同场景：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>模式</th><th>说明</th><th>典型场景</th></tr></thead><tbody><tr><td>Interactive（交互式）</td><td>完整的终端 UI 体验</td><td>日常编码、对话式开发</td></tr><tr><td>Print / JSON</td><td><code>pi -p &quot;提问&quot;</code> 一次性输出；<code>--mode json</code> 输出事件流</td><td>脚本自动化、管道处理</td></tr><tr><td>RPC</td><td>通过 stdin/stdout 的 JSON 协议通信</td><td>非 Node 程序集成</td></tr><tr><td>SDK</td><td>作为库嵌入到你的应用里</td><td>在自家产品里集成 Agent 能力</td></tr></tbody></table></div>
+<h2 id="安装">安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pi 提供多种安装方式，覆盖 macOS、Linux 和 Windows。</p>
+<p>最常见的是用 npm 全局安装，也可以用官方的一键脚本。</p>
+<h3 id="方式一一键脚本推荐新手">方式一：一键脚本（推荐新手）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方式一一键脚本推荐新手" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>macOS 和 Linux 用户用 curl：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">curl </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">fsSL https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">pi.dev</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">install.sh </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> sh</span></span></code></pre></figure>
+<p>Windows 用户用 PowerShell：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">powershell </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">c </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;irm https://pi.dev/install.ps1 | iex&quot;</span></span></code></pre></figure>
+<h3 id="方式二npm-全局安装">方式二：npm 全局安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方式二npm-全局安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果你已经装了 Node.js，用包管理器全局安装即可。</p>
+<p>注意那个 <code>--ignore-scripts</code> 参数：它会跳过依赖的安装期生命周期脚本，Pi 正常使用不需要这些脚本，加上更安全。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># npm 安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">npm install </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">g </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ignore</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">scripts </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">earendil</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">works</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">coding</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># pnpm 安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pnpm add </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">g </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ignore</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">scripts </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">earendil</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">works</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">coding</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># bun 安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">bun add </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">g </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ignore</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">scripts </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">earendil</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">works</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">coding</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent</span></span></code></pre></figure>
+<h3 id="验证安装">验证安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#验证安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>安装完成后，查看版本号确认是否成功：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">version</span></span></code></pre></figure>
+<p>例如：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">version
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.80</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.6</span></span></code></pre></figure>
+<h3 id="卸载">卸载<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#卸载" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>卸载方式取决于你当初用什么装的：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># curl 装的或 npm 装的
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">npm uninstall </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">g </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">earendil</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">works</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">coding</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># pnpm 装的
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pnpm remove </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">g </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">earendil</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">works</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">coding</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># bun 装的
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">bun uninstall </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">g </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">earendil</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">works</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">coding</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent</span></span></code></pre></figure>
+<blockquote>
+<p>注意：卸载 Pi 不会删除你的配置。设置、凭证、会话记录、已安装的 Pi 包都保留在 <code>~/.pi/agent/</code> 目录里，需要手动清理。</p>
+</blockquote>
+<h2 id="配置模型-provider">配置模型 Provider<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置模型-provider" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pi 本身不包含大模型，它需要你提供至少一个模型供应商（Provider）的访问凭证。</p>
+<p>配置方式有两种：订阅登录，或 API Key。</p>
+<h3 id="方式一订阅登录最省事">方式一：订阅登录（最省事）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方式一订阅登录最省事" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果你已经有 Claude Pro/Max、ChatGPT Plus/Pro 或 GitHub Copilot 订阅，可以直接登录复用。</p>
+<p>启动 Pi 后运行 <code>/login</code>，然后选择供应商即可：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 启动 pi
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 在 pi 里执行登录命令
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">login</span></span></code></pre></figure>
+<p>可选的订阅供应商有三种：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>供应商</th><th>要求</th><th>说明</th></tr></thead><tbody><tr><td>Claude Pro / Max</td><td>Anthropic 订阅</td><td>第三方工具用量按 Token 计费，不占订阅额度</td></tr><tr><td>ChatGPT Plus / Pro（Codex）</td><td>OpenAI 订阅</td><td>OpenAI 官方通过 Codex for OSS 认可</td></tr><tr><td>GitHub Copilot</td><td>Copilot 订阅</td><td>若提示模型不支持，需在 VS Code 里先启用对应模型</td></tr></tbody></table></div>
+<p>登录后凭证会存进 <code>~/.pi/agent/auth.json</code>，过期会自动刷新。退出登录用 <code>/logout</code>。</p>
+<h3 id="方式二api-key最灵活">方式二：API Key（最灵活）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#方式二api-key最灵活" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>用环境变量传入 API Key 是最通用的方式。比如用 Anthropic 的 Key：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 设置环境变量后启动
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">ANTHROPIC_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">sk</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ant</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span></span></code></pre></figure>
+<p>你也可以在 Pi 里运行 <code>/login</code> 并选择 API Key 类型的供应商，把 Key 持久化存进 <code>auth.json</code>。</p>
+<h3 id="常见供应商的环境变量">常见供应商的环境变量<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见供应商的环境变量" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 支持 15 家以上的供应商，下面列出最常见的几家：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>供应商</th><th>环境变量</th><th>auth.json 里的键名</th></tr></thead><tbody><tr><td>Anthropic</td><td><code>ANTHROPIC_API_KEY</code></td><td>anthropic</td></tr><tr><td>OpenAI</td><td><code>OPENAI_API_KEY</code></td><td>openai</td></tr><tr><td>Google Gemini</td><td><code>GEMINI_API_KEY</code></td><td>google</td></tr><tr><td>DeepSeek</td><td><code>DEEPSEEK_API_KEY</code></td><td>deepseek</td></tr><tr><td>Groq</td><td><code>GROQ_API_KEY</code></td><td>groq</td></tr><tr><td>Mistral</td><td><code>MISTRAL_API_KEY</code></td><td>mistral</td></tr><tr><td>xAI</td><td><code>XAI_API_KEY</code></td><td>xai</td></tr><tr><td>OpenRouter</td><td><code>OPENROUTER_API_KEY</code></td><td>openrouter</td></tr><tr><td>Hugging Face</td><td><code>HF_TOKEN</code></td><td>huggingface</td></tr></tbody></table></div>
+<blockquote>
+<p>提示：<code>auth.json</code> 里的凭证优先级高于环境变量。如果两处都配了，以 <code>auth.json</code> 为准。</p>
+</blockquote>
+<h3 id="authjson-的结构">auth.json 的结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#authjson-的结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果你想手动管理凭证，可以直接编辑 <code>~/.pi/agent/auth.json</code>。这个文件创建时会被设为 0600 权限（仅当前用户可读写）：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;anthropic&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: { </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;api_key&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;key&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;sk-ant-...&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;openai&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: { </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;api_key&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;key&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;sk-...&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> },
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;google&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: { </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;api_key&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;key&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;...&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p>Key 字段还支持三种高级写法，方便从密码管理器或环境变量里取值：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>写法</th><th>含义</th><th>示例</th></tr></thead><tbody><tr><td><code>&quot;!命令&quot;</code></td><td>以感叹号开头，执行该命令并取 stdout 作为 Key</td><td><code>&quot;!op read 'op://vault/item/cred'&quot;</code></td></tr><tr><td><code>&quot;$变量名&quot;</code></td><td>取环境变量的值</td><td><code>&quot;$MY_ANTHROPIC_KEY&quot;</code></td></tr><tr><td>纯字面量</td><td>直接当作 Key 使用</td><td><code>&quot;sk-ant-...&quot;</code></td></tr></tbody></table></div>
+<h3 id="云平台供应商">云平台供应商<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#云平台供应商" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果你用的是云上的模型服务，Pi 也支持 Azure OpenAI、Amazon Bedrock、Google Vertex AI、Cloudflare 等。</p>
+<p>这些通常需要额外配置端点、区域或部署名。以 Azure OpenAI 为例：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># Azure OpenAI 所需的环境变量
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AZURE_OPENAI_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AZURE_OPENAI_BASE_URL</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">your</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">resource.ai.azure.com
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 可选：API 版本与部署名映射
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AZURE_OPENAI_API_VERSION</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2024</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">2</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">AZURE_OPENAI_DEPLOYMENT_NAME_MAP</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">gpt</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">4o</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">gpt4o</span></span></code></pre></figure>
+<h3 id="配置-deepseek-供应商">配置 DeepSeek 供应商<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置-deepseek-供应商" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 通过 models.json 支持自定义供应商，配置文件地址：</p>
+<ul>
+<li>Linux / macOS：~/.pi/agent/models.json</li>
+<li>Windows：%USERPROFILE%.pi\agent\models.json</li>
+</ul>
+<p>先在 DeepSeek 开放平台获取  API Key：<a href="https://platform.deepseek.com/api_keys" class="external external-link">https://platform.deepseek.com/api_keys<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">{
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">  &quot;providers&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">    &quot;deepseek&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;baseUrl&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;https://api.deepseek.com&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;api&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;openai-completions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;apiKey&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;$DEEPSEEK_API_KEY&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">      &quot;models&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;id&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;deepseek-v4-pro&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;DeepSeek V4 Pro&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;contextWindow&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1000000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;maxTokens&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">384000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;input&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;text&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">],
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;reasoning&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: true,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;cost&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;input&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1.74</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;output&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3.48</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;cacheRead&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.145</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;cacheWrite&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">          },
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;compat&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;requiresReasoningContentOnAssistantMessages&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: true,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;thinkingFormat&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;deepseek&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;reasoningEffortMap&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;minimal&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;low&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;medium&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;xhigh&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;max&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">            }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">          }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        },
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;id&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;deepseek-v4-flash&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;DeepSeek V4 Flash&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;contextWindow&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1000000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;maxTokens&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">384000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;input&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;text&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">],
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;reasoning&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: true,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;cost&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;input&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.14</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;output&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.28</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;cacheRead&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0.028</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;cacheWrite&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">          },
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">          &quot;compat&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;requiresReasoningContentOnAssistantMessages&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: true,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;thinkingFormat&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;deepseek&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">            &quot;reasoningEffortMap&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: {
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;minimal&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;low&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;medium&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;high&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">              &quot;xhigh&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;max&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">            }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">          }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">      ]
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p>设置环境变量：</p>
+<p>Linux / Mac 用户：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">DEEPSEEK_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;&lt;你的 DeepSeek API Key>&quot;</span></span></code></pre></figure>
+<p>Windows 用户：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">$</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">env:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">DEEPSEEK_API_KEY</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;&lt;你的 DeepSeek API Key>&quot;</span></span></code></pre></figure>
+<p>进入项目目录并执行 pi 命令：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">cd </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">path</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">to</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">project
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span></span></code></pre></figure>
+<p>输入 /model 打开模型切换器，选择 deepseek，然后选择 DeepSeek-V4-Pro 或 DeepSeek-V4-Flash。</p>
+<p>更多配置选项请参阅：<a href="https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/models.md" class="external external-link">https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/models.md<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<h3 id="凭证解析顺序">凭证解析顺序<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#凭证解析顺序" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当 Pi 需要某个供应商的凭证时，按以下顺序依次查找，找到即用：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>优先级</th><th>来源</th></tr></thead><tbody><tr><td>1（最高）</td><td>命令行 <code>--api-key</code> 参数</td></tr><tr><td>2</td><td><code>auth.json</code> 里的条目（API Key 或 OAuth 令牌）</td></tr><tr><td>3</td><td>环境变量</td></tr><tr><td>4</td><td><code>models.json</code> 里自定义供应商的 Key</td></tr></tbody></table></div>
+<h2 id="第一次运行">第一次运行<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一次运行" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>配置好凭证后，进入你的项目目录，直接运行 <code>pi</code> 启动。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 进入项目目录
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">cd </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">path</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">to</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">project
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 启动 pi
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span></span></code></pre></figure>
+<p>启动后，直接输入一句话并回车，比如让它分析这个仓库：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Summarize this repository </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">and</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> tell me how to run its checks.</span></span></code></pre></figure>
+<p>Pi 会自动读取文件、运行命令，然后给出总结和检查方式。</p>
+<h3 id="项目信任提示">项目信任提示<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#项目信任提示" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果当前目录或上层目录里有 <code>.pi</code> 配置、扩展、技能等项目级资源，Pi 在交互式启动时会先问你信不信任这个项目。</p>
+<p>这是为了防止一个仓库在你不知情时静默加载它的扩展或修改设置。</p>
+<blockquote>
+<p>注意：信任决策保存在 <code>~/.pi/agent/trust.json</code>。非交互模式（<code>-p</code>、<code>--mode json</code>）不会弹窗，默认按全局设置里的 <code>defaultProjectTrust</code> 处理。</p>
+</blockquote>
+<h3 id="agent-是怎么工作的">Agent 是怎么工作的<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-是怎么工作的" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>你每发一条消息，Pi 就会启动一个 agent 循环。理解这个循环，就理解了 Pi 的工作方式。</p>
+<p>核心是中间那个 turn 循环：模型每轮可能调用工具，Pi 执行工具把结果塞回上下文，再让模型继续，直到模型不再调用工具、给出最终回复。</p>
+<h2 id="四个内置工具">四个内置工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#四个内置工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pi 默认只给模型四个工具，覆盖了编码最核心的读写和执行能力。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>工具</th><th>作用</th><th>是否默认启用</th></tr></thead><tbody><tr><td><code>read</code></td><td>读取文件内容</td><td>是</td></tr><tr><td><code>write</code></td><td>创建或覆盖文件</td><td>是</td></tr><tr><td><code>edit</code></td><td>对文件做局部补丁修改</td><td>是</td></tr><tr><td><code>bash</code></td><td>运行 shell 命令</td><td>是</td></tr><tr><td><code>grep</code></td><td>搜索文件内容</td><td>否（需通过工具选项开启）</td></tr><tr><td><code>find</code></td><td>按条件查找文件</td><td>否（需通过工具选项开启）</td></tr><tr><td><code>ls</code></td><td>列出目录内容</td><td>否（需通过工具选项开启）</td></tr></tbody></table></div>
+<h3 id="控制可用工具">控制可用工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#控制可用工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>你可以通过命令行参数精确控制模型能用哪些工具。</p>
+<p>这在需要限制 Agent 能力时很有用，比如只让它审查代码而不许改动：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 只读模式：只允许读取和搜索类工具
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">tools read,grep,find,ls </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">p </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;审查这段代码&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 禁用某个工具，其余保留
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">exclude</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">tools ask_question
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 关闭所有内置工具，只保留扩展提供的工具
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">no</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">builtin</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">tools </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">e .</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">extension.ts
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 完全禁用工具，纯对话
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">no</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">tools </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">p </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;解释一下这个概念&quot;</span></span></code></pre></figure>
+<blockquote>
+<p>提醒：Pi 在你的当前工作目录里运行，能修改你的文件。建议配合 git 等版本控制使用，方便随时回滚。</p>
+</blockquote>
+<h2 id="用-agentsmd-给项目下指令">用 AGENTS.md 给项目下指令<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#用-agentsmd-给项目下指令" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>AGENTS.md 是 Pi 的项目指令文件，告诉模型这个项目有什么规矩、怎么跑、要注意什么。</p>
+<p>它的作用类似于 Claude Code 的 CLAUDE.md——而且 Pi 同时支持这两种文件名。</p>
+<h3 id="写一个-agentsmd">写一个 AGENTS.md<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#写一个-agentsmd" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在项目根目录创建 <code>AGENTS.md</code>，写上你希望模型遵守的规则：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 项目指令
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 改完代码后运行 </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">`npm run check`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">。
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 不要在本地跑生产环境的数据库迁移。
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 回答尽量简洁。</span></span></code></pre></figure>
+<h3 id="pi-从哪里加载指令">Pi 从哪里加载指令<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pi-从哪里加载指令" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 在启动时会从多个位置加载指令文件，按范围从大到小：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>位置</th><th>作用范围</th><th>说明</th></tr></thead><tbody><tr><td><code>~/.pi/agent/AGENTS.md</code></td><td>全局</td><td>对你所有项目生效的通用指令</td></tr><tr><td>父目录的 <code>AGENTS.md</code></td><td>项目级</td><td>从当前目录向上逐层查找</td></tr><tr><td>当前目录的 <code>AGENTS.md</code></td><td>项目级</td><td>最具体、优先级最高的指令</td></tr></tbody></table></div>
+<p>文件名用 <code>AGENTS.md</code> 或 <code>CLAUDE.md</code> 都行，Pi 都会识别。</p>
+<h3 id="修改系统提示">修改系统提示<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#修改系统提示" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>AGENTS.md 是在默认系统提示之外追加的指令。如果你想更彻底地控制，可以替换整个系统提示。</p>
+<p>在项目里放 <code>.pi/SYSTEM.md</code> 会替换默认系统提示；放 <code>.pi/APPEND_SYSTEM.md</code> 则是追加（全局对应 <code>~/.pi/agent/</code> 下的同名文件）。</p>
+<blockquote>
+<p>注意：改了指令文件后，记得在 Pi 里运行 <code>/reload</code> 重载，或者重启 Pi，新指令才会生效。</p>
+</blockquote>
+<h2 id="交互模式常用操作">交互模式常用操作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#交互模式常用操作" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>交互模式是 Pi 最常用的形态，掌握几个关键操作就能高效使用。</p>
+<h3 id="引用文件">引用文件：@<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#引用文件" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在编辑器里输入 <code>@</code>，会弹出项目文件的模糊搜索，选中后文件内容会作为上下文发给模型。</p>
+<p>你也可以在命令行启动时直接带上文件：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 启动时带上一个文件
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">README</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.md </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;总结一下这个文件&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 带上多个文件一起审查
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">src</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">app.ts </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">src</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">app.test.ts </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;一起审查这两个文件&quot;</span></span></code></pre></figure>
+<h3 id="运行-shell-命令">运行 shell 命令：!<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#运行-shell-命令" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在编辑器里以 <code>!</code> 开头输入命令，会直接运行并把输出发给模型：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 运行命令，输出会进入模型上下文
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">npm run lint
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 两个感叹号：运行但不把输出加进模型上下文
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">!</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">npm run build</span></span></code></pre></figure>
+<h3 id="切换模型与思考强度">切换模型与思考强度<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#切换模型与思考强度" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 支持中途切换模型和思考强度，适配不同任务的复杂度。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>快捷键 / 命令</th><th>说明</th></tr></thead><tbody><tr><td>打开模型选择器</td><td><code>/model</code> 或 Ctrl+L</td><td>从所有可用模型里挑一个</td></tr><tr><td>切换思考强度</td><td>Shift+Tab</td><td>在 off / minimal / low / medium / high / xhigh / max 之间循环</td></tr><tr><td>循环收藏模型</td><td>Ctrl+P / Shift+Ctrl+P</td><td>在你预先圈定的几个模型间快速切换</td></tr></tbody></table></div>
+<p>启动时也可以直接指定模型和思考强度：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 指定厂商和模型
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">provider openai </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">model gpt</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">4o</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;帮我重构&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 用 厂商/模型 的写法
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">model openai</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">gpt</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">4o</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;帮我重构&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 用 名称:思考强度 的简写
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">model sonnet:high </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;解决这个复杂问题&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 限定可在 Ctrl+P 里循环的模型
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">models </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;claude-*,gpt-4o&quot;</span></span></code></pre></figure>
+<h3 id="输入与编辑技巧">输入与编辑技巧<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#输入与编辑技巧" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>操作</th><th>方式</th><th>说明</th></tr></thead><tbody><tr><td>多行输入</td><td>Shift+Enter（Windows Terminal 用 Ctrl+Enter）</td><td>在一条消息里换行</td></tr><tr><td>路径补全</td><td>Tab</td><td>补全文件路径</td></tr><tr><td>粘贴图片</td><td>Ctrl+V（Windows 用 Alt+V）</td><td>也支持把图片拖进终端</td></tr><tr><td>复制回复</td><td>Ctrl+X</td><td>复制最后一条助手消息</td></tr><tr><td>外部编辑器</td><td>Ctrl+G</td><td>打开 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">V</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mord mathnormal" style="margin-right:0.0576em;">S</span><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="mord mathnormal">A</span><span class="mord mathnormal">L</span><span class="mord">/</span></span></span></span>EDITOR 编辑长文本</td></tr></tbody></table></div>
+<h3 id="边跑边插话">边跑边插话<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#边跑边插话" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agent 在工作时，你不用干等，可以随时插入消息。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>按键</th><th>行为</th><th>适用场景</th></tr></thead><tbody><tr><td>Enter</td><td>转向消息：当前工具跑完后立刻送达，打断剩余工具</td><td>发现方向跑偏，及时纠正</td></tr><tr><td>Alt+Enter</td><td>后续消息：等 Agent 完全跑完再送达</td><td>想追加一个新需求</td></tr><tr><td>Escape</td><td>中止当前工作，把排队消息还原回编辑器</td><td>想停下来重新组织</td></tr></tbody></table></div>
+<blockquote>
+<p>提示：Windows Terminal 里 Alt+Enter 默认是全屏切换，转向和后续消息的按键可以在设置里通过 <code>steeringMode</code> 和 <code>followUpMode</code> 改。</p>
+</blockquote>
+<h2 id="常用斜杠命令速查">常用斜杠命令速查<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常用斜杠命令速查" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>在编辑器里输入 <code>/</code> 就会弹出命令补全。下面是最常用的一批斜杠命令。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>功能</th></tr></thead><tbody><tr><td><code>/login</code> / <code>/logout</code></td><td>管理 OAuth 或 API Key 凭证</td></tr><tr><td><code>/model</code></td><td>切换模型</td></tr><tr><td><code>/scoped-models</code></td><td>设置哪些模型参与 Ctrl+P 循环</td></tr><tr><td><code>/settings</code></td><td>调整思考强度、主题、消息送达方式等</td></tr><tr><td><code>/resume</code></td><td>从历史会话里选一个继续</td></tr><tr><td><code>/new</code></td><td>开一个新会话</td></tr><tr><td><code>/name &lt;名称></code></td><td>给当前会话起个显示名</td></tr><tr><td><code>/session</code></td><td>查看会话文件、ID、消息数、Token 用量和花费</td></tr><tr><td><code>/tree</code></td><td>跳到会话树的任意节点，从那里继续</td></tr><tr><td><code>/fork</code></td><td>从某条历史消息分叉出一个新会话</td></tr><tr><td><code>/clone</code></td><td>把当前分支复制成一个新会话</td></tr><tr><td><code>/compact [提示]</code></td><td>手动压缩上下文，可带自定义指令</td></tr><tr><td><code>/copy</code></td><td>复制最后一条助手消息到剪贴板</td></tr><tr><td><code>/export [文件]</code></td><td>把会话导出为 HTML 或 JSONL</td></tr><tr><td><code>/import &lt;文件></code></td><td>从 JSONL 文件导入并恢复会话</td></tr><tr><td><code>/share</code></td><td>上传为私有 GitHub Gist，生成可分享的 HTML 链接</td></tr><tr><td><code>/reload</code></td><td>重载快捷键、扩展、技能、提示、主题和上下文文件</td></tr><tr><td><code>/trust</code></td><td>保存当前项目的信任决策</td></tr><tr><td><code>/hotkeys</code></td><td>显示所有快捷键</td></tr><tr><td><code>/changelog</code></td><td>查看版本更新历史</td></tr><tr><td><code>/quit</code></td><td>退出 Pi</td></tr></tbody></table></div>
+<h2 id="会话管理树形历史">会话管理：树形历史<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#会话管理树形历史" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pi 的会话不是一条直线，而是一棵树。</p>
+<p>这意味着你在任意一个历史节点分叉，都不会丢失原来的分支，所有分支都存在同一个会话文件里。</p>
+<h3 id="会话存在哪里">会话存在哪里<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#会话存在哪里" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>会话自动保存到 <code>~/.pi/agent/sessions/</code>，按工作目录归类。</p>
+<p>从命令行恢复或浏览历史会话：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 继续最近一次会话
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">c
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 浏览并选择一个历史会话
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">r
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 给会话起个名字，方便日后查找
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">name </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;my task&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 打开指定的会话文件或 ID
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">session </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">path</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">id</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 临时会话，不保存
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">no</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">session</span></span></code></pre></figure>
+<h3 id="在会话树里导航">在会话树里导航<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#在会话树里导航" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>用 <code>/tree</code> 可以打开会话树视图，跳到任意历史节点继续。</p>
+<p>从这里继续会产生一条新分支，原来的分支保持不变。</p>
+<h3 id="分叉与克隆">分叉与克隆<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#分叉与克隆" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>行为</th><th>区别</th></tr></thead><tbody><tr><td><code>/fork</code></td><td>从某条更早的用户消息分叉出新会话</td><td>从历史中间某个点重新开始</td></tr><tr><td><code>/clone</code></td><td>复制当前活跃分支成新会话</td><td>在当前最新状态基础上开一份副本</td></tr></tbody></table></div>
+<h3 id="压缩上下文">压缩上下文<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#压缩上下文" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当对话变长、接近模型的上下文上限时，Pi 会自动把较早的消息压缩成摘要。</p>
+<p>你也可以主动用 <code>/compact</code> 触发，还能附带一句自定义指令告诉它压缩时保留什么重点：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 在 pi 里手动压缩，并要求保留最近改动
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">compact 重点保留最近的改动和错误处理</span></span></code></pre></figure>
+<h3 id="导出与分享">导出与分享<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#导出与分享" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>把会话导出成 HTML 方便存档或展示：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 导出为 HTML 文件
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">export my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">session.html
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 上传为私有 GitHub Gist，得到分享链接
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">share</span></span></code></pre></figure>
+<h2 id="非交互模式与集成">非交互模式与集成<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#非交互模式与集成" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pi 不只能交互式对话，它还能作为命令行工具、事件流、RPC 服务和 SDK 库来用。</p>
+<h3 id="一次性提问print-模式">一次性提问：print 模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一次性提问print-模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>用 <code>-p</code> 让 Pi 回答完就退出，适合在脚本里调用：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 直接提问
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">p </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;总结一下这个代码库&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 配合管道，把内容喂给 Pi
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">cat </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">README</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.md </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">|</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">p </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;总结这段文字&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 带图片提问
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">p </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">screenshot.png </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;这张图里是什么？&quot;</span></span></code></pre></figure>
+<h3 id="事件流json-模式">事件流：JSON 模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#事件流json-模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>--mode json</code> 会把所有事件以 JSON 行的形式输出，方便程序解析：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 输出 JSON 事件流
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">mode json </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">p </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;列出 src 下所有 .ts 文件&quot;</span></span></code></pre></figure>
+<h3 id="进程集成rpc-模式">进程集成：RPC 模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#进程集成rpc-模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>--mode rpc</code> 通过 stdin/stdout 走 JSON 协议，适合非 Node 的程序（比如 Python、Go）来驱动 Pi。</p>
+<h3 id="导出已有会话">导出已有会话<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#导出已有会话" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不启动新会话，直接把一个已有会话文件导出成 HTML：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 把会话文件导出为 HTML
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">export session.jsonl output.html</span></span></code></pre></figure>
+<h3 id="sdk-模式">SDK 模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sdk-模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>如果你要在自己的 Node 应用里嵌入 Pi 的能力，可以用 SDK 模式把它当作库引入。</p>
+<p>这是比 RPC 更紧密的集成方式，详见官方文档的 SDK 章节：<a href="https://pi.dev/docs/latest/sdk" class="external external-link">https://pi.dev/docs/latest/sdk<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<h2 id="扩展-extensions">扩展 Extensions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#扩展-extensions" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>扩展是 Pi 可扩展性的核心。它就是一个 TypeScript 模块，能订阅生命周期事件、注册自定义工具、添加命令和快捷键。</p>
+<p>扩展通过 jiti 加载，所以直接写 TypeScript 即可，无需编译。</p>
+<h3 id="扩展放在哪里">扩展放在哪里<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#扩展放在哪里" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>位置</th><th>作用范围</th></tr></thead><tbody><tr><td><code>~/.pi/agent/extensions/*.ts</code></td><td>全局，所有项目生效</td></tr><tr><td><code>.pi/extensions/*.ts</code></td><td>项目级，仅当前项目生效</td></tr></tbody></table></div>
+<p>也可以是子目录形式（<code>扩展名/index.ts</code>），或带 <code>package.json</code> 的完整包。</p>
+<h3 id="一个最小扩展示例">一个最小扩展示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#一个最小扩展示例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>下面这个扩展演示了三件事：启动时通知、拦截危险命令、注册一个自定义工具和一个命令。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 文件路径：</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">~/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">extensions</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">extension.ts
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="property"> type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { ExtensionAPI } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;@earendil-works/pi-coding-agent&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> { Type } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;typebox&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 扩展导出一个默认工厂函数，接收 ExtensionAPI
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">export default function (pi: ExtensionAPI) {
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">  //</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 监听 session_start 事件：会话启动时弹个通知
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  pi.on(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;session_start&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> (_event, ctx) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> {
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    ctx.ui.notify(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;扩展已加载！&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;info&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">);
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">  });
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">  //</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 监听 tool_call 事件：拦截危险的 bash 命令
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  pi.on(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;tool_call&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> (event, ctx) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> {
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> (event.toolName </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">==</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">= </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;bash&quot;</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error"> &amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> event.input.command</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">?</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.includes(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;rm -rf&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)) {
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">      //</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> 弹确认框，用户拒绝就阻止执行
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">      const ok = </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> ctx.ui.confirm(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;危险操作！&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;允许执行 rm -rf 吗？&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">);
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> (</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">!</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">ok) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> { block: true, reason: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;被用户阻止&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> };
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">  });
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">  //</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 注册一个自定义工具，模型可以调用它
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  pi.registerTool({
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    name: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;greet&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    label: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;打招呼&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;按名字向某人打招呼&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    parameters: Type.Object({
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">      name: Type.String({ description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;要打招呼的名字&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> }),
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    }),
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> execute(toolCallId, params, signal, onUpdate, ctx) {
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">      return</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> {
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">        content: [{ </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="property">type</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;text&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, text: </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">`你好，${params.name}！`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> }],
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">        details: {},
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">      };
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    },
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">  });
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">  //</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 注册一个斜杠命令 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">hello
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">  pi.registerCommand(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;hello&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, {
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    description: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;打个招呼&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    handler: </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> (args, ctx) =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> {
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">      ctx.ui.notify(</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">`你好 ${args || </span><span style="--shiki-light:#032F62;--shiki-light-font-style:italic;--shiki-dark:#9ECBFF;--shiki-dark-font-style:italic;" data-token-type="string">&quot;world&quot;</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="punctuation">}！`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;info&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">);
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">    },
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">  });
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span></code></pre></figure>
+<p>写完后用 <code>-e</code> 参数临时加载测试：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 临时加载一个扩展来测试
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">e .</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">extension.ts</span></span></code></pre></figure>
+<h3 id="扩展能做什么">扩展能做什么<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#扩展能做什么" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>扩展的能力远不止上面这些，它几乎能介入 Pi 工作流的每个环节：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>能力</th><th>对应方法</th><th>典型用途</th></tr></thead><tbody><tr><td>注册自定义工具</td><td><code>pi.registerTool()</code></td><td>让模型调用你的业务接口</td></tr><tr><td>注册命令</td><td><code>pi.registerCommand()</code></td><td>添加自己的斜杠命令</td></tr><tr><td>注册快捷键</td><td><code>pi.registerShortcut()</code></td><td>绑定自定义快捷键</td></tr><tr><td>拦截工具调用</td><td><code>tool_call</code> 事件</td><td>权限确认、命令改写</td></tr><tr><td>修改上下文</td><td><code>context</code> 事件</td><td>过滤历史、注入 RAG 内容</td></tr><tr><td>注入消息</td><td><code>pi.sendMessage()</code></td><td>动态补充上下文</td></tr><tr><td>注册供应商</td><td><code>pi.registerProvider()</code></td><td>接入私有模型网关</td></tr><tr><td>自定义 UI</td><td><code>ctx.ui</code> 系列</td><td>对话框、状态栏、组件</td></tr></tbody></table></div>
+<blockquote>
+<p>提示：Pi 仓库里有 50 多个示例扩展，涵盖子 Agent、计划模式、权限门、SSH 执行、沙箱等，是学习扩展开发的最好参考。</p>
+</blockquote>
+<h2 id="技能-skills">技能 Skills<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#技能-skills" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>技能是另一种可复用的能力包，和扩展的区别在于：技能主要是给模型看的指令和脚本，按需加载。</p>
+<p>Pi 实现了 Agent Skills 标准，所以也能直接用 Claude Code、OpenAI Codex 等工具的技能。</p>
+<h3 id="技能的工作方式">技能的工作方式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#技能的工作方式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>技能采用渐进式披露（progressive disclosure）的原则。</p>
+<p>启动时 Pi 只把每个技能的名字和描述放进系统提示；当任务匹配时，模型才用 <code>read</code> 工具加载完整的技能说明。</p>
+<p>这样既能装很多技能，又不会一开始就把上下文撑满。</p>
+<h3 id="技能放在哪里">技能放在哪里<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#技能放在哪里" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>位置</th><th>作用范围</th></tr></thead><tbody><tr><td><code>~/.pi/agent/skills/</code></td><td>全局</td></tr><tr><td><code>~/.agents/skills/</code></td><td>全局（跨工具共享）</td></tr><tr><td><code>.pi/skills/</code></td><td>项目级（需项目被信任）</td></tr><tr><td><code>.agents/skills/</code></td><td>项目级（跨工具共享）</td></tr></tbody></table></div>
+<h3 id="技能的结构">技能的结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#技能的结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>一个技能就是一个包含 <code>SKILL.md</code> 的目录，其余文件随意组织：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">skill</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">SKILL</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.md              </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 必需：前置信息 + 指令
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── scripts</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">              # 辅助脚本
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">│   └── process.sh
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── references</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">           # 按需加载的详细文档
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">│   └── api</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">reference.md
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">└── assets</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">    └── template.json</span></span></code></pre></figure>
+<h3 id="skillmd-的写法">SKILL.md 的写法<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#skillmd-的写法" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>SKILL.md 顶部是前置信息（frontmatter），下面是给模型的指令正文：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">name: my</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">skill
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">description: 这个技能做什么、什么时候用。要写具体。
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">--</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># My Skill
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">## Setup
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">首次使用前运行一次：
+</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">```bash
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">cd </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">path</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">to</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">skill </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">&amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> npm install
+</span></span></code></pre></figure>
+<h2 id="usage">Usage<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#usage" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line> </span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function">./scripts/process.sh</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> &lt;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">inpu</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">t</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">
+</span></span></code></pre></figure>
+<pre><code>
+前置信息里最重要的两个字段：
+
+| 字段 | 是否必填 | 说明 |
+| --- | --- | --- |
+| `name` | 必填 | 最多 64 字符，只能用小写字母、数字、连字符 |
+| `description` | 必填 | 最多 1024 字符，决定模型何时加载这个技能，要写得具体 |
+
+> 提醒：`description` 写得好不好，直接决定模型会不会在正确时机用上这个技能。写「处理 PDF 文件，提取文本和表格、填表单、合并多个 PDF」远好过写「帮助处理 PDF」。
+
+### 手动调用技能
+
+模型不一定会主动加载技能。你可以用 `/skill:名称` 强制加载并执行：
+
+```python
+# 加载并执行技能
+/skill:brave-search
+
+# 带参数加载技能
+/skill:pdf-tools extract
+</code></pre>
+<h2 id="pi-包管理">Pi 包管理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pi-包管理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>扩展、技能、提示模板、主题都可以打包成 Pi 包，通过 npm 或 git 分享安装。</p>
+<p>Pi 内置了一套包管理命令，让你像装插件一样扩展能力。</p>
+<h3 id="安装与卸载">安装与卸载<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装与卸载" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 从 npm 安装一个包
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">pi install npm:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">foo</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">tools
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 从 git 仓库安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">pi install git:github.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">badlogic</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">doom
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 项目本地安装（加 -l）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">pi install npm:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">foo</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">tools </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">l
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 卸载
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">pi remove npm:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">foo</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">tools</span></span></code></pre></figure>
+<h3 id="更新与查看">更新与查看<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#更新与查看" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>命令</th><th>功能</th></tr></thead><tbody><tr><td><code>pi list</code></td><td>列出已安装的包</td></tr><tr><td><code>pi update</code></td><td>只更新 Pi 自身</td></tr><tr><td><code>pi update --all</code></td><td>更新 Pi 和所有包</td></tr><tr><td><code>pi update --extensions</code></td><td>只更新包，不动 Pi 本体</td></tr><tr><td><code>pi update --extension &lt;源></code></td><td>更新指定的某个包</td></tr><tr><td><code>pi config</code></td><td>启用或禁用包里的各项资源</td></tr></tbody></table></div>
+<h2 id="安全须知">安全须知<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安全须知" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>安全是使用 Pi 前必须了解的部分。Pi 的安全模型和很多 Agent 工具不同，需要你主动配合。</p>
+<h3 id="没有内置沙箱">没有内置沙箱<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#没有内置沙箱" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Pi 不包含内置沙箱，它以启动它的用户身份运行，拥有该用户的全部权限。</p>
+<p>内置工具可以读写文件、运行 shell 命令；扩展是 TypeScript 模块，权限和 Pi 进程一样。</p>
+<p>这是有意为之：Pi 要在本机源码上工作、调用项目工具链、融入开发环境，一个不完整的进程内沙箱会让人误以为是安全边界，实际却仍依赖宿主的 shell、文件系统和凭证。</p>
+<blockquote>
+<p>重要：真正的隔离必须来自操作系统或容器/虚拟化边界，而不是 Pi 内部。</p>
+</blockquote>
+<h3 id="项目信任">项目信任<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#项目信任" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>项目信任决定 Pi 是否加载项目级的设置、资源、扩展和包。</p>
+<p>当一个目录里存在 <code>.pi/settings.json</code>、<code>.pi/extensions</code>、<code>.pi/skills</code>、<code>.pi/SYSTEM.md</code> 等内容时，Pi 会要求先信任才能加载。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>信任级别</th><th>行为</th><th>设置方式</th></tr></thead><tbody><tr><td><code>ask</code>（默认）</td><td>交互式询问；非交互模式忽略项目资源</td><td>settings.json 的 <code>defaultProjectTrust</code></td></tr><tr><td><code>always</code></td><td>始终信任项目资源</td><td>同上，或用 <code>-a</code> / <code>--approve</code></td></tr><tr><td><code>never</code></td><td>从不信任，忽略项目资源</td><td>同上，或用 <code>-na</code> / <code>--no-approve</code></td></tr></tbody></table></div>
+<p>信任决策保存在 <code>~/.pi/agent/trust.json</code>，按目录路径记录，最近的父目录决策优先。</p>
+<blockquote>
+<p>注意：项目信任只是「输入加载守卫」，它防止仓库静默改你的设置或扩展，但不能让不可信的代码、提示或模型输出变得安全。仓库文件、注释、文档里的提示注入是本地 Agent 固有的风险，Pi 无法可靠阻止。</p>
+</blockquote>
+<h3 id="处理不可信或无人值守的任务">处理不可信或无人值守的任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#处理不可信或无人值守的任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>对于不受信任的仓库、需要密切监控的生成代码、或无人值守的自动化，官方建议把 Pi 放进隔离环境里跑。</p>
+<p>推荐做法：</p>
+<ul>
+<li>把整个 <code>pi</code> 进程放进容器、虚拟机或远程沙箱</li>
+<li>只挂载 Agent 应该访问的工作区路径</li>
+<li>除非必要，不要挂载宿主的 <code>~/.pi/agent</code>（里面有你的凭证和会话）</li>
+<li>只传最少必要的 API Key，或用短期凭证</li>
+<li>任务不需要联网时，限制网络访问</li>
+<li>把结果复制回可信系统前，先审查 diff 和输出</li>
+</ul>
+<blockquote>
+<p>提醒：如果你把宿主工作区以读写方式挂载进容器，容器内的写入仍会改到宿主文件。要更强地防范误写，用只读挂载，或把文件复制进出沙箱。</p>
+</blockquote>
+<h2 id="资源与社区">资源与社区<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#资源与社区" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="官方资源">官方资源<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#官方资源" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>GitHub 仓库：<a href="https://github.com/earendil-works/pi" class="external external-link">github.com/earendil-works/pi<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>官网：<a href="https://pi.dev/" class="external external-link">pi.dev<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>官方文档：<a href="https://pi.dev/docs/latest" class="external external-link">pi.dev/docs/latest<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>npm 包：<a href="https://www.npmjs.com/package/@earendil-works/pi-coding-agent" class="external external-link">@earendil-works/pi-coding-agent<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-35" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#pi-coding-agent-编码智能体实战" data-for="pi-coding-agent-编码智能体实战">Pi Coding Agent 编码智能体实战</a></li><li class="depth-0"><a href="#pi-coding-agent-入门教程" data-for="pi-coding-agent-入门教程">Pi Coding Agent 入门教程</a></li><li class="depth-2"><a href="#pi-包含什么" data-for="pi-包含什么">Pi 包含什么</a></li><li class="depth-2"><a href="#适合谁用" data-for="适合谁用">适合谁用</a></li><li class="depth-1"><a href="#核心设计哲学原语而非功能" data-for="核心设计哲学原语而非功能">核心设计哲学：原语而非功能</a></li><li class="depth-2"><a href="#故意不内置的功能" data-for="故意不内置的功能">故意不内置的功能</a></li><li class="depth-2"><a href="#为什么要这样做" data-for="为什么要这样做">为什么要这样做</a></li><li class="depth-1"><a href="#架构与核心包" data-for="架构与核心包">架构与核心包</a></li><li class="depth-2"><a href="#四个核心包" data-for="四个核心包">四个核心包</a></li><li class="depth-2"><a href="#四种运行模式" data-for="四种运行模式">四种运行模式</a></li><li class="depth-1"><a href="#安装" data-for="安装">安装</a></li><li class="depth-2"><a href="#方式一一键脚本推荐新手" data-for="方式一一键脚本推荐新手">方式一：一键脚本（推荐新手）</a></li><li class="depth-2"><a href="#方式二npm-全局安装" data-for="方式二npm-全局安装">方式二：npm 全局安装</a></li><li class="depth-2"><a href="#验证安装" data-for="验证安装">验证安装</a></li><li class="depth-2"><a href="#卸载" data-for="卸载">卸载</a></li><li class="depth-1"><a href="#配置模型-provider" data-for="配置模型-provider">配置模型 Provider</a></li><li class="depth-2"><a href="#方式一订阅登录最省事" data-for="方式一订阅登录最省事">方式一：订阅登录（最省事）</a></li><li class="depth-2"><a href="#方式二api-key最灵活" data-for="方式二api-key最灵活">方式二：API Key（最灵活）</a></li><li class="depth-2"><a href="#常见供应商的环境变量" data-for="常见供应商的环境变量">常见供应商的环境变量</a></li><li class="depth-2"><a href="#authjson-的结构" data-for="authjson-的结构">auth.json 的结构</a></li><li class="depth-2"><a href="#云平台供应商" data-for="云平台供应商">云平台供应商</a></li><li class="depth-2"><a href="#配置-deepseek-供应商" data-for="配置-deepseek-供应商">配置 DeepSeek 供应商</a></li><li class="depth-2"><a href="#凭证解析顺序" data-for="凭证解析顺序">凭证解析顺序</a></li><li class="depth-1"><a href="#第一次运行" data-for="第一次运行">第一次运行</a></li><li class="depth-2"><a href="#项目信任提示" data-for="项目信任提示">项目信任提示</a></li><li class="depth-2"><a href="#agent-是怎么工作的" data-for="agent-是怎么工作的">Agent 是怎么工作的</a></li><li class="depth-1"><a href="#四个内置工具" data-for="四个内置工具">四个内置工具</a></li><li class="depth-2"><a href="#控制可用工具" data-for="控制可用工具">控制可用工具</a></li><li class="depth-1"><a href="#用-agentsmd-给项目下指令" data-for="用-agentsmd-给项目下指令">用 AGENTS.md 给项目下指令</a></li><li class="depth-2"><a href="#写一个-agentsmd" data-for="写一个-agentsmd">写一个 AGENTS.md</a></li><li class="depth-2"><a href="#pi-从哪里加载指令" data-for="pi-从哪里加载指令">Pi 从哪里加载指令</a></li><li class="depth-2"><a href="#修改系统提示" data-for="修改系统提示">修改系统提示</a></li><li class="depth-1"><a href="#交互模式常用操作" data-for="交互模式常用操作">交互模式常用操作</a></li><li class="depth-2"><a href="#引用文件" data-for="引用文件">引用文件：@</a></li><li class="depth-2"><a href="#运行-shell-命令" data-for="运行-shell-命令">运行 shell 命令：!</a></li><li class="depth-2"><a href="#切换模型与思考强度" data-for="切换模型与思考强度">切换模型与思考强度</a></li><li class="depth-2"><a href="#输入与编辑技巧" data-for="输入与编辑技巧">输入与编辑技巧</a></li><li class="depth-2"><a href="#边跑边插话" data-for="边跑边插话">边跑边插话</a></li><li class="depth-1"><a href="#常用斜杠命令速查" data-for="常用斜杠命令速查">常用斜杠命令速查</a></li><li class="depth-1"><a href="#会话管理树形历史" data-for="会话管理树形历史">会话管理：树形历史</a></li><li class="depth-2"><a href="#会话存在哪里" data-for="会话存在哪里">会话存在哪里</a></li><li class="depth-2"><a href="#在会话树里导航" data-for="在会话树里导航">在会话树里导航</a></li><li class="depth-2"><a href="#分叉与克隆" data-for="分叉与克隆">分叉与克隆</a></li><li class="depth-2"><a href="#压缩上下文" data-for="压缩上下文">压缩上下文</a></li><li class="depth-2"><a href="#导出与分享" data-for="导出与分享">导出与分享</a></li><li class="depth-1"><a href="#非交互模式与集成" data-for="非交互模式与集成">非交互模式与集成</a></li><li class="depth-2"><a href="#一次性提问print-模式" data-for="一次性提问print-模式">一次性提问：print 模式</a></li><li class="depth-2"><a href="#事件流json-模式" data-for="事件流json-模式">事件流：JSON 模式</a></li><li class="depth-2"><a href="#进程集成rpc-模式" data-for="进程集成rpc-模式">进程集成：RPC 模式</a></li><li class="depth-2"><a href="#导出已有会话" data-for="导出已有会话">导出已有会话</a></li><li class="depth-2"><a href="#sdk-模式" data-for="sdk-模式">SDK 模式</a></li><li class="depth-1"><a href="#扩展-extensions" data-for="扩展-extensions">扩展 Extensions</a></li><li class="depth-2"><a href="#扩展放在哪里" data-for="扩展放在哪里">扩展放在哪里</a></li><li class="depth-2"><a href="#一个最小扩展示例" data-for="一个最小扩展示例">一个最小扩展示例</a></li><li class="depth-2"><a href="#扩展能做什么" data-for="扩展能做什么">扩展能做什么</a></li><li class="depth-1"><a href="#技能-skills" data-for="技能-skills">技能 Skills</a></li><li class="depth-2"><a href="#技能的工作方式" data-for="技能的工作方式">技能的工作方式</a></li><li class="depth-2"><a href="#技能放在哪里" data-for="技能放在哪里">技能放在哪里</a></li><li class="depth-2"><a href="#技能的结构" data-for="技能的结构">技能的结构</a></li><li class="depth-2"><a href="#skillmd-的写法" data-for="skillmd-的写法">SKILL.md 的写法</a></li><li class="depth-1"><a href="#usage" data-for="usage">Usage</a></li><li class="depth-1"><a href="#pi-包管理" data-for="pi-包管理">Pi 包管理</a></li><li class="depth-2"><a href="#安装与卸载" data-for="安装与卸载">安装与卸载</a></li><li class="depth-2"><a href="#更新与查看" data-for="更新与查看">更新与查看</a></li><li class="depth-1"><a href="#安全须知" data-for="安全须知">安全须知</a></li><li class="depth-2"><a href="#没有内置沙箱" data-for="没有内置沙箱">没有内置沙箱</a></li><li class="depth-2"><a href="#项目信任" data-for="项目信任">项目信任</a></li><li class="depth-2"><a href="#处理不可信或无人值守的任务" data-for="处理不可信或无人值守的任务">处理不可信或无人值守的任务</a></li><li class="depth-1"><a href="#资源与社区" data-for="资源与社区">资源与社区</a></li><li class="depth-2"><a href="#官方资源" data-for="官方资源">官方资源</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

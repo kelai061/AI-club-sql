@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>CrewAI 构建多角色智能体团队</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="CrewAI 构建多角色智能体团队"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="CrewAI 构建多角色智能体团队"/><meta name="twitter:description" content="CrewAI 构建多角色智能体团队 出处：www.runoob.com/ai-agent/crewai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 CrewAI 制作智能体 CrewAI 是一个多智能体协作的开源框架，专门用于编排和协调多个 AI Agent 进行协作。 CrewAI 可以把一个复杂任务，拆成多个角色，各自负责一部分，通过流程协作完成。 对比理解： 单 Agent：一个大模型，从头干到尾 CrewAI：产品经理 + 工程师 + 分析师 + 编辑，各司其职 CrewAI 是一个协调、管理和框架化 AI Agent 的工具，它..."/><meta property="og:description" content="CrewAI 构建多角色智能体团队 出处：www.runoob.com/ai-agent/crewai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 CrewAI 制作智能体 CrewAI 是一个多智能体协作的开源框架，专门用于编排和协调多个 AI Agent 进行协作。 CrewAI 可以把一个复杂任务，拆成多个角色，各自负责一部分，通过流程协作完成。 对比理解： 单 Agent：一个大模型，从头干到尾 CrewAI：产品经理 + 工程师 + 分析师 + 编辑，各司其职 CrewAI 是一个协调、管理和框架化 AI Agent 的工具，它..."/><meta property="og:image:alt" content="CrewAI 构建多角色智能体团队 出处：www.runoob.com/ai-agent/crewai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 CrewAI 制作智能体 CrewAI 是一个多智能体协作的开源框架，专门用于编排和协调多个 AI Agent 进行协作。 CrewAI 可以把一个复杂任务，拆成多个角色，各自负责一部分，通过流程协作完成。 对比理解： 单 Agent：一个大模型，从头干到尾 CrewAI：产品经理 + 工程师 + 分析师 + 编辑，各司其职 CrewAI 是一个协调、管理和框架化 AI Agent 的工具，它..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/crewai-构建多角色智能体团队"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/crewai-构建多角色智能体团队"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="CrewAI 构建多角色智能体团队 出处：www.runoob.com/ai-agent/crewai-agent.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：04-主流框架与开发实战 CrewAI 制作智能体 CrewAI 是一个多智能体协作的开源框架，专门用于编排和协调多个 AI Agent 进行协作。 CrewAI 可以把一个复杂任务，拆成多个角色，各自负责一部分，通过流程协作完成。 对比理解： 单 Agent：一个大模型，从头干到尾 CrewAI：产品经理 + 工程师 + 分析师 + 编辑，各司其职 CrewAI 是一个协调、管理和框架化 AI Agent 的工具，它..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/crewai-构建多角色智能体团队-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/crewai-构建多角色智能体团队-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/04-主流框架与开发实战/crewai-构建多角色智能体团队-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/04-主流框架与开发实战/crewai-构建多角色智能体团队" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-25" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-25" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/04-主流框架与开发实战/">04-主流框架与开发实战</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>CrewAI 构建多角色智能体团队</a></div></nav><h1 class="article-title">CrewAI 构建多角色智能体团队</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/主流框架与开发实战" class="internal internal-link tag-link">主流框架与开发实战</a><span class="note-properties-separator">, </span><a href="../../../tags/crewai-构建多" class="internal internal-link tag-link">crewai-构建多</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>21分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="crewai-构建多角色智能体团队">CrewAI 构建多角色智能体团队<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#crewai-构建多角色智能体团队" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/crewai-agent.html" class="external external-link">https://www.runoob.com/ai-agent/crewai-agent.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>04-主流框架与开发实战</code></p>
+</blockquote>
+<hr/>
+<h1 id="crewai-制作智能体">CrewAI 制作智能体<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#crewai-制作智能体" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>CrewAI 是一个多智能体协作的开源框架，专门用于编排和协调多个 AI Agent 进行协作。</p>
+<p>CrewAI 可以把一个复杂任务，拆成多个角色，各自负责一部分，通过流程协作完成。</p>
+<p><strong>对比理解：</strong></p>
+<ul>
+<li><strong>单 Agent</strong>：一个大模型，从头干到尾</li>
+<li><strong>CrewAI</strong>：产品经理 + 工程师 + 分析师 + 编辑，各司其职</li>
+</ul>
+<p>CrewAI 是一个协调、管理和框架化 AI Agent 的工具，它基于 LangChain 和 Pydantic 构建，用于促进角色扮演、自治和协作的 Agent 团队。</p>
+<ul>
+<li><strong>Crew（团队）</strong>： 一个由多个 <code>Agent</code> 组成的项目组。</li>
+<li><strong>Agent（成员）</strong>： 团队中的个体，每个都有明确的 <code>role</code>（角色）、<code>goal</code>（目标）和 <code>backstory</code>（背景故事）。</li>
+<li><strong>Task（任务）</strong>： 需要团队完成的具体工作。一个 <code>Crew</code> 包含多个有序或并行的 <code>Task</code>，并分配给合适的 <code>Agent</code>。</li>
+<li><strong>Process（流程）</strong>： 定义团队的工作流程，例如是顺序执行还是同时执行任务。</li>
+</ul>
+<p>简单来说，crewAI 提供了一个结构化的方式来定义谁（Agent）在什么流程（Process）下，完成哪些事（Task），最终达成团队目标。</p>
+<p>下面的流程图清晰地展示了 crewAI 框架中各个核心组件是如何协同工作的：</p>
+<p>流程始于定义具备特定角色和目标的智能体（Agent），然后为其创建具体的任务（Task）。</p>
+<p>接着，将这些智能体及其任务组建成一个团队（Crew），并为团队选择协同工作的流程（Process），如顺序执行或并行执行。最终，团队按照既定流程执行所有任务，产出最终结果。</p>
+<h2 id="环境搭建与安装">环境搭建与安装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#环境搭建与安装" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>开始构建前，我们需要准备好开发环境。</p>
+<h3 id="前置条件">前置条件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#前置条件" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Python 版本要求：</strong></p>
+<ul>
+<li><strong>必须</strong>：Python ≥ 3.10 且 &lt; 3.14</li>
+<li>可以在终端输入 <code>python --version</code> 来检查，不满足版本范围，后续问题会非常多，不建议硬扛</li>
+</ul>
+<p>CrewAI 使用 <strong>UV</strong> 做依赖和包管理，目的只有一个：<strong>让多 Agent 项目更稳定，不被环境问题拖垮</strong></p>
+<p>UV 入门教程参考：<a href="https://www.runoob.com/python3/uv-tutorial.html" class="external external-link">UV - Python 包与环境管理工具<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<p>API 密钥：</p>
+<p>crewAI 本身不提供 AI 模型，它需要连接像 OpenAI 的 GPT、Anthropic 的 Claude 等大语言模型。</p>
+<h3 id="安装-crewai">安装 crewAI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#安装-crewai" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>打开你的终端或命令行工具，使用 pip 命令安装 crewAI 包。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 正常安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install crewai
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 其他依赖
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install langchain
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install openai
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 如果安装慢，可以使用国内镜像安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install crewai </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">i https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">mirrors.aliyun.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pypi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">simple</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install langchain </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">i https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">mirrors.aliyun.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pypi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">simple</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install openai </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">i https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">mirrors.aliyun.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pypi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">simple</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span></span></code></pre></figure>
+<p>如果希望使用 crewAI 内置的一些高级工具（如网络搜索），可以安装额外的依赖项：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 正常安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">'crewai[tools]'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 如果安装慢，可以使用国内镜像安装
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">'crewai[tools]'</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">i https:</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">//</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">mirrors.aliyun.com</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pypi</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">simple</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span></span></code></pre></figure>
+<p>国内我们可以采用 DeepSeek 大模型来测试，如果还没有需要先去 <a href="https://platform.deepseek.com/api_keys" class="external external-link">https://platform.deepseek.com/api_keys<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 创建一个 API key。</p>
+<p>DeepSeek 的 API 文档参考：<a href="https://api-docs.deepseek.com/zh-cn/" class="external external-link">https://api-docs.deepseek.com/zh-cn/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。</p>
+<p>安装完成后，创建一个新的 Python 文件，例如 <code>my_first_crew.py</code>，并导入必要的库。</p>
+<p>CrewAI 的 LLM 对第三方模型（包括 DeepSeek）底层必须通过 LiteLLM，使用前我们需要先安装：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">U litellm</span></span></code></pre></figure>
+<h2 id="实例">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>from crewai import Agent, Task, Crew, Process
+from crewai.llm import LLM</p>
+<h1 id>=====================================================</h1>
+<h1 id="llm-配置deepseeklitellm-规范写法">LLM 配置（DeepSeek｜LiteLLM 规范写法）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#llm-配置deepseeklitellm-规范写法" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="-1">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = LLM(
+    model=“deepseek/deepseek-v4-flash”,  # 关键： 必须包含服务商 deepseek，然后再写模型名 deepseek-v4-flash 或 deepseek-v4-pro
+    api_key=“sk-xxxxx”,   # 设置 API key
+    api_base=“<a href="https://api.deepseek.com/v1" class="external external-link">https://api.deepseek.com/v1<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>”,
+    temperature=0.7,
+)</p>
+<h1 id="-2">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="agents">Agents<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agents" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="-3">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>researcher = Agent(
+    role=“技术研究员”,
+    goal=“寻找最新、准确、可验证的技术资料，并给出代码证明。”,
+    backstory=“擅长系统性分析技术问题，注重事实和可复现性。”,
+    llm=llm,
+    verbose=True,
+    allow_delegation=False,
+)</p>
+<p>writer = Agent(
+    role=“技术博客作家”,
+    goal=“将研究成果整理成适合初学者阅读的技术文章。”,
+    backstory=“擅长将复杂概念拆解为清晰步骤，并提供完整示例。”,
+    llm=llm,
+    verbose=True,
+    allow_delegation=True,
+)</p>
+<h1 id="-4">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="tasks">Tasks<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tasks" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="-5">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>research_task = Task(
+    description=(
+        “深入研究：使用 Python 进行自动化数据清洗。\n”
+        “重点包括：pandas、numpy、缺失值、重复值、格式不一致问题。\n”
+        “必须提供完整、可运行的代码示例。”
+    ),
+    agent=researcher,
+    expected_output=(
+        “一份研究报告，包含问题分类、解决方案代码和完整清洗流程。”
+    ),
+)</p>
+<p>write_task = Task(
+    description=(
+        “基于研究报告，撰写入门级技术博客。\n”
+        “标题：《Python 数据清洗入门：用 pandas 告别脏数据》。”
+    ),
+    agent=writer,
+    context=[research_task],
+    expected_output=“不少于 800 字的 Markdown 技术博客。”,
+)</p>
+<h1 id="-6">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-6" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="crew">Crew<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#crew" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="-7">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-7" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>crew = Crew(
+    agents=[researcher, writer],
+    tasks=[research_task, write_task],
+    process=Process.sequential,
+    verbose=True,
+)</p>
+<h1 id="-8">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-8" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="run">Run<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#run" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="-9">=====================================================<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-9" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>if <strong>name</strong> == “<strong>main</strong>”:
+    result = crew.kickoff()</p>
+<p>    output = result.raw</p>
+<p>    with open(“python_data_cleaning_blog.md”, “w”, encoding=“utf-8”) as f:
+        f.write(output)</p>
+<p>接下来，就会开始执行任务，输出相关信息：</p>
+<p>完成后就会把输出的内容写入到  python_data_cleaning_blog.md 文件中。</p>
+<p>以下是代码中相关属性的说明。</p>
+<h3 id="llm模型层关键属性">LLM（模型层）关键属性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#llm模型层关键属性" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>示例值</th><th>作用</th><th>错误后果</th></tr></thead><tbody><tr><td><code>model</code></td><td><code>deepseek/deepseek-v4-flash</code></td><td><strong>LiteLLM 规范写法</strong>：<code>服务商/模型名</code></td><td>少了 <code>deepseek/</code> 会直接报 <code>LLM Provider NOT provided</code></td></tr><tr><td><code>api_key</code></td><td><code>sk-xxxxx</code></td><td>模型鉴权</td><td>为空或错误直接 401 / LLM Failed</td></tr><tr><td><code>api_base</code></td><td><code>https://api.deepseek.com/v1</code></td><td>DeepSeek API 地址</td><td>根据具体模型的地址来</td></tr><tr><td><code>temperature</code></td><td><code>0.7</code></td><td>控制输出随机性</td><td>过高内容发散，过低文本僵硬</td></tr></tbody></table></div>
+<h3 id="agent智能体关键属性">Agent（智能体）关键属性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent智能体关键属性" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>作用</th><th>本质</th></tr></thead><tbody><tr><td><code>role</code></td><td>Agent 的”身份标签”</td><td>写进 system prompt</td></tr><tr><td><code>goal</code></td><td>当前 Agent 的核心目标</td><td>决定回答方向</td></tr><tr><td><code>backstory</code></td><td>行为约束与风格</td><td>稳定输出质量</td></tr><tr><td><code>llm</code></td><td>使用哪个模型</td><td>必须显式绑定</td></tr><tr><td><code>verbose</code></td><td>打印执行过程</td><td>仅影响日志</td></tr><tr><td><code>allow_delegation</code></td><td>是否允许转派任务</td><td><strong>极易踩坑</strong></td></tr></tbody></table></div>
+<h3 id="researcher研究员">researcher（研究员）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#researcher研究员" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>值</th><th>设计意图</th></tr></thead><tbody><tr><td><code>allow_delegation</code></td><td><code>False</code></td><td>防止无限拆任务</td></tr><tr><td><code>goal</code></td><td>找资料 + 给代码</td><td>输出是”原料”</td></tr></tbody></table></div>
+<h3 id="writer写作">writer（写作）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#writer写作" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>值</th><th>风险</th></tr></thead><tbody><tr><td><code>allow_delegation</code></td><td><code>True</code></td><td>可能触发 delegate 再研究</td></tr><tr><td><code>context</code></td><td><code>[research_task]</code></td><td>已有输入，其实不需要再 delegate</td></tr></tbody></table></div>
+<p><strong>结论</strong>顺序流水线中，写作 Agent <strong>应关闭 delegation</strong>，否则容易二次委托失败。</p>
+<h3 id="task任务关键属性">Task（任务）关键属性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#task任务关键属性" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Task 通用字段:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>作用</th><th>关键点</th></tr></thead><tbody><tr><td><code>description</code></td><td>实际发给 LLM 的任务文本</td><td>越具体越稳</td></tr><tr><td><code>agent</code></td><td>谁来执行</td><td>必须唯一</td></tr><tr><td><code>expected_output</code></td><td>结果约束</td><td>不强制，但强烈建议</td></tr><tr><td><code>context</code></td><td>依赖的上游任务</td><td><strong>顺序执行核心</strong></td></tr></tbody></table></div>
+<p><strong>research_task:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>说明</th></tr></thead><tbody><tr><td><code>agent=researcher</code></td><td>绑定研究员</td></tr><tr><td>无 <code>context</code></td><td>第一阶段任务</td></tr><tr><td>输出</td><td>结构化研究内容</td></tr></tbody></table></div>
+<p><strong>write_task:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>说明</th></tr></thead><tbody><tr><td><code>context=[research_task]</code></td><td>强制读取研究结果</td></tr><tr><td><code>agent=writer</code></td><td>只做整理与表达</td></tr><tr><td>输出</td><td>最终 Markdown 文本</td></tr></tbody></table></div>
+<h3 id="crew执行器关键属性">Crew（执行器）关键属性<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#crew执行器关键属性" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>属性</th><th>示例值</th><th>作用</th><th>错误后果</th></tr></thead><tbody><tr><td><code>agents</code></td><td><code>[researcher, writer]</code></td><td>所有可用 Agent</td><td>少一个直接报错</td></tr><tr><td><code>tasks</code></td><td><code>[research_task, write_task]</code></td><td>执行队列</td><td>顺序按列表</td></tr><tr><td><code>process</code></td><td><code>Process.sequential</code></td><td>执行策略</td><td>并行会打乱依赖</td></tr><tr><td><code>verbose</code></td><td><code>True</code></td><td>日志开关</td><td>只能是 bool</td></tr></tbody></table></div>
+<h3 id="kickoff-与输出结构">kickoff() 与输出结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#kickoff-与输出结构" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>表达式</th><th>类型</th><th>用途</th></tr></thead><tbody><tr><td><code>crew.kickoff()</code></td><td><code>CrewOutput</code></td><td>执行结果容器</td></tr><tr><td><code>result.raw</code></td><td><code>str</code></td><td><strong>最终文本输出</strong></td></tr><tr><td><code>result.tasks_output</code></td><td>list/dict</td><td>每个 Task 的输出</td></tr><tr><td><code>result.token_usage</code></td><td>dict</td><td>统计信息</td></tr></tbody></table></div>
+<h2 id="crewai-命令">crewai 命令<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#crewai-命令" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>我们可以使用 crewai 命令生成完整工程结构：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">crewai create crew </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">项目名</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span></span></code></pre></figure>
+<p>例如我们创建一个项目 runoob-agent-test，还行以下命令：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">crewai create crew runoob</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">agent</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">test</span></span></code></pre></figure>
+<p>接下来出现以下内容，可以先选择大模型的提供商：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Creating folder runoob_agent_test</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Cache expired </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">or</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> not</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> found. Fetching provider data </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> the web</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">Downloading  [</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">####################################]  1102019/56339
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Select a provider to </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="property">set</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> up:
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. openai
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. anthropic
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. gemini
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. nvidia_nim
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. groq
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">6</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. huggingface
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">7</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. ollama
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">8</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. watson
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">9</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. bedrock
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. azure
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">11</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. cerebras
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">12</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. sambanova
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">13</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. other
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">q. Quit</span></span></code></pre></figure>
+<p>本章节，我们就选 DeepSeek，先输入 13 选 other，然后可以鼠标滚动看下 DeepSeek 在 23，输入序号 23 即可：</p>
+<p>如果你有其他模型的 API key ，根据序号选择即可。</p>
+<p>完成后，可以看到生成的目录如下：</p>
+<p>项目结构说明:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my_project</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">├── .env                </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 环境变量（API Key）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">├── pyproject.toml      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 项目依赖声明
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">├── </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">README</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.md
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">└── src</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    └── my_project</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        ├── main.py     </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 程序入口
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">        ├── crew.py     </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># Crew 与 Agent 的核心逻辑
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        ├── tools</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">      # 自定义工具
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        └── config</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">            ├── agents.yaml  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># Agent 定义
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">            └── tasks.yaml   </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># Task 定义</span></span></code></pre></figure>
+<h3 id="运行你的-crew">运行你的 Crew<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#运行你的-crew" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>进入项目根目录：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">cd my_project</span></span></code></pre></figure>
+<p>锁定并安装依赖：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">crewai install</span></span></code></pre></figure>
+<p>运行：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">crewai run</span></span></code></pre></figure>
+<p>或直接：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">python src</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">my_project</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">main.py</span></span></code></pre></figure>
+<h3 id="配置-api-密钥">配置 API 密钥<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#配置-api-密钥" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>为了安全起见，不建议将 API Key 直接写在代码里，我们可以将其设置为环境变量。</p>
+<p><strong>在代码中设置（仅用于测试）</strong>：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> os
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">os.environ[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;OPENAI_API_KEY&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string"> &quot;你的-openai-api-key-here&quot;</span></span></code></pre></figure>
+<p><strong>推荐方式：使用 <code>.env</code> 文件</strong></p>
+<p>在项目根目录创建一个名为 <code>.env</code> 的文件。</p>
+<p>在文件中写入：<code>OPENAI_API_KEY=你的-openai-api-key-here</code></p>
+<p>在 Python 代码中，使用 <code>python-dotenv</code> 包来加载。</p>
+<p>安装命令：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pip install python</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">dotenv</span></span></code></pre></figure>
+<p>接下来在代码中载入：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> dotenv </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> load_dotenv
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function">load_dotenv() </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 这会自动加载 .env 文件中的变量
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 现在 os.environ[&quot;OPENAI_API_KEY&quot;] 就已经有了值</span></span></code></pre></figure>
+<h2 id="核心组件详解与实战">核心组件详解与实战<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心组件详解与实战" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>现在，让我们像组建公司一样，一步步创建我们的 AI 团队，我们将模拟一个技术博客创作团队。</p>
+<h3 id="第一步定义智能体-agent">第一步：定义智能体 (Agent)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第一步定义智能体-agent" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>Agent</code> 是你的团队成员。创建时需要定义几个关键属性：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>参数</th><th>说明</th><th>示例</th></tr></thead><tbody><tr><td><strong>role</strong></td><td>代理的角色或职位。</td><td><code>资深技术作家</code></td></tr><tr><td><strong>goal</strong></td><td>代理的最终目标。</td><td><code>创作深入浅出、实用的技术教程</code></td></tr><tr><td><strong>backstory</strong></td><td>角色的背景故事，用于塑造其行为和语气。</td><td><code>你是一位拥有10年全栈开发经验的开发者，热爱分享，擅长将复杂概念简单化。</code></td></tr><tr><td><strong>llm</strong></td><td>指定代理使用的大语言模型。</td><td><code>ChatOpenAI(model=&quot;gpt-4&quot;, temperature=0.7)</code></td></tr><tr><td><strong>verbose</strong></td><td>设置为 <code>True</code> 时，会输出代理的详细思考过程。</td><td><code>True</code> (调试时很有用)</td></tr><tr><td><strong>allow_delegation</strong></td><td>是否允许此代理将任务委托给其他代理。</td><td><code>True</code></td></tr></tbody></table></div>
+<p>让我们创建两个代理：一个<strong>研究员</strong>和一个<strong>作家</strong>。</p>
+<h2 id="实例-1">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-1" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="首先定义一个共享的-llm这样所有代理可以使用相同的模型配置">首先，定义一个共享的 LLM，这样所有代理可以使用相同的模型配置<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#首先定义一个共享的-llm这样所有代理可以使用相同的模型配置" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>llm = ChatOpenAI(model=“gpt-3.5-turbo”, temperature=0.7)</p>
+<h1 id="创建研究员代理">创建研究员代理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建研究员代理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>researcher = Agent(
+    role=‘技术研究员’,
+    goal=‘为你分配的主题，寻找最新、最准确、最相关的技术信息。’,
+    backstory=‘你是一位专注且严谨的技术分析师，擅长从海量信息中筛选出关键点，并验证其来源的可靠性。’,
+    llm=llm, # 使用上面定义的模型
+    verbose=True, # 输出详细日志
+    allow_delegation=False # 研究员不需要委托任务
+)</p>
+<h1 id="创建作家代理">创建作家代理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建作家代理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>writer = Agent(
+    role=‘技术博客作家’,
+    goal=‘根据研究员提供的资料，撰写结构清晰、生动有趣、代码示例完整的技术博客文章。’,
+    backstory=‘你是一位广受欢迎的技术博主，文风亲切，逻辑严谨，尤其擅长通过比喻和实例来解释复杂概念。’,
+    llm=llm,
+    verbose=True,
+    allow_delegation=True # 作家如果觉得需要，可以委托任务（比如回去让研究员补充资料）
+)</p>
+<h3 id="第二步创建任务-task">第二步：创建任务 (Task)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第二步创建任务-task" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>Task</code> 是具体的工作项，需要分配给 <code>Agent</code> 去完成。关键属性包括：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>参数</th><th>说明</th><th>示例</th></tr></thead><tbody><tr><td><strong>description</strong></td><td>对任务的清晰描述。</td><td><code>研究 &quot;Python异步编程asyncio&quot; 在 2023 年后的核心应用场景和最佳实践。</code></td></tr><tr><td><strong>agent</strong></td><td>负责执行此任务的 <code>Agent</code> 对象。</td><td><code>researcher</code></td></tr><tr><td><strong>expected_output</strong></td><td>对任务产出物的详细描述。</td><td><code>一份结构化的研究报告，包含概述、3-4个核心应用场景、2-3个代码片段示例以及总结。</code></td></tr></tbody></table></div>
+<p>我们为研究员和作家各创建一个任务。</p>
+<h2 id="实例-2">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-2" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="创建研究任务">创建研究任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建研究任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>research_task = Task(
+    description=(
+        “对 ‘使用 Python 进行自动化数据清洗’ 这个主题进行深入研究。\n”
+        “重点关注 pandas 和 numpy 库的最新用法（2023年后），常见的脏数据问题（如缺失值、重复值、格式不一致），以及高效的清洗流程。\n”
+        “请提供具体的代码片段来说明每个步骤。”
+    ),
+    agent=researcher, # 这个任务交给研究员
+    expected_output=(
+        “一份完整的研究报告，格式如下：\n”
+        “1. 主题概述\n”
+        “2. 常见数据问题分类（至少3类）\n”
+        “3. 针对每类问题的 pandas/numpy 解决方案（附代码片段）\n”
+        “4. 一个完整的端到端清洗流程示例\n”
+        “5. 总结与建议”
+    )
+)</p>
+<h1 id="创建写作任务">创建写作任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建写作任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>write_task = Task(
+    description=(
+        “利用研究员提供的研究报告，撰写一篇面向初学者的技术博客文章。\n”
+        “文章标题为：‘Python 数据清洗入门：用 pandas 告别脏数据’。\n”
+        “文章要求：语言通俗易懂，逻辑层层递进，包含研究员提供的所有关键代码片段并添加详细注释。\n”
+        “最后，提供一个完整的、可运行的示例，演示清洗一个模拟数据集的全过程。”
+    ),
+    agent=writer, # 这个任务交给作家
+    expected_output=(
+        “一篇不少于800字的 Markdown 格式博客文章。\n”
+        “包含引言、正文（分小节）、代码块、总结。\n”
+        “文末必须附上一个完整的、包含模拟数据和清洗代码的 Python 脚本。”
+    ),
+    # context 参数非常重要！它指定了此任务的依赖，即需要先完成 research_task
+    context=[research_task]
+)</p>
+<p><strong>注意</strong> <code>write_task</code> 中的 <code>context=[research_task]</code>，这建立了任务间的依赖关系，意味着作家需要等研究员完成任务后才能开始工作。</p>
+<h3 id="第三步组建团队与设置流程-crew--process">第三步：组建团队与设置流程 (Crew &amp; Process)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第三步组建团队与设置流程-crew--process" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>现在，将 <code>Agent</code> 和 <code>Task</code> 组装成 <code>Crew</code>，并定义他们的工作 <code>Process</code>。</p>
+<h2 id="实例-3">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-3" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="组建团队">组建团队<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#组建团队" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>blog_crew = Crew(
+    agents=[researcher, writer], # 团队由哪些成员构成
+    tasks=[research_task, write_task], # 团队有哪些任务
+    process=Process.sequential, # 流程类型：顺序执行。研究员做完，作家再做。
+    verbose=2 # 设置团队执行时的日志详细程度 (0=安静, 1=基础, 2=详细)
+)</p>
+<p>crewAI 主要支持两种流程：</p>
+<ul>
+<li><strong><code>Process.sequential</code></strong>： 任务按在列表中的顺序依次执行。适合有严格依赖关系的流水线作业。</li>
+<li><strong><code>Process.hierarchical</code></strong>： 配合一个管理者（Manager）Agent，由它来协调和分配任务。适合更复杂、动态的协作场景。</li>
+</ul>
+<h3 id="第四步执行任务并获取结果">第四步：执行任务并获取结果<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#第四步执行任务并获取结果" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>一切就绪，启动你的 AI 团队！</p>
+<h2 id="实例-4">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-4" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h1 id="执行团队任务">执行团队任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#执行团队任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>result = blog_crew.kickoff()</p>
+<h1 id="打印最终结果">打印最终结果<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#打印最终结果" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>print(”#<a href="../../.././../../tags/" class="tag-link internal internal-link alias" data-slug="tags/index"></a> 最终成果 <a href="../../.././../../tags/" class="tag-link internal internal-link alias" data-slug="tags/index"></a>”)
+print(result)</p>
+<p>运行你的 Python 脚本 (<code>python my_first_crew.py</code>)。由于我们设置了 <code>verbose=True</code> 和 <code>verbose=2</code>，你将在终端看到每个 Agent 的思考过程和任务执行日志，最后看到生成的博客文章。</p>
+<h2 id="进阶技巧为-agent-配备工具-tools">进阶技巧：为 Agent 配备工具 (Tools)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#进阶技巧为-agent-配备工具-tools" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>crewAI 可以让 <code>Agent</code> 调用外部 <code>Tool</code>，如搜索网络、查询数据库、执行计算等。</p>
+<p>以下示例为研究员配备<strong>网络搜索</strong>和<strong>计算</strong>工具：</p>
+<h2 id="实例-5">实例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#实例-5" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>from crewai_tools import SerperDevTool, CalculatorTool</p>
+<h1 id="初始化工具">初始化工具<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#初始化工具" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h1 id="注意serperdevtool-需要单独的-api-key请在-httpsserperdev-注册获取">注意：SerperDevTool 需要单独的 API Key，请在 <a href="https://serper.dev/" class="external external-link">https://serper.dev/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 注册获取<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#注意serperdevtool-需要单独的-api-key请在-httpsserperdev-注册获取" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>search_tool = SerperDevTool(serper_api_key=“你的-serper-api-key”)
+calc_tool = CalculatorTool()</p>
+<h1 id="创建配备工具的研究员">创建配备工具的研究员<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建配备工具的研究员" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>advanced_researcher = Agent(
+    role=‘高级技术研究员’,
+    goal=‘搜索最新的技术动态并进行量化分析’,
+    backstory=‘你不仅善于查找信息，还能对数据进行简单的计算和对比。’,
+    tools=[search_tool, calc_tool], # 将工具列表赋予代理
+    llm=llm,
+    verbose=True
+)</p>
+<h1 id="创建一个使用工具的任务">创建一个使用工具的任务<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#创建一个使用工具的任务" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>analysis_task = Task(
+    description=(
+        “搜索并比较 ‘FastAPI’ 和 ‘Django’ 在 GitHub 上过去一年的 Star 增长数量。\n”
+        “计算两者的增长率，并分析可能的原因。”
+    ),
+    agent=advanced_researcher,
+    expected_output=“包含具体数据、计算过程和原因分析的简短报告。”
+)</p>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-25" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#crewai-构建多角色智能体团队" data-for="crewai-构建多角色智能体团队">CrewAI 构建多角色智能体团队</a></li><li class="depth-0"><a href="#crewai-制作智能体" data-for="crewai-制作智能体">CrewAI 制作智能体</a></li><li class="depth-1"><a href="#环境搭建与安装" data-for="环境搭建与安装">环境搭建与安装</a></li><li class="depth-2"><a href="#前置条件" data-for="前置条件">前置条件</a></li><li class="depth-2"><a href="#安装-crewai" data-for="安装-crewai">安装 crewAI</a></li><li class="depth-1"><a href="#实例" data-for="实例">实例</a></li><li class="depth-0"><a href="#" data-for>=====================================================</a></li><li class="depth-0"><a href="#llm-配置deepseeklitellm-规范写法" data-for="llm-配置deepseeklitellm-规范写法">LLM 配置（DeepSeek｜LiteLLM 规范写法）</a></li><li class="depth-0"><a href="#-1" data-for="-1">=====================================================</a></li><li class="depth-0"><a href="#-2" data-for="-2">=====================================================</a></li><li class="depth-0"><a href="#agents" data-for="agents">Agents</a></li><li class="depth-0"><a href="#-3" data-for="-3">=====================================================</a></li><li class="depth-0"><a href="#-4" data-for="-4">=====================================================</a></li><li class="depth-0"><a href="#tasks" data-for="tasks">Tasks</a></li><li class="depth-0"><a href="#-5" data-for="-5">=====================================================</a></li><li class="depth-0"><a href="#-6" data-for="-6">=====================================================</a></li><li class="depth-0"><a href="#crew" data-for="crew">Crew</a></li><li class="depth-0"><a href="#-7" data-for="-7">=====================================================</a></li><li class="depth-0"><a href="#-8" data-for="-8">=====================================================</a></li><li class="depth-0"><a href="#run" data-for="run">Run</a></li><li class="depth-0"><a href="#-9" data-for="-9">=====================================================</a></li><li class="depth-2"><a href="#llm模型层关键属性" data-for="llm模型层关键属性">LLM（模型层）关键属性</a></li><li class="depth-2"><a href="#agent智能体关键属性" data-for="agent智能体关键属性">Agent（智能体）关键属性</a></li><li class="depth-2"><a href="#researcher研究员" data-for="researcher研究员">researcher（研究员）</a></li><li class="depth-2"><a href="#writer写作" data-for="writer写作">writer（写作）</a></li><li class="depth-2"><a href="#task任务关键属性" data-for="task任务关键属性">Task（任务）关键属性</a></li><li class="depth-2"><a href="#crew执行器关键属性" data-for="crew执行器关键属性">Crew（执行器）关键属性</a></li><li class="depth-2"><a href="#kickoff-与输出结构" data-for="kickoff-与输出结构">kickoff() 与输出结构</a></li><li class="depth-1"><a href="#crewai-命令" data-for="crewai-命令">crewai 命令</a></li><li class="depth-2"><a href="#运行你的-crew" data-for="运行你的-crew">运行你的 Crew</a></li><li class="depth-2"><a href="#配置-api-密钥" data-for="配置-api-密钥">配置 API 密钥</a></li><li class="depth-1"><a href="#核心组件详解与实战" data-for="核心组件详解与实战">核心组件详解与实战</a></li><li class="depth-2"><a href="#第一步定义智能体-agent" data-for="第一步定义智能体-agent">第一步：定义智能体 (Agent)</a></li><li class="depth-1"><a href="#实例-1" data-for="实例-1">实例</a></li><li class="depth-0"><a href="#首先定义一个共享的-llm这样所有代理可以使用相同的模型配置" data-for="首先定义一个共享的-llm这样所有代理可以使用相同的模型配置">首先，定义一个共享的 LLM，这样所有代理可以使用相同的模型配置</a></li><li class="depth-0"><a href="#创建研究员代理" data-for="创建研究员代理">创建研究员代理</a></li><li class="depth-0"><a href="#创建作家代理" data-for="创建作家代理">创建作家代理</a></li><li class="depth-2"><a href="#第二步创建任务-task" data-for="第二步创建任务-task">第二步：创建任务 (Task)</a></li><li class="depth-1"><a href="#实例-2" data-for="实例-2">实例</a></li><li class="depth-0"><a href="#创建研究任务" data-for="创建研究任务">创建研究任务</a></li><li class="depth-0"><a href="#创建写作任务" data-for="创建写作任务">创建写作任务</a></li><li class="depth-2"><a href="#第三步组建团队与设置流程-crew--process" data-for="第三步组建团队与设置流程-crew--process">第三步：组建团队与设置流程 (Crew &amp; Process)</a></li><li class="depth-1"><a href="#实例-3" data-for="实例-3">实例</a></li><li class="depth-0"><a href="#组建团队" data-for="组建团队">组建团队</a></li><li class="depth-2"><a href="#第四步执行任务并获取结果" data-for="第四步执行任务并获取结果">第四步：执行任务并获取结果</a></li><li class="depth-1"><a href="#实例-4" data-for="实例-4">实例</a></li><li class="depth-0"><a href="#执行团队任务" data-for="执行团队任务">执行团队任务</a></li><li class="depth-0"><a href="#打印最终结果" data-for="打印最终结果">打印最终结果</a></li><li class="depth-1"><a href="#进阶技巧为-agent-配备工具-tools" data-for="进阶技巧为-agent-配备工具-tools">进阶技巧：为 Agent 配备工具 (Tools)</a></li><li class="depth-1"><a href="#实例-5" data-for="实例-5">实例</a></li><li class="depth-0"><a href="#初始化工具" data-for="初始化工具">初始化工具</a></li><li class="depth-0"><a href="#注意serperdevtool-需要单独的-api-key请在-httpsserperdev-注册获取" data-for="注意serperdevtool-需要单独的-api-key请在-httpsserperdev-注册获取">注意：SerperDevTool 需要单独的 API Key，请在 https://serper.dev/ 注册获取</a></li><li class="depth-0"><a href="#创建配备工具的研究员" data-for="创建配备工具的研究员">创建配备工具的研究员</a></li><li class="depth-0"><a href="#创建一个使用工具的任务" data-for="创建一个使用工具的任务">创建一个使用工具的任务</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr"><head><title>Agent 上下文工程（Context Engineering）</title><meta charset="utf-8"/><link rel="preload" href="../../../index-bb6c1746.css" as="style"/><link rel="preload" href="../../../prescript-2bfc6315.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="QQ-SQL 可莱知识库"/><meta property="og:title" content="Agent 上下文工程（Context Engineering）"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Agent 上下文工程（Context Engineering）"/><meta name="twitter:description" content="Agent 上下文工程（Context Engineering） 出处：www.runoob.com/ai-agent/agent-context-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Agent 上下文工程 Agent 上下文工程（Agent Context Engineering）是系统化设计和优化传递给 AI Agent 的上下文信息的技术实践，它的目标是让 Agent 在有限的上下文窗口内获得最有效的信息，从而提升任务执行的准确性、效率和可靠性。 AI Agent 不像传统程序那样有固定的执行逻辑，它的行为完全取决于接收..."/><meta property="og:description" content="Agent 上下文工程（Context Engineering） 出处：www.runoob.com/ai-agent/agent-context-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Agent 上下文工程 Agent 上下文工程（Agent Context Engineering）是系统化设计和优化传递给 AI Agent 的上下文信息的技术实践，它的目标是让 Agent 在有限的上下文窗口内获得最有效的信息，从而提升任务执行的准确性、效率和可靠性。 AI Agent 不像传统程序那样有固定的执行逻辑，它的行为完全取决于接收..."/><meta property="og:image:alt" content="Agent 上下文工程（Context Engineering） 出处：www.runoob.com/ai-agent/agent-context-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Agent 上下文工程 Agent 上下文工程（Agent Context Engineering）是系统化设计和优化传递给 AI Agent 的上下文信息的技术实践，它的目标是让 Agent 在有限的上下文窗口内获得最有效的信息，从而提升任务执行的准确性、效率和可靠性。 AI Agent 不像传统程序那样有固定的执行逻辑，它的行为完全取决于接收..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/agent-上下文工程（context-engineering）"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/agent-上下文工程（context-engineering）"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="Agent 上下文工程（Context Engineering） 出处：www.runoob.com/ai-agent/agent-context-engineering.html ｜ 整理归档：可莱 QQ-SQL 知识库 ｜ 分类：02-工程与范式 Agent 上下文工程 Agent 上下文工程（Agent Context Engineering）是系统化设计和优化传递给 AI Agent 的上下文信息的技术实践，它的目标是让 Agent 在有限的上下文窗口内获得最有效的信息，从而提升任务执行的准确性、效率和可靠性。 AI Agent 不像传统程序那样有固定的执行逻辑，它的行为完全取决于接收..."/><meta name="generator" content="Quartz"/><link href="../../../index-bb6c1746.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-e427079e.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-58d5ff56.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../component-7262b5a7.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../../../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../../../prescript-2bfc6315.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/agent-上下文工程（context-engineering）-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/agent-上下文工程（context-engineering）-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/02-群友分享/ai-agent教程/02-工程与范式/agent-上下文工程（context-engineering）-og-image.webp"/><meta property="og:image:type" content="image/webp"/></head><body data-slug="02-群友分享/ai-agent教程/02-工程与范式/agent-上下文工程（context-engineering）" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">QQ-SQL 可莱知识库</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="搜索" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>搜索</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="搜索内容..." placeholder="搜索内容..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="暗色模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="暗色模式"><title>暗色模式</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="亮色模式"><title>亮色模式</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="阅读模式"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="阅读模式"><title>阅读模式</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-10" aria-label="探索"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>探索</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-10" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/">02-群友分享</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/">AI-Agent教程</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../02-群友分享/ai-agent教程/02-工程与范式/">02-工程与范式</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Agent 上下文工程（Context Engineering）</a></div></nav><h1 class="article-title">Agent 上下文工程（Context Engineering）</h1><details class="note-properties metadata-container" open data-collapsed="false"><summary class="note-properties-header"><span class="note-properties-title">Properties</span><span class="note-properties-count">1</span></summary><table class="note-properties-table"><tbody><tr class="note-properties-row metadata-property"><td class="note-properties-key metadata-property-key">tags</td><td class="note-properties-value metadata-property-value"><span class="note-properties-tags"><a href="../../../tags/ai-agent" class="internal internal-link tag-link">ai-agent</a><span class="note-properties-separator">, </span><a href="../../../tags/智能体" class="internal internal-link tag-link">智能体</a><span class="note-properties-separator">, </span><a href="../../../tags/工程与范式" class="internal internal-link tag-link">工程与范式</a><span class="note-properties-separator">, </span><a href="../../../tags/agent-上下文工" class="internal internal-link tag-link">agent-上下文工</a></span></td></tr></tbody></table></details><p show-comma="true" class="content-meta"><time datetime="2026-10-02T16:00:00.000Z">2026年10月03日</time><span>12分钟阅读</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><h1 id="agent-上下文工程context-engineering">Agent 上下文工程（Context Engineering）<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-上下文工程context-engineering" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>出处</strong>：<a href="https://www.runoob.com/ai-agent/agent-context-engineering.html" class="external external-link">https://www.runoob.com/ai-agent/agent-context-engineering.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ｜ <strong>整理归档</strong>：可莱 QQ-SQL 知识库 ｜ <strong>分类</strong>：<code>02-工程与范式</code></p>
+</blockquote>
+<hr/>
+<h1 id="agent-上下文工程">Agent 上下文工程<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-上下文工程" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><code>Agent 上下文工程</code>（Agent Context Engineering）是系统化设计和优化传递给 AI Agent 的上下文信息的技术实践，它的目标是让 Agent 在有限的上下文窗口内获得最有效的信息，从而提升任务执行的准确性、效率和可靠性。</p>
+<p>AI Agent 不像传统程序那样有固定的执行逻辑，它的行为完全取决于接收到的上下文——包括系统提示、工具描述、历史对话和外部检索到的信息。</p>
+<p>上下文工程的核心在于回答一个问题：<strong>在这轮调用中，Agent 最需要知道什么？</strong></p>
+<blockquote>
+<p>上下文工程不是一次性的提示词编写，而是贯穿 Agent 系统开发、测试和运维全生命周期的持续优化过程。</p>
+</blockquote>
+<h3 id="核心要素">核心要素<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心要素" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agent 上下文由以下几个层次构成：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>层次</th><th>内容</th><th>特点</th></tr></thead><tbody><tr><td>系统提示（System Prompt）</td><td>角色定义、行为规则、输出格式要求</td><td>每次调用都会携带，相对稳定</td></tr><tr><td>工具定义（Tool Definitions）</td><td>可用工具的名称、参数和功能描述</td><td>占用大量 token，需要精简</td></tr><tr><td>历史记录（History）</td><td>当前会话的对话和工具调用记录</td><td>持续增长，需要截断或摘要策略</td></tr><tr><td>检索上下文（Retrieved Context）</td><td>从外部知识库或代码库中检索的内容</td><td>按需注入，需要相关性排序</td></tr><tr><td>用户输入（User Input）</td><td>用户当前的指令或问题</td><td>不可控，但可以通过澄清来优化</td></tr></tbody></table></div>
+<h2 id="核心实践">核心实践<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#核心实践" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="上下文预算管理">上下文预算管理<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#上下文预算管理" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>将上下文窗口视为一个有限的「预算」，合理分配给不同类型的上下文。</p>
+<p>不是所有信息都值得占据上下文空间，每一条上下文都应该有明确的 ROI。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">上下文预算分配建议（以 </span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">200K</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> token 窗口为例）：
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">系统提示　　██████████　</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">10</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">　（</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">20K</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> token）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">工具定义　　████████████████　</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">20</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">　（</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">40K</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> token）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">检索上下文　████████████████████　</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">25</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">　（</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">50K</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> token）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">历史记录　　████████████████████████　</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">30</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">　（</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">60K</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> token）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">用户输入　　████████　</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%~</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">10</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">　（</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">10</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">20K</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> token）
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">预留缓冲　　████　</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">5</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">%</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">　（</span><span style="--shiki-light:#B31D28;--shiki-light-font-style:italic;--shiki-dark:#FDAEB7;--shiki-dark-font-style:italic;" data-token-type="error">10K</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> token）</span></span></code></pre></figure>
+<p>实际比例应根据 Agent 的具体任务类型动态调整。</p>
+<p>如果 Agent 主要做代码生成，检索上下文的比例可以调高。</p>
+<p>如果 Agent 是多轮对话助手，历史记录的预算应优先保证。</p>
+<h3 id="系统提示的工程化">系统提示的工程化<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#系统提示的工程化" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>系统提示是 Agent 行为的基石，需要遵循结构化编写原则。</p>
+<p><strong>编写原则：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>原则</th><th>说明</th><th>示例</th></tr></thead><tbody><tr><td>分层组织</td><td>将指令按角色、规则、流程、格式分块</td><td>使用 Markdown 标题分隔</td></tr><tr><td>正面表述</td><td>告诉 Agent 应该怎么做，而非不怎么做</td><td>「保持回答简洁」优于「不要啰嗦」</td></tr><tr><td>提供示例</td><td>用 few-shot 示例代替长篇描述</td><td>输出格式示例比文字描述更高效</td></tr><tr><td>优先级明确</td><td>当规则冲突时，Agent 应遵循哪条</td><td>「安全规则优先于效率要求」</td></tr><tr><td>去除冗余</td><td>删除从未被触发的规则和重复说明</td><td>定期审查并精简系统提示</td></tr></tbody></table></div>
+<p>以下是一个结构化系统提示的示例骨架：</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">## 角色
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">你是一名 Python 代码审查助手。
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">## 核心规则
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 每个问题附上修复建议
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 按严重程度排序输出
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 不确定时标注「待确认」
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">## 工作流程
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 分析代码变更
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 按严重程度分类问题
+</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">. 逐一输出问题与建议
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment">## 输出格式
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">问题</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">：[问题描述]
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">严重程度</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">：[高</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">中</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">低]
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">建议</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">**</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">：[修复建议]</span></span></code></pre></figure>
+<h3 id="工具描述的优化">工具描述的优化<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#工具描述的优化" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>工具描述往往占据上下文的最大比重，但很多工具从未被实际调用。</p>
+<p>优化策略包括：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>策略</th><th>方法</th><th>效果</th></tr></thead><tbody><tr><td>工具精简</td><td>移除与当前任务无关的工具定义</td><td>减少 30%~50% 的工具上下文</td></tr><tr><td>描述精炼</td><td>每个工具只用一句话说明用途和参数</td><td>提升模型对工具的理解准确度</td></tr><tr><td>参数约束</td><td>在描述中明确参数的使用场景和限制</td><td>减少工具调用中的参数错误</td></tr><tr><td>分组注册</td><td>按任务阶段动态注册不同的工具集</td><td>避免工具过多导致的「选择困难」</td></tr></tbody></table></div>
+<blockquote>
+<p>工具定义不为零即是负担。每个保留的工具都需要在描述质量和 token 成本之间做权衡。</p>
+</blockquote>
+<h3 id="历史记录的压缩策略">历史记录的压缩策略<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#历史记录的压缩策略" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>多轮对话中，历史记录快速增长并占据上下文。</p>
+<p>需要选择合适的压缩策略来平衡上下文完整性和窗口限制。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">常见历史压缩策略对比：
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">策略　　　　　方法　　　　　　　　　　　　适用场景
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">─────────────────────────────────────────────────
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">滑动窗口　　　保留最近 N 轮完整记录　　　　短对话、实时交互
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">阶梯摘要　　　每轮做一次增量摘要　　　　　长对话、客服场景
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">分层摘要　　　近期保留完整、远期做摘要　　文档生成、复杂任务
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">关键轮标记　　标记重要轮次，其余丢弃　　　调试、分步执行任务</span></span></code></pre></figure>
+<p>分层摘要是最常用的策略：最近 3-5 轮保持完整，更早的对话用结构化摘要代替。</p>
+<p>结构化摘要应包含原对话的关键信息：用户目标是什么，Agent 做了什么，产生了什么输出，遇到了什么错误。</p>
+<h3 id="检索上下文的质量控制">检索上下文的质量控制<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#检索上下文的质量控制" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当 Agent 依赖外部知识库时，检索到的上下文质量直接决定输出质量。</p>
+<p>提高检索上下文质量的关键点：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>环节</th><th>常见问题</th><th>改进方法</th></tr></thead><tbody><tr><td>查询改写</td><td>用户输入不够精确</td><td>让 Agent 先改写查询再检索</td></tr><tr><td>相关性过滤</td><td>检索结果中包含无关内容</td><td>设置相关性阈值，不足时主动提示</td></tr><tr><td>来源标注</td><td>Agent 无法判断信息可信度</td><td>附上来源路径和更新时间</td></tr><tr><td>长度裁剪</td><td>检索结果占用过多上下文</td><td>按段落截取，保留最相关片段</td></tr></tbody></table></div>
+<h2 id="常见模式">常见模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#常见模式" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="渐进式披露">渐进式披露<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#渐进式披露" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>不一次性把所有信息塞进上下文，而是根据执行阶段逐步披露。</p>
+<p>初始上下文只包含系统提示和当前阶段的必要工具，当 Agent 完成当前阶段后，再注入下一阶段的工具和规则。</p>
+<p>这种模式将上下文的「密度」控制在合理范围内，避免 Agent 被无关信息干扰。</p>
+<h3 id="上下文压缩链">上下文压缩链<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#上下文压缩链" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>当一个任务需要处理大量数据时，用链式调用拆分为多个步骤，每步只保留关键中间结果。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">步骤1：读取全部日志文件 → 输出 { 错误数量，时间范围，错误类型列表 }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">步骤2：基于步骤1的输出，分析 Top </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> 错误 → 输出 { 根因分析，修复建议 }
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">步骤3：基于步骤2的输出，生成修复 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">PR</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> → 输出 { </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">PR</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> 标题，描述，代码变更 }</span></span></code></pre></figure>
+<p>每条链路的输入都是上一步精炼后的摘要，而非原始数据，使得上下文始终保持可控大小。</p>
+<h3 id="上下文水印">上下文水印<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#上下文水印" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在上下文的关键位置放置「水印」标记，帮助监控和诊断 Agent 行为。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">上下文水印示例：
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">system</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">reminder</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">当前使用的上下文策略版本：v2.3
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">检索到的文档来源：docs</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">api</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">reference</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 共 </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> 个文件
+</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">已消耗上下文：</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">85</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">000</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator"> /</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 200</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">,</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">000</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> tokens
+</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">&lt;/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">system</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">reminder</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">></span></span></code></pre></figure>
+<p>这些水印不会直接影响 Agent 行为，但在调试时可以快速定位上下文注入是否按预期执行。</p>
+<h2 id="评估与迭代">评估与迭代<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#评估与迭代" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>上下文工程的效果需要通过评估来验证，不能仅凭感觉判断。</p>
+<p>常用的评估维度：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>维度</th><th>评估方式</th><th>关键指标</th></tr></thead><tbody><tr><td>任务完成率</td><td>在标准测试集上运行 Agent</td><td>成功率、失败原因分布</td></tr><tr><td>上下文效率</td><td>统计每次调用的上下文使用量</td><td>平均 token 消耗、上下文利用率</td></tr><tr><td>工具调用质量</td><td>分析工具调用的准确率和参数正确率</td><td>无效调用占比、重试次数</td></tr><tr><td>响应一致性</td><td>相同输入多次测试</td><td>输出稳定性、格式合规率</td></tr></tbody></table></div>
+<p>上下文工程不是一次性配置，而是需要建立「测试 → 分析 → 优化 → 再测试」的迭代循环。</p>
+<h2 id="注意事项">注意事项<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#注意事项" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>上下文窗口不是越大越好。过多的上下文会导致模型在关键信息上的注意力被稀释，反而降低输出质量。</p>
+</blockquote>
+<blockquote>
+<p>盲目增加规则可能让系统提示变得臃肿且自相矛盾。每新增一条规则，都需要审查是否与已有规则冲突。</p>
+</blockquote>
+<p>工具定义的修改可能影响已有 Agent 的行为，修改后需要在典型场景下做回归测试。</p>
+<p>历史记录压缩策略需要根据 Agent 的任务特征来选择，一个策略不可能在所有场景中都表现最优。</p>
+<p>上下文中的敏感信息（API 密钥、内部路径等）会在工具调用和日志中传播，需要做好脱敏处理。</p>
+<h2 id="相关概念">相关概念<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#相关概念" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>概念</th><th>说明</th></tr></thead><tbody><tr><td>Prompt Engineering</td><td>专注于单次调用的提示词设计和优化</td></tr><tr><td>Context Window</td><td>模型能够一次性处理的 token 上限</td></tr><tr><td>Token</td><td>模型处理文本的最小语义单元</td></tr><tr><td>RAG（检索增强生成）</td><td>通过外部检索来扩充上下文的架构模式</td></tr><tr><td>Few-shot Prompting</td><td>在上下文中提供示例来引导模型输出</td></tr><tr><td>Chain-of-Thought</td><td>让模型在上下文中展现推理过程</td></tr></tbody></table></div>
+<p>其他扩展</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>关系图谱</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc"><button type="button" class="toc-header" aria-controls="toc-10" aria-expanded="true"><h3>目录</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#agent-上下文工程context-engineering" data-for="agent-上下文工程context-engineering">Agent 上下文工程（Context Engineering）</a></li><li class="depth-0"><a href="#agent-上下文工程" data-for="agent-上下文工程">Agent 上下文工程</a></li><li class="depth-2"><a href="#核心要素" data-for="核心要素">核心要素</a></li><li class="depth-1"><a href="#核心实践" data-for="核心实践">核心实践</a></li><li class="depth-2"><a href="#上下文预算管理" data-for="上下文预算管理">上下文预算管理</a></li><li class="depth-2"><a href="#系统提示的工程化" data-for="系统提示的工程化">系统提示的工程化</a></li><li class="depth-2"><a href="#工具描述的优化" data-for="工具描述的优化">工具描述的优化</a></li><li class="depth-2"><a href="#历史记录的压缩策略" data-for="历史记录的压缩策略">历史记录的压缩策略</a></li><li class="depth-2"><a href="#检索上下文的质量控制" data-for="检索上下文的质量控制">检索上下文的质量控制</a></li><li class="depth-1"><a href="#常见模式" data-for="常见模式">常见模式</a></li><li class="depth-2"><a href="#渐进式披露" data-for="渐进式披露">渐进式披露</a></li><li class="depth-2"><a href="#上下文压缩链" data-for="上下文压缩链">上下文压缩链</a></li><li class="depth-2"><a href="#上下文水印" data-for="上下文水印">上下文水印</a></li><li class="depth-1"><a href="#评估与迭代" data-for="评估与迭代">评估与迭代</a></li><li class="depth-1"><a href="#注意事项" data-for="注意事项">注意事项</a></li><li class="depth-1"><a href="#相关概念" data-for="相关概念">相关概念</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>反向链接</h3><ul id="list-0" class="overflow"><li><a href="../../../00-知识库全景索引" class="internal">QQ-SQL 社群知识库全景索引与核心目录</a></li><li><a href="../../../" class="internal">QQ-SQL 社群知识库</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script src="../../../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../../../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../../../postscript-3426b91c.js" type="module" data-persist="true"></script></html>
