@@ -1,12 +1,12 @@
 # Obsidian local state
-.obsidian/workspace.json
-.obsidian/cache/
+.obsidian/
 
-# Build outputs and cache
+# Local tools and dependencies (isolated)
+tools/
+dist/
+public/
 node_modules/
 .quartz-cache/
-public/
-dist/
 .cache/
 
 # OS and temp files
