@@ -3,7 +3,6 @@
 
 # Local tools and dependencies (isolated)
 tools/
-dist/
 public/
 node_modules/
 .quartz-cache/

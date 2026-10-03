@@ -42,30 +42,18 @@ if ($proxyOnline) {
     git config --local --unset https.proxy 2>$null
 }
 
-# 2. 自动编译静态网页至 dist 目录
+# 2. 保存本地笔记
 Write-Host ""
-Write-Host "[2/4] 正在编译最新笔记至静态网站 (dist)..." -ForegroundColor Yellow
-$nodeDir = "E:\Artificial Intellengence\ai APP\node"
-$env:PATH = "$nodeDir;$env:PATH"
-$quartzCli = Join-Path $RepoRoot "tools\quartz\quartz\bootstrap-cli.mjs"
-if (Test-Path $quartzCli) {
-    & node $quartzCli build -d "$RepoRoot" -o "$RepoRoot\dist" 2>&1 | Out-Null
-    Write-Host "  -> [OK] 静态网页已编译就绪。" -ForegroundColor Green
-} else {
-    Write-Host "  -> [跳过] 未检测到本地 Quartz 编译器。" -ForegroundColor DarkGray
-}
-
-# 3. 保存本地笔记与静态网页
-Write-Host ""
-Write-Host "[3/4] 正在保存本地所有变动至 Git..." -ForegroundColor Yellow
+Write-Host "[2/4] 正在保存本地所有笔记变动..." -ForegroundColor Yellow
 git add .
 $timeStr = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$commitRes = git commit -m "update: sync notes and static dist ($timeStr)" 2>&1
-Write-Host "  -> 本地笔记与编译产物已提交。" -ForegroundColor Green
+$commitRes = git commit -m "update: sync notes ($timeStr)" 2>&1
+Write-Host "  -> 本地笔记索引已更新。" -ForegroundColor Green
 
-# 4. 检查远程仓库与推送
+# 3. 检查远程仓库与推送
 Write-Host ""
-Write-Host "[4/4] 正在推送到 GitHub (kelai061/AI-club-sql)..." -ForegroundColor Yellow
+Write-Host "[3/4] 正在推送到 GitHub (kelai061/AI-club-sql)..." -ForegroundColor Yellow
+Write-Host "  （若首次运行且未登录，系统稍后会唤起浏览器弹出 GitHub 授权页）" -ForegroundColor Gray
 
 git push -u origin main
 $pushExitCode = $LASTEXITCODE
@@ -73,8 +61,7 @@ $pushExitCode = $LASTEXITCODE
 Write-Host ""
 if ($pushExitCode -eq 0) {
     Write-Host "========================================================" -ForegroundColor Green
-    Write-Host "  [成功] 知识库与静态网页已成功推送至 GitHub！" -ForegroundColor Green
-    Write-Host "  Cloudflare 边缘节点将自动拉取并更新线上网站！" -ForegroundColor Green
+    Write-Host "  [成功] 知识库已成功推送至 GitHub！" -ForegroundColor Green
     Write-Host "========================================================" -ForegroundColor Green
 } else {
     Write-Host "========================================================" -ForegroundColor Red
